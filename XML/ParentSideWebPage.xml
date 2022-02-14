@@ -8,8 +8,14 @@ Web Application is under GNU General Public License v3.0
 
 
 <Pages>
-    <Page link="dashboard">
+    <Page>
+        <PageLink>dashboard</PageLink>
         <PageTitle>Dashboard</PageTitle>
+        <PageDescription>Home page of the website.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>index</PageLink>
+        <PageTitle>Template Page</PageTitle>
         <PageDescription>Home page of the website.</PageDescription>
     </Page>
 </Pages>

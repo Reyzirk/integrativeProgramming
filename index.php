@@ -5,14 +5,9 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php include 'Function/load.php' ?>
-<?php include 'Mail/mail_load.php' ?>
-<?php
-    include 'Database/DBController.php';
-?>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <title></title>
+        <?php include 'Components/headmeta.php' ?>
     </head>
     <body>
 

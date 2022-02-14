@@ -14,8 +14,7 @@
  */
 class WebPage {
     private $pageLink, $pageTitle, $pageDescription;
-    
-    public function __construct($pageLink, $pageTitle, $pageDescription) {
+    public function __construct($pageLink=null, $pageTitle=null, $pageDescription=null) {
         $this->pageLink = $pageLink;
         $this->pageTitle = $pageTitle;
         $this->pageDescription = $pageDescription;
