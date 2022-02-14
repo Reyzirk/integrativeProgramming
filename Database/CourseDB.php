@@ -30,6 +30,7 @@ class CourseDB extends DBController{
             $course = new Course($row["CourseCode"],$row["CourseName"],$row["CourseDesc"]);
             $courses[] = $course;
         }
+        $this->closeDB();
         return $courses;
     }
 }
