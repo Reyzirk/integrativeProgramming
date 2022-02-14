@@ -9,7 +9,6 @@
 
 namespace Database;
 
-use PDO;
 use Course;
 /**
  * Description of CourseDB
