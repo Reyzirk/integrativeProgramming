@@ -1,0 +1,11 @@
+#
+#
+#DON TOUCH IT
+#DON TOUCH IT
+#DON TOUCH IT
+#
+#
+#Don remove FilesMatch, else security straight die
+<FilesMatch "config.ini">
+    Require all denied
+</FilesMatch>

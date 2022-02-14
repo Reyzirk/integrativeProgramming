@@ -1,0 +1,10 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}============================================
+${licensePrefix}Copyright 2022 Omega International Junior School. All Right Reserved.
+${licensePrefix}Web Application is under GNU General Public License v3.0
+${licensePrefix}============================================
+<#if licenseLast??>
+${licenseLast}
+</#if>

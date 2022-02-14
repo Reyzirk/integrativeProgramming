@@ -1,7 +1,15 @@
-# integrativeProgramming
-Assignment for Integrative Programming
-
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
 ============================================
 Copyright 2022 Omega International Junior School. All Right Reserved.
 Web Application is under GNU General Public License v3.0
 ============================================
+-->
+
+
+<Pages>
+    <Page link="dashboard">
+        <PageTitle>Dashboard</PageTitle>
+        <PageDescription>Home page of the website.</PageDescription>
+    </Page>
+</Pages>
