@@ -23,4 +23,11 @@ echo("
     <meta name='keywords' content='$keywords'>
     <meta name='description' content='$description'>
     <title>$pageTitle | $companyName</title>
+    <link href='css/sweetalert2.min.css' rel='stylesheet' type='text/css'/>
+    <script src='https://kit.fontawesome.com/3f628a0091.js' crossorigin='anonymous'></script>
+    <script src='js/jquery-3.6.0.js' type='text/javascript'></script>
+    <script src='js/sweetalert2.all.min.js' type='text/javascript'></script>
+    <script src='js/ckeditor.js' type='text/javascript'></script>
         ");
+
+
