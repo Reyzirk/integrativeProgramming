@@ -60,7 +60,7 @@ $lang_action_btn = "Action";
                                                 <?php
                                             }
                                             ?>
-                                            <th width="10%" class="text-center">
+                                            <th width="10%" class="text-center" style="cursor:default;">
                                                 <?php echo $lang_action_btn; ?>
                                             </th>
                                         </tr>

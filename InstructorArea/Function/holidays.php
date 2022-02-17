@@ -52,6 +52,6 @@ function callLog() {
             })
         </script>
         <?php
-        unset($_SESSION["errorLog"]);
+        unset($_SESSION["modifyLog"]);
     }
 }
