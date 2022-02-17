@@ -6,18 +6,18 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 <?php include '../Function/load.php' ?>
-<?php include 'Function/createholiday.php' ?>
+<?php include 'Function/editholiday.php' ?>
 <?php
 #Page Languages
-$lang_title = "Create new holiday";
-$lang_description = "Create a new holiday.";
+$lang_title = "Edit existing holiday";
+$lang_description = "Edit an existing holiday.";
 $lang_required = "* Required Fields";
 $lang_legendTitle = "Holiday Details";
 ?>
 <html>
     <head>
         <?php include 'Components/headmeta.php' ?>
-        <script src="js/createholiday.js" type="text/javascript"></script>
+        <script src="js/editholiday.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="wrapper">

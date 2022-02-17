@@ -22,6 +22,7 @@ $lang_action_btn = "Action";
         <script src="js/holidays.js" type="text/javascript"></script>
     </head>
     <body>
+        <?php callLog(); ?>
         <div id="wrapper">
             <div id="content-wrapper">
                 <div id="content">
@@ -29,7 +30,7 @@ $lang_action_btn = "Action";
                         <div id="displayList">
                             <div class="jumbotrun" id="container">
                                 <div class="text-right">
-                                    <button class="btn btn-info"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_create_btn; ?></button>
+                                    <button class="btn btn-info" onclick="location.href='createholiday.php'"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_create_btn; ?></button>
                                     
                                 </div>
                                 <br/>

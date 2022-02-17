@@ -12,7 +12,7 @@
  *
  * @author Choo Meng
  */
-require_once dirname(__DIR__)."/Objects/Holiday.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Holiday.php";
 
 class HolidaysParser {
     private $holidays;
@@ -40,6 +40,19 @@ class HolidaysParser {
     public function getXML(){
         return $this->xml;
     }
+    public function updateHoliday($holidayItem):bool{
+        $holiday = $this->xml->xpath('holiday[@id="'.$holidayItem->getId().'"]');
+        if(count($holiday)>=1){
+            $holiday=$holiday[0];
+            $dom= dom_import_simplexml($holiday);
+            $dom->childNodes->item(0)->nodeValue=$holidayItem->getName();
+            $dom->childNodes->item(1)->nodeValue=$holidayItem->getDateStart();
+            $dom->childNodes->item(2)->nodeValue=$holidayItem->getDateEnd();
+        }else{
+            return false;
+        }
+        return true;
+    }
     public function removeHoliday($id):bool{
         $holiday = $this->xml->xpath('holiday[@id="'.$id.'"]');
         if(count($holiday)>=1){
@@ -51,6 +64,13 @@ class HolidaysParser {
         }
         $this->updateList();
         return true;
+    }
+    public function addHoliday($newHoliday){
+        $holiday = $this->xml->addChild('holiday');
+        $holiday->addAttribute('id', uniqid("H", true));
+        $holiday->addChild('name',$newHoliday->getName());
+        $holiday->addChild('dateStart',$newHoliday->getDateStart());
+        $holiday->addChild('dateEnd',$newHoliday->getDateEnd());
     }
     public function saveXML($filename){
         $this->xml->asXml($filename);

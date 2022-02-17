@@ -51,7 +51,7 @@ function loadList(closeBool) {
         data: {"search": inputSearch.val(), "sorttype": sortType, "sortorder": sortOrder, "currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {
             tableContent.html(response);
-            if (closeBool){
+            if (closeBool) {
                 Swal.close();
             }
         }
@@ -71,52 +71,41 @@ function displayList() {
     loadList(true);
 }
 function deleteDataRecord(value) {
-    loadingScreen();
-    $.ajax({
-        url: "AJAX/deleteHoliday.php",
-        type: "POST",
-        data: {"holidayID": value},
-        success: function (response) {
-            if (response === "fail") {
-                Swal.close();
-                showErrorMessage("Please Try Again!");
-            } else if (response === "success") {
-                loadingScreen();
-                loadList(false);
-                Toast.fire({
-                    icon: 'success',
-                    html: '<b>Successful</b><br/>Removed the holiday.'
-                })
-               
-            } else{
-                Swal.close();
-                showErrorMessage(response);
-            }
+    Swal.fire({
+        title: 'Confirmation',
+        text: "Are you sure you want to delete the holiday!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Confirm'
+    }).then((result) => {
+        loadingScreen();
+        $.ajax({
+            url: "AJAX/deleteHoliday.php",
+            type: "POST",
+            data: {"holidayID": value},
+            success: function (response) {
+                if (response === "fail") {
+                    Swal.close();
+                    showErrorMessage("Please Try Again!");
+                } else if (response === "success") {
+                    loadingScreen();
+                    loadList(false);
+                    Toast.fire({
+                        icon: 'success',
+                        html: '<b>Successful</b><br/>Removed the holiday.'
+                    })
 
-        }
+                } else {
+                    Swal.close();
+                    showErrorMessage(response);
+                }
+
+            }
+        });
     });
 }
-function showErrorMessage(message) {
-    Swal.fire({
-        heightAuto: false,
-        titleText: 'Error',
-        icon: 'error',
-        timer: 1500,
-        text: message,
-    })
-}
-const Toast = Swal.mixin({
-    toast: true,
-    position: 'bottom-end',
-    showConfirmButton: false,
-    timer: 3000,
-    width: 350,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer),
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-    }
-})
+
+
 
 function updatePageIndex(index) {
     loadingScreen();

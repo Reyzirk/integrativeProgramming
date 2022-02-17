@@ -26,3 +26,7 @@ Web Application is under GNU General Public License v3.0
 #tableList th{
     cursor:pointer;
 }
+#formControl .required{
+    color:red;
+    font-size: 0.8em;
+}

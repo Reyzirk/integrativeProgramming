@@ -18,4 +18,14 @@ Web Application is under GNU General Public License v3.0
         <PageTitle>Instructor Template Page</PageTitle>
         <PageDescription>Home page of the website.</PageDescription>
     </Page>
+    <Page>
+        <PageLink>holidays</PageLink>
+        <PageTitle>Holiday List</PageTitle>
+        <PageDescription>Display list of the holiday.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>createholiday</PageLink>
+        <PageTitle>Create new holiday</PageTitle>
+        <PageDescription>Create a new holiday.</PageDescription>
+    </Page>
 </Pages>
