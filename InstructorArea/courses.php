@@ -6,20 +6,20 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 <?php include '../Function/load.php' ?>
-<?php include 'Function/holidays.php' ?>
+<?php include 'Function/courses.php' ?>
 <?php
 #Page Languages
-$lang_search = "Filter the holidays list";
+$lang_search = "Filter the course list";
 $lang_search_btn = "Search";
 $lang_search_tooltip = "Type in any word that you want to search";
-$lang_create_btn = "Create new holiday";
+$lang_create_btn = "Create new course";
 $lang_refresh_btn = "Refresh";
 $lang_action_btn = "Action";
 ?>
 <html>
     <head>
         <?php include 'Components/headmeta.php' ?>
-        <script src="js/holidays.js" type="text/javascript"></script>
+        <script src="js/courses.js" type="text/javascript"></script>
     </head>
     <body>
         <?php callLog(); ?>
@@ -30,7 +30,7 @@ $lang_action_btn = "Action";
                         <div id="displayList">
                             <div class="jumbotrun" id="container">
                                 <div class="text-right">
-                                    <button class="btn btn-info" onclick="location.href='createholiday.php'"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_create_btn; ?></button>
+                                    <button class="btn btn-info" onclick="location.href='createcourse.php'"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_create_btn; ?></button>
                                     
                                 </div>
                                 <br/>
@@ -39,7 +39,7 @@ $lang_action_btn = "Action";
                                         <div class="input-group">
                                             <input type="text" name="inputSearch" id="inputSearch" placeholder="<?php echo $lang_search; ?>" title="<?php echo $lang_search_tooltip; ?>" class="form-control bg-white small"/>
                                             <div class="input-group-append">
-                                                <button class="btn btn-primary" type="button" runat="server" id="searchButton" onclick="displayList();">
+                                                <button class="btn btn-primary" type="button" runat="server" id="searchButton" onclick="displayList()">
                                                     <i class="fas fa-search fa-sm"></i> <?php echo $lang_search_btn; ?>
                                                 </button>
                                             </div>
@@ -47,7 +47,7 @@ $lang_action_btn = "Action";
                                     </div>
                                 </div>
                                 <div class="leftSide">
-                                    <button class="btn btn-warning" onclick="displayList();"><?php echo $lang_refresh_btn; ?></button>
+                                    <button class="btn btn-warning" onclick="displayList()"><?php echo $lang_refresh_btn; ?></button>
                                 </div>
                                 <br/>
                                 <table class="table table-hover" id="tableList">
@@ -60,7 +60,7 @@ $lang_action_btn = "Action";
                                                 <?php
                                             }
                                             ?>
-                                            <th width="10%" class="text-center" style="cursor:default;">
+                                            <th width="20%" class="text-center" style="cursor:default;">
                                                 <?php echo $lang_action_btn; ?>
                                             </th>
                                         </tr>

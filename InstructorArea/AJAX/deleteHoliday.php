@@ -9,7 +9,7 @@
 if (empty($_POST["holidayID"])){
     echo "fail";
 }else{
-    $id = trim($_POST["holidayID"]);
+    $id =  eliminateExploit($_POST["holidayID"]);
     require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/HolidaysParser.php';
     $parser = new HolidaysParser(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/holidays.xml");
     if ($parser->removeHoliday($id)){
@@ -19,4 +19,10 @@ if (empty($_POST["holidayID"])){
         echo "Unable to find the Holiday.";
     }
     
+}
+function eliminateExploit($str){
+    $str = trim($str);
+    $str = stripcslashes($str);
+    $str = htmlspecialchars($str);
+    return $str;
 }

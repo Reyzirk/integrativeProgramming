@@ -11,4 +11,3 @@ $dbSection = $ini_array["Database"];
 $mailSection = $ini_array["Mail"];
 $generalSection = $ini_array["General"];
 $recaptchaSection = $ini_array["Recaptcha"];
-

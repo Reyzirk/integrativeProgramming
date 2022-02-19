@@ -42,6 +42,7 @@ $lang_legendTitle = "Holiday Details";
                                                 </div>
                                                 <div class="col-md"></div>
                                             </div>
+                                            <br/>
                                             <div class="row">
                                                 <div class="col-md">
                                                     <label for="dateStart" class="col-form-label">Start Date <span class="required">*</span></label>

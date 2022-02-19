@@ -30,3 +30,9 @@ Web Application is under GNU General Public License v3.0
     color:red;
     font-size: 0.8em;
 }
+#formControl .invalid-content{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #e74a3b;
+}

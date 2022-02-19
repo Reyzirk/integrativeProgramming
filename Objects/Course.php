@@ -11,34 +11,28 @@
  * @author Choo Meng
  */
 class Course {
-    private $courseCode, $courseName, $courseDesc;
-    function __construct($courseCode, $courseName, $courseDesc){
+    private $courseCode, $courseName, $courseDesc,$courseMaterials = array();
+    function __construct($courseCode, $courseName, $courseDesc, $courseMaterials){
         $this->courseCode = $courseCode;
         $this->courseName = $courseName;
         $this->courseDesc = $courseDesc;
+        $this->courseMaterials = $courseMaterials;
     }
-    public function getCourseCode() {
-        return $this->courseCode;
+    
+    public function __get($name) {
+        if (property_exists($this, $name)){
+            return $this->$name;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
-
-    public function getCourseName() {
-        return $this->courseName;
-    }
-
-    public function getCourseDesc() {
-        return $this->courseDesc;
-    }
-
-    public function setCourseCode($courseCode): void {
-        $this->courseCode = $courseCode;
-    }
-
-    public function setCourseName($courseName): void {
-        $this->courseName = $courseName;
-    }
-
-    public function setCourseDesc($courseDesc): void {
-        $this->courseDesc = $courseDesc;
+    
+    public function __set($name, $value) {
+        if (property_exists($this, $name)){
+            $this->$name = $value;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
 
 

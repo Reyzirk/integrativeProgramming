@@ -7,31 +7,28 @@
  */
 
 /**
- * Description of displayHolidayPagination
+ * Description of displayCoursePagination
  *
  * @author Choo Meng
  */
-require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/HolidaysParser.php';
-$parser = new HolidaysParser(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/holidays.xml");
-$holidays = $parser->getHolidays();
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/CoursesParser.php';
+$parser = new CoursesParser(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/courses.xml");
+$courses = $parser->getCourses();
 $entry = empty($_POST["entry"]) ? 20 : (int) $_POST["entry"];
 $search = empty($_POST["search"]) ? null : eliminateExploit($_POST["search"]);
 $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
+$currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
 $count = 0;
 //Convert to indexed array
-foreach ($holidays as $key) {
-    $valueDateStart = (string) $key->dateStart;
-    $valueDateEnd = (string) $key->dateEnd;
+foreach ($courses as $key) {
     if (empty($search) ||
             (
-            custom_str_contains($key->name, empty($search) ? "" : $search) ||
-            custom_str_contains($valueDateStart, empty($search) ? "" : $search) ||
-            custom_str_contains($valueDateEnd, empty($search) ? "" : $search)
+            custom_str_contains($key->courseCode, empty($search) ? "" : $search) ||
+            custom_str_contains($key->courseName, empty($search) ? "" : $search)
             )
     ) {
         $count++;
-        $holidayList[] = $key;
-    }   
+    }
 }
 $totalCount = $count;
 $totalPage = (int) (ceil($totalCount / $entry));
@@ -96,6 +93,7 @@ if ($totalCount != 0) {
 
     <?php
 }
+
 //For PHP version that below 8.0
 function custom_str_contains(string $haystack, string $needle): bool {
     return '' === $needle || false !== strpos($haystack, $needle);

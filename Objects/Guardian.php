@@ -17,53 +17,26 @@ class Guardian extends User{
     
     public function __construct($userID, $name, $gender, $birthDate, $email, $contactNumber, $icNo, 
             $address, $totalChild, $emergencyContactNumber, $child, $password=null, $passwordSalt=null) {
-        $this->userID = $userID;
-        $this->name = $name;
-        $this->gender = $gender;
-        $this->birthDate = $birthDate;
-        $this->email = $email;
-        $this->contactNumber = $contactNumber;
-        $this->icNo = $icNo;
-        $this->password = $password;
-        $this->passwordSalt = $passwordSalt;
+        parent::__construct($userID, $name, $gender, $birthDate, $email, $contactNumber, $icNo, $password, $passwordSalt);
         $this->address = $address;
         $this->totalChild = $totalChild;
         $this->emergencyContactNumber = $emergencyContactNumber;
         $this->child = $child;
     }
-    public function getAddress() {
-        return $this->address;
-    }
-
-    public function getTotalChild() {
-        return $this->totalChild;
-    }
-
-    public function getEmergencyContactNumber() {
-        return $this->emergencyContactNumber;
-    }
-
-    public function getChild() {
-        return $this->child;
-    }
-
-    public function setAddress($address): void {
-        $this->address = $address;
-    }
-
-    public function setTotalChild($totalChild): void {
-        $this->totalChild = $totalChild;
-    }
-
-    public function setEmergencyContactNumber($emergencyContactNumber): void {
-        $this->emergencyContactNumber = $emergencyContactNumber;
-    }
-
-    public function setChild($child): void {
-        $this->child = $child;
-    }
-
-
     
+    public function __get($name) {
+        if (property_exists($this, $name)){
+            return $this->$name;
+        }else{
+            return parent::__get($name);
+        }
+    }
 
+    public function __set($name, $value) {
+        if (property_exists($this, $name)){
+            $this->$name = $value;
+        }else{
+            parent::__set($name,$value);
+        }
+    }
 }

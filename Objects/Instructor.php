@@ -15,24 +15,24 @@
 class Instructor extends User{
     private $employDate;
     public function __construct($userID, $name, $gender, $birthDate, $email, $contactNumber, $icNo, $employDate, $password=null, $passwordSalt=null) {
-        $this->userID = $userID;
-        $this->name = $name;
-        $this->gender = $gender;
-        $this->birthDate = $birthDate;
-        $this->email = $email;
-        $this->contactNumber = $contactNumber;
-        $this->icNo = $icNo;
+        parent::__construct($userID, $name, $gender, $birthDate, $email, $contactNumber, $icNo, $password, $passwordSalt);
         $this->employDate = $employDate;
-        $this->password = $password;
-        $this->passwordSalt = $passwordSalt;
     }
     
-    public function getEmployDate() {
-        return $this->employDate;
+    public function __get($name) {
+        if (property_exists($this, $name)){
+            return $this->$name;
+        }else{
+            return parent::__get($name);
+        }
     }
 
-    public function setEmployDate($employDate): void {
-        $this->employDate = $employDate;
+    public function __set($name, $value) {
+        if (property_exists($this, $name)){
+            $this->$name = $value;
+        }else{
+            parent::__set($name,$value);
+        }
     }
 
 }

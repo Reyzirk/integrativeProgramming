@@ -21,36 +21,20 @@ class Homework {
         $this->homework = $homework;
     }
 
-    public function getHomeworkID() {
-        return $this->homeworkID;
+    public function __get($name) {
+        if (property_exists($this, $name)){
+            return $this->$name;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
-
-    public function getClass() {
-        return $this->class;
-    }
-
-    public function getDate() {
-        return $this->date;
-    }
-
-    public function getHomework() {
-        return $this->homework;
-    }
-
-    public function setHomeworkID($homeworkID): void {
-        $this->homeworkID = $homeworkID;
-    }
-
-    public function setClass($class): void {
-        $this->class = $class;
-    }
-
-    public function setDate($date): void {
-        $this->date = $date;
-    }
-
-    public function setHomework($homework): void {
-        $this->homework = $homework;
+    
+    public function __set($name, $value) {
+        if (property_exists($this, $name)){
+            $this->$name = $value;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
 
 

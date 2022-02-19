@@ -31,16 +31,16 @@ class WebPageParser {
     public function getEndElement($parser, $name){
         switch(strtolower($name)){
             case "page":
-                $this->webpage[$this->webpageTemp->getPageLink()] = $this->webpageTemp;
+                $this->webpage[$this->webpageTemp->pageLink] = $this->webpageTemp;
                 break;
             case "pagetitle":
-                $this->webpageTemp->setPageTitle($this->temp);
+                $this->webpageTemp->pageTitle = $this->temp;
                 break;
             case "pagelink":
-                $this->webpageTemp->setPageLink($this->temp);
+                $this->webpageTemp->pageLink = $this->temp;
                 break;
             case "pagedescription":
-                $this->webpageTemp->setPageDescription($this->temp);
+                $this->webpageTemp->pageDescription = $this->temp;
                 break;
         }
     }

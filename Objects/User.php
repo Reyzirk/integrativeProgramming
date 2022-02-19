@@ -27,79 +27,19 @@ class User {
         $this->passwordSalt = $passwordSalt;
     }
 
-    public function getUserID() {
-        return $this->userID;
+    public function __get($name) {
+        if (property_exists($this, $name)){
+            return $this->$name;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
-
-    public function getName() {
-        return $this->name;
-    }
-
-    public function getGender() {
-        return $this->gender;
-    }
-
-    public function getBirthDate() {
-        return $this->birthDate;
-    }
-
-    public function getEmail() {
-        return $this->email;
-    }
-
-    public function getContactNumber() {
-        return $this->contactNumber;
-    }
-
-    public function getIcNo() {
-        return $this->icNo;
-    }
-
-    public function getPassword() {
-        return $this->password;
-    }
-
-    public function getPasswordSalt() {
-        return $this->passwordSalt;
-    }
-
-    public function setUserID($userID): void {
-        $this->userID = $userID;
-    }
-
-    public function setName($name): void {
-        $this->name = $name;
-    }
-
-    public function setGender($gender): void {
-        $this->gender = $gender;
-    }
-
-    public function setBirthDate($birthDate): void {
-        $this->birthDate = $birthDate;
-    }
-
-    public function setEmail($email): void {
-        $this->email = $email;
-    }
-
-    public function setContactNumber($contactNumber): void {
-        $this->contactNumber = $contactNumber;
-    }
-
-    public function setIcNo($icNo): void {
-        $this->icNo = $icNo;
-    }
-
-    public function setPassword($password): void {
-        $this->password = $password;
-    }
-
-    public function setPasswordSalt($passwordSalt): void {
-        $this->passwordSalt = $passwordSalt;
-    }
-
-
     
-
+    public function __set($name, $value) {
+        if (property_exists($this, $name)){
+            $this->$name = $value;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
+    }
 }

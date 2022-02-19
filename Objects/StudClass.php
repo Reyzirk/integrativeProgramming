@@ -21,52 +21,20 @@ class StudClass {
         $this->formTeacher = $formTeacher;
     }
     
-    public function getClassID() {
-        return $this->classID;
+    public function __get($name) {
+        if (property_exists($this, $name)){
+            return $this->$name;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
-
-    public function getCourseList() {
-        return $this->courseList;
-    }
-
-    public function getStudentList() {
-        return $this->studentList;
-    }
-
-    public function getSemester() {
-        return $this->semester;
-    }
-
-    public function getYear() {
-        return $this->year;
-    }
-
-    public function getFormTeacher() {
-        return $this->formTeacher;
-    }
-
-    public function setClassID($classID): void {
-        $this->classID = $classID;
-    }
-
-    public function setCourseList($courseList): void {
-        $this->courseList = $courseList;
-    }
-
-    public function setStudentList($studentList): void {
-        $this->studentList = $studentList;
-    }
-
-    public function setSemester($semester): void {
-        $this->semester = $semester;
-    }
-
-    public function setYear($year): void {
-        $this->year = $year;
-    }
-
-    public function setFormTeacher($formTeacher): void {
-        $this->formTeacher = $formTeacher;
+    
+    public function __set($name, $value) {
+        if (property_exists($this, $name)){
+            $this->$name = $value;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
 
 }

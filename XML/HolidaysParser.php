@@ -41,13 +41,13 @@ class HolidaysParser {
         return $this->xml;
     }
     public function updateHoliday($holidayItem):bool{
-        $holiday = $this->xml->xpath('holiday[@id="'.$holidayItem->getId().'"]');
+        $holiday = $this->xml->xpath('holiday[@id="'.$holidayItem->id.'"]');
         if(count($holiday)>=1){
             $holiday=$holiday[0];
             $dom= dom_import_simplexml($holiday);
-            $dom->childNodes->item(0)->nodeValue=$holidayItem->getName();
-            $dom->childNodes->item(1)->nodeValue=$holidayItem->getDateStart();
-            $dom->childNodes->item(2)->nodeValue=$holidayItem->getDateEnd();
+            $dom->childNodes->item(0)->nodeValue=$holidayItem->name;
+            $dom->childNodes->item(1)->nodeValue=$holidayItem->dateStart;
+            $dom->childNodes->item(2)->nodeValue=$holidayItem->dateEnd;
         }else{
             return false;
         }
@@ -68,9 +68,9 @@ class HolidaysParser {
     public function addHoliday($newHoliday){
         $holiday = $this->xml->addChild('holiday');
         $holiday->addAttribute('id', uniqid("H", true));
-        $holiday->addChild('name',$newHoliday->getName());
-        $holiday->addChild('dateStart',$newHoliday->getDateStart());
-        $holiday->addChild('dateEnd',$newHoliday->getDateEnd());
+        $holiday->addChild('name',$newHoliday->name);
+        $holiday->addChild('dateStart',$newHoliday->dateStart);
+        $holiday->addChild('dateEnd',$newHoliday->dateEnd);
     }
     public function saveXML($filename){
         $this->xml->asXml($filename);

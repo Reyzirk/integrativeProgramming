@@ -20,34 +20,20 @@ class Holiday {
         $this->dateStart = $dateStart;
         $this->dateEnd = $dateEnd;
     }
-    public function getId(){
-        return $this->id;
+    public function __get($name) {
+        if (property_exists($this, $name)){
+            return $this->$name;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
-    public function getName() {
-        return $this->name;
-    }
-
-    public function getDateStart() {
-        return $this->dateStart;
-    }
-
-    public function getDateEnd() {
-        return $this->dateEnd;
-    }
-
-    public function setName($name): void {
-        $this->name = $name;
-    }
-
-    public function setDateStart($dateStart): void {
-        $this->dateStart = $dateStart;
-    }
-
-    public function setDateEnd($dateEnd): void {
-        $this->dateEnd = $dateEnd;
-    }
-    public function setId($id){
-        $this->id = $id;
+    
+    public function __set($name, $value) {
+        if (property_exists($this, $name)){
+            $this->$name = $value;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
 
 }

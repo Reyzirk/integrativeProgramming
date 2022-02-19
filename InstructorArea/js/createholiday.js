@@ -13,7 +13,7 @@ function validateHolidayName(){
         input.addClass("is-invalid");
         input.removeClass("is-valid");
         return false;
-    }else if (input.val().length === 300){
+    }else if (input.val().length > 300){
         errorMsg.html("<b>Holiday Name</b> cannot more than 300 characters.");
         input.addClass("is-invalid");
         input.removeClass("is-valid");

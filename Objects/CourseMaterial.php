@@ -8,19 +8,17 @@
  */
 
 /**
- * Description of Timetable
+ * Description of CourseMaterial
  *
  * @author Choo Meng
  */
-class Timetable {
-    private $timetableID, $class, $classSchedule;
-    
-    public function __construct($timetableID, $class, $classSchedule) {
-        $this->timetableID = $timetableID;
-        $this->class = $class;
-        $this->classSchedule = $classSchedule;
+class CourseMaterial {
+    private $materialID, $materialName, $materialLink;
+    public function __construct($materialID, $materialName, $materialLink) {
+        $this->materialID = $materialID;
+        $this->materialName = $materialName;
+        $this->materialLink = $materialLink;
     }
-
     public function __get($name) {
         if (property_exists($this, $name)){
             return $this->$name;
@@ -36,5 +34,6 @@ class Timetable {
             trigger_error("Property $name doesn't exists", E_USER_ERROR);
         }
     }
+
 
 }

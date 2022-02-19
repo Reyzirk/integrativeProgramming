@@ -20,28 +20,20 @@ class WebPage {
         $this->pageDescription = $pageDescription;
     }
 
-    public function getPageLink() {
-        return $this->pageLink;
+    public function __get($name) {
+        if (property_exists($this, $name)){
+            return $this->$name;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
-
-    public function getPageTitle() {
-        return $this->pageTitle;
-    }
-
-    public function getPageDescription() {
-        return $this->pageDescription;
-    }
-
-    public function setPageLink($pageLink): void {
-        $this->pageLink = $pageLink;
-    }
-
-    public function setPageTitle($pageTitle): void {
-        $this->pageTitle = $pageTitle;
-    }
-
-    public function setPageDescription($pageDescription): void {
-        $this->pageDescription = $pageDescription;
+    
+    public function __set($name, $value) {
+        if (property_exists($this, $name)){
+            $this->$name = $value;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
 
 

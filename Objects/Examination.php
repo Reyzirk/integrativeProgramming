@@ -23,44 +23,20 @@ class Examination {
         $this->examDuration = $examDuration;
     }
 
-    public function getExaminationID() {
-        return $this->examinationID;
+    public function __get($name) {
+        if (property_exists($this, $name)){
+            return $this->$name;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
-
-    public function getCourse() {
-        return $this->course;
-    }
-
-    public function getExaminer() {
-        return $this->examiner;
-    }
-
-    public function getExamStartTime() {
-        return $this->examStartTime;
-    }
-
-    public function getExamDuration() {
-        return $this->examDuration;
-    }
-
-    public function setExaminationID($examinationID): void {
-        $this->examinationID = $examinationID;
-    }
-
-    public function setCourse($course): void {
-        $this->course = $course;
-    }
-
-    public function setExaminer($examiner): void {
-        $this->examiner = $examiner;
-    }
-
-    public function setExamStartTime($examStartTime): void {
-        $this->examStartTime = $examStartTime;
-    }
-
-    public function setExamDuration($examDuration): void {
-        $this->examDuration = $examDuration;
+    
+    public function __set($name, $value) {
+        if (property_exists($this, $name)){
+            $this->$name = $value;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
 
 

@@ -12,8 +12,8 @@ $fileName = pathinfo($_SERVER['PHP_SELF'],PATHINFO_BASENAME);
 $parser = new WebPageParser(str_replace("InstructorArea","",dirname(__DIR__))."/XML/InstructorSideWebPage.xml");
 $webpage = empty($parser->getWebpage()[ str_replace(".php","",strtolower($fileName))])?"":
         $parser->getWebpage()[ str_replace(".php","",strtolower($fileName))];
-$pageTitle = empty($webpage)?"":$webpage->getPageTitle();
-$description = empty($webpage)?"":$webpage->getPageDescription();
+$pageTitle = empty($webpage)?"":$webpage->pageTitle;
+$description = empty($webpage)?"":$webpage->pageDescription;
 
 echo("
     <meta charset='UTF-8'>

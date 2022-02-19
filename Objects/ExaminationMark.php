@@ -21,28 +21,20 @@ class ExaminationMark {
         $this->mark = $mark;
     }
     
-    public function getExamination() {
-        return $this->examination;
+    public function __get($name) {
+        if (property_exists($this, $name)){
+            return $this->$name;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
-
-    public function getStudent() {
-        return $this->student;
-    }
-
-    public function getMark() {
-        return $this->mark;
-    }
-
-    public function setExamination($examination): void {
-        $this->examination = $examination;
-    }
-
-    public function setStudent($student): void {
-        $this->student = $student;
-    }
-
-    public function setMark($mark): void {
-        $this->mark = $mark;
+    
+    public function __set($name, $value) {
+        if (property_exists($this, $name)){
+            $this->$name = $value;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
     }
 
 

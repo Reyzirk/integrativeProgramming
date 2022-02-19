@@ -18,11 +18,11 @@ $holidays = $parser->getHolidays();
 $id = $_GET["id"];
 $valid = false;
 foreach ($holidays as $key) {
-    if ($key->getId()==$id){
+    if ($key->id==$id){
         $valid = true;
-        $storedValue["holidayName"] = $key->getName();
-        $storedValue["dateStart"] = $key->getDateStart();
-        $storedValue["dateEnd"] = $key->getDateEnd();
+        $storedValue["holidayName"] = $key->name;
+        $storedValue["dateStart"] = $key->dateStart;
+        $storedValue["dateEnd"] = $key->dateEnd;
         break;
     }
 }
@@ -36,7 +36,7 @@ if (isset($_POST["formDetect"])){
     if (empty($_POST["holidayName"])){
         $error["holidayName"] = "<b>Holiday Name</b> cannot empty.";
     }else{
-        $storedValue["holidayName"] = $_POST["holidayName"];
+        $storedValue["holidayName"] = eliminateExploit($_POST["holidayName"]);
         if (strlen($storedValue["holidayName"])>300){
             $error["holidayName"] = "<b>Holiday Name</b> cannot more than 300 characters.";
         }
@@ -44,7 +44,7 @@ if (isset($_POST["formDetect"])){
     if (empty($_POST["dateStart"])){
         $error["dateStart"] = "<b>Start Date</b> cannot empty.";
     }else{
-        $storedValue["dateStart"] = $_POST["dateStart"];
+        $storedValue["dateStart"] = eliminateExploit($_POST["dateStart"]);
         try{
             $date = date_parse_from_format("Y-m-d", $storedValue["dateStart"]);
             if (!checkdate($date["month"], $date["day"], $date["year"])){
@@ -57,7 +57,7 @@ if (isset($_POST["formDetect"])){
     if (empty($_POST["dateEnd"])){
         $error["dateEnd"] = "<b>End Date</b> cannot empty.";
     }else{
-        $storedValue["dateEnd"] = $_POST["dateEnd"];
+        $storedValue["dateEnd"] = eliminateExploit($_POST["dateEnd"]);
         try{
             $date = date_parse_from_format("Y-m-d", $storedValue["dateEnd"]);
             if (!checkdate($date["month"], $date["day"], $date["year"])){
@@ -78,4 +78,10 @@ if (isset($_POST["formDetect"])){
         header('Location: holidays.php');
         
     }
+}
+function eliminateExploit($str){
+    $str = trim($str);
+    $str = stripcslashes($str);
+    $str = htmlspecialchars($str);
+    return $str;
 }
