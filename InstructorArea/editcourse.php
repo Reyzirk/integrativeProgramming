@@ -6,11 +6,11 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 <?php include '../Function/load.php' ?>
-<?php include 'Function/createcourse.php' ?>
+<?php include 'Function/editcourse.php' ?>
 <?php
 #Page Languages
-$lang_title = "Create new course";
-$lang_description = "Create a new course.";
+$lang_title = "Edit existing course";
+$lang_description = "Edit an existing course.";
 $lang_required = "* Required Fields";
 $lang_legendTitle = "Course Details";
 $lang_legendTitle2 = "Course Materials"
@@ -18,7 +18,7 @@ $lang_legendTitle2 = "Course Materials"
 <html>
     <head>
         <?php include 'Components/headmeta.php' ?>
-        <script src="js/createcourse.js" type="text/javascript"></script>
+        <script src="js/editcourse.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -77,6 +77,32 @@ $lang_legendTitle2 = "Course Materials"
 
                                                 </thead>
                                                 <tbody class="table-secondary">
+                                                    <?php 
+                                                        for ($i = 0;$i < count($storedValue["courseMaterials"]);$i++){
+                                                            $material = $storedValue["courseMaterials"][$i];
+                                                    ?>
+                                                        <tr class="material">
+                                                            <td>
+                                                                <input type="text" maxlength="300" placeholder="Enter the material name" class="bg-white form-control materialName" 
+                                                                       id="materialName" name="materialName[]" oninput="validateMaterialName(this)" value="<?php echo $material->materialName; ?>"/>
+                                                                <span class="invalid-feedback"></span>
+                                                            </td>
+                                                            <td>
+                                                                <div class="form-group bg-white" style="border-radius:0.35rem; border: 1px solid #d1d3e2; ">
+                                                                    <input type="file" class="form-control-file materialFile" id="materialFile" name="materialFile[]" style="padding: 5px 10px;cursor:pointer;" oninput="validateFile(this)"/>
+                                                                    <span class="invalid-feedback" style="background-color:rgb(221, 221, 226);border:none;"></span>
+                                                                    <span style="padding-left: 5px;">File Name: <?php echo $material->materialLink; ?></span>
+                                                                    <input type="hidden" name="materialHiddenFile[]" value="<?php echo $material->materialLink; ?>"/>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <button class="btn btn-danger" type="button" title="Delete material" onclick="removeRow(this)"><i class="fa-solid fa-trash-can"></i></button>
+                                                            </td>
+                                                        </tr>
+
+                                                    <?php
+                                                        }
+                                                    ?>
                                                     <tr>
                                                         <td></td>
                                                         <td></td>

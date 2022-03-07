@@ -15,9 +15,10 @@ use Course;
  *
  * @author Choo Meng
  */
-class CourseDB extends DBController{
+class CourseDB{
+    private $con;
     public function __construct(){
-        $this->connectDB();
+        $this->connInstance = DBController::getInstance();
     }
     public function getCourseDetails($courseCode):Course{
         $statement="SELECT * FROM Course WHERE CourseCode = ?";

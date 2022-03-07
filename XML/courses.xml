@@ -5,42 +5,6 @@ Copyright 2022 Omega International Junior School. All Right Reserved.
 Web Application is under GNU General Public License v3.0
 ============================================
 -->
-
-
-<courses
-    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-    xsi:noNamespaceSchemaLocation='courses.xsd'>
-    <course code="a">
-        <name></name>
-        <desc></desc>
-        <CourseMaterials>
-            <CourseMaterial id="">
-                <name></name>
-                <link></link>
-            </CourseMaterial>
-            <CourseMaterial id="">
-                <name></name>
-                <link></link>
-            </CourseMaterial>
-            <CourseMaterial id="">
-                <name></name>
-                <link></link>
-            </CourseMaterial>
-        </CourseMaterials>
-    </course>
-    <course code="b">
-        <name></name>
-        <desc></desc>
-        <CourseMaterials>
-            <CourseMaterial id="">
-                <name></name>
-                <link></link>
-            </CourseMaterial>
-        </CourseMaterials>
-    </course>
-    <course code="c">
-        <name></name>
-        <desc></desc>
-    </course>
+<courses xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="courses.xsd">
 
 </courses>

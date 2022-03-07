@@ -7,4 +7,4 @@ Web Application is under GNU General Public License v3.0
 -->
 <holidays xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="holidays.xsd">
 
-<holiday id="H620e8f493716a5.82682947"><name>Happy New Year</name><dateStart>2022-01-01</dateStart><dateEnd>2022-01-01</dateEnd></holiday></holidays>
+</holidays>

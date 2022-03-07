@@ -10,13 +10,16 @@
  *
  * @author Choo Meng
  */
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/CourseMaterial.php";
 class Course {
     private $courseCode, $courseName, $courseDesc,$courseMaterials = array();
     function __construct($courseCode, $courseName, $courseDesc, $courseMaterials){
         $this->courseCode = $courseCode;
         $this->courseName = $courseName;
         $this->courseDesc = $courseDesc;
-        $this->courseMaterials = $courseMaterials;
+        
+        $this->courseMaterials = (array)$courseMaterials;
+        
     }
     
     public function __get($name) {

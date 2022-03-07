@@ -16,17 +16,12 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/Holiday
 $parser = new HolidaysParser(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/holidays.xml");
 $holidays = $parser->getHolidays();
 $id = $_GET["id"];
-$valid = false;
-foreach ($holidays as $key) {
-    if ($key->id==$id){
-        $valid = true;
-        $storedValue["holidayName"] = $key->name;
-        $storedValue["dateStart"] = $key->dateStart;
-        $storedValue["dateEnd"] = $key->dateEnd;
-        break;
-    }
-}
-if (!$valid){
+$retrievedHoliday = $parser->getHoliday($id);
+if (!empty($retrievedHoliday)){
+    $storedValue["holidayName"] = $retrievedHoliday->name;
+    $storedValue["dateStart"] = $retrievedHoliday->dateStart;
+    $storedValue["dateEnd"] = $retrievedHoliday->dateEnd;
+}else{
     $_SESSION["errorLog"] = "noid";
     header('HTTP/1.1 307 Temporary Redirect');
     header('Location: holidays.php');

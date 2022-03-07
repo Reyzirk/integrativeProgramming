@@ -53,6 +53,16 @@ class HolidaysParser {
         }
         return true;
     }
+    public function getHoliday($id){
+        $holiday = $this->xml->xpath('holiday[@id="'.$id.'"]');
+        if(count($holiday)>=1){
+            $holiday=$holiday[0];
+            $dom= dom_import_simplexml($holiday);
+            return new Holiday($id,$dom->childNodes->item(0)->nodeValue,$dom->childNodes->item(1)->nodeValue,$dom->childNodes->item(2)->nodeValue);
+        }else{
+            return null;
+        }
+    }
     public function removeHoliday($id):bool{
         $holiday = $this->xml->xpath('holiday[@id="'.$id.'"]');
         if(count($holiday)>=1){
@@ -62,8 +72,12 @@ class HolidaysParser {
         }else{
             return false;
         }
-        $this->updateList();
-        return true;
+        foreach ($this->holidays as $key) {
+            if ($key->id==$id){
+                $this->holidays->detach($key);
+                return true;
+            }
+        }
     }
     public function addHoliday($newHoliday){
         $holiday = $this->xml->addChild('holiday');
@@ -74,14 +88,5 @@ class HolidaysParser {
     }
     public function saveXML($filename){
         $this->xml->asXml($filename);
-    }
-    private function updateList(){
-        $this->holidays = new SplObjectStorage();
-        $holidayList = $this->xml->holiday;
-        foreach($holidayList as $holiday){
-            $attr = $holiday->attributes();
-            $temp = new Holiday($attr->id,$holiday->name,$holiday->dateStart,$holiday->dateEnd);
-            $this->holidays->attach($temp);
-        }
     }
 }

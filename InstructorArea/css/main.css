@@ -36,3 +36,15 @@ Web Application is under GNU General Public License v3.0
     font-size: 80%;
     color: #e74a3b;
 }
+input[type="file"]::-webkit-file-upload-button{
+    padding: 0px 10px 0px 0px;
+    border-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background-color: #fff !important;
+    border:none;
+    border-right: lightgray 2px solid;
+}
+#tableList .btn{
+    margin-bottom: 5px;
+}

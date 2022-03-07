@@ -81,34 +81,67 @@ function validateCourseDescription(data){
 function validateFile(element){
     input = $(element);
     errorMsg = input.next();
-   
-    if (input.val().length===0){
-        errorMsg.html("<b>Material File</b> cannot empty.");
-        input.addClass("is-invalid");
-        input.removeClass("is-valid");
-        return false;
-    }else if(!checkValidFileType(input.val())){
-        input.val("");
-        errorMsg.html("File type of <b>Material File</b> not supported.");
-        input.addClass("is-invalid");
-        input.removeClass("is-valid");
-        return false;
-    }else{
-        fileSize = element.files[0].size;
-        if(fileSize>maxFileSize){
+    fileNameInput = input.next().next();
+    hiddenInput = input.next().next().next();
+    if (hiddenInput.val().length!=0){
+        if (input.val().length===0){
+            fileNameInput.html("File Name: "+hiddenInput.val());
+            return true;
+        }else if(!checkValidFileType(input.val())){
             input.val("");
-            errorMsg.html("<b>Material File</b> cannot more than "+convertByteToMB(maxFileSize)+".");
+            fileNameInput.html("File Name: "+hiddenInput.val());
+            errorMsg.html("File type of <b>Material File</b> not supported.");
             input.addClass("is-invalid");
             input.removeClass("is-valid");
             return false;
+        }else{
+            fileSize = element.files[0].size;
+            if(fileSize>maxFileSize){
+                input.val("");
+                fileNameInput.html("File Name: "+hiddenInput.val());
+                errorMsg.html("<b>Material File</b> cannot more than "+convertByteToMB(maxFileSize)+".");
+                input.addClass("is-invalid");
+                input.removeClass("is-valid");
+                return false;
+            }
+            else{
+                errorMsg.html("");
+                fileNameInput.html("File Name: "+input.val());
+                input.addClass("is-valid");
+                input.removeClass("is-invalid");
+                return true;
+            }
         }
-        else{
-            errorMsg.html("");
-            input.addClass("is-valid");
-            input.removeClass("is-invalid");
-            return true;
+    }else{
+        if (input.val().length===0){
+            errorMsg.html("<b>Material File</b> cannot empty.");
+            input.addClass("is-invalid");
+            input.removeClass("is-valid");
+            return false;
+        }else if(!checkValidFileType(input.val())){
+            input.val("");
+            errorMsg.html("File type of <b>Material File</b> not supported.");
+            input.addClass("is-invalid");
+            input.removeClass("is-valid");
+            return false;
+        }else{
+            fileSize = element.files[0].size;
+            if(fileSize>maxFileSize){
+                input.val("");
+                errorMsg.html("<b>Material File</b> cannot more than "+convertByteToMB(maxFileSize)+".");
+                input.addClass("is-invalid");
+                input.removeClass("is-valid");
+                return false;
+            }
+            else{
+                errorMsg.html("");
+                input.addClass("is-valid");
+                input.removeClass("is-invalid");
+                return true;
+            }
         }
     }
+    
 }
 function convertByteToMB(size){
     if (size >= 1048576){
@@ -130,7 +163,7 @@ function submitForm(){
     form = $("#form");
     Swal.fire({
         title: 'Confirmation',
-        text: "Are you sure you want to create a new holiday!",
+        text: "Are you sure you want to edit an existing holiday!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Confirm'

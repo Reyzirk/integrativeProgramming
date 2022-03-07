@@ -18,9 +18,12 @@ namespace Database;
 use PDO;
 
 class DBController {
-    
-    protected $con;
-    protected function connectDB($error = null):boolean{
+    private static $dbConnection = NULL;
+    private $con;
+    private function __construct(){
+        
+    }
+    private function connectDB($error = null):boolean{
         try{
             $ini_array = parse_ini_file(dirname(__DIR__)."config.ini",true);
             $dbSection = $ini_array["Database"];
@@ -35,7 +38,17 @@ class DBController {
             return false;
         }
     }
-    public function closeDB(){
+    private function closeDB(){
         $con = null;
+    }
+    public static function getInstance(){
+        if (self::$dbConnection==NULL){
+            self::$dbConnection = new DBController();
+        }
+        return self::$dbConnection;
+    }
+    public static function closeConnection(){
+        self::$dbConnection.$this->closeDB();
+        self::$dbConnection = NULL;
     }
 }
