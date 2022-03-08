@@ -57,10 +57,10 @@ $lang_legendTitle2 = "Course Materials"
                                             <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
                                                 <div class="d-flex w-100 justify-content-between">
                                                     <h5 class="mb-1">List group item heading</h5>
-                                                    <small>3 days ago</small>
+                                                    <small>File type: <?php echo strtoupper(pathinfo(str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$material->materialLink, PATHINFO_EXTENSION)); ?></small>
                                                 </div>
                                                 <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                                <small>File Size: <?php echo filesize(str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$material->materialLink) ?></small>
+                                                <small>File Size: <?php echo convertByteToOther(filesize(str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$material->materialLink)) ?></small>
                                             </a>
                                         </div>
                                     <?php

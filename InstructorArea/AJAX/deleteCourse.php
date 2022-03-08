@@ -10,8 +10,9 @@ if (empty($_POST["courseCode"])){
     echo "fail";
 }else{
     $id = eliminateExploit($_POST["courseCode"]);
-    require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/CoursesParser.php';
-    $parser = new CoursesParser(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/courses.xml");
+    require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
+    $factory = new ParserFactory();
+    $parser = $factory->getParser("Courses");
     if ($parser->removeCourse($id)){
         echo "success";
         $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/courses.xml");

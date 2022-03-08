@@ -12,14 +12,22 @@
  *
  * @author Choo Meng
  */
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/XML/Parser.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Holiday.php";
 
-class HolidaysParser {
+class HolidaysParser implements Parser{
     private $holidays;
     private $xml;
+    private static $parser;
     public function __construct($filename){
         $this->holidays = new SplObjectStorage();
         $this->readFromXML($filename);
+    }
+    public static function getInstance($filename){
+        if (self::$parser==NULL){
+            self::$parser = new HolidaysParser($filename);
+        }
+        return self::$parser;
     }
     private function readFromXML($filename){
         $xml = simplexml_load_file($filename);

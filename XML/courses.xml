@@ -7,4 +7,4 @@ Web Application is under GNU General Public License v3.0
 -->
 <courses xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="courses.xsd">
 
-</courses>
+<course code="BAIT3173"><name>Integrative Programming</name><desc>&lt;p&gt;test&lt;/p&gt;</desc><CourseMaterials><CourseMaterial id="CM622610e2f22fd0.08590834"><name>test</name><link>62260fbaf046e2.40843446.png</link></CourseMaterial></CourseMaterials></course></courses>

@@ -10,8 +10,9 @@ if (empty($_POST["holidayID"])){
     echo "fail";
 }else{
     $id =  eliminateExploit($_POST["holidayID"]);
-    require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/HolidaysParser.php';
-    $parser = new HolidaysParser(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/holidays.xml");
+    require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
+    $factory = new ParserFactory();
+    $parser = $factory->getParser("Holidays");
     if ($parser->removeHoliday($id)){
         echo "success";
         $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/holidays.xml");

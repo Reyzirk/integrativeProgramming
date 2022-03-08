@@ -11,8 +11,9 @@
  *
  * @author Choo Meng
  */
-require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/CoursesParser.php';
-$parser = new CoursesParser(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/courses.xml");
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
+$factory = new ParserFactory();
+$parser = $factory->getParser("Courses");
 $courses = $parser->getCourses();
 $entry = empty($_POST["entry"]) ? 20 : (int) $_POST["entry"];
 $search = empty($_POST["search"]) ? null : eliminateExploit($_POST["search"]);

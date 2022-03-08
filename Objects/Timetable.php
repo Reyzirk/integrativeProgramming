@@ -13,12 +13,12 @@
  * @author Choo Meng
  */
 class Timetable {
-    private $timetableID, $class, $classSchedule;
+    private $timetableID, $class, $courseSchedule= array();
     
-    public function __construct($timetableID, $class, $classSchedule) {
+    public function __construct($timetableID, $class, $courseSchedule) {
         $this->timetableID = $timetableID;
         $this->class = $class;
-        $this->classSchedule = $classSchedule;
+        $this->courseSchedule = $courseSchedule;
     }
 
     public function __get($name) {

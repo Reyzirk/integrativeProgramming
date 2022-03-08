@@ -44,8 +44,9 @@ if (isset($_POST["formDetect"])){
     }
     if (empty($error)){
         $newHoliday = new Holiday("H",$storedValue["holidayName"],$storedValue["dateStart"],$storedValue["dateEnd"]);
-        require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/HolidaysParser.php';
-        $parser = new HolidaysParser(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/holidays.xml");
+        require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
+        $factory = new ParserFactory();
+        $parser = $factory->getParser("Holidays");
         $parser->addHoliday($newHoliday);
         $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/holidays.xml");
         $_SESSION["modifyLog"] = "createholiday";

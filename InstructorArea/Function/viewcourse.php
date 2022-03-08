@@ -19,8 +19,9 @@ if (empty($_GET["id"])){
 }
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/CourseMaterial.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Course.php";
-require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/CoursesParser.php';
-$parser = new CoursesParser(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/courses.xml");
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
+$factory = new ParserFactory();
+$parser = $factory->getParser("Courses");
 $id = $_GET["id"];
 $retrievedCourse = $parser->getCourse($id);
 if (empty($retrievedCourse)){
@@ -31,10 +32,10 @@ if (empty($retrievedCourse)){
 
 function convertByteToOther($size){
     if ($size >= 1048576){
-        return $size/1048576.0+" MB";
+        return number_format((float)$size/1048576.0, 2, '.', '')." MB";
     }else if ($size>=1024){
-        return $size/1024.0+" KB";
+        return number_format((float)$size/1024.0, 2, '.', '')." KB";
     }else{
-        return $size+" bytes";
+        return number_format((float)$size, 2, '.', '').+" bytes";
     }
 }

@@ -11,8 +11,9 @@
  *
  * @author Choo Meng
  */
-require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/HolidaysParser.php';
-$parser = new HolidaysParser(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/holidays.xml");
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
+$factory = new ParserFactory();
+$parser = $factory->getParser("Holidays");
 $holidays = $parser->getHolidays();
 $count = 0;
 $sortType = trim(empty($_POST["sorttype"]) ? "Date" : eliminateExploit($_POST["sorttype"]));

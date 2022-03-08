@@ -8,8 +8,9 @@
  */
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/CourseMaterial.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Course.php";
-require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/CoursesParser.php';
-$parser = new CoursesParser(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/courses.xml");
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
+$factory = new ParserFactory();
+$parser = $factory->getParser("Courses");
 if (isset($_POST["formDetect"])){
     $inputName = "courseCode";
     $inputTitle = "Course Code";

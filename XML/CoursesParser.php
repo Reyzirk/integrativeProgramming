@@ -12,11 +12,13 @@
  *
  * @author Choo Meng
  */
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/XML/Parser.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Course.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/CourseMaterial.php";
-class CoursesParser {
+class CoursesParser implements Parser{
     private $courses;
     private $xml;
+    private static $parser = NULL;
     public function __construct($filename){
         $this->courses = new SplObjectStorage();
         $this->readFromXML($filename);
@@ -36,6 +38,13 @@ class CoursesParser {
             $this->courses->attach($temp);
         }
         
+    }
+    
+    public static function getInstance($filename){
+        if (self::$parser==NULL){
+            self::$parser = new CoursesParser($filename);
+        }
+        return self::$parser;
     }
     
     public function getCourses(){
@@ -97,7 +106,7 @@ class CoursesParser {
                 break;
             }
         }
-        addCourse($updatedCourse);
+        $this->addCourse($updatedCourse);
         return true;
     }
     public function removeCourse($id):bool{

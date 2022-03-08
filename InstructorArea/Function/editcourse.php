@@ -19,8 +19,9 @@ if (empty($_GET["id"])){
 }
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/CourseMaterial.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Course.php";
-require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/CoursesParser.php';
-$parser = new CoursesParser(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/courses.xml");
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
+$factory = new ParserFactory();
+$parser = $factory->getParser("Courses");
 $id = $_GET["id"];
 $retrievedCourse = $parser->getCourse($id);
 if (!empty($retrievedCourse)){
@@ -178,17 +179,16 @@ if (isset($_POST["formDetect"])){
         $parser->updateCourse($oriCode,$newCourse);
         $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/courses.xml");
         $_SESSION["modifyLog"] = "createcourse";
-        header('HTTP/1.1 307 Temporary Redirect');
-        header('Location: courses.php');
+        
 
     }
     
 }
 function convertByteToOther($size){
     if ($size >= 1048576){
-        return $size/1048576.0+" MB";
+        return $size/1048576.0." MB";
     }else if ($size>=1024){
-        return $size/1024.0+" KB";
+        return $size/1024.0." KB";
     }else{
         return $size+" bytes";
     }

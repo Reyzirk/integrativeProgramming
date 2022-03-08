@@ -29,10 +29,12 @@ function callLog() {
         }
         ?>
         <script>
-            Toast.fire({
-                icon: 'error',
-                html: '<b>Failed</b><br/><?php echo $errorMsg; ?>.'
-            })
+            setTimeout(function (){
+                Toast.fire({
+                    icon: 'error',
+                    html: '<b>Failed</b><br/><?php echo $errorMsg; ?>.'
+                })
+            },3000);
         </script>
         <?php
         unset($_SESSION["errorLog"]);
@@ -46,10 +48,12 @@ function callLog() {
         }
         ?>
         <script>
-            Toast.fire({
-                icon: 'success',
-                html: '<b>Sucessful</b><br/><?php echo $successMsg; ?>.'
-            })
+            setTimeout(function (){
+                Toast.fire({
+                    icon: 'success',
+                    html: '<b>Sucessful</b><br/><?php echo $successMsg; ?>.'
+                })
+            },3000);
         </script>
         <?php
         unset($_SESSION["modifyLog"]);

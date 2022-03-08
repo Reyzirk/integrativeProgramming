@@ -31,7 +31,6 @@ $lang_action_btn = "Action";
                             <div class="jumbotrun" id="container">
                                 <div class="text-right">
                                     <button class="btn btn-info" onclick="location.href='createcourse.php'"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_create_btn; ?></button>
-                                    
                                 </div>
                                 <br/>
                                 <div class="rightSide">
