@@ -1,20 +1,20 @@
 <?php
-/* 
+/*
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
-require_once dirname(__DIR__).'/XML/WebPageParser.php';
+require_once dirname(__DIR__) . '/XML/WebPageParser.php';
 $author = "Ng Kar Kai, Oon Kheng Huang, Tang Khai Li, Fong Shu Ling, Poh Choo Meng";
 $keywords = "Kindergarden, Education, Learning";
-$fileName = pathinfo($_SERVER['PHP_SELF'],PATHINFO_BASENAME);
+$fileName = pathinfo($_SERVER['PHP_SELF'], PATHINFO_BASENAME);
 $companyName = $generalSection["companyName"];
-$parser = new WebPageParser(dirname(__DIR__)."/XML/ParentSideWebPage.xml");
-$webpage = empty($parser->getWebpage()[ str_replace(".php","",strtolower($fileName))])?"":
-        $parser->getWebpage()[ str_replace(".php","",strtolower($fileName))];
-$pageTitle = empty($webpage)?"":$webpage->pageTitle;
-$description = empty($webpage)?"":$webpage->pageDescription;
+$parser = new WebPageParser(dirname(__DIR__) . "/XML/ParentSideWebPage.xml");
+$webpage = empty($parser->getWebpage()[str_replace(".php", "", strtolower($fileName))]) ? "" :
+        $parser->getWebpage()[str_replace(".php", "", strtolower($fileName))];
+$pageTitle = empty($webpage) ? "" : $webpage->pageTitle;
+$description = empty($webpage) ? "" : $webpage->pageDescription;
 
 echo("
     <meta charset='UTF-8'>
@@ -29,5 +29,24 @@ echo("
     <script src='js/sweetalert2.all.min.js' type='text/javascript'></script>
     <script src='js/ckeditor.js' type='text/javascript'></script>
         ");
+?>
 
+<!-- Favicons -->
+<link href="../css/NavBarCSS/assets/img/favicon.png" rel="icon">
+<link href="../css/NavBarCSS/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="../css/NavBarCSS/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+<link href="../css/NavBarCSS/assets/vendor/aos/aos.css" rel="stylesheet">
+<link href="../css/NavBarCSS/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/NavBarCSS/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="../css/NavBarCSS/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="../css/NavBarCSS/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="../css/NavBarCSS/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+<!-- Template Main CSS File -->
+<link href="../css/NavBarCSS/assets/css/style.css" rel="stylesheet">
 
