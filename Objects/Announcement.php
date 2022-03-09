@@ -1,0 +1,51 @@
+<?php
+
+/*
+ * ============================================
+ * Copyright 2022 Omega International Junior School. All Right Reserved.
+ * Web Application is under GNU General Public License v3.0
+ * ============================================
+ * 
+ * Description of Announcement
+ *
+ * @author Oon Kheng Huang
+ * 
+ */
+
+class Announcement {
+
+    private $annouceID;
+    private $instructorID;
+    private $title;
+    private $desc;
+    private $cat;
+    private $date;
+
+    public function __construct($annouceID, $instructorID, $title, $desc, $cat, $date) {
+        $this->annouceID = $annouceID;
+        $this->instructorID = $instructorID;
+        $this->title = $title;
+        $this->desc = $desc;
+        $this->cat = $cat;
+        $this->date = $date;
+        
+    }
+    
+    public function __get($name) {
+        if (property_exists($this, $name)){
+            return $this->$name;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
+    }
+    
+    public function __set($name, $value) {
+        if (property_exists($this, $name)){
+            $this->$name = $value;
+        }else{
+            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }
+    }
+    
+
+}
