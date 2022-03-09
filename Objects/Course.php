@@ -9,6 +9,7 @@
  * Description of Course
  *
  * @author Choo Meng
+ * 
  */
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/CourseMaterial.php";
 class Course {

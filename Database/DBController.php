@@ -8,9 +8,10 @@
  */
 
 /**
- * Description of DBController
+ * Description of DBController (Singleton)
  *
  * @author Choo Meng
+ * 
  */
 
 namespace Database;
