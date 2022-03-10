@@ -29,5 +29,3 @@ echo("
     <script src='js/sweetalert2.all.min.js' type='text/javascript'></script>
     <script src='js/ckeditor.js' type='text/javascript'></script>
         ");
-
-

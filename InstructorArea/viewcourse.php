@@ -46,28 +46,43 @@ $lang_legendTitle2 = "Course Materials"
                                     </div>
                                 </fieldset>
                                 <br/>
-                                <?php if (count($retrievedCourse->courseMaterials)!=0){ ?>
-                                <fieldset>
-                                    <legend><?php echo $lang_legendTitle2; ?></legend>
-                                    <?php 
-                                        for ($i = 0;$i < count($retrievedCourse->courseMaterials);$i++){
+                                <?php if (count($retrievedCourse->courseMaterials) != 0) { ?>
+                                    <fieldset>
+                                        <legend><?php echo $lang_legendTitle2; ?></legend>
+                                        <?php
+                                        $materialCount = 0;
+                                        for ($i = 0; $i < count($retrievedCourse->courseMaterials); $i++) {
+                                            $materialCount++;
                                             $material = $retrievedCourse->courseMaterials[$i];
-                                    ?>
-                                        <div class="list-group">
-                                            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-                                                <div class="d-flex w-100 justify-content-between">
-                                                    <h5 class="mb-1">List group item heading</h5>
-                                                    <small>File type: <?php echo strtoupper(pathinfo(str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$material->materialLink, PATHINFO_EXTENSION)); ?></small>
+                                            if ($materialCount % 2 == 1) {
+                                                ?>
+                                                <div class="row">
+                                                <?php } ?>
+                                                <div class="list-group col-md-6">
+                                                    <div class="list-group-item list-group-item-action flex-column align-items-start active">
+                                                        <div class="d-flex w-100 justify-content-between">
+                                                            <h5 class="mb-1"><?php echo $material->materialName ?></h5>
+                                                            <small>File type: <?php echo strtoupper(pathinfo(str_replace("InstructorArea", "", dirname(__DIR__)) . '/uploads/CourseMaterial/' . $material->materialLink, PATHINFO_EXTENSION)); ?></small>
+                                                        </div>
+
+                                                        <small>File Size: <?php echo convertByteToOther(filesize(str_replace("InstructorArea", "", dirname(__DIR__)) . '/uploads/CourseMaterial/' . $material->materialLink)) ?></small>
+                                                        <br/>
+                                                        <center>
+                                                            <a class="btn btn-light" href="<?php echo "../uploads/CourseMaterial/" . $material->materialLink; ?>">Access the file</a>
+                                                        </center>
+                                                    </div>
                                                 </div>
-                                                <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                                                <small>File Size: <?php echo convertByteToOther(filesize(str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$material->materialLink)) ?></small>
-                                            </a>
-                                        </div>
-                                    <?php
+                                                <?php
+                                                if ($materialCount % 2 == 1) {
+                                                    ?>
+                                                </div>
+                                            <?php } ?>
+                                            <?php
                                         }
-                                    ?>
-                                </fieldset>
+                                        ?>
+                                    </fieldset>
                                 <?php } ?>
+                                <br/>
                                 <center>
                                     <button type="button" class="btn btn-success" id="submitBtn" onclick="submitForm();">Submit</button>
                                     <button type="button" class="btn btn-warning" onclick="location.href = 'createcourse.php'">Reset</button>
