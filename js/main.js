@@ -8,19 +8,19 @@
  * Mobile Navigation Bar
  */
 function toggleMobileNavBar(element){
-    document.querySelector('#navbar').classList.toggle('navbar-mobile')
-    element.classList.toggle('bi-list')
-    element.classList.toggle('bi-x')
+    document.querySelector('#navbar').classList.toggle('navbar-mobile');
+    element.classList.toggle('bi-list');
+    element.classList.toggle('bi-x');
     if (!document.querySelector('#navbar').classList.contains('navbar-mobile')){
-        document.getElementById("navbarSeperator").innerHTML = "<a>|</a>"
+        document.getElementById("navbarSeperator").innerHTML = "<a>|</a>";
     }else{
-        document.getElementById("navbarSeperator").innerHTML = "<hr>"
+        document.getElementById("navbarSeperator").innerHTML = "<hr>";
     }
     
 }
 function toggleMobileNavBarDropdown(element){
     if (document.querySelector('#navbar').classList.contains('navbar-mobile')) {
-        element.nextElementSibling.classList.toggle('dropdown-active')
+        element.nextElementSibling.classList.toggle('dropdown-active');
     }
 }
 window.onload = function(e){
@@ -51,4 +51,4 @@ window.onload = function(e){
         }
         detectScroll();
     }
-}
+};
