@@ -8,12 +8,8 @@ Web Application is under GNU General Public License v3.0
 -->
 <html>
     <head>
-        <?php
-            include '../Components/headmeta.php';
-        ?>
         <meta charset="UTF-8">
         <title></title>
- 
     </head>
     <body>
         <?php
