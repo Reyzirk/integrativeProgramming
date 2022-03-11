@@ -15,18 +15,18 @@
 require "Function/CMApi/HolidayController.php";
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode( '/', $uri );
-if (empty($uri[3])){
+if (empty($uri[4])){
     header("HTTP/1.1 404 Not Found");
     return;
-}else if ($uri[3]!='holiday'){
+}else if ($uri[4]!='holiday'){
     header("HTTP/1.1 404 Not Found");
     return;
-}else if (!isset ($uri[4])){
+}else if (!isset ($uri[5])){
     header("HTTP/1.1 404 Not Found");
     return;
 }
 $holidayController = new HolidayController();
-$type = $uri[4];
+$type = $uri[5];
 if ($type=="list"){
     $holidayController->list();
 }
