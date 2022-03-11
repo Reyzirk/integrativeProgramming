@@ -62,7 +62,7 @@ class HolidayController extends BaseController {
                         for ($i = $beginIndex; $i < $endIndex; $i++) {
                             $count++;
                             $key = $holidayList[$i];
-                            $valueDateStart = (string) $key->getdateStart();
+                            $valueDateStart = (string) $key->dateStart;
                             $dateStart = new DateTime($valueDateStart);
                             if (!empty($month)) {
                                 if ($dateStart->format('n') != $month) {
@@ -79,7 +79,7 @@ class HolidayController extends BaseController {
                                     continue;
                                 }
                             }
-                            $data[] = array("ID" => (string) $key->getId(), "Name" => (string) $key->getName(), "Start Date" => (string) $key->getDateStart(), "End Date" => (string) $key->getDateEnd());
+                            $data[] = array("ID" => (string) $key->id, "Name" => (string) $key->name, "Start Date" => (string) $key->dateStart, "End Date" => (string) $key->dateEnd);
                         }
                         $output[] = array("Status"=>"Success","Data" => $data, "Total Record Retrieved" => $count);
                     }
