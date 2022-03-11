@@ -8,23 +8,22 @@
  */
 
 /**
- * Description of HolidayController
+ * Description of CourseController
  *
  * @author Choo Meng
  */
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
 require_once "BaseController.php";
-
-class HolidayController extends BaseController implements Controller{
+class CourseController extends BaseController implements Controller{
     private static $controller = NULL;
     
     public static function getInstance(){
         if (self::$controller == NULL){
-            self::$controller = new HolidayController();
+            self::$controller = new CourseController();
         }
         return self::$controller;
     }
-    //Get the list of the holiday
+    //Get the list of the course
     public function list() {
         $entry = 20;
         $currentPage = 1;
@@ -33,8 +32,8 @@ class HolidayController extends BaseController implements Controller{
         if (strtoupper($method) == "GET") {
             try {
                 $factory = new ParserFactory();
-                $parser = $factory->getParser("Holidays");
-                $holidays = $parser->getHolidays();
+                $parser = $factory->getParser("Courses");
+                $courses = $parser->getCourses();
                 $output = array();
                 if (empty($params["api-key"])) {
                     $output[] = array("Status" => "Failed", "Message" => "Required API Key to retrieve the data.");
@@ -44,8 +43,8 @@ class HolidayController extends BaseController implements Controller{
                     if ($apiKey != $ini_array["General"]["apiKey"]) {
                         $output[] = array("Status" => "Failed", "Message" => "Invalid API Key to retrieve the data.");
                     } else {
-                        foreach ($holidays as $key) {
-                            $holidayList[] = $key;
+                        foreach ($courses as $key) {
+                            $courseList[] = $key;
                         }
                         if (isset($params["limit"])) {
                             $entry = $params["limit"];
@@ -53,41 +52,15 @@ class HolidayController extends BaseController implements Controller{
                         if (!empty($params["index"])) {
                             $currentPage = $params["index"];
                         }
-                        if (!empty($params["month"])) {
-                            $month = $params["month"];
-                        }
-                        if (!empty($params["year"])) {
-                            $year = $params["year"];
-                        }
-                        if (!empty($params["day"])) {
-                            $day = $params["day"];
-                        }
-                        $totalCount = count($holidays);
+                        $totalCount = count($courses);
                         $beginIndex = ($currentPage - 1) * $entry;
                         $endIndex = ($currentPage * $entry) >= $totalCount ? $totalCount : ($currentPage * $entry);
                         $count = 0;
                         $data=array();
                         for ($i = $beginIndex; $i < $endIndex; $i++) {
                             $count++;
-                            $key = $holidayList[$i];
-                            $valueDateStart = (string) $key->dateStart;
-                            $dateStart = new DateTime($valueDateStart);
-                            if (!empty($month)) {
-                                if ($dateStart->format('n') != $month) {
-                                    continue;
-                                }
-                            }
-                            if (!empty($year)) {
-                                if ($dateStart->format('Y') != $year) {
-                                    continue;
-                                }
-                            }
-                            if (!empty($day)) {
-                                if ($dateStart->format('j') != $day) {
-                                    continue;
-                                }
-                            }
-                            $data[] = array("ID" => (string) $key->id, "Name" => (string) $key->name, "Start Date" => (string) $key->dateStart, "End Date" => (string) $key->dateEnd);
+                            $key = $courseList[$i];
+                            $data[] = array("Course Code" => (string) $key->courseCode, "Course Name" => (string) $key->courseName, "Course Description" => (string) $key->courseDesc);
                         }
                         $output[] = array("Status"=>"Success","Data" => $data, "Total Record Retrieved" => $count);
                     }

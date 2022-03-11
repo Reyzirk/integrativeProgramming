@@ -48,3 +48,9 @@ input[type="file"]::-webkit-file-upload-button{
 #tableList .btn{
     margin-bottom: 5px;
 }
+.fileDownload-blue{
+    color: #e74a3b !important;
+}
+.fileDownload-blue:hover {
+    color:#e02d1b !important; 
+}
