@@ -50,7 +50,7 @@ class MySQLQueryBuilder implements QueryBuilder{
         }
         return $this;
     }
-    public function update($table, $data){
+    public function update($table, $data = array()){
         $this->clear();
         $this->query->type = \QueryTypeEnum::UPDATE;
         if (empty($table)){
