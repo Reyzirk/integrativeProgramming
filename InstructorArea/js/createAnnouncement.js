@@ -7,14 +7,42 @@
  * @author Oon Kheng Huang
  */
 
-var descValue;
-var descStore = true;
+var textvalidate = true;
 
 //Validate Announcement Input
-function validateA(){
-    title = $("#title");
-    descF = $("#descFeedback"); 
+function validateA() {
+    
+    descF = $("#descFeedBack");
+    var cat = validateCat();
+    var title = validateTitle();
+    
+    if(cat && title){
+        return true;
+    }else{
+        return false;
+    }
+   
+   
+    
+}
+
+function validateCat(){
     cat = $("#cat");
+     if (cat.val() == "") {
+        cat.next().html("<b>Category</b> is not selected");
+        cat.addClass("is-invalid");
+        cat.removeClass("is-valid");
+        return false;
+    }else{
+        cat.next().html("");
+        cat.addClass("is-valid");
+        cat.removeClass("is-invalid");
+        return true;
+    }
+}
+
+function validateTitle(){
+    title = $("#title");
     if(title.val().length===0){
         title.next().html("<b>Title</b> cannot be empty");
         title.addClass("is-invalid");
@@ -25,38 +53,27 @@ function validateA(){
         title.addClass("is-invalid");
         title.removeClass("is-valid");
         return false;
-    }else if(descValue.length === 0){
-        descF.html("<b>Description</b> cannot be empty");
-        descStore = false;
-        return false;
-    }else if(descValue.length > 5000){
-        descF.html("<b>Description</b> cannot contain more than 5000 characters");
-        descStore = false;
-        return false;
-    }else if(cat.val() == 0){
-        desc.next().html("<b>Category</b> is not selected");
-        desc.addClass("is-invalid");
-        desc.removeClass("is-valid");
-        return false;
-    }else if(descStore == true){
-        error.html("");
-        input.addClass("is-valid");
-        input.removeClass("is-invalid");
-        return false;
+    }else{
+        title.next().html("");
+        title.addClass("is-valid");
+        title.removeClass("is-invalid");
+        return true;
     }
 }
 
-function getDesc(desc){
-    descF = $("#descFeedback");
-    if(desc.length === 0){
-        descF.html("<b>Description</b> cannot be empty");
-        descStore = false;
+function validateTextArea(value){
+    descF = $("#descFeedBack");
+    if(value.length===0){
+        descF.html("<b>Description</b> cannot be empty")
+        textvalidate = false;
         return false;
-    }else if(desc.length > 5000){
-        descF.html("<b>Description</b> cannot contain more than 5000 characters");
-        descStore = false;
-        return false;
+    }else{
+        descF.html("");
+        textvalidate = true;
+        return true;
     }
 }
+
+
 
 

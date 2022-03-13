@@ -53,16 +53,15 @@ Web Application is under GNU General Public License v3.0
                                 <div class="col-md">
                                     <label for="title" class="col-form-label">Title <span class="requiredF">*</span></label>
                                     <input id="title" type="text" name="title" class="bg-white form-control" placeholder="Please enter an announcement title" 
-                                           maxlength="50" value=""/><span class="invalid-feedback"></span>
+                                           maxlength="50" oninput="validateTitle()" value=""/><span class="invalid-feedback"></span>
                                 </div>
                             </div><br/>
                             <!--************************Description***************************-->
                             <div class="row">
                                 <div class="col-md">
-                                    <label for="adesc" class="col-form-label">Description <span class="requiredF">*</span></label>
-                                    <textarea id="desc" maxlength="5000" rows="10" class="bg-white form-control editor is-invalid" placeholder="Please enter annoncement description" name="desc">
-                                    
-                                    </textarea>
+                                    <label for="desc" class="col-form-label">Description <span class="requiredF">*</span></label>
+                                    <textarea id="desc" maxlength="5000" rows="10" class="bg-white form-control editor is-invalid" 
+                                              placeholder="Please enter annoncement description" name="desc"></textarea>
                                     <span class="invalid-feedback" id="descFeedBack"></span>
 
                                 </div>
@@ -71,8 +70,8 @@ Web Application is under GNU General Public License v3.0
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="cat" class="col-form-label">Category <span class="requiredF">*</span></label>
-                                    <select id="cat" name="cat" class="bg-white form-control">
-                                        <option disabled selected value="0">-Select-</option>
+                                    <select id="cat" name="cat" class="bg-white form-control" onchange="validateCat()">
+                                        <option selected value="">-Select-</option>
                                         <option value="A">Activity</option>
                                         <option value="C">Covid-19</option> 
                                         <option value="E">Examination</option>
@@ -135,7 +134,7 @@ Web Application is under GNU General Public License v3.0
                         console.log(editor);
                         window.editor = editor;
                         editor.model.document.on('change:data', (evt, data) => {
-                            getDesc(editor.getData());
+                            validateTextArea(editor.getData());
                         });
                     })
                     .catch(error => {
