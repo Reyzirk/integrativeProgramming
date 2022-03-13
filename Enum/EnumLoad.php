@@ -10,3 +10,4 @@
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Enum/OperatorEnum.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Enum/OrderTypeEnum.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Enum/QueryTypeEnum.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Enum/CustomSQLEnum.php';

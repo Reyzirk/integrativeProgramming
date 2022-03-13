@@ -15,7 +15,7 @@ if (empty($_POST["holidayID"])){
     $parser = $factory->getParser("Holidays");
     if ($parser->removeHoliday($id)){
         echo "success";
-        $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/holidays.xml");
+        $factory->saveXML("Holidays");
     }else{
         echo "Unable to find the Holiday.";
     }

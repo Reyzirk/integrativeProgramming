@@ -116,7 +116,6 @@ $lang_legendTitle2 = "Course Materials"
                                     <input hidden="true" name="formDetect" value="formDetect">
                                     <center>
                                         <button type="button" class="btn btn-success" id="submitBtn" onclick="submitForm();">Submit</button>
-                                        <button type="button" class="btn btn-warning" onclick="location.href = 'createcourse.php'">Reset</button>
                                         <button type="button" class="btn btn-danger" onclick="location.href = 'courses.php'">Cancel</button>
                                     </center>
                                 </form>

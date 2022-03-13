@@ -15,19 +15,21 @@
 require "Function/CMApi/ControllerFactory.php";
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode( '/', $uri );
+$type = array("holiday","course","grade");
 $defaultApi = 0;
 for ($i = 0;$i < count($uri);$i++){
-    if (strtolower($uri[$i])=="api.php"){
-        $defaultApi = $uri[$i];
+    if (strtolower($uri[$i])=="cmapi.php"){
+        $defaultApi = $i;
     }
 }
 if (empty($uri[$defaultApi+1])){
     header("HTTP/1.1 404 Not Found");
     return;
-}else if ($uri[$defaultApi+1]!='holiday'){
+}else if (!in_array($uri[$defaultApi+1],$type)){
     header("HTTP/1.1 404 Not Found");
     return;
 }else if (!isset ($uri[$defaultApi+2])){
+    die();
     header("HTTP/1.1 404 Not Found");
     return;
 }
@@ -44,5 +46,11 @@ if ($dataType == 'holiday'){
     $type = $uri[$defaultApi+2];
     if ($type=="list"){
         $courseController->list();
+    }
+}else if ($dataType == "grade"){
+    $gradeController = $factory->getController("Grade");
+    $type = $uri[$defaultApi+2];
+    if ($type=="list"){
+        $gradeController->list();
     }
 }

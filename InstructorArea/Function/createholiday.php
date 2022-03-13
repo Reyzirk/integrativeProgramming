@@ -48,7 +48,7 @@ if (isset($_POST["formDetect"])){
         $factory = new ParserFactory();
         $parser = $factory->getParser("Holidays");
         $parser->addHoliday($newHoliday);
-        $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/holidays.xml");
+        $factory->saveXML("Holidays");
         $_SESSION["modifyLog"] = "createholiday";
         header('HTTP/1.1 307 Temporary Redirect');
         header('Location: holidays.php');

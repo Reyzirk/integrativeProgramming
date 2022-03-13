@@ -46,7 +46,7 @@ function loadList(closeBool) {
     entry = $('#displayEntries');
 
     $.ajax({
-        url: "AJAX/displayHolidayList.php",
+        url: "AJAX/displayGradeList.php",
         type: "POST",
         data: {"search": inputSearch.val(), "sorttype": sortType, "sortorder": sortOrder, "currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {
@@ -72,7 +72,7 @@ function displayList() {
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayHolidayPagination.php",
+        url: "AJAX/displayGradePagination.php",
         type: "POST",
         data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
@@ -84,7 +84,7 @@ function displayList() {
 function deleteDataRecord(value) {
     Swal.fire({
         title: 'Confirmation',
-        text: "Are you sure you want to delete the holiday!",
+        text: "Are you sure you want to delete the grade!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Confirm'
@@ -92,9 +92,9 @@ function deleteDataRecord(value) {
         if (result.isConfirmed) {
             loadingScreen();
             $.ajax({
-                url: "AJAX/deleteHoliday.php",
+                url: "AJAX/deleteGrade.php",
                 type: "POST",
-                data: {"holidayID": value},
+                data: {"gradeID": value},
                 success: function (response) {
                     if (response === "fail") {
                         Swal.close();
@@ -104,7 +104,7 @@ function deleteDataRecord(value) {
                         loadList(false);
                         Toast.fire({
                             icon: 'success',
-                            html: '<b>Successful</b><br/>Removed the holiday.'
+                            html: '<b>Successful</b><br/>Removed the grade.'
                         })
 
                     } else {
@@ -126,7 +126,7 @@ function updatePageIndex(index) {
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayHolidayPagination.php",
+        url: "AJAX/displayGradePagination.php",
         type: "POST",
         data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
@@ -141,7 +141,7 @@ function updatePageEntry() {
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayHolidayPagination.php",
+        url: "AJAX/displayGradePagination.php",
         type: "POST",
         data: {"currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {

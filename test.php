@@ -11,7 +11,7 @@ require_once 'Enum/EnumLoad.php';
 $builder = new Database\MySQLQueryBuilder();
 $value = $builder->select(["users"], ["name", "email", "password"])
         ->where("age", 18, OperatorEnum::LESSER, false)
-        ->where("age", 30, OperatorEnum::GREATER, false)
+        ->where("age", CustomSQLEnum::BIND_QUESTIONMARK, OperatorEnum::GREATER, true)
         ->order("ab")
         ->limit(10)
         ->query();

@@ -100,7 +100,7 @@ if (isset($_POST["formDetect"])){
         $newCourse = new Course($storedValue["courseCode"],$storedValue["courseName"],$storedValue["courseDescription"],$courseMaterials);
         
         $parser->addCourse($newCourse);
-        $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/courses.xml");
+        $factory->saveXML("Courses");
         $_SESSION["modifyLog"] = "createcourse";
         header('HTTP/1.1 307 Temporary Redirect');
         header('Location: courses.php');

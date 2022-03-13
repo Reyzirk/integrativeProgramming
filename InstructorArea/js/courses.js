@@ -89,30 +89,32 @@ function deleteDataRecord(value) {
         showCancelButton: true,
         confirmButtonText: 'Confirm'
     }).then((result) => {
-        loadingScreen();
-        $.ajax({
-            url: "AJAX/deleteCourse.php",
-            type: "POST",
-            data: {"courseCode": value},
-            success: function (response) {
-                if (response === "fail") {
-                    Swal.close();
-                    showErrorMessage("Please Try Again!");
-                } else if (response === "success") {
-                    loadingScreen();
-                    loadList(false);
-                    Toast.fire({
-                        icon: 'success',
-                        html: '<b>Successful</b><br/>Removed the course.'
-                    })
+        if (result.isConfirmed) {
+            loadingScreen();
+            $.ajax({
+                url: "AJAX/deleteCourse.php",
+                type: "POST",
+                data: {"courseCode": value},
+                success: function (response) {
+                    if (response === "fail") {
+                        Swal.close();
+                        showErrorMessage("Please Try Again!");
+                    } else if (response === "success") {
+                        loadingScreen();
+                        loadList(false);
+                        Toast.fire({
+                            icon: 'success',
+                            html: '<b>Successful</b><br/>Removed the course.'
+                        })
 
-                } else {
-                    Swal.close();
-                    showErrorMessage(response);
+                    } else {
+                        Swal.close();
+                        showErrorMessage(response);
+                    }
+
                 }
-
-            }
-        });
+            });
+        }
     });
 }
 

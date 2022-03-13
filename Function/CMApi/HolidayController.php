@@ -12,8 +12,9 @@
  *
  * @author Choo Meng
  */
-require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
+require_once str_replace("InstructorArea", "", str_replace("Function", "", dirname(__DIR__))) . '/XML/ParserFactory.php';
 require_once "BaseController.php";
+require_once "Controller.php";
 
 class HolidayController extends BaseController implements Controller{
     private static $controller = NULL;

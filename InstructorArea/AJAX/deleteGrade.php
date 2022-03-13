@@ -6,18 +6,19 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
-if (empty($_POST["courseCode"])){
+
+if (empty($_POST["gradeID"])){
     echo "fail";
 }else{
-    $id = eliminateExploit($_POST["courseCode"]);
+    $id =  eliminateExploit($_POST["gradeID"]);
     require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
     $factory = new ParserFactory();
-    $parser = $factory->getParser("Courses");
-    if ($parser->removeCourse($id)){
+    $parser = $factory->getParser("Grades");
+    if ($parser->removeGrade($id)){
         echo "success";
-        $factory->saveXML("Courses");
+        $factory->saveXML("Grades");
     }else{
-        echo "Unable to find the Course.";
+        echo "Unable to find the Grade.";
     }
     
 }

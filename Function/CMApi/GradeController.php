@@ -1,30 +1,26 @@
 <?php
 
-/*
+/* 
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
 
-/**
- * Description of CourseController
- *
- * @author Choo Meng
- */
 require_once str_replace("InstructorArea", "", str_replace("Function", "", dirname(__DIR__))) . '/XML/ParserFactory.php';
 require_once "BaseController.php";
 require_once "Controller.php";
-class CourseController extends BaseController implements Controller{
+
+class GradeController extends BaseController implements Controller{
     private static $controller = NULL;
     
     public static function getInstance(){
         if (self::$controller == NULL){
-            self::$controller = new CourseController();
+            self::$controller = new GradeController();
         }
         return self::$controller;
     }
-    //Get the list of the course
+    //Get the list of the grade
     public function list() {
         $entry = 20;
         $currentPage = 1;
@@ -33,8 +29,8 @@ class CourseController extends BaseController implements Controller{
         if (strtoupper($method) == "GET") {
             try {
                 $factory = new ParserFactory();
-                $parser = $factory->getParser("Courses");
-                $courses = $parser->getCourses();
+                $parser = $factory->getParser("Grades");
+                $grades = $parser->getGrades();
                 $output = array();
                 if (empty($params["api-key"])) {
                     $output[] = array("Status" => "Failed", "Message" => "Required API Key to retrieve the data.");
@@ -44,8 +40,8 @@ class CourseController extends BaseController implements Controller{
                     if ($apiKey != $ini_array["General"]["apiKey"]) {
                         $output[] = array("Status" => "Failed", "Message" => "Invalid API Key to retrieve the data.");
                     } else {
-                        foreach ($courses as $key) {
-                            $courseList[] = $key;
+                        foreach ($grades as $key) {
+                            $gradeList[] = $key;
                         }
                         if (isset($params["limit"])) {
                             $entry = $params["limit"];
@@ -53,20 +49,25 @@ class CourseController extends BaseController implements Controller{
                         if (!empty($params["index"])) {
                             $currentPage = $params["index"];
                         }
-                        $totalCount = count($courses);
+                        if (!empty($params["mark"])) {
+                            $mark = $params["mark"];
+                        }
+                        $totalCount = count($grades);
                         $beginIndex = ($currentPage - 1) * $entry;
                         $endIndex = ($currentPage * $entry) >= $totalCount ? $totalCount : ($currentPage * $entry);
                         $count = 0;
                         $data=array();
                         for ($i = $beginIndex; $i < $endIndex; $i++) {
                             $count++;
-                            $key = $courseList[$i];
-                            $materials = $key->courseMaterials;
-                            $material = array();
-                            foreach($materials as $key2){
-                                $material[] = array("Material Name"=>(string)$key2->materialName,"Link"=>(string)$key2->materialLink);
+                            $key = $gradeList[$i];
+                            if (!empty($mark)) {
+                                $minMark = $key->minMark;
+                                $maxMark = $key->maxMark;
+                                if ($minMark <= $mark && $mark <= $maxMark) {
+                                    continue;
+                                }
                             }
-                            $data[] = array("Course Code" => (string) $key->courseCode, "Course Name" => (string) $key->courseName, "Course Description" => (string) $key->courseDesc, "Course Materials"=>$materials);
+                            $data[] = array("Grade" => (string) $key->grade, "Min Mark" => (string)$key->minMark, "Max Mark" => (string)$key->maxMark);
                         }
                         $output[] = array("Status"=>"Success","Data" => $data, "Total Record Retrieved" => $count);
                     }

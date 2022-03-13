@@ -7,18 +7,18 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 
-<?php include 'Function/editholiday.php' ?>
+<?php include 'Function/creategrade.php' ?>
 <?php
 #Page Languages
-$lang_title = "Edit existing holiday";
-$lang_description = "Edit an existing holiday.";
+$lang_title = "Create new grade";
+$lang_description = "Create a new grade.";
 $lang_required = "* Required Fields";
-$lang_legendTitle = "Holiday Details";
+$lang_legendTitle = "Grade Details";
 ?>
 <html>
     <head>
         <?php include 'Components/headmeta.php' ?>
-        <script src="js/editholiday.js" type="text/javascript"></script>
+        <script src="js/creategrade.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -36,26 +36,26 @@ $lang_legendTitle = "Holiday Details";
                                             <legend><?php echo $lang_legendTitle; ?></legend>
                                             <div class="row">
                                                 <div class="col-md">
-                                                    <label for="holidayName" class="col-form-label">Holiday Name <span class="required">*</span></label>
-                                                    <input type="text" maxlength="300" placeholder="Enter the holiday name" class="bg-white form-control <?php echo empty($error["holidayName"])?"":"is-invalid"; ?>" 
-                                                           id="holidayName" name="holidayName" oninput="validateHolidayName()" value="<?php echo empty($storedValue["holidayName"])?"":$storedValue["holidayName"]; ?>"/>
-                                                    <span class="invalid-feedback"><?php echo empty($error["holidayName"])?"":$error["holidayName"]; ?></span>
+                                                    <label for="grade" class="col-form-label">Grade <span class="required">*</span></label>
+                                                    <input type="text" maxlength="3" placeholder="Enter the grade" class="bg-white form-control <?php echo empty($error["grade"])?"":"is-invalid"; ?>" 
+                                                           id="grade" name="grade" oninput="validateGrade()" value="<?php echo empty($storedValue["grade"])?"":$storedValue["grade"]; ?>"/>
+                                                    <span class="invalid-feedback"><?php echo empty($error["grade"])?"":$error["grade"]; ?></span>
                                                 </div>
                                                 <div class="col-md"></div>
                                             </div>
                                             <br/>
                                             <div class="row">
                                                 <div class="col-md">
-                                                    <label for="dateStart" class="col-form-label">Start Date <span class="required">*</span></label>
-                                                    <input type="date" class="bg-white form-control <?php echo empty($error["dateStart"])?"":"is-invalid"; ?>" id="dateStart" name="dateStart" oninput="validateDateStart()" 
-                                                           value="<?php echo empty($storedValue["dateStart"])?"":$storedValue["dateStart"]; ?>"/>
-                                                    <span class="invalid-feedback"><?php echo empty($error["dateStart"])?"":$error["dateStart"]; ?></span>
+                                                    <label for="minMark" class="col-form-label">Min Mark <span class="required">*</span></label>
+                                                    <input type="number" min="0" max="100" class="bg-white form-control <?php echo empty($error["minMark"])?"":"is-invalid"; ?>" id="minMark" name="minMark" oninput="validateMinMark()" 
+                                                           value="<?php echo empty($storedValue["minMark"])?"":$storedValue["minMark"]; ?>"/>
+                                                    <span class="invalid-feedback"><?php echo empty($error["minMark"])?"":$error["minMark"]; ?></span>
                                                 </div>
                                                 <div class="col-md">
-                                                    <label for="dateEnd" class="col-form-label">End Date <span class="required">*</span></label>
-                                                    <input type="date" class="bg-white form-control <?php echo empty($error["dateEnd"])?"":"is-invalid"; ?>" id="dateEnd" name="dateEnd" oninput="validateDateEnd()"
-                                                            value="<?php echo empty($storedValue["dateEnd"])?"":$storedValue["dateEnd"]; ?>"/>
-                                                    <span class="invalid-feedback"><?php echo empty($error["dateEnd"])?"":$error["dateEnd"]; ?></span>
+                                                    <label for="maxMark" class="col-form-label">Max Mark <span class="required">*</span></label>
+                                                    <input type="number" min="0" max="100" class="bg-white form-control <?php echo empty($error["maxMark"])?"":"is-invalid"; ?>" id="maxMark" name="maxMark" oninput="validateMaxMark()"
+                                                            value="<?php echo empty($storedValue["maxMark"])?"":$storedValue["maxMark"]; ?>"/>
+                                                    <span class="invalid-feedback"><?php echo empty($error["maxMark"])?"":$error["maxMark"]; ?></span>
                                                 </div>
 
                                             </div>
@@ -64,7 +64,8 @@ $lang_legendTitle = "Holiday Details";
                                     <input hidden="true" name="formDetect" value="formDetect">
                                     <center>
                                         <button type="button" class="btn btn-success" id="submitBtn" onclick="submitForm();">Submit</button>
-                                        <button type="button" class="btn btn-danger" onclick="location.href='holidays.php'">Cancel</button>
+                                        <button type="button" class="btn btn-warning" onclick="location.href='creategrade.php'">Reset</button>
+                                        <button type="button" class="btn btn-danger" onclick="location.href='grades.php'">Cancel</button>
                                     </center>
                                 </form>
                             </div>

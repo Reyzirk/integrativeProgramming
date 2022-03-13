@@ -66,7 +66,8 @@ class MySQLQueryBuilder implements QueryBuilder{
         }
         $dataCount = count($data);
         foreach ($data as $col => $value){
-            $this->query->base .= "$col = $value";
+            $val = "$col = '$value'";
+            $this->query->base .= str_replace("'".\CustomSQLEnum::BIND_QUESTIONMARK."'", "?", $val);
             if ($i !== $dataCount){
                 $this->query->base .= ", ";
             }
@@ -89,7 +90,8 @@ class MySQLQueryBuilder implements QueryBuilder{
         if (empty($values)){
             throw new \QueryBuilderException("Values cannot empty.");
         }
-        $this->query->addValues("VALUES (".implode(", ",$values).")");
+        $value = "VALUES ('".implode(", ",$values)."')";
+        $this->query->addValues(str_replace("'".\CustomSQLEnum::BIND_QUESTIONMARK."'", "?", $value));
         return $this;
     }
     public function where($field, $value, $operator = \OperatorEnum::EQUAL, $singlequote = true, $otheroperator = ""){
@@ -105,6 +107,8 @@ class MySQLQueryBuilder implements QueryBuilder{
         $startquote = $singlequote?"'":"";
         $endquote = $singlequote?"'":"";
         $value = $startquote.$value.$endquote;
+        $value = str_replace("'".\CustomSQLEnum::BIND_QUESTIONMARK."'", "?", $value);
+        $value = str_replace(\CustomSQLEnum::BIND_QUESTIONMARK, "?", $value);
         if ($operator == \OperatorEnum::OTHERS){
             $this->query->addWhere("$field $otheroperator $value");
         }else{

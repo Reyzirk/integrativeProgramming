@@ -177,7 +177,7 @@ if (isset($_POST["formDetect"])){
         }
         $newCourse = new Course($storedValue["courseCode"],$storedValue["courseName"],$storedValue["courseDescription"],$courseMaterials);
         $parser->updateCourse($oriCode,$newCourse);
-        $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/courses.xml");
+        $factory->saveXML("Courses");
         $_SESSION["modifyLog"] = "createcourse";
         
 

@@ -38,7 +38,7 @@ $totalCount = $count;
 $beginIndex = ($currentPage - 1) * $entry;
 $endIndex = ($currentPage * $entry) >= $totalCount ? $totalCount : ($currentPage * $entry);
 //Sorting
-if (empty($courseList)) {
+if (!empty($courseList)) {
     if ($sortType == "Course Code") {
         empty($courseList)?"":usort($courseList, $sortOrder == "ASC" ? "compareCodeAsc" : "compareCodeDesc");
     }else if ($sortType == "Name") {
@@ -60,7 +60,7 @@ if (count($courses) == 0 || $count == 0) {
     for ($i = $beginIndex; $i < $endIndex; $i++) {
         $key = $courseList[$i];
         ?>
-        <tr code="<?php echo $key->courseCode; ?>">
+        <tr id="<?php echo $key->courseCode; ?>">
             <td class="text-center"><?php echo $key->courseCode; ?></td>
             <td><?php echo $key->courseName; ?></td>
             <td class="text-center">

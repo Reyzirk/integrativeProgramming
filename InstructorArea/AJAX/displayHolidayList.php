@@ -41,7 +41,7 @@ $totalCount = $count;
 $beginIndex = ($currentPage - 1) * $entry;
 $endIndex = ($currentPage * $entry) >= $totalCount ? $totalCount : ($currentPage * $entry);
 //Sorting
-if (empty($holidayList)) {
+if (!empty($holidayList)) {
     if ($sortType == "Holiday") {
         empty($holidayList)?"":usort($holidayList, $sortOrder == "ASC" ? "compareNameAsc" : "compareNameDesc");
     } else if ($sortType == "Date") {
