@@ -57,7 +57,7 @@ if (!empty($gradeList)) {
 if (count($grades) == 0 || $count == 0) {
     ?>
     <tr>
-        <td colspan='3'height='60px' class='emptySlot'>
+        <td colspan='4'height='60px' class='emptySlot'>
             <b>NO RESULT FOUND</b>
         </td>
     </tr>

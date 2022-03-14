@@ -7,8 +7,6 @@
  * ============================================
  */
 
-namespace Database;
-
 /**
  * Description of QueryBuilder
  *
@@ -22,7 +20,9 @@ interface QueryBuilder{
     public function update(string $table, array $data = array());
     public function delete(string $table);
     public function values(array $values);
+    public function join(string $table,string $leftOn,string $rightOn, JoinTypeEnum $type = \JoinTypeEnum::NONE);
     public function where(string $field, string $value, OperatorEnum $operator = \OperatorEnum::EQUAL, string $otheroperator = "");
+    public function groupby(array $groupby);
     public function order(string $column, OrderTypeEnum $orderType = \OrderTypeEnum::DESC);
     public function limit(int $start, int $offset=0);
     

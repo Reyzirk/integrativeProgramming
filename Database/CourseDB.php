@@ -7,8 +7,6 @@
  * ============================================
  */
 
-namespace Database;
-
 use Course;
 /**
  * Description of CourseDB

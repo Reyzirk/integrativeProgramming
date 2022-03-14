@@ -10,9 +10,9 @@
  *
  * @author Choo Meng
  */
-class StudClass {
-    private $classID, $studentList = array(), $semester, $year, $formTeacher;
-    public function __construct($classID, $studentList, $semester, $year, $formTeacher) {
+class Classes {
+    private $classID, $semester, $year, $formTeacher, $studentList = array();
+    public function __construct($classID, $semester, $year, $formTeacher, $studentList=array()) {
         $this->classID = $classID;
         $this->studentList = $studentList;
         $this->semester = $semester;

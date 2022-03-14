@@ -10,8 +10,12 @@ require_once 'Database/MySQLQueryBuilder.php';
 require_once 'Enum/EnumLoad.php';
 $builder = new Database\MySQLQueryBuilder();
 $value = $builder->select(["users"], ["name", "email", "password"])
-        ->where("age", 18, OperatorEnum::LESSER, false)
-        ->where("age", CustomSQLEnum::BIND_QUESTIONMARK, OperatorEnum::GREATER, true)
+        ->where("age", 18, WhereTypeEnum::OR, OperatorEnum::LESSER, false)
+        ->where("age", 21, WhereTypeEnum::OR, OperatorEnum::LESSER, false)
+        ->bracketWhere(WhereTypeEnum::OR)
+        ->where("age", CustomSQLEnum::BIND_QUESTIONMARK, WhereTypeEnum::AND, OperatorEnum::GREATER, true)
+        ->bracketWhere(WhereTypeEnum::AND)
+        ->where("age", CustomSQLEnum::BIND_QUESTIONMARK, WhereTypeEnum::AND, OperatorEnum::GREATER, true)
         ->order("ab")
         ->limit(10)
         ->query();

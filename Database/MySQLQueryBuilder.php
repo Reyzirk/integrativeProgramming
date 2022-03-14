@@ -7,8 +7,6 @@
  * ============================================
  */
 
-namespace Database;
-
 /**
  * Description of QueryBuilder
  *
@@ -94,15 +92,56 @@ class MySQLQueryBuilder implements QueryBuilder{
         $this->query->addValues(str_replace("'".\CustomSQLEnum::BIND_QUESTIONMARK."'", "?", $value));
         return $this;
     }
-    public function where($field, $value, $operator = \OperatorEnum::EQUAL, $singlequote = true, $otheroperator = ""){
+    public function bracketWhere($type = \WhereTypeEnum::AND){
+        $where = "(";
+        if ($type == \WhereTypeEnum::AND){
+            if (empty($this->query->getAndWhere())){
+                throw new \QueryBuilderException("No WHERE data. ");
+            }
+            $where .= implode(' AND ',$this->query->getAndWhere());
+            $this->query->setAndWhere(array());
+        }else{
+            if (empty($this->query->getOrWhere())){
+                throw new \QueryBuilderException("No WHERE data. ");
+            }
+            $where .= implode(' OR ',$this->query->getOrWhere());
+            $this->query->setOrWhere(array());
+        }
+        $where .= ")";
+        $this->query->addWhere($where);
+        return $this;
+    }
+    public function join($table,$leftOn, $rightOn, $type = \JoinTypeEnum::NONE){
+        if (!in_array($this->query->type, $this->blockType3)){
+            throw new \QueryBuilderException("ORDER syntax not allowed to use for ".$this->query->type);
+        }
+        if (empty($table)){
+            throw new \QueryBuilderException("Table cannot empty.");
+        }
+        if (empty($leftOn)){
+            throw new \QueryBuilderException("Left side on cannot empty.");
+        }
+        if (empty($rightOn)){
+            throw new \QueryBuilderException("Right side on cannot empty.");
+        }
+        if ($type==\JoinTypeEnum::LEFT){
+            $this->query->addJoin(" LEFT JOIN ".$table." ON $leftOn = $rightOn");
+        }else if ($type==\JoinTypeEnum::RIGHT){
+            $this->query->addJoin(" RIGHT JOIN ".$table." ON $leftOn = $rightOn");
+        }else{
+            $this->query->addJoin(" JOIN ".$table." ON $leftOn = $rightOn");
+        }
+        return $this;
+    }
+    public function where($field, $value, $type= \WhereTypeEnum::AND, $operator = \OperatorEnum::EQUAL, $singlequote = true, $otheroperator = ""){
         if (!in_array($this->query->type, $this->blockType1)){
             throw new \QueryBuilderException("WHERE syntax not allowed to use for ".$this->query->type);
         }
         if (empty($field)){
             throw new \QueryBuilderException("Field cannot empty.");
         }
-        if (empty($value)){
-            throw new \QueryBuilderException("Value cannot empty.");
+        if ($value==NULL){
+            $value = "";
         }
         $startquote = $singlequote?"'":"";
         $endquote = $singlequote?"'":"";
@@ -110,11 +149,33 @@ class MySQLQueryBuilder implements QueryBuilder{
         $value = str_replace("'".\CustomSQLEnum::BIND_QUESTIONMARK."'", "?", $value);
         $value = str_replace(\CustomSQLEnum::BIND_QUESTIONMARK, "?", $value);
         if ($operator == \OperatorEnum::OTHERS){
-            $this->query->addWhere("$field $otheroperator $value");
+            
+            if ($type == \WhereTypeEnum::AND){
+                $this->query->addAndWhere("$field $otheroperator $value");
+            }else{
+                $this->query->addOrWhere("$field $otheroperator $value");
+            }
         }else{
             $ope = $operator;
-            $this->query->addWhere("$field $ope $value");
+            if ($type == \WhereTypeEnum::AND){
+                $this->query->addAndWhere("$field $ope $value");
+            }else{
+                $this->query->addOrWhere("$field $ope $value");
+            }
         }
+        return $this;
+    }
+    public function groupby($column){
+        if (!in_array($this->query->type, $this->blockType3)){
+            throw new \QueryBuilderException("ORDER syntax not allowed to use for ".$this->query->type);
+        }
+        if (empty($column)){
+            throw new \QueryBuilderException("Column cannot empty.");
+        }
+        if (!is_array($column)){
+            throw new \QueryBuilderException("Column must in array type.");
+        }
+        $this->query->groupby = "GROUP BY ".implode(', ',$column);
         return $this;
     }
     public function order(string $column, $orderType = \OrderTypeEnum::DESC){
@@ -132,23 +193,26 @@ class MySQLQueryBuilder implements QueryBuilder{
         if (!in_array($this->query->type, $this->blockType3)){
             throw new \QueryBuilderException("LIMIT syntax not allowed to use for ".$this->query->type);
         }
-        if (empty($start)){
-            throw new \QueryBuilderException("Start cannot empty.");
-        }
         $this->query->limit = " LIMIT $start , $offset";
         return $this;
     }
     public function query(){
         if ($this->query->type==\QueryTypeEnum::SELECT){
             $sqlStmt = $this->query->base;
+            if (!empty($this->query->getJoin())){
+                $sqlStmt .= implode('',$this->query->getJoin());;
+            }
             if (!empty($this->query->getWhere())){
-                $sqlStmt .= " WHERE ".implode(' AND ',$this->query->where);
+                $sqlStmt .= $this->retrieveWhere();
             }
             if (!empty($this->query->getOrder())){
                 $sqlStmt .= " ORDER BY ".implode(', ',$this->query->order);
             }
-            if (isset($this->query->limit)){
-                $sqlStmt .= $this->query->limit;
+            if (!empty($this->query->getLimit())){
+                $sqlStmt .= $this->query->getLimit();
+            }
+            if (!empty($this->query->groupby)){
+                $sqlStmt .= $this->query->groupby;
             }
         }else if ($this->query->type==\QueryTypeEnum::INSERT){
             $sqlStmt = $this->query->base;
@@ -156,15 +220,32 @@ class MySQLQueryBuilder implements QueryBuilder{
         }else if ($this->query->type==\QueryTypeEnum::UPDATE){
             $sqlStmt = $this->query->base;
             if (!empty($this->query->getWhere())){
-                $sqlStmt .= " WHERE ".implode(' AND ',$this->query->where);
+                $sqlStmt .= $this->retrieveWhere();
             }
         }else if ($this->query->type==\QueryTypeEnum::DELETE){
             $sqlStmt = $this->query->base;
             if (!empty($this->query->getWhere())){
-                $sqlStmt .= " WHERE ".implode(' AND ',$this->query->where);
+                $sqlStmt .= $this->retrieveWhere();
             }
         }
         return $sqlStmt .= ";";
+    }
+    private function retrieveWhere(){
+        $where = " WHERE ";
+        if (!empty($this->query->getAndWhere())){
+            $where .= implode(' AND ',$this->query->getAndWhere());
+            if (!empty($this->query->getWhere())){
+                $where .= " AND ";
+            }
+            
+        }else if (!empty($this->query->getOrWhere())){
+            $where .= implode(' OR ',$this->query->getOrWhere());
+            if (!empty($this->query->getWhere())){
+                $where .= " AND ";
+            }
+        }
+        $where .= implode(' AND ',$this->query->getWhere());
+        return $where;
     }
     private function isAssociativeArray(array $arr)
     {
