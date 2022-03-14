@@ -35,7 +35,7 @@ Web Application is under GNU General Public License v3.0
         <div class="container">
             <div class="row">
                 <div class="col-md">
-                    <form method="POST" id="formSubmit" onsubmit="return validateA()" enctype="multipart/form-data">
+                    <form method="POST" id="formSubmit" enctype="multipart/form-data">
                         <h1 class="display-4">Create Announcement</h1>
                         <p class="lead">Create a new announcement <span class="requiredF">* Required Fields</span></p>
                         <hr class="my-3">
@@ -60,7 +60,7 @@ Web Application is under GNU General Public License v3.0
                             <div class="row">
                                 <div class="col-md">
                                     <label for="desc" class="col-form-label">Description <span class="requiredF">*</span></label>
-                                    <textarea id="desc" maxlength="5000" rows="10" class="bg-white form-control editor is-invalid" 
+                                    <textarea id="desc" maxlength="5000" rows="10" class="bg-white form-control editor" 
                                               placeholder="Please enter annoncement description" name="desc"></textarea>
                                     <span class="invalid-feedback" id="descFeedBack"></span>
 
@@ -111,8 +111,11 @@ Web Application is under GNU General Public License v3.0
                         <div class="row">
                             <div class="col-md">
                                 <center>
-                                    <input type="submit" class="btn btn-success" name="submit" id="submit" value="Submit" />                                   
-                                    <button type="button" class="btn btn-warning" onclick="'">Reset</button>
+                                    <!-- Prevent implicit submission of the form -->
+                                    <button type="submit" disabled style="display: none" aria-hidden="true"></button>
+                                    
+                                    <button type="button" class="btn btn-success" onclick="validateA()">Submit</button>
+                                    <button type="button" class="btn btn-warning" onclick="location.href = location.href">Reset</button>
                                     <button type="button" class="btn btn-danger" onclick="">Cancel</button>
                                 </center>
                             </div>
@@ -131,10 +134,10 @@ Web Application is under GNU General Public License v3.0
             ClassicEditor
                     .create(document.querySelector('#desc'))
                     .then(editor => {
-                        console.log(editor);
-                        window.editor = editor;
                         editor.model.document.on('change:data', (evt, data) => {
                             validateTextArea(editor.getData());
+
+
                         });
                     })
                     .catch(error => {
