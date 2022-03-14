@@ -4,7 +4,7 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
-var sortType = "ClassID";
+var sortType = "Class ID";
 var sortOrder = "ASC";
 var pageIndex = 1;
 function sortCol(element) {
@@ -19,9 +19,6 @@ function sortCol(element) {
         sortOrder = "ASC";
     }
     sortType = element.innerText;
-    if (sortType === ""){
-        
-    }
     headerRow = $('#tableList') > $('thead') > $('tr');
     headerRow > $('th').each(function () {
         var icon = $(this).find('i');

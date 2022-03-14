@@ -14,7 +14,7 @@
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/MySQLQueryBuilder.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ClassDB.php';
 $totalCount = 0;
-$sortType = trim(empty($_POST["sorttype"]) ? "ClassID" : eliminateExploit($_POST["sorttype"]));
+$sortType = trim(empty($_POST["sorttype"]) ? "Class ID" : eliminateExploit($_POST["sorttype"]));
 $sortOrder = trim(empty($_POST["sortorder"]) ? "ASC" : eliminateExploit($_POST["sortorder"]));
 $search = empty($_POST["search"]) ? "" : eliminateExploit($_POST["search"]);
 $entry = empty($_POST["entry"]) ? 20 : (int) $_POST["entry"];
@@ -29,6 +29,13 @@ $query = $builder->select(array("classes","instructor"), array("*"))
         ->where("instructor.InstructorID", "classes.InstructorID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
         ->query();
 $classdb = new ClassDB();
+if ($sortType==="Class ID"){
+    $sortType = "classes.ClassID";
+}else if ($sortType==="Students"){
+    $sortType = "totalstudent";
+}else if ($sortType==="Instructor"){
+    $sortType = "InstructorName";
+}
 try{
     $totalCount = $classdb->getCount($query);
 } catch (PDOException $ex) {
