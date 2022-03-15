@@ -59,6 +59,9 @@ footer>p{
 /*
     General
 */
+#content-wrapper #content{
+    min-height: 95vh;
+}
 .rightSide{
     float:right;
 }
