@@ -1,4 +1,4 @@
-<?php include '../Function/load.php' ?>
+<?php include '../Function/load.php';$pageName = basename(__FILE__); ?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -22,8 +22,15 @@ $lang_legendTitle = "Grade Details";
     </head>
     <body>
         <div id="wrapper">
+            <?php include 'Components/navbar.php' ?>
             <div id="content-wrapper">
                 <div id="content">
+                    <?php include 'Components/header.php' ?>
+                    <ol class="breadcrumb shadow" id="breadcrumb">
+                        <li class="breadcrumb-item"><a href="dashboard.jsp">Home</a></li>
+                        <li class="breadcrumb-item"><a href="grades.jsp">Grades</a></li>
+                        <li class="breadcrumb-item active">Edit Grade</li>
+                    </ol>
                     <div class="container-fluid">
                         <div id="formControl">
                             <div class="jumbotrun" id="container">
@@ -71,6 +78,7 @@ $lang_legendTitle = "Grade Details";
                         </div>
                     </div>
                 </div>
+                <?php include "Components/footer.php"; ?>
             </div>
         </div>
     </body>

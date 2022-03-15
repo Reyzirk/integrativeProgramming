@@ -17,7 +17,7 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Enum/OrderT
 interface QueryBuilder{
     public function select(array $tables, array $fields);
     public function insert(string $table, array $columns = array());
-    public function update(string $table, array $data = array());
+    public function update(string $table, array $data);
     public function delete(string $table);
     public function values(array $values);
     public function join(string $table,string $leftOn,string $rightOn, JoinTypeEnum $type = \JoinTypeEnum::NONE);

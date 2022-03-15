@@ -6,22 +6,28 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
-
 /**
- * Description of displayClassNavigation
+ * Description of displayHomeworkPagination
  *
  * @author Choo Meng
  */
-require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ClassDB.php';
+
+require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/HomeworkDB.php';
 $totalCount = 0;
-$sortType = trim(empty($_POST["sorttype"]) ? "ClassID" : eliminateExploit($_POST["sorttype"]));
-$sortOrder = trim(empty($_POST["sortorder"]) ? "ASC" : eliminateExploit($_POST["sortorder"]));
+$sortType = trim(empty($_POST["sorttype"]) ? "Date" : eliminateExploit($_POST["sorttype"]));
+$sortOrder = trim(empty($_POST["sortorder"]) ? "DESC" : eliminateExploit($_POST["sortorder"]));
 $search = empty($_POST["search"]) ? "" : eliminateExploit($_POST["search"]);
 $entry = empty($_POST["entry"]) ? 20 : (int) $_POST["entry"];
 $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
-$classdb = new ClassDB();
+
+$homeworkdb = new HomeworkDB();
+if (!isset($_POST["id"])){
+    return;
+}else{
+    $id = $_POST["id"];
+}
 try{
-    $totalCount = $classdb->getCount($search);
+    $totalCount = $homeworkdb->getCount($search,$id);
 } catch (PDOException $ex) {
     echo 'Connection failed: ' . $ex->getMessage();
 }

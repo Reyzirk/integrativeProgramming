@@ -1,4 +1,4 @@
-<?php include '../Function/load.php' ?>
+<?php include '../Function/load.php';$pageName = basename(__FILE__); ?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -23,8 +23,15 @@ $lang_legendTitle2 = "Course Materials"
     </head>
     <body>
         <div id="wrapper">
+            <?php include 'Components/navbar.php' ?>
             <div id="content-wrapper">
                 <div id="content">
+                    <?php include 'Components/header.php' ?>
+                    <ol class="breadcrumb shadow" id="breadcrumb">
+                        <li class="breadcrumb-item"><a href="dashboard.jsp">Home</a></li>
+                        <li class="breadcrumb-item"><a href="courses.jsp">Courses</a></li>
+                        <li class="breadcrumb-item active">Create Course</li>
+                    </ol>
                     <div class="container-fluid">
                         <div id="formControl">
                             <div class="jumbotrun" id="container">
@@ -98,6 +105,7 @@ $lang_legendTitle2 = "Course Materials"
                         </div>
                     </div>
                 </div>
+                <?php include "Components/footer.php"; ?>
             </div>
         </div>
         <script>

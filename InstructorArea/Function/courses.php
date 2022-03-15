@@ -35,7 +35,7 @@ function callLog() {
                         icon: 'error',
                         html: '<b>Failed</b><br/><?php echo $errorMsg; ?>.'
                     })
-                },3000);
+                },1500);
             });
             
         </script>
@@ -57,7 +57,7 @@ function callLog() {
                         icon: 'success',
                         html: '<b>Sucessful</b><br/><?php echo $successMsg; ?>.'
                     })
-                },3000);
+                },1500);
             });
         </script>
         <?php

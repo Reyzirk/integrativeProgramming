@@ -8,6 +8,57 @@ Web Application is under GNU General Public License v3.0
     Created on : 15 Feb 2022, 9:36:27 pm
     Author     : Choo Meng
 */
+/*
+    Header
+*/
+#title{
+    margin-bottom: 0px;
+    word-break: break-word;
+}
+#title>a{
+    text-decoration: none;
+}
+#divider{
+    margin-bottom: 0px;
+}
+#iconSidebar{
+    margin-top:-12px;
+    margin-left: -6px;
+    margin-right: 10px;
+}
+#nav-update{
+    padding: 10px;
+    padding-left: 8px;
+}
+.nav-link:hover{
+    background:#7e9efc;
+    color:white;
+}
+.middleButton{
+    width: 38px;
+    margin: 10px auto;
+}
+/*Footer*/
+footer{
+    background-color:white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 6px 0px;
+    font-weight:bold;
+    margin-top: 15px;
+    color:gray;
+    border-radius:0px;
+    box-shadow: 0px -2px 12px #BBBBBB;
+    position: relative;
+}
+footer>p{
+    margin: 3px 0px;
+    text-align:center;
+    padding-right: 110px;
+}
+/*
+    General
+*/
 .rightSide{
     float:right;
 }

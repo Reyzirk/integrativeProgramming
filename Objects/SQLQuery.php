@@ -15,7 +15,7 @@
 class SQLQuery {
     private $base;
     private $type;
-    private $values = array();
+    private $values;
     private $andwhere = array();
     private $orwhere = array();
     private $where = array();
@@ -25,9 +25,6 @@ class SQLQuery {
     private $limit;
     public function addJoin($join){
         $this->join[] = $join;
-    }
-    public function addValues($values){
-        $this->values[] = $values;
     }
     public function addWhere ($where){
         $this->where[] = $where;
@@ -43,9 +40,6 @@ class SQLQuery {
     }
     public function getJoin(){
         return $this->join;
-    }
-    public function getValues(){
-        return $this->values;
     }
     public function getAndWhere(){
         return $this->andwhere;

@@ -8,41 +8,42 @@
  */
 
 /**
- * Description of classes
+ * Description of homeworks
  *
  * @author Choo Meng
  */
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ClassDB.php";
+$id = $_GET["id"];
+$classDB = new ClassDB();
+$retrievedClass = $classDB->details($id);
+if (!empty($retrievedClass)){
+    $storedValue["semester"] = $retrievedClass->semester;
+    $storedValue["year"] = $retrievedClass->year;
+    $storedValue["instructor"] = $retrievedClass->formTeacher;
+}else{
+    $_SESSION["errorLog"] = "noid";
+    header('HTTP/1.1 307 Temporary Redirect');
+    header('Location: classes.php');
+}
 $dataArray = array(
-    "classID" =>
+    "homeworkID" =>
     array(
-        "Title" => "Class ID",
-        "Width" => "18%"),
-    "semester" =>
+        "Title" => "Homework ID",
+        "Width" => "15%"),
+    "date" =>
     array(
-        "Title" => "Semester",
-        "Width" => "12%"),
-    "year" =>
+        "Title" => "Date",
+        "Width" => "20%"),
+    "homeworkDesc" =>
     array(
-        "Title" => "Year",
-        "Width" => "14%"),
-    "instructor" =>
-    array(
-        "Title" => "Instructor",
-        "Width" => "27%"),
-    "students" =>
-    array(
-        "Title" => "Students",
-        "Width" => "80px"),
-    "Homeworks" =>
-    array(
-        "Title" => "Homeworks",
-        "Width" => "80px"));
+        "Title" => "Homework",
+        "Width" => "50%"));
 
 function callLog() {
     if (!empty($_SESSION["errorLog"])) {
 
         if ($_SESSION["errorLog"] == "noid") {
-            $errorMsg = "Invalid Grade ID";
+            $errorMsg = "Invalid Homework ID";
         }
         ?>
         <script>
@@ -58,10 +59,10 @@ function callLog() {
     }
     if (!empty($_SESSION["modifyLog"])) {
 
-        if ($_SESSION["modifyLog"] == "createclass") {
-            $successMsg = "Created new class.";
-        }else if ($_SESSION["modifyLog"] == "editclass") {
-            $successMsg = "Edited an existing class details.";
+        if ($_SESSION["modifyLog"] == "createhomework") {
+            $successMsg = "Created new homework.";
+        }else if ($_SESSION["modifyLog"] == "edithomework") {
+            $successMsg = "Edited an existing homework details.";
         }
         ?>
         <script>

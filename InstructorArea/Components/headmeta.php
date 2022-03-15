@@ -29,5 +29,6 @@ echo("
     <script src='../js/jquery-3.6.0.js' type='text/javascript'></script>
     <script src='../js/sweetalert2.all.min.js' type='text/javascript'></script>
     <script src='../js/ckeditor.js' type='text/javascript'></script>
+    <script src='js/sb-admin-2.min.js' type='text/javascript'></script>
     <script src='js/main.js' type='text/javascript'></script>
         ");

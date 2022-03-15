@@ -48,7 +48,7 @@ class MySQLQueryBuilder implements QueryBuilder{
         }
         return $this;
     }
-    public function update($table, $data = array()){
+    public function update($table, $data){
         $this->clear();
         $this->query->type = \QueryTypeEnum::UPDATE;
         if (empty($table)){
@@ -63,7 +63,9 @@ class MySQLQueryBuilder implements QueryBuilder{
             }
         }
         $dataCount = count($data);
+        $i = 0;
         foreach ($data as $col => $value){
+            $i++;
             $val = "$col = '$value'";
             $this->query->base .= str_replace("'".\CustomSQLEnum::BIND_QUESTIONMARK."'", "?", $val);
             if ($i !== $dataCount){
@@ -88,8 +90,8 @@ class MySQLQueryBuilder implements QueryBuilder{
         if (empty($values)){
             throw new \QueryBuilderException("Values cannot empty.");
         }
-        $value = "VALUES ('".implode(", ",$values)."')";
-        $this->query->addValues(str_replace("'".\CustomSQLEnum::BIND_QUESTIONMARK."'", "?", $value));
+        $value = "VALUES ('".implode("', '",$values)."')";
+        $this->query->values = str_replace("'".\CustomSQLEnum::BIND_QUESTIONMARK."'", "?", $value);
         return $this;
     }
     public function bracketWhere($type = \WhereTypeEnum::AND){
@@ -175,7 +177,7 @@ class MySQLQueryBuilder implements QueryBuilder{
         if (!is_array($column)){
             throw new \QueryBuilderException("Column must in array type.");
         }
-        $this->query->groupby = "GROUP BY ".implode(', ',$column);
+        $this->query->groupby = " GROUP BY ".implode(', ',$column);
         return $this;
     }
     public function order(string $column, $orderType = \OrderTypeEnum::DESC){
@@ -202,8 +204,12 @@ class MySQLQueryBuilder implements QueryBuilder{
             if (!empty($this->query->getJoin())){
                 $sqlStmt .= implode('',$this->query->getJoin());;
             }
-            if (!empty($this->query->getWhere())){
+            if (!empty($this->query->getAndWhere())||!empty($this->query->getOrWhere())||!empty($this->query->getWhere())){
                 $sqlStmt .= $this->retrieveWhere();
+            }
+            
+            if (!empty((string)($this->query->groupby))){
+                $sqlStmt .= $this->query->groupby;
             }
             if (!empty($this->query->getOrder())){
                 $sqlStmt .= " ORDER BY ".implode(', ',$this->query->order);
@@ -211,20 +217,18 @@ class MySQLQueryBuilder implements QueryBuilder{
             if (!empty($this->query->getLimit())){
                 $sqlStmt .= $this->query->getLimit();
             }
-            if (!empty($this->query->groupby)){
-                $sqlStmt .= $this->query->groupby;
-            }
+            
         }else if ($this->query->type==\QueryTypeEnum::INSERT){
             $sqlStmt = $this->query->base;
-            $sqlStmt .= $this->query->getValues();
+            $sqlStmt .= $this->query->values;
         }else if ($this->query->type==\QueryTypeEnum::UPDATE){
             $sqlStmt = $this->query->base;
-            if (!empty($this->query->getWhere())){
+            if (!empty($this->query->getAndWhere())||!empty($this->query->getOrWhere())||!empty($this->query->getWhere())){
                 $sqlStmt .= $this->retrieveWhere();
             }
         }else if ($this->query->type==\QueryTypeEnum::DELETE){
             $sqlStmt = $this->query->base;
-            if (!empty($this->query->getWhere())){
+            if (!empty($this->query->getAndWhere())||!empty($this->query->getOrWhere())||!empty($this->query->getWhere())){
                 $sqlStmt .= $this->retrieveWhere();
             }
         }
