@@ -1,5 +1,6 @@
 <?php
 include '../Function/load.php';
+include 'Function/searchAttendance.php';
 ?>
 <!DOCTYPE html>
 <!--
@@ -29,9 +30,9 @@ Web Application is under GNU General Public License v3.0
                             <div class="col-md">
                                 <br>
                                 <h1 class="display-4">Update Student Attendance</h1>
-                                <p class="lead">Update student attendances here <span class="reqF">* Required Fields</span></p>
+                                <p class="lead">Update student attendances here </p>
                                 <hr class="my-3">
-                                <form method="POST" id="attendanceCreation" enctype="multipart/form-data">
+                                <form method="POST" id="attendanceCreation" name="attendanceForm">
                                     <fieldset>
                                         <legend>
                                             Attendance Entry
@@ -44,15 +45,22 @@ Web Application is under GNU General Public License v3.0
                                         </div>
                                         <br><br>
                                         <div class="row">
-                                            <div class="col-sm-3">
-                                                <select class="form-control bg-white small">
+                                            <div class="col-sm-2">
+                                                <select class="form-control bg-white small" name="searchCriteria">
                                                     <option value="name">Name </option>
                                                     <option value="class">Class</option>
                                                 </select>
                                             </div>
-                                            <div class="col-sm-8">
-                                                <input type="text" class="bg-white form-control" placeholder="Please enter the search criteria!">
+                                            <div class="col-sm-9">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="bg-white form-control" placeholder="Please enter the search criteria!" name="searchInfo">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-outline-info" type="submit" name="submit">Search</button>
+                                                    </div>
+                                                </div>
                                             </div>
+
+                                            <span class="invalid-feedback"><?php echo empty($error["emptySearch"]) ? "123" : $error['emptySearch'] ?></span>
                                         </div>
                                         <br><br>
                                         <!--Student Table to be injected here  -->
@@ -77,9 +85,9 @@ Web Application is under GNU General Public License v3.0
                             </div>
                         </div>
                     </div>
-                <?php
-                include 'Components/footer.php'
-                ?>
+                    <?php
+                    include 'Components/footer.php'
+                    ?>
                 </div>
             </div>
     </body>
