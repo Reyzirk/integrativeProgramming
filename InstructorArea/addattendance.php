@@ -54,17 +54,21 @@ Web Application is under GNU General Public License v3.0
                                                 <input type="text" class="bg-white form-control" placeholder="Please enter the search criteria!">
                                             </div>
                                         </div>
+                                        <br><br>
                                         <!--Student Table to be injected here  -->
                                         <table class="table table-striped table-hover">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Student ID</th>
                                                     <th scope="col">Name</th>
-                                                    <th scope="col">Actions</th>
+                                                    <th scope="col">Temperature</th>
+                                                    <th scope="col" class="w-25">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
+                                                <?php
+                                                include 'Function/addAttendance.php'
+                                                ?>
                                             </tbody>
                                         </table>
                                         </div>

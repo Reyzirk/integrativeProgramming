@@ -8,36 +8,23 @@
  */
 
 /**
- * Description of AttendanceDB
+ * Description of ChildDB
  *
  * @author Ng Kar Kai
  */
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/DBController.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/MySQLQueryBuilder.php';
-require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Objects/Classes.php';
-class AttendanceDB {
-    private $instance; 
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Objects/Child.php';
+class ChildDB {
+    private $instance;
     public function __construct(){
         $this->instance = DBController::getInstance();
     }
     
-    public function getRecordCount(){
-        $query = "SELECT * FROM ATTENDANCE";
+    public function getChildDetails($childID){
+        $query = "SELECT * FROM Child WHERE ChildID = ?";
         $stmt = $this->instance->con->prepare($query);
-        $stmt->execute();
-        $totalrows = $stmt->rowCount();
-        
-        if ($totalrows == 0 ){
-            return 0;
-        }
-        else{
-            return $totalrows;
-        }
-    }
-    
-    public function selectAll(){
-        $query = "SELECT * FROM ATTENDANCE";
-        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         
@@ -46,8 +33,10 @@ class AttendanceDB {
         }
         else{
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $result = $stmt->fetchAll();
-            return $result;
+            $results = $stmt->fetchAll();
+            $row = $results[0];
+            $record = new Child($row["ChildID"], $row["ChildName"], $row["BirthDate"], $row["ChildICNo"], $row["Status"]);
+            return $record;
         }
     }
 }
