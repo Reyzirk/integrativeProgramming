@@ -85,8 +85,8 @@ Web Application is under GNU General Public License v3.0
                                 <!--************************Attachment***************************-->
                                 <div class="col-md-6">
                                     <label for="attach" class="col-form-label">Attachment</label>
-                                    <input id="attach" type="file" class="form-control-file bg-white form-control" name="attach" multiple />
-                                    <span class="invalid-feedback" style="background-color:rgb(221, 221, 226);border:none;">test</span>
+                                    <input id="attach" type="file" class="form-control-file bg-white form-control" oninput="validateAttach(this)" name="attach[]" multiple />
+                                    <span class="invalid-feedback" style="background-color:#f8f9fc;border:none;"></span>
                                     <input type="hidden" name="hiddenAttach" value=""/>
                                 </div>
                             </div><br>
@@ -129,6 +129,7 @@ Web Application is under GNU General Public License v3.0
 
         <?php
         //include '../Components/footer.php';
+       
         ?>
         <script>
             ClassicEditor
