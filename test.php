@@ -8,7 +8,7 @@
  */
 require_once 'Database/MySQLQueryBuilder.php';
 require_once 'Enum/EnumLoad.php';
-$builder = new Database\MySQLQueryBuilder();
+$builder = new MySQLQueryBuilder();
 $value = $builder->select(["users"], ["name", "email", "password"])
         ->where("age", 18, WhereTypeEnum::OR, OperatorEnum::LESSER, false)
         ->where("age", 21, WhereTypeEnum::OR, OperatorEnum::LESSER, false)
