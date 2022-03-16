@@ -13,18 +13,20 @@
  * @author Choo Meng
  */
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ClassDB.php";
-$id = $_GET["id"];
-$classDB = new ClassDB();
-$retrievedClass = $classDB->details($id);
-if (!empty($retrievedClass)){
-    $storedValue["semester"] = $retrievedClass->semester;
-    $storedValue["year"] = $retrievedClass->year;
-    $storedValue["instructor"] = $retrievedClass->formTeacher;
-}else{
+if (empty($_GET["id"])){
     $_SESSION["errorLog"] = "noid";
     header('HTTP/1.1 307 Temporary Redirect');
     header('Location: classes.php');
+}else{
+    $id = $_GET["id"];
+    $classDB = new ClassDB();
+    if (!$classDB->validID($id)){
+        $_SESSION["errorLog"] = "noid";
+        header('HTTP/1.1 307 Temporary Redirect');
+        header('Location: classes.php');
+    }
 }
+
 $dataArray = array(
     "homeworkID" =>
     array(

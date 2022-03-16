@@ -68,14 +68,15 @@ if ($totalCount == 0) {
         ->limit($beginIndex,$endIndex)
         ->query();
     
-    $results = $classdb->select($query);
+    $results = $homeworkdb->select($query);
    
     foreach($results as $row){
+        $desc = strip_tags(html_entity_decode($row["HomeworkDesc"]));
         ?>
         <tr id="<?php echo $row["HomeworkID"]; ?>">
-            <td class="text-center"><?php echo $row["HomeworkID"]; ?></td>
+            <td class="text-center" style="word-break: break-all;"><?php echo $row["HomeworkID"]; ?></td>
             <td class="text-center"><?php echo $row["Date"]; ?></td>
-            <td class="text-center"><?php echo $row["HomeworkDesc"]; ?></td>
+            <td><?php echo strlen($desc)>150?substr($desc,0,150):$desc; ?></td>
             <td class="text-center">
                 <button class='btn btn-info' onclick="location.href='viewhomework.php?id=<?php echo $row["HomeworkID"]; ?>';"><i class="fa-solid fa-pen-to-square"></i> View</button>
                 <button class='btn btn-warning' onclick="location.href='edithomework.php?id=<?php echo $row["HomeworkID"]; ?>';"><i class="fa-solid fa-pen-to-square"></i> Modify</button>

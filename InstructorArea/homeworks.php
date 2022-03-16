@@ -37,7 +37,7 @@ $lang_action_btn = "Action";
                         <div id="displayList">
                             <div class="jumbotrun" id="container">
                                 <div class="text-right">
-                                    <button class="btn btn-info" onclick="location.href='createclass.php'"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_create_btn; ?></button>
+                                    <button class="btn btn-info" onclick="location.href='createhomework.php?id=<?php echo $id; ?>'"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_create_btn; ?></button>
                                 </div>
                                 <br/>
                                 <div class="rightSide">

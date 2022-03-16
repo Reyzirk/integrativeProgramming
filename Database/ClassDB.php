@@ -109,5 +109,19 @@ class ClassDB {
             return true;
         }
     }
+    public function validID($id): bool{
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("classes"), array("*"))
+                ->where("ClassID", $id)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
 }

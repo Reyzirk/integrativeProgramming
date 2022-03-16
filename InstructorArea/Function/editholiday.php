@@ -15,17 +15,24 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Holid
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
 $factory = new ParserFactory();
 $parser = $factory->getParser("Holidays");
-$id = $_GET["id"];
-$retrievedHoliday = $parser->getHoliday($id);
-if (!empty($retrievedHoliday)){
-    $storedValue["holidayName"] = $retrievedHoliday->name;
-    $storedValue["dateStart"] = $retrievedHoliday->dateStart;
-    $storedValue["dateEnd"] = $retrievedHoliday->dateEnd;
-}else{
+if (empty($_GET["id"])){
     $_SESSION["errorLog"] = "noid";
     header('HTTP/1.1 307 Temporary Redirect');
     header('Location: holidays.php');
+}else{
+    $id = $_GET["id"];
+    $retrievedHoliday = $parser->getHoliday($id);
+    if (!empty($retrievedHoliday)){
+        $storedValue["holidayName"] = $retrievedHoliday->name;
+        $storedValue["dateStart"] = $retrievedHoliday->dateStart;
+        $storedValue["dateEnd"] = $retrievedHoliday->dateEnd;
+    }else{
+        $_SESSION["errorLog"] = "noid";
+        header('HTTP/1.1 307 Temporary Redirect');
+        header('Location: holidays.php');
+    }
 }
+
 if (isset($_POST["formDetect"])){
     
     if (empty($_POST["holidayName"])){

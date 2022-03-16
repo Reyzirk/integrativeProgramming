@@ -47,4 +47,79 @@ class HomeworkDB {
             return $result;
         }
     }
+    public function insert($homework){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->insert("homework")
+                ->values(array($homework->homeworkID,$homework->class,$homework->date,$homework->homework))
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    public function dateExist($date){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("homework"), array("*"))
+                ->where("Date", $date)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    public function details($id){
+         $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("homework"), array("*"))
+                ->where("HomeworkID", $id)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return NULL;
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $row = $results[0];
+            $result = new Homework($row["HomeworkID"],$row["ClassID"],$row["Date"],$row["HomeworkDesc"]);
+            $resultList = $result;
+            return $resultList;
+        }
+    }
+    public function delete($id){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->delete("homework")
+                ->where("HomeworkID", $id)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    public function update($oldID, $updated){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->update("homework", array("Date"=>$updated->date,"HomeworkDesc"=>$updated->homework))
+                ->where("HomeworkID", $oldID)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 }

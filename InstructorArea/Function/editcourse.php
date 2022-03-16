@@ -22,18 +22,25 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Cours
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
 $factory = new ParserFactory();
 $parser = $factory->getParser("Courses");
-$id = $_GET["id"];
-$retrievedCourse = $parser->getCourse($id);
-if (!empty($retrievedCourse)){
-    $storedValue["courseCode"] = $retrievedCourse->courseCode;
-    $storedValue["courseName"] = $retrievedCourse->courseName;
-    $storedValue["courseDescription"] = $retrievedCourse->courseDesc;
-    $storedValue["courseMaterials"] = $retrievedCourse->courseMaterials;
-}else{
+if (empty($_GET["id"])){
     $_SESSION["errorLog"] = "noid";
     header('HTTP/1.1 307 Temporary Redirect');
     header('Location: courses.php');
+}else{
+    $id = $_GET["id"];
+    $retrievedCourse = $parser->getCourse($id);
+    if (!empty($retrievedCourse)){
+        $storedValue["courseCode"] = $retrievedCourse->courseCode;
+        $storedValue["courseName"] = $retrievedCourse->courseName;
+        $storedValue["courseDescription"] = $retrievedCourse->courseDesc;
+        $storedValue["courseMaterials"] = $retrievedCourse->courseMaterials;
+    }else{
+        $_SESSION["errorLog"] = "noid";
+        header('HTTP/1.1 307 Temporary Redirect');
+        header('Location: courses.php');
+    }
 }
+
 if (isset($_POST["formDetect"])){
     $inputName = "courseCode";
     $inputTitle = "Course Code";

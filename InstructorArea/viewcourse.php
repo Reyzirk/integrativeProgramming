@@ -92,9 +92,8 @@ $lang_legendTitle2 = "Course Materials"
                                 <?php } ?>
                                 <br/>
                                 <center>
-                                    <button type="button" class="btn btn-success" id="submitBtn" onclick="submitForm();">Submit</button>
-                                    <button type="button" class="btn btn-warning" onclick="location.href = 'createcourse.php'">Reset</button>
-                                    <button type="button" class="btn btn-danger" onclick="location.href = 'courses.php'">Cancel</button>
+                                    <button type="button" class="btn btn-warning" id="submitBtn" onclick="editcourse.php?id=<?php echo $id; ?>">Modify</button>
+                                    <button type="button" class="btn btn-danger" onclick="location.href = 'courses.php'">Back</button>
                                 </center>
                             </div>
                         </div>

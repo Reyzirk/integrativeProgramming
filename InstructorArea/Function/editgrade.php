@@ -16,19 +16,26 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Grade
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
 $factory = new ParserFactory();
 $parser = $factory->getParser("Grades");
-$id = $_GET["id"];
-$oriGrade = "";
-$retrievedGrade = $parser->getGrade($id);
-if (!empty($retrievedGrade)){
-    $oriGrade = $retrievedGrade->grade;
-    $storedValue["grade"] = $retrievedGrade->grade;
-    $storedValue["minMark"] = $retrievedGrade->minMark;
-    $storedValue["maxMark"] = $retrievedGrade->maxMark;
-}else{
+if (empty($_GET["id"])){
     $_SESSION["errorLog"] = "noid";
     header('HTTP/1.1 307 Temporary Redirect');
     header('Location: grades.php');
+}else{
+    $id = $_GET["id"];
+    $oriGrade = "";
+    $retrievedGrade = $parser->getGrade($id);
+    if (!empty($retrievedGrade)){
+        $oriGrade = $retrievedGrade->grade;
+        $storedValue["grade"] = $retrievedGrade->grade;
+        $storedValue["minMark"] = $retrievedGrade->minMark;
+        $storedValue["maxMark"] = $retrievedGrade->maxMark;
+    }else{
+        $_SESSION["errorLog"] = "noid";
+        header('HTTP/1.1 307 Temporary Redirect');
+        header('Location: grades.php');
+    }
 }
+
 if (isset($_POST["formDetect"])){
     if (empty($_POST["grade"])){
         $error["grade"] = "<b>Grade</b> cannot empty.";
