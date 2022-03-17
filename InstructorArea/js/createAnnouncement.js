@@ -8,7 +8,7 @@
  */
 
 var textvalidate = false;
-var maxFileSize = 8000000;
+var maxFileSize = 0;
 
 //Validate Announcement Input
 function validateA() {
@@ -125,7 +125,7 @@ function validateAttach(file) {
             fileSize = file.files[i].size;
             if (fileSize > maxFileSize) {
                 files.val("");
-                files.next().html("<b>The item's file size</b> cannot more than <b>8 MB</b>.");
+                files.next().html("<b>The item's file size</b> cannot more than  "+convertByteToMB(maxFileSize)+".");
                 files.addClass("is-invalid");
                 files.removeClass("is-valid");
                 valid = false;
