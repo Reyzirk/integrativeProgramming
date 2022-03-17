@@ -15,7 +15,7 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/An
 if (!empty($_POST['submit'])) {
     $date = trim($_POST["hiddenDate"]);
 
-    //Title Validation
+    //***************************Title Validation************************************
     $inputName = "title";
     $inputTitle = "Title";
     if (empty($_POST[$inputName])) {
@@ -27,7 +27,7 @@ if (!empty($_POST['submit'])) {
         }
     }
 
-    //Description Validation
+    //***************************Description Validation************************************
     $desc = trim($_POST["desc"]);
     $inputName = "desc";
     $inputTitle = "Description";
@@ -37,7 +37,7 @@ if (!empty($_POST['submit'])) {
         $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
     }
 
-
+    //***************************Category Validation************************************
     $inputName = "cat";
     $inputTitle = "Category";
     if (empty($_POST[$inputName])) {
@@ -45,7 +45,8 @@ if (!empty($_POST['submit'])) {
     } else {
         $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
     }
-
+    
+    //***************************Store allow comment value************************************
     $inputName = "allowC";
     if (isset($_POST["allowC"])) {
         if ($_POST["allowC"] == "checked") {
@@ -55,6 +56,7 @@ if (!empty($_POST['submit'])) {
         }
     }
 
+    //***************************Store pin to top value************************************
     $inputName = "pinTop";
     if (isset($_POST["pinTop"])) {
         if ($_POST["pinTop"] == "checked") {
@@ -63,7 +65,8 @@ if (!empty($_POST['submit'])) {
             $storedValue[$inputName] = 0;
         }
     }
-
+    
+    //***************************Attachment Validation************************************
     $inputName = "attach";
     $inputTitle = "Attachment";
     if (isset($_FILES[$inputName])) {
@@ -100,6 +103,7 @@ if (!empty($_POST['submit'])) {
     // Connect Database
 }
 
+//***************************Generate Announcement ID************************************
 function genAnnounceID() {
     $announceBD = new AnnouncementDB();
     $count = $announceBD->getCount();
@@ -140,6 +144,7 @@ function genAnnounceID() {
     return $announceID;
 }
 
+//***************************Trim the variable************************************
 function eliminateExploit($str) {
     $str = trim($str);
     $str = stripcslashes($str);
