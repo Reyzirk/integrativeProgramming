@@ -42,7 +42,7 @@ if ($totalRecords == 0) {
                 <?php echo $row["ChildTemperature"] ?>
             </td>
             <td>
-                <button type="button" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Update Record</button>
+                <button type="button" class="btn btn-primary" onclick="window.location.href= '../updateNewAttendance.php?<?php echo $row["ChildID"]?>'"><i class="fa-solid fa-pen-to-square"></i>Update Record</button>
             </td>
         </tr>
         <?php
