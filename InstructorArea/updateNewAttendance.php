@@ -1,3 +1,6 @@
+<?php
+include '../Function/load.php';
+?>
 <!DOCTYPE html>
 <!--
 ============================================
