@@ -63,7 +63,7 @@ function validateCat() {
 }
 
 function validateTitle() {
-    title = $("#title");
+    title = $("#titleA");
     if (title.val().length === 0) {
         title.next().html("<b>Title</b> cannot be empty");
         title.addClass("is-invalid");
