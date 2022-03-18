@@ -38,6 +38,24 @@ Web Application is under GNU General Public License v3.0
     width: 38px;
     margin: 10px auto;
 }
+.list-brand{
+    overflow:hidden;
+    
+}
+.sidebar-brand{
+    min-height:52px;
+    padding: 1.2rem 1rem 1.7rem 1rem !important;
+}
+.sidebar-brand-icon{
+    display: inline-block;
+    padding-left:6px;
+    padding-right:6px;
+}
+.sidebar-brand-icon img{
+    width:48px;
+    height: 48px;
+    border-radius: 20px;
+}
 /*Footer*/
 footer{
     background-color:white;
@@ -98,6 +116,10 @@ input[type="file"]::-webkit-file-upload-button{
     background-color: #fff !important;
     border:none;
     border-right: lightgray 2px solid;
+}
+input:disabled {
+  cursor:no-drop;
+  background-color: #DDDDDD !important;
 }
 #tableList .btn{
     margin-bottom: 5px;

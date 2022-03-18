@@ -88,6 +88,7 @@ if ($totalCount == 0) {
                 <button class="btn btn-outline-dark" style="width:60px;" onclick="location.href='homeworks.php?id=<?php echo $row["ClassID"]; ?>';">📚 <?php echo $totalHomework; ?></button>
             </td>
             <td class="text-center">
+                <button class='btn btn-outline-primary' onclick="location.href='courseschedule.php?id=<?php echo $row["ClassID"]; ?>';"><i class="fa-solid fa-book"></i> Courses</button>
                 <button class='btn btn-outline-warning' onclick="location.href='editclass.php?id=<?php echo $row["ClassID"]; ?>';"><i class="fa-solid fa-pen-to-square"></i> Modify</button>
                 <button class='btn btn-outline-danger' onclick="deleteDataRecord('<?php echo $row["ClassID"]; ?>');"><i class="fa-solid fa-trash"></i> Delete</button>
             </td>

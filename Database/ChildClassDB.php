@@ -29,7 +29,7 @@ class ChildClassDB {
         ->bracketWhere(WhereTypeEnum::OR)
         ->where("childclass.ChildID", "child.ChildID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
         ->where("child.ParentID", "parent.ParentID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false )
-        ->where("ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->where("childclass.ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
         ->bracketWhere(WhereTypeEnum::AND)
         ->query();
         $stmt = $this->instance->con->prepare($query);

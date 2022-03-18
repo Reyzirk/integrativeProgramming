@@ -8,7 +8,7 @@
  */
 
 /**
- * Description of childclasses
+ * Description of course schedule
  *
  * @author Choo Meng
  */
@@ -28,29 +28,33 @@ if (empty($_GET["id"])){
 }
 
 $dataArray = array(
-    "No" =>
+    "CourseCode" =>
     array(
-        "Title" => "No",
-        "Width" => "10%"),
-    "Name" =>
+        "Title" => "Course Code",
+        "Width" => "17%"),
+    "Instructor" =>
     array(
-        "Title" => "Name",
+        "Title" => "Instructor",
         "Width" => "20%"),
-    "ICNo" =>
+    "Day" =>
     array(
-        "Title" => "IC No",
+        "Title" => "Day of Week",
         "Width" => "15%"),
-    "ParentEmail" =>
+    "Time" =>
     array(
-        "Title" => "Parent Email",
-        "Width" => "30%"),
+        "Title" => "Time",
+        "Width" => "23%"),
+    "ClassType" =>
+    array(
+        "Title" => "Class Type",
+        "Width" => "15%"),
     );
 
 function callLog() {
     if (!empty($_SESSION["errorLog"])) {
 
         if ($_SESSION["errorLog"] == "noid") {
-            $errorMsg = "Invalid Child ID";
+            $errorMsg = "Invalid Course ID";
         }
         ?>
         <script>
@@ -66,8 +70,10 @@ function callLog() {
     }
     if (!empty($_SESSION["modifyLog"])) {
 
-        if ($_SESSION["modifyLog"] == "assignchildclass") {
-            $successMsg = "Assigned new child to the class.";
+        if ($_SESSION["modifyLog"] == "createcourseschedule") {
+            $successMsg = "Created new course schedule.";
+        }else if ($_SESSION["modifyLog"] == "editcourseschedule") {
+            $successMsg = "Edited an existing course schedule details.";
         }
         ?>
         <script>

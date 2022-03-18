@@ -1,17 +1,14 @@
 <?php
-/*
+
+/* 
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
-//Check session
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+
+function callErrorLog($exception){
+    $message = $exception->getMessage();
+    error_log("[".date("Y-m-d H:i:s")."] $message \n", 3, "error.log");
 }
-include_once 'ini_load.php';
-include_once 'exception_load.php';
-
-
-
-
+set_exception_handler('callErrorLog');

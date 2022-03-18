@@ -146,3 +146,50 @@ function navigateToExamResult(){
         }
     })
 }
+function navigateToCourseSchedule(){
+    Swal.fire({
+        title: 'Navigate to the schedule list',
+        input: 'text',
+        inputAttributes: {
+            autocapitalize: 'off'
+        },
+        inputPlaceholder: 'Enter the Class ID',
+        showCancelButton: true,
+        confirmButtonText: 'Navigate',
+        showLoaderOnConfirm: true,
+        preConfirm: (inputID) => {
+            $.ajax({
+                url: "AJAX/navigateCourseSchedule.php",
+                type: "POST",
+                async:false,
+                data: {"classID": inputID },
+            }).done(function (response) {
+                if (response === "fail") {
+                    Swal.showValidationMessage(
+                        `Please Try Again!`
+                    )
+                    return false;
+                } else if (response === "success") {
+                    Swal.close();
+                    id = inputID;
+                    return true;
+                }else{
+                    Swal.showValidationMessage(response);
+                    return false;
+                }
+                
+                
+            }).fail(function (jqXHR, status) {
+                Swal.showValidationMessage(
+                    `Failed to assign: ${error}`
+                )
+                return false;
+            });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+        if (result.isConfirmed) {
+            location.href='courseschedule.php?id='+id;
+        }
+    })
+}

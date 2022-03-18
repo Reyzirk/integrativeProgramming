@@ -24,8 +24,138 @@ Web Application is under GNU General Public License v3.0
         <PageDescription>Display list of the holiday.</PageDescription>
     </Page>
     <Page>
+        <PageLink>classes</PageLink>
+        <PageTitle>Class List</PageTitle>
+        <PageDescription>Display list of the class.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>childclasses</PageLink>
+        <PageTitle>Child Class List</PageTitle>
+        <PageDescription>Display list of the student class.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>courseschedule</PageLink>
+        <PageTitle>Course Schedule List</PageTitle>
+        <PageDescription>Display list of the course schedule.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>courses</PageLink>
+        <PageTitle>Course List</PageTitle>
+        <PageDescription>Display list of the courses.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>createclass</PageLink>
+        <PageTitle>Create Class</PageTitle>
+        <PageDescription>Create a new class.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>createcourse</PageLink>
+        <PageTitle>Create Course</PageTitle>
+        <PageDescription>Create a new course.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>createcourseschedule</PageLink>
+        <PageTitle>Create Course Schedule</PageTitle>
+        <PageDescription>Create a new course schedule.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>creategrade</PageLink>
+        <PageTitle>Create Grade</PageTitle>
+        <PageDescription>Create a new grade.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>createholiday</PageLink>
+        <PageTitle>Create Holiday</PageTitle>
+        <PageDescription>Create a new holiday.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>createhomework</PageLink>
+        <PageTitle>Create Homework</PageTitle>
+        <PageDescription>Create a new homework.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>createexamination</PageLink>
+        <PageTitle>Create Examination</PageTitle>
+        <PageDescription>Create a new examination.</PageDescription>
+    </Page>
+    <Page>
         <PageLink>createholiday</PageLink>
         <PageTitle>Create new holiday</PageTitle>
         <PageDescription>Create a new holiday.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>editclass</PageLink>
+        <PageTitle>Edit Class</PageTitle>
+        <PageDescription>Edit an existing class.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>editcourse</PageLink>
+        <PageTitle>Edit Course</PageTitle>
+        <PageDescription>Edit an existing course.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>editcourseschedule</PageLink>
+        <PageTitle>Edit Course Schedule</PageTitle>
+        <PageDescription>Edit an existing course schedule.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>editexamination</PageLink>
+        <PageTitle>Edit Examination</PageTitle>
+        <PageDescription>Edit an existing examination.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>editgrade</PageLink>
+        <PageTitle>Edit Grade</PageTitle>
+        <PageDescription>Edit an existing grade.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>editholiday</PageLink>
+        <PageTitle>Edit Holiday</PageTitle>
+        <PageDescription>Edit an existing holiday.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>edithomework</PageLink>
+        <PageTitle>Edit Homework</PageTitle>
+        <PageDescription>Edit an existing homework.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>examinations</PageLink>
+        <PageTitle>Examination List</PageTitle>
+        <PageDescription>Display list of examination.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>examresults</PageLink>
+        <PageTitle>Exam Result List</PageTitle>
+        <PageDescription>Display list of exam results.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>grades</PageLink>
+        <PageTitle>Grade List</PageTitle>
+        <PageDescription>Display list of grade.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>holidays</PageLink>
+        <PageTitle>Holiday List</PageTitle>
+        <PageDescription>Display list of holiday.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>homeworks</PageLink>
+        <PageTitle>Homework List</PageTitle>
+        <PageDescription>Display list of homework.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>viewcourse</PageLink>
+        <PageTitle>View Course</PageTitle>
+        <PageDescription>View course details.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>viewexamination</PageLink>
+        <PageTitle>View Examination</PageTitle>
+        <PageDescription>View examination details.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>viewhomework</PageLink>
+        <PageTitle>View Homework</PageTitle>
+        <PageDescription>View homework details.</PageDescription>
     </Page>
 </Pages>

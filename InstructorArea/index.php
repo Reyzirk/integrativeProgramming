@@ -11,6 +11,6 @@ Web Application is under GNU General Public License v3.0
         <?php include 'Components/headmeta.php' ?>
     </head>
     <body>
-
+        <?php throw new Exception("test"); ?>
     </body>
 </html>

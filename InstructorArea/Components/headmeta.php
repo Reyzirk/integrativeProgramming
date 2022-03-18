@@ -21,6 +21,7 @@ echo("
     <meta name='author' content='$author'>
     <meta name='keywords' content='$keywords'>
     <meta name='description' content='$description'>
+    <link rel='icon' type='image/x-icon' href='../images/favicon.png'>
     <title>$pageTitle | Instructor Section</title>
     <link href='css/main.css' rel='stylesheet' type='text/css'/>
     <link href='css/sb-admin-2.css' rel='stylesheet' type='text/css'/>

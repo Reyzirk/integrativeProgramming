@@ -14,15 +14,17 @@
  */
 class CourseSchedule {
     
-    private $scheduleID, $course, $instructor, $timeStart, $duration, $classType;
-    
-    public function __construct($scheduleID, $course, $instructor, $timeStart, $duration, $classType) {
+    private $scheduleID,$courseCode, $classID, $instructor, $timeStart, $duration, $classType, $day;
+   
+    public function __construct($scheduleID,$courseCode, $classID, $instructor, $timeStart, $duration, $classType, $day) {
         $this->scheduleID = $scheduleID;
-        $this->course = $course;
+        $this->courseCode = $courseCode;
+        $this->classID = $classID;
         $this->instructor = $instructor;
         $this->timeStart = $timeStart;
         $this->duration = $duration;
         $this->classType = $classType;
+        $this->day = $day;
     }
     
     public function __get($name) {

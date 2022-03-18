@@ -116,7 +116,7 @@ function deleteDataRecord(value, value2) {
                         loadList(false);
                         Toast.fire({
                             icon: 'success',
-                            html: '<b>Successful</b><br/>Removed the child from the class.'
+                            html: '<b>Successful</b><br/>Removed the student from the class.'
                         })
 
                     } else {

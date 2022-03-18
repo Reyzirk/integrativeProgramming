@@ -60,9 +60,9 @@ if ($totalCount == 0) {
         ->bracketWhere(WhereTypeEnum::OR)
         ->where("childclass.ChildID", "child.ChildID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
         ->where("child.ParentID", "parent.ParentID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false )
-        ->where("ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->where("childclass.ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
         ->bracketWhere(WhereTypeEnum::AND)
-        ->groupby(array("ClassID"))
+        ->groupby(array("childclass.ClassID"))
         ->order($sortType, $sortOrder)
         ->limit($beginIndex,$endIndex)
         ->query();
