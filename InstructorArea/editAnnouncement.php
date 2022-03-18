@@ -7,13 +7,13 @@ include '../Function/load.php';
 Copyright 2022 Omega International Junior School. All Right Reserved.
 Web Application is under GNU General Public License v3.0
 ============================================
+
 @author Oon Kheng Huang
 -->
-<?php include 'Function/createAnnouncement.php' ?>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Create Announcement</title>
+        <title>Edit Announcement</title>
         <?php
         include './Components/headmeta.php';
         ?>
@@ -29,7 +29,6 @@ Web Application is under GNU General Public License v3.0
                 min-height: 250px;
             }
         </style>
-        <script src="js/createAnnouncement.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -40,31 +39,31 @@ Web Application is under GNU General Public License v3.0
                     <ol class="breadcrumb shadow" id="breadcrumb">
                         <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
                         <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
-                        <li class="breadcrumb-item active">Create Announcement</li>
+                        <li class="breadcrumb-item active">Edit Announcement</li>
                     </ol>
                     <div class="container">
                         <div class="row">
                             <div class="col-md">
                                 <form method="POST" id="formSubmit" name="formSubmit" enctype="multipart/form-data">
-                                    <h1 class="display-4">Create Announcement</h1>
-                                    <p class="lead">Create a new announcement <span class="requiredF">* Required Fields</span></p>
+                                    <h1 class="display-4">Edit Announcement</h1>
+                                    <p class="lead">Edit an existing announcement <span class="requiredF">* Required Fields</span></p>
                                     <hr class="my-3">
                                     <fieldset>
                                         <legend>Announcement Details</legend>
                                         <!--************************Date***************************-->
                                         <div class="row">
                                             <div class="col-md">
-                                                Date: <?php echo date("Y-m-d") . " (" . date("l") . ")" ?>
+                                                Modify Date: <?php echo date("Y-m-d") . " (" . date("l") . ")" ?>
                                                 <input type="hidden" name="hiddenDate" value="<?php echo date("Y-m-d") ?>"/>
                                             </div>
                                         </div><br/>
                                         <!--************************Title***************************-->
                                         <div class="row">
                                             <div class="col-md">
-                                                <label for="titleA" class="col-form-label">Title <span class="requiredF">*</span></label>
-                                                <input id="titleA" type="text" name="titleA" class="bg-white form-control <?php echo empty($error["titleA"]) ? "" : "is-invalid"; ?>" placeholder="Please enter an announcement title" 
-                                                       maxlength="50" oninput="validateTitle()" value="<?php echo empty($storedValue["titleA"]) ? "" : $storedValue["titleA"]; ?>"/>
-                                                <span class="invalid-feedback"><?php echo empty($error["titleA"]) ? "" : $error["titleA"]; ?></span>
+                                                <label for="title" class="col-form-label">Title <span class="requiredF">*</span></label>
+                                                <input id="title" type="text" name="title" class="bg-white form-control <?php echo empty($error["title"]) ? "" : "is-invalid"; ?>" placeholder="Please enter an announcement title" 
+                                                       maxlength="50" oninput="validateTitle()" value="<?php echo empty($storedValue["title"]) ? "" : $storedValue["title"]; ?>"/>
+                                                <span class="invalid-feedback"><?php echo empty($error["title"]) ? "" : $error["title"]; ?></span>
                                             </div>
                                         </div><br/>
                                         <!--************************Description***************************-->
@@ -128,7 +127,6 @@ Web Application is under GNU General Public License v3.0
                                                 <button type="submit" disabled style="display: none" aria-hidden="true"></button>
                                                 <input type="hidden" name="formDetect" value="formDetect">
                                                 <button type="button" class="btn btn-success" onclick="validateA()">Submit</button>
-                                                <button type="button" class="btn btn-warning" onclick="location.href = location.href">Reset</button>
                                                 <button type="button" class="btn btn-danger" onclick="location.href = 'announcement.php'">Cancel</button>
                                             </center>
                                         </div>
@@ -136,29 +134,11 @@ Web Application is under GNU General Public License v3.0
 
                                 </form>
                             </div>
-                        </div><br/><br/>
-
-                    </div></div><?php include "Components/footer.php"; ?></div></div>
-
-        
-        <script>
-            ClassicEditor
-                    .create(document.querySelector('#desc'))
-                    .then(editor => {
-                        editor.model.document.on('change:data', (evt, data) => {
-                            validateTextArea(editor.getData());
-
-
-                        });
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
-<?php
-echo "maxFileSize = " . $generalSection["file_max_size"] . ";";
-?>
-
-        </script>
-
+                        </div>                       
+                    </div>
+                </div>
+                <?php include "Components/footer.php"; ?>
+            </div>
+        </div>
     </body>
 </html>

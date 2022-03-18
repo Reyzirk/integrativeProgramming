@@ -14,7 +14,7 @@
 
 class Announcement {
 
-    private $annouceID;
+    private $announceID;
     private $instructorID;
     private $title;
     private $desc;
@@ -23,8 +23,8 @@ class Announcement {
     private $pin;
     private $allowC;
 
-    public function __construct($annouceID, $instructorID, $title, $desc, $cat, $date, $pin, $allowC) {
-        $this->annouceID = $annouceID;
+    public function __construct($announceID, $instructorID, $title, $desc, $cat, $date, $pin, $allowC) {
+        $this->announceID = $announceID;
         $this->instructorID = $instructorID;
         $this->title = $title;
         $this->desc = $desc;

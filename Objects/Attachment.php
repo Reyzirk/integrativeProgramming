@@ -12,17 +12,19 @@
  * @author Oon Kheng Huang
  * 
  */
-require_once './Announcement.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Announcement.php";
 
 class Attachment{
     private $attachID;
-    private $annouce;
+    private $announce;
+    private $attachName;
     private $filePath;
     
-    public function __construct($attachID, Announcement $annouce, $filePath) {
+    public function __construct($attachID, Announcement $announce, $attachName, $filePath) {
         $this->attachID = $attachID;
-        $this->annouce = $annouce;
+        $this->announce = $announce;
         $this->filePath = $filePath;
+        $this->attachName = $attachName;
         
     }
     
