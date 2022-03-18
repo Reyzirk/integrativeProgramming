@@ -14,7 +14,9 @@ $lang_search = "Filter the list";
 $lang_search_btn = "Search";
 $lang_search_tooltip = "Type in any word that you want to search";
 $lang_refresh_btn = "Refresh";
+$lang_create_btn = "Assign Child";
 $lang_action_btn = "Action";
+
 ?>
 <html>
     <head>
@@ -29,12 +31,17 @@ $lang_action_btn = "Action";
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.jsp">Home</a></li>
+                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="classes.php">Classes</a></li>
                         <li class="breadcrumb-item active">Child Classes</li>
                     </ol>
                     <div class="container-fluid">
                         <div id="displayList">
                             <div class="jumbotrun" id="container">
+                                <div class="text-right">
+                                    <button class="btn btn-info" onclick="createBtn()"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_create_btn; ?></button><br/>
+                                    
+                                </div>
                                 <br/>
                                 <div class="rightSide">
                                     <div class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search text-center m-auto searchDiv">

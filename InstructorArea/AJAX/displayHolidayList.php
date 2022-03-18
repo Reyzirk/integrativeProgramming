@@ -78,8 +78,8 @@ if (count($holidays) == 0||$count==0) {
                 ?>
             </td>
             <td class="text-center">
-                <button class='btn btn-info' onclick="location.href='editholiday.php?id=<?php echo $key->id; ?>';"><i class="fa-solid fa-pen-to-square"></i> Modify</button>
-                <button class='btn btn-danger' onclick="deleteDataRecord('<?php echo $key->id; ?>');"><i class="fa-solid fa-trash"></i> Delete</button>
+                <button class='btn btn-outline-warning' onclick="location.href='editholiday.php?id=<?php echo $key->id; ?>';"><i class="fa-solid fa-pen-to-square"></i> Modify</button>
+                <button class='btn btn-outline-danger' onclick="deleteDataRecord('<?php echo $key->id; ?>');"><i class="fa-solid fa-trash"></i> Delete</button>
             </td>
         </tr>
         <?php

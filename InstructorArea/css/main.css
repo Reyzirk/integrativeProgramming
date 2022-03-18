@@ -108,3 +108,10 @@ input[type="file"]::-webkit-file-upload-button{
 .fileDownload-blue:hover {
     color:#e02d1b !important; 
 }
+.fa-envelope{
+    color: #7e9efc;
+    cursor:pointer;
+}
+.fa-envelope:hover{
+    color: skyblue;
+}

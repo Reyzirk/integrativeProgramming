@@ -30,7 +30,7 @@ $lang_action_btn = "Action";
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.jsp">Home</a></li>
+                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
                         <li class="breadcrumb-item active">Courses</li>
                     </ol>
                     <div class="container-fluid">

@@ -31,19 +31,20 @@ $dataArray = array(
     "No" =>
     array(
         "Title" => "No",
-        "Width" => "25px"),
+        "Width" => "10%"),
     "Name" =>
     array(
         "Title" => "Name",
         "Width" => "20%"),
+    "ICNo" =>
+    array(
+        "Title" => "IC No",
+        "Width" => "15%"),
     "ParentEmail" =>
     array(
         "Title" => "Parent Email",
         "Width" => "30%"),
-    "ICNo" =>
-    array(
-        "Title" => "IC No",
-        "Width" => "15%"));
+    );
 
 function callLog() {
     if (!empty($_SESSION["errorLog"])) {

@@ -64,9 +64,9 @@ if (count($courses) == 0 || $count == 0) {
             <td class="text-center"><?php echo $key->courseCode; ?></td>
             <td><?php echo $key->courseName; ?></td>
             <td class="text-center">
-                <button class='btn btn-info' onclick="location.href='viewcourse.php?id=<?php echo $key->courseCode; ?>';"><i class="fa-solid fa-eye"></i> View</button>
-                <button class='btn btn-warning' onclick="location.href='editcourse.php?id=<?php echo $key->courseCode; ?>';"><i class="fa-solid fa-pen-to-square"></i> Modify</button>
-                <button class='btn btn-danger' onclick="deleteDataRecord('<?php echo $key->courseCode; ?>');"><i class="fa-solid fa-trash"></i> Delete</button>
+                <button class='btn btn-outline-info' onclick="location.href='viewcourse.php?id=<?php echo $key->courseCode; ?>';"><i class="fa-solid fa-eye"></i> View</button>
+                <button class='btn btn-outline-warning' onclick="location.href='editcourse.php?id=<?php echo $key->courseCode; ?>';"><i class="fa-solid fa-pen-to-square"></i> Modify</button>
+                <button class='btn btn-outline-danger' onclick="deleteDataRecord('<?php echo $key->courseCode; ?>');"><i class="fa-solid fa-trash"></i> Delete</button>
             </td>
         </tr>
         <?php

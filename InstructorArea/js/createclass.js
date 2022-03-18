@@ -70,6 +70,50 @@ function validateInstructor(){
         return true;
     }
 }
+function validateDateStart(){
+    input = $("#dateStart");
+    input2 = $("#dateEnd");
+    errorMsg = input.next();
+    if (input.val().length===0){
+        errorMsg.html("<b>Class Start</b> cannot empty.");
+        input.addClass("is-invalid");
+        input.removeClass("is-valid");
+        return false;
+    }else if (!isValidDate(input.val())){
+        errorMsg.html("<b>Class Start</b> invalid date.");
+        input.addClass("is-invalid");
+        input.removeClass("is-valid");
+        return false;
+    }else{
+        input2.attr("min",input.val());
+        errorMsg.html("");
+        input.addClass("is-valid");
+        input.removeClass("is-invalid");
+        return true;
+    }
+}
+function validateDateEnd(){
+    input = $("#dateEnd");
+    input2 = $("#dateStart");
+    errorMsg = input.next();
+    if (input.val().length===0){
+        errorMsg.html("<b>Class End</b> cannot empty.");
+        input.addClass("is-invalid");
+        input.removeClass("is-valid");
+        return false;
+    }else if (!isValidDate(input.val())){
+        errorMsg.html("<b>Class End</b> invalid date.");
+        input.addClass("is-invalid");
+        input.removeClass("is-valid");
+        return false;
+    }else{
+        input2.attr("max",input.val());
+        errorMsg.html("");
+        input.addClass("is-valid");
+        input.removeClass("is-invalid");
+        return true;
+    }
+}
 function submitForm(){
     form = $("#form");
     Swal.fire({
@@ -83,7 +127,9 @@ function submitForm(){
             var validated1 = validateYear();
             var validated2 = validateSemester();
             var validated3 = validateInstructor();
-            if (validated1&&validated2&&validated3){
+            var validated4 = validateDateStart();
+            var validated5 = validateDateEnd();
+            if (validated1&&validated2&&validated3&&validated4&&validated5){
                 form.submit();
             }
         }

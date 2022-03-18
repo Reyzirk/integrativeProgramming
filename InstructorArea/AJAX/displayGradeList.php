@@ -71,8 +71,8 @@ if (count($grades) == 0 || $count == 0) {
             <td class="text-center"><?php echo $key->minMark; ?></td>
             <td class="text-center"><?php echo $key->maxMark; ?></td>
             <td class="text-center">
-                <button class='btn btn-warning' onclick="location.href='editgrade.php?id=<?php echo $key->gradeID; ?>';"><i class="fa-solid fa-pen-to-square"></i> Modify</button>
-                <button class='btn btn-danger' onclick="deleteDataRecord('<?php echo $key->gradeID; ?>');"><i class="fa-solid fa-trash"></i> Delete</button>
+                <button class='btn btn-outline-warning' onclick="location.href='editgrade.php?id=<?php echo $key->gradeID; ?>';"><i class="fa-solid fa-pen-to-square"></i> Modify</button>
+                <button class='btn btn-outline-danger' onclick="deleteDataRecord('<?php echo $key->gradeID; ?>');"><i class="fa-solid fa-trash"></i> Delete</button>
             </td>
         </tr>
         <?php

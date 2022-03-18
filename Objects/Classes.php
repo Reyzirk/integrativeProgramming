@@ -11,13 +11,14 @@
  * @author Choo Meng
  */
 class Classes {
-    private $classID, $semester, $year, $formTeacher, $studentList = array();
-    public function __construct($classID, $semester, $year, $formTeacher, $studentList=array()) {
+    private $classID, $semester, $year, $formTeacher, $classStart, $classEnd;
+    public function __construct($classID, $semester, $year, $formTeacher, $classStart = NULL, $classEnd = NULL) {
         $this->classID = $classID;
-        $this->studentList = $studentList;
         $this->semester = $semester;
         $this->year = $year;
         $this->formTeacher = $formTeacher;
+        $this->classStart = $classStart;
+        $this->classEnd = $classEnd;
     }
     
     public function __get($name) {

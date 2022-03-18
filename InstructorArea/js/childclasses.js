@@ -45,9 +45,9 @@ function loadList(closeBool) {
     tableContent = $('#tableContent');
     entry = $('#displayEntries');
     $.ajax({
-        url: "AJAX/displayChildClassList.php",
+        url: "AJAX/displayChildClassesList.php",
         type: "POST",
-        data: {"id":url.searchParams.get("id"),"search": inputSearch.val(), "sorttype": sortType, "sortorder": sortOrder, "currentPage": pageIndex, "entry": entry.val()},
+        data: {"id": url.searchParams.get("id"), "search": inputSearch.val(), "sorttype": sortType, "sortorder": sortOrder, "currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {
             tableContent.html(response);
             if (closeBool) {
@@ -71,19 +71,32 @@ function displayList() {
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayChildClassPagination.php",
+        url: "AJAX/displayChildClassesPagination.php",
         type: "POST",
-        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id": url.searchParams.get("id"), "currentPage": pageIndex, "entry": entry.val(), "search": inputSearch.val()},
         success: function (response) {
             Swal.close();
             paginationContent.html(response);
         }
     });
 }
-function deleteDataRecord(value) {
+function displayListWithoutLoading() {
+    loadList(false);
+    entry = $('#displayEntries');
+    paginationContent = $('#displayPagination');
+    $.ajax({
+        url: "AJAX/displayChildClassesPagination.php",
+        type: "POST",
+        data: {"id": url.searchParams.get("id"), "currentPage": pageIndex, "entry": entry.val(), "search": inputSearch.val()},
+        success: function (response) {
+            paginationContent.html(response);
+        }
+    });
+}
+function deleteDataRecord(value, value2) {
     Swal.fire({
         title: 'Confirmation',
-        text: "Are you sure you want to delete the child from the class!",
+        text: "Are you sure you want to delete the student from the class!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Confirm'
@@ -93,7 +106,7 @@ function deleteDataRecord(value) {
             $.ajax({
                 url: "AJAX/deleteChildClass.php",
                 type: "POST",
-                data: {"homeworkID": value},
+                data: {"classID": value, "childID": value2},
                 success: function (response) {
                     if (response === "fail") {
                         Swal.close();
@@ -125,9 +138,9 @@ function updatePageIndex(index) {
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayChildClassPagination.php",
+        url: "AJAX/displayChildClassesPagination.php",
         type: "POST",
-        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id": url.searchParams.get("id"), "currentPage": pageIndex, "entry": entry.val(), "search": inputSearch.val()},
         success: function (response) {
             paginationContent.html(response);
         }
@@ -140,16 +153,72 @@ function updatePageEntry() {
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayChildClassPagination.php",
+        url: "AJAX/displayChildClassesPagination.php",
         type: "POST",
-        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val()},
+        data: {"id": url.searchParams.get("id"), "currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {
             paginationContent.html(response);
         }
     });
     loadList(true);
 }
-$(document).ready(function() {
-   displayList(); 
+
+function createBtn() {
+    Swal.fire({
+        title: 'Assign student to the class',
+        input: 'text',
+        inputAttributes: {
+            autocapitalize: 'off'
+        },
+        inputPlaceholder: 'Enter the Child ID',
+        showCancelButton: true,
+        confirmButtonText: 'Assign',
+        showLoaderOnConfirm: true,
+        preConfirm: (inputID) => {
+            $.ajax({
+                url: "AJAX/assignChildClass.php",
+                type: "POST",
+                async:false,
+                data: {"classID": url.searchParams.get("id"), "childID": inputID},
+            }).done(function (response) {
+                if (response === "fail") {
+                    Swal.showValidationMessage(
+                        `Please Try Again!`
+                    )
+                    return false;
+                } else if (response === "success") {
+                    Swal.close();
+                    displayListWithoutLoading();
+                    return true;
+                }else{
+                    Swal.showValidationMessage(response)
+                    return false;
+                }
+                
+                
+            }).fail(function (jqXHR, status) {
+                Swal.showValidationMessage(
+                    `Failed to assign: ${error}`
+                )
+                return false;
+            });
+        },
+        allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                heightAuto: false,
+                titleText: 'Successful',
+                icon: 'success',
+                text: 'Successful assign student to the class.',
+                showCloseButton: true,
+                timer: 3000,
+                showConfirmButton: false
+            })
+        }
+    })
+}
+$(document).ready(function () {
+    displayList();
 });
 

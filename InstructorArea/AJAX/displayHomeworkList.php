@@ -61,7 +61,7 @@ if ($totalCount == 0) {
     $query = $builder->select(array("homework"), array("*"))
         ->where("HomeworkID", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
         ->where("Date", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
-        ->where("HomeworkDesc", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::EQUAL)
+        ->where("HomeworkDesc", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
         ->bracketWhere(WhereTypeEnum::OR)
         ->where("ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
         ->order($sortType, $sortOrder)
@@ -78,9 +78,9 @@ if ($totalCount == 0) {
             <td class="text-center"><?php echo $row["Date"]; ?></td>
             <td><?php echo strlen($desc)>150?substr($desc,0,150):$desc; ?></td>
             <td class="text-center">
-                <button class='btn btn-info' onclick="location.href='viewhomework.php?id=<?php echo $row["HomeworkID"]; ?>';"><i class="fa-solid fa-pen-to-square"></i> View</button>
-                <button class='btn btn-warning' onclick="location.href='edithomework.php?id=<?php echo $row["HomeworkID"]; ?>';"><i class="fa-solid fa-pen-to-square"></i> Modify</button>
-                <button class='btn btn-danger' onclick="deleteDataRecord('<?php echo $row["HomeworkID"]; ?>');"><i class="fa-solid fa-trash"></i> Delete</button>
+                <button class='btn btn-outline-info' onclick="location.href='viewhomework.php?id=<?php echo $row["HomeworkID"]; ?>';"><i class="fa-solid fa-eye"></i> View</button>
+                <button class='btn btn-outline-warning' onclick="location.href='edithomework.php?id=<?php echo $row["HomeworkID"]; ?>';"><i class="fa-solid fa-pen-to-square"></i> Modify</button>
+                <button class='btn btn-outline-danger' onclick="deleteDataRecord('<?php echo $row["HomeworkID"]; ?>');"><i class="fa-solid fa-trash"></i> Delete</button>
             </td>
         </tr>
         <?php

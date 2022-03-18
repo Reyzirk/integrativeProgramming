@@ -116,7 +116,42 @@ function deleteDataRecord(value) {
         }
     });
 }
+function deleteAllBtn() {
+    Swal.fire({
+        title: 'Confirmation',
+        text: "Are you sure you want to delete all the homework!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Confirm'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            loadingScreen();
+            $.ajax({
+                url: "AJAX/deleteAllHomework.php",
+                type: "POST",
+                data: {"classID": url.searchParams.get("id")},
+                success: function (response) {
+                    if (response === "fail") {
+                        Swal.close();
+                        showErrorMessage("Please Try Again!");
+                    } else if (response === "success") {
+                        loadingScreen();
+                        loadList(false);
+                        Toast.fire({
+                            icon: 'success',
+                            html: '<b>Successful</b><br/>Removed all the homework.'
+                        })
 
+                    } else {
+                        Swal.close();
+                        showErrorMessage(response);
+                    }
+
+                }
+            });
+        }
+    });
+}
 
 
 function updatePageIndex(index) {

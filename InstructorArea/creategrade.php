@@ -27,8 +27,8 @@ $lang_legendTitle = "Grade Details";
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.jsp">Home</a></li>
-                        <li class="breadcrumb-item"><a href="grades.jsp">Grades</a></li>
+                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="grades.php">Grades</a></li>
                         <li class="breadcrumb-item active">Create Grade</li>
                     </ol>
                     <div class="container-fluid">

@@ -44,15 +44,36 @@ class InstructorDB {
     public function validID($id): bool{
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("instructor"), array("*"))
-                ->where("InstructorID", $id)
+                ->where("InstructorID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows==0){
             return false;
         }else{
             return true;
+        }
+    }
+    public function details($id){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("instructor"), array("*"))
+                ->where("InstructorID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return NULL;
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $row = $results[0];
+            $result = new Instructor($row["InstructorID"],$row["InstructorName"],$row["EmployeeDate"],$row["Gender"],$row["BirthDate"],$row["Email"],$row["ContactNumber"],$row["ICNo"]);
+            $resultList = $result;
+            return $resultList;
         }
     }
     

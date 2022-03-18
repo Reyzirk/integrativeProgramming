@@ -14,8 +14,20 @@ $sortOrder = trim(empty($_POST["sortorder"]) ? "ASC" : eliminateExploit($_POST["
 $search = empty($_POST["search"]) ? "" : eliminateExploit($_POST["search"]);
 $entry = empty($_POST["entry"]) ? 20 : (int) $_POST["entry"];
 $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
-
-$classdb = new ClassDB();
+if (!isset($_POST["id"])){
+    
+?>
+    <tr>
+        <td colspan='7'height='60px' class='emptySlot'>
+            <b>NO RESULT FOUND</b>
+        </td>
+    </tr>
+<?php
+    return;
+}else{
+    $id = $_POST["id"];
+}
+$classdb = new ChildClassDB();
 if ($sortType==="Name"){
     $sortType = "ChildName";
 }else if ($sortType==="Parent Email"){
@@ -24,7 +36,7 @@ if ($sortType==="Name"){
     $sortType = "ChildICNo";
 }
 try{
-    $totalCount = $classdb->getCount($search);
+    $totalCount = $classdb->getCount($search,$id);
 } catch (PDOException $ex) {
     echo 'Connection failed: ' . $ex->getMessage();
 }
@@ -41,40 +53,33 @@ if ($totalCount == 0) {
     <?php
 } else {
     $builder = new MySQLQueryBuilder();
-    $query = $builder->select(array("classes"), array("classes.ClassID","Semester","Year","InstructorName","COUNT(childclass.ChildID) as totalstudent","COUNT(homework.HomeworkID) as totalhomework"))
-        ->join("instructor","classes.InstructorID","instructor.InstructorID")
-        ->join("childclass","classes.ClassID","childclass.ClassID", JoinTypeEnum::LEFT)
-        ->join("homework","classes.ClassID","homework.ClassID", JoinTypeEnum::LEFT)
-        ->where("classes.ClassID", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
-        ->where("Semester", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
-        ->where("Year", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::EQUAL)
-        ->where("InstructorName", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+    $query = $builder->select(array("childclass","child","parent"), array("ParentEmail","ChildName","ChildICNo","ClassID","childclass.ChildID"))
+        ->where("ParentEmail", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        ->where("ChildName", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        ->where("ChildICNo", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
         ->bracketWhere(WhereTypeEnum::OR)
-        ->groupby(array("classes.ClassID"))
+        ->where("childclass.ChildID", "child.ChildID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
+        ->where("child.ParentID", "parent.ParentID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false )
+        ->where("ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->bracketWhere(WhereTypeEnum::AND)
+        ->groupby(array("ClassID"))
         ->order($sortType, $sortOrder)
         ->limit($beginIndex,$endIndex)
         ->query();
-    
     $results = $classdb->select($query);
-    
+    $index = 0;
    
     foreach($results as $row){
+        $index ++;
         ?>
         <tr id="<?php echo $row["ClassID"]; ?>">
+            <td class="text-center"><?php echo $index; ?></td>
             <td class="text-center"><?php echo $row["ChildName"]; ?></td>
-            <td class="text-center"><?php echo $row["Semester"]; ?></td>
-            <td class="text-center"><?php echo $row["Year"]; ?></td>
-            <td class="text-center"><?php echo $row["InstructorName"]; ?></td>
+            
+            <td class="text-center"><?php echo $row["ChildICNo"]; ?></td>
+            <td class="text-center"><?php echo $row["ParentEmail"]; ?> <i class="fa-solid fa-envelope" onclick="location.href='mailto: <?php echo $row["ParentEmail"]; ?>'"></i></td>
             <td class="text-center">
-                <button class="btn btn-info" style="width:60px;"><i class="fa-solid fa-person"></i> <?php echo $row["totalstudent"]; ?></button>
-                
-            </td>
-            <td class="text-center">
-                <button class="btn btn-dark" style="width:60px;" onclick="location.href='homeworks.php?id=<?php echo $row["ClassID"]; ?>';"><i class="fa-solid fa-book-open"></i> <?php echo $row["totalhomework"]; ?></button>
-            </td>
-            <td class="text-center">
-                <button class='btn btn-warning' onclick="location.href='editclass.php?id=<?php echo $row["ClassID"]; ?>';"><i class="fa-solid fa-pen-to-square"></i> Modify</button>
-                <button class='btn btn-danger' onclick="deleteDataRecord('<?php echo $row["ClassID"]; ?>');"><i class="fa-solid fa-trash"></i> Delete</button>
+                <button class='btn btn-outline-danger' onclick="deleteDataRecord('<?php echo $row["ClassID"]; ?>','<?php echo $row["ChildID"]; ?>');"><i class="fa-solid fa-trash"></i> Delete</button>
             </td>
         </tr>
         <?php

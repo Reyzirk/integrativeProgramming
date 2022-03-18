@@ -16,6 +16,7 @@ $lang_search_tooltip = "Type in any word that you want to search";
 $lang_create_btn = "Create new homework";
 $lang_refresh_btn = "Refresh";
 $lang_action_btn = "Action";
+$lang_delete_all_btn = "Delete All";
 ?>
 <html>
     <head>
@@ -38,6 +39,7 @@ $lang_action_btn = "Action";
                             <div class="jumbotrun" id="container">
                                 <div class="text-right">
                                     <button class="btn btn-info" onclick="location.href='createhomework.php?id=<?php echo $id; ?>'"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_create_btn; ?></button>
+                                    <button class="btn btn-danger" onclick="deleteAllBtn()"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_delete_all_btn; ?></button>
                                 </div>
                                 <br/>
                                 <div class="rightSide">

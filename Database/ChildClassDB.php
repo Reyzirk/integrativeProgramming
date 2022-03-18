@@ -25,9 +25,12 @@ class ChildClassDB {
         $query = $builder->select(array("childclass","child","parent"), array("ParentEmail","ChildName","ChildICNo"))
         ->where("ParentEmail", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
         ->where("ChildName", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
-        ->where("ChildICNo", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::EQUAL)
+        ->where("ChildICNo", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
         ->bracketWhere(WhereTypeEnum::OR)
+        ->where("childclass.ChildID", "child.ChildID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
+        ->where("child.ParentID", "parent.ParentID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false )
         ->where("ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->bracketWhere(WhereTypeEnum::AND)
         ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->execute();
@@ -47,12 +50,19 @@ class ChildClassDB {
             return $result;
         }
     }
-    public function insert($homework){
+    public function insert($childclass){
         $builder = new MySQLQueryBuilder();
-        $query = $builder->insert("homework")
-                ->values(array($homework->homeworkID,$homework->class,$homework->date,$homework->homework))
+        $query = $builder->insert("childclass")
+                ->values(array(\CustomSQLEnum::BIND_QUESTIONMARK,\CustomSQLEnum::BIND_QUESTIONMARK,\CustomSQLEnum::BIND_QUESTIONMARK))
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $classID = $childclass->classID;
+        $childID = $childclass->childID;
+        $priority = $childclass->priority;
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $classID, PDO::PARAM_STR);
+        
+        $stmt->bindParam(3, $priority, PDO::PARAM_INT);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows==0){
@@ -61,12 +71,18 @@ class ChildClassDB {
             return true;
         }
     }
-    public function dateExist($date){
+    public function delete($childclass){
         $builder = new MySQLQueryBuilder();
-        $query = $builder->select(array("homework"), array("*"))
-                ->where("Date", $date)
+        $query = $builder->delete("childclass")
+                ->where("ClassID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->where("ChildID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $classID = $childclass->classID;
+        $childID = $childclass->childID;
+        $stmt->bindParam(1, $classID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $childID, PDO::PARAM_STR);
+        
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows==0){
@@ -75,51 +91,63 @@ class ChildClassDB {
             return true;
         }
     }
-    public function details($id){
-         $builder = new MySQLQueryBuilder();
-        $query = $builder->select(array("homework"), array("*"))
-                ->where("HomeworkID", $id)
+    public function list($id){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("childclass"), array("*"))
+                ->where("ClassID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows==0){
-            return NULL;
+            return array();
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+    }
+    public function validID($childclass): bool{
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("childclass"), array("*"))
+                ->where("ChildID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->where("ClassID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $classID = $childclass->classID;
+        $childID = $childclass->childID;
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $classID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    public function getPriority($childclass):int{
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("childclass"), array("*"))
+                ->where("ChildID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->where("ClassID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->order("Priority")
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $classID = $childclass->classID;
+        $childID = $childclass->childID;
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $classID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return 0;
         }else{
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $results = $stmt->fetchAll();
             $row = $results[0];
-            $result = new Homework($row["HomeworkID"],$row["ClassID"],$row["Date"],$row["HomeworkDesc"]);
-            $resultList = $result;
-            return $resultList;
-        }
-    }
-    public function delete($id){
-        $builder = new MySQLQueryBuilder();
-        $query = $builder->delete("homework")
-                ->where("HomeworkID", $id)
-                ->query();
-        $stmt = $this->instance->con->prepare($query);
-        $stmt->execute();
-        $totalrows = $stmt->rowCount();
-        if ($totalrows==0){
-            return false;
-        }else{
-            return true;
-        }
-    }
-    public function update($oldID, $updated){
-        $builder = new MySQLQueryBuilder();
-        $query = $builder->update("homework", array("Date"=>$updated->date,"HomeworkDesc"=>$updated->homework))
-                ->where("HomeworkID", $oldID)
-                ->query();
-        $stmt = $this->instance->con->prepare($query);
-        $stmt->execute();
-        $totalrows = $stmt->rowCount();
-        if ($totalrows==0){
-            return false;
-        }else{
-            return true;
+            return $row["Priority"];
         }
     }
 }

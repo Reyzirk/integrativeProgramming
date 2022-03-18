@@ -27,8 +27,8 @@ $lang_legendTitle = "Class Details";
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.jsp">Home</a></li>
-                        <li class="breadcrumb-item"><a href="classes.jsp">Classes</a></li>
+                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="classes.php">Classes</a></li>
                         <li class="breadcrumb-item active">Create Class</li>
                     </ol>
                     <div class="container-fluid">
@@ -58,6 +58,22 @@ $lang_legendTitle = "Class Details";
                                             <br/>
                                             <div class="row">
                                                 <div class="col-md">
+                                                    <label for="dateStart" class="col-form-label">Start Date <span class="required">*</span></label>
+                                                    <input type="date" class="bg-white form-control <?php echo empty($error["dateStart"])?"":"is-invalid"; ?>" id="dateStart" name="dateStart" oninput="validateDateStart()" 
+                                                           value="<?php echo empty($storedValue["dateStart"])?"":$storedValue["dateStart"]; ?>"/>
+                                                    <span class="invalid-feedback"><?php echo empty($error["dateStart"])?"":$error["dateStart"]; ?></span>
+                                                </div>
+                                                <div class="col-md">
+                                                    <label for="dateEnd" class="col-form-label">End Date <span class="required">*</span></label>
+                                                    <input type="date" class="bg-white form-control <?php echo empty($error["dateEnd"])?"":"is-invalid"; ?>" id="dateEnd" name="dateEnd" oninput="validateDateEnd()"
+                                                            value="<?php echo empty($storedValue["dateEnd"])?"":$storedValue["dateEnd"]; ?>"/>
+                                                    <span class="invalid-feedback"><?php echo empty($error["dateEnd"])?"":$error["dateEnd"]; ?></span>
+                                                </div>
+
+                                            </div>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-md">
                                                     <label for="insturctor" class="col-form-label">Form Teacher <span class="required">*</span></label>
                                                     <input list="instructorList" type="text" placeholder="Enter the Instructor ID" class="bg-white form-control <?php echo empty($error["instructor"])?"":"is-invalid"; ?>" id="instructor" name="instructor" oninput="validateInstructor()" 
                                                            value="<?php echo empty($storedValue["instructor"])?"":$storedValue["instructor"]; ?>"/>
@@ -75,7 +91,6 @@ $lang_legendTitle = "Class Details";
                                                 <div class="col-md">
                                                     
                                                 </div>
-
                                             </div>
                                         </fieldset>
                                     </div>

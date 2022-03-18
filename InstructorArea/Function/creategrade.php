@@ -23,26 +23,26 @@ if (isset($_POST["formDetect"])){
             }
         }
     }
-    if (empty($_POST["minMark"])){
+    if ($_POST["minMark"]==null){
         $error["minMark"] = "<b>Min Mark</b> cannot empty.";
     }else{
         $storedValue["minMark"] = eliminateExploit($_POST["minMark"]);
         try{
             $minmark = intval($storedValue["minMark"]);
-            if ($minmark < 0 && $minmark > 100){
+            if ($minmark < 0 || $minmark > 100){
                 $error["minMark"] = "<b>Min Mark</b> must between 0 to 100.";
             }
         } catch (Exception $ex) {
             $error["minMark"] = "<b>Min Mark</b> must decimal.";
         }
     }
-    if (empty($_POST["maxMark"])){
+    if ($_POST["maxMark"]==null){
         $error["maxMark"] = "<b>Max Mark</b> cannot empty.";
     }else{
         $storedValue["maxMark"] = eliminateExploit($_POST["maxMark"]);
         try{
             $maxmark = intval($storedValue["maxMark"]);
-            if ($maxmark < 0 && $maxmark > 100){
+            if ($maxmark < 0 || $maxmark > 100){
                 $error["maxMark"] = "<b>Max Mark</b> must between 0 to 100.";
             }
         } catch (Exception $ex) {

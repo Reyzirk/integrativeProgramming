@@ -16,7 +16,7 @@ $dataArray = array(
     "classID" =>
     array(
         "Title" => "Class ID",
-        "Width" => "18%"),
+        "Width" => "15%"),
     "semester" =>
     array(
         "Title" => "Semester",
@@ -28,7 +28,11 @@ $dataArray = array(
     "instructor" =>
     array(
         "Title" => "Instructor",
-        "Width" => "27%"),
+        "Width" => "20%"),
+    "classDuration" =>
+    array(
+        "Title" => "Class Duration",
+        "Width" => "20%"),
     "students" =>
     array(
         "Title" => "Students",

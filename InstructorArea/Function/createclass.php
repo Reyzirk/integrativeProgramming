@@ -22,7 +22,7 @@ if (isset($_POST["formDetect"])){
         $storedValue["semester"] = eliminateExploit($_POST["semester"]);
         try{
             $storedValue["semester"] = $semester = intval($storedValue["semester"]);
-            if ($semester < 0 && $semester > 100){
+            if ($semester < 0 || $semester > 100){
                 $error["semester"] = "<b>Semester</b> must between 0 to 100.";
             }
         } catch (Exception $ex) {
@@ -35,7 +35,7 @@ if (isset($_POST["formDetect"])){
         $storedValue["year"] = eliminateExploit($_POST["year"]);
         try{
             $storedValue["year"] = $year = intval($storedValue["year"]);
-            if ($year < 10000 && $semester > 1999){
+            if ($year < 10000 || $year > 1999){
                 $error["year"] = "<b>Year</b> must between 2000 to 9999.";
             }
         } catch (Exception $ex) {
@@ -55,8 +55,34 @@ if (isset($_POST["formDetect"])){
             $error["instructor"] = "<b>Form Teacher</b> database error.";
         }
     }
+    if (empty($_POST["dateStart"])){
+        $error["dateStart"] = "<b>Class Start</b> cannot empty.";
+    }else{
+        $storedValue["dateStart"] = eliminateExploit($_POST["dateStart"]);
+        try{
+            $date = date_parse_from_format("Y-m-d", $storedValue["dateStart"]);
+            if (!checkdate($date["month"], $date["day"], $date["year"])){
+                $error["dateStart"] = "<b>Class Start</b> invalid date.";
+            }
+        } catch (Exception $ex) {
+            $error["dateStart"] = "<b>Class Start</b> invalid date.";
+        }
+    }
+    if (empty($_POST["dateEnd"])){
+        $error["dateEnd"] = "<b>Class End</b> cannot empty.";
+    }else{
+        $storedValue["dateEnd"] = eliminateExploit($_POST["dateEnd"]);
+        try{
+            $date = date_parse_from_format("Y-m-d", $storedValue["dateEnd"]);
+            if (!checkdate($date["month"], $date["day"], $date["year"])){
+                $error["dateEnd"] = "<b>Class End</b> invalid date.";
+            }
+        } catch (Exception $ex) {
+            $error["dateEnd"] = "<b>Class End</b> invalid date.";
+        }
+    }
     if (empty($error)){
-        $newClass = new Classes("Y".$storedValue["year"]."S".$storedValue["semester"]."-".substr(uniqid(),5),$storedValue["semester"],$storedValue["year"],$storedValue["instructor"]);
+        $newClass = new Classes("Y".$storedValue["year"]."S".$storedValue["semester"]."-".substr(uniqid(),5),$storedValue["semester"],$storedValue["year"],$storedValue["instructor"],$storedValue["dateStart"],$storedValue["dateEnd"]);
         $classDB = new ClassDB();
         if ($classDB->insert($newClass)){
             $_SESSION["modifyLog"] = "createclass";

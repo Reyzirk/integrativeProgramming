@@ -13,6 +13,7 @@
  * @author Choo Meng
  */
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ClassDB.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/HomeworkDB.php";
 if (empty($_POST["classID"])){
     echo "fail";
 }else{
@@ -28,7 +29,7 @@ if (empty($_POST["classID"])){
         $errorInfo = $ex->errorInfo;
         $errorCode = $errorInfo[1];
         if ($errorCode == "1451"){
-            echo "Required to reassign the student that under this class.";
+            echo "Required to reassign the student that under this class or delete all the homework.";
         }else{
             echo $ex->getMessage();
         }

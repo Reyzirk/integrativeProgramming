@@ -27,8 +27,8 @@ $lang_legendTitle = "Homework Details";
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.jsp">Home</a></li>
-                        <li class="breadcrumb-item"><a href="homeworks.jsp">Homework</a></li>
+                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="homeworks.php">Homework</a></li>
                         <li class="breadcrumb-item active">Create Homework</li>
                     </ol>
                     <div class="container-fluid">

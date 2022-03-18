@@ -37,18 +37,18 @@ $lang_legendTitle2 = "Course Materials"
                                     <legend><?php echo $lang_legendTitle; ?></legend>
                                     <div class="row">
                                         <div class="col-md">
-                                            <label for="courseCode" class="col-form-label">Course Code <span class="required">*</span></label>
+                                            <label for="courseCode" class="col-form-label">Course Code </label>
                                             <p class="p-12 font-weight-bold"><?php echo $retrievedCourse->courseCode; ?></p>
 
                                         </div>
                                         <div class="col-md">
-                                            <label for="courseName" class="col-form-label">Course Name <span class="required">*</span></label>
+                                            <label for="courseName" class="col-form-label">Course Name </label>
                                             <p class="p-12 font-weight-bold"><?php echo $retrievedCourse->courseName; ?></p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md">
-                                            <label for="courseDescription" class="col-form-label">Course Description <span class="required">*</span></label>
+                                            <label for="courseDescription" class="col-form-label">Course Description </label>
                                             <div><?php echo $retrievedCourse->courseName; ?></div>
                                         </div>
                                     </div>
