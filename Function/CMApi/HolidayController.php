@@ -13,6 +13,7 @@
  * @author Choo Meng
  */
 require_once str_replace("InstructorArea", "", str_replace("Function", "", dirname(__DIR__))) . '/XML/ParserFactory.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Holiday.php";
 require_once "BaseController.php";
 require_once "Controller.php";
 
@@ -114,5 +115,110 @@ class HolidayController extends BaseController implements Controller{
             );
         }
     }
+    //Create new holiday
+    public function create() {
+        $entry = 20;
+        $currentPage = 1;
+        $method = $_SERVER["REQUEST_METHOD"];
+        $params = $this->getParams();
+        if (strtoupper($method) == "GET") {
+            try {
+                $factory = new ParserFactory();
+                $parser = $factory->getParser("Holidays");
+                $output = array();
+                if (empty($params["api-key"])) {
+                    $output[] = array("Status" => "Failed", "Message" => "Required API Key to retrieve the data.");
+                } else {
+                    $apiKey = $params["api-key"];
+                    $ini_array = parse_ini_file(str_replace("Function", "", str_replace("InstructorArea", "", dirname(__DIR__))) ."/config.ini",true);
+                    if ($apiKey != $ini_array["General"]["apiKey"]) {
+                        $output[] = array("Status" => "Failed", "Message" => "Invalid API Key to retrieve the data.");
+                    } else {
+                        $noparam = false;
+                        $errorData = array();
+                        if (empty($params["name"])){
+                            $errorData[] = array("Message" => "Required holiday name to insert the data.");
+                            $noparam = true;
+                        }
+                        if (empty($params["start"])){
+                            $errorData[] = array("Message" => "Required start date to insert the data.");
+                            $noparam = true;
+                        }
+                        if (empty($params["end"])){
+                            $errorData[] = array("Message" => "Required end date to insert the data.");
+                            $noparam = true;
+                        }
+                        if (!noparam){
+                            $errorReturnedData = $this->validateData($params["name"], $params["start"], $params["end"]);
+                            if (empty($errorReturnedData)){
+                                $newHoliday = new Holiday("H",$params["name"],$params["start"],$params["end"]);
+                                $parser->addHoliday($newHoliday);
+                                $factory->saveXML("Holidays");
+                            }else{
+                                $output[] = array("Status" => "Failed", "Error Messages"=>$errorReturnedData);
+                            }
+                        }else{
+                            $output[] = array("Status" => "Failed", "Error Messages"=>$errorData);
+                        }
+                    }
+                }
 
+                $response = json_encode($output, JSON_PRETTY_PRINT);
+            } catch (Exception $ex) {
+                $errorDesc = "Something error! Please contact administrator.";
+                $errorHeader = "HTTP/1.1 500 Internal Server Error";
+            }
+        } else {
+            $errorDesc = "Method not found";
+            $errorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        if (empty($errorDesc)) {
+            $this->sendOutput(
+                    $response,
+                    array('Content-Type: application/json', 'HTTP/1.1 200 OK')
+            );
+        } else {
+            $this->sendOutput(json_encode(array('error' => $errorDesc)),
+                    array('Content-Type: application/json', $errorHeader)
+            );
+        }
+    }
+    public function validateData($name,$start,$end){
+        $error = array();
+        if (empty($name)){
+            $error["holidayName"] = "<b>Holiday Name</b> cannot empty.";
+        }else{
+            $storedValue["holidayName"] = eliminateExploit($name);
+            if (strlen($storedValue["holidayName"])>300){
+                $error["holidayName"] = "<b>Holiday Name</b> cannot more than 300 characters.";
+            }
+        }
+        if (empty($start)){
+            $error["dateStart"] = "<b>Start Date</b> cannot empty.";
+        }else{
+            $storedValue["dateStart"] = eliminateExploit($start);
+            try{
+                $date = date_parse_from_format("Y-m-d", $storedValue["dateStart"]);
+                if (!checkdate($date["month"], $date["day"], $date["year"])){
+                    $error["dateStart"] = "<b>Start Date</b> invalid date.";
+                }
+            } catch (Exception $ex) {
+                $error["dateStart"] = "<b>Start Date</b> invalid date.";
+            }
+        }
+        if (empty($end)){
+            $error["dateEnd"] = "<b>End Date</b> cannot empty.";
+        }else{
+            $storedValue["dateEnd"] = eliminateExploit($end);
+            try{
+                $date = date_parse_from_format("Y-m-d", $storedValue["dateEnd"]);
+                if (!checkdate($date["month"], $date["day"], $date["year"])){
+                    $error["dateEnd"] = "<b>End Date</b> invalid date.";
+                }
+            } catch (Exception $ex) {
+                $error["dateEnd"] = "<b>End Date</b> invalid date.";
+            }
+        }
+        return $error;
+    }
 }

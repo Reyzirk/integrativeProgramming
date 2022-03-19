@@ -40,17 +40,23 @@ if ($dataType == 'holiday'){
     $type = $uri[$defaultApi+2];
     if ($type=="list"){
         $holidayController->list();
+    }else if ($type=="create"){
+        $holidayController->create();
     }
 }else if ($dataType == "course"){
     $courseController = $factory->getController("Course");
     $type = $uri[$defaultApi+2];
     if ($type=="list"){
         $courseController->list();
+    }else if ($type=="get"){
+        $courseController->get();
     }
 }else if ($dataType == "grade"){
     $gradeController = $factory->getController("Grade");
     $type = $uri[$defaultApi+2];
     if ($type=="list"){
         $gradeController->list();
+    }else if ($type=="details"){
+        $gradeController->details();
     }
 }
