@@ -132,6 +132,22 @@ class ExaminationDB {
             return true;
         }
     }
+    public function updateCourseCode($oldID, $newID){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->update("examination", array("CourseCode"=>\CustomSQLEnum::BIND_QUESTIONMARK))
+                ->where("CourseCode", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $newID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $oldID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
     public function validID($id): bool{
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("examination"), array("*"))

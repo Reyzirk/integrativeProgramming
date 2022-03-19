@@ -1,5 +1,5 @@
 <?php include '../Function/load.php';$pageName = basename(__FILE__); ?>
-<?php include 'Function/editcourse.php' ?>
+<?php include 'Function/editcourse.php'; ?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -7,6 +7,7 @@ Copyright 2022 Omega International Junior School. All Right Reserved.
 Web Application is under GNU General Public License v3.0
 ============================================
 -->
+
 
 
 <?php

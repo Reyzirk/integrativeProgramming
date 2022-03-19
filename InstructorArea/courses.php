@@ -1,4 +1,5 @@
 <?php include '../Function/load.php';$pageName = basename(__FILE__); ?>
+
 <?php include 'Function/courses.php' ?>
 <!DOCTYPE html>
 <!--

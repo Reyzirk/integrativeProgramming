@@ -7,4 +7,4 @@ Web Application is under GNU General Public License v3.0
 -->
 <holidays xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="holidays.xsd">
 
-<holiday id="H6228b29adc92a9.38918825"><name>Test 1</name><dateStart>2022-03-18</dateStart><dateEnd>2022-03-30</dateEnd></holiday></holidays>
+<holiday id="H6235ed0c7fd1d5.60383160"><name>test</name><dateStart>2022-03-16</dateStart><dateEnd>2022-03-24</dateEnd></holiday></holidays>

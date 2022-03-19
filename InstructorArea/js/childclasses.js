@@ -112,8 +112,8 @@ function deleteDataRecord(value, value2) {
                         Swal.close();
                         showErrorMessage("Please Try Again!");
                     } else if (response === "success") {
-                        loadingScreen();
-                        loadList(false);
+                        Swal.close();
+                        displayListWithoutLoading();
                         Toast.fire({
                             icon: 'success',
                             html: '<b>Successful</b><br/>Removed the student from the class.'

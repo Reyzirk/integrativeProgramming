@@ -80,6 +80,19 @@ function displayList() {
         }
     });
 }
+function displayListWithoutLoading() {
+    loadList(false);
+    entry = $('#displayEntries');
+    paginationContent = $('#displayPagination');
+    $.ajax({
+        url: "AJAX/displayHomeworkPagination.php",
+        type: "POST",
+        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        success: function (response) {
+            paginationContent.html(response);
+        }
+    });
+}
 function deleteDataRecord(value) {
     Swal.fire({
         title: 'Confirmation',
@@ -99,8 +112,8 @@ function deleteDataRecord(value) {
                         Swal.close();
                         showErrorMessage("Please Try Again!");
                     } else if (response === "success") {
-                        loadingScreen();
-                        loadList(false);
+                        Swal.close();
+                        displayListWithoutLoading();
                         Toast.fire({
                             icon: 'success',
                             html: '<b>Successful</b><br/>Removed the homework.'

@@ -30,8 +30,6 @@ if ($sortType==="Class ID"){
     $sortType = "totalstudent";
 }else if ($sortType==="Instructor"){
     $sortType = "InstructorName";
-}else if ($sortType==="Homeworks"){
-    $sortType = "totalhomework";
 }else if ($sortType==="Class Duration"){
     $sortType = "ClassStart";
 }
@@ -81,8 +79,6 @@ if ($totalCount == 0) {
         }
 
     }
-    
-    
    
     foreach($results as $row){
         $homeworkdb = new HomeworkDB();

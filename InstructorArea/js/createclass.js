@@ -135,3 +135,24 @@ function submitForm(){
         }
       })
 }
+function isValidDate(date){
+    if (!/^(20\d\d)[-](0[1-9]|1[0-2])[-](0[1-9]|[12][0-9]|3[01])$/.test(date)){
+        return false;
+    }else{
+        var splitDate = date.split("-");
+        var year = parseInt(splitDate[0]);
+        var month = parseInt(splitDate[1]);
+        var day = parseInt(splitDate[2]);
+        if (year<=2000||year>3000||month<=0||month>12){
+            return false;
+        }else{
+            if (year%4===0){
+                if (month===2&&day>29){
+                    return false;
+                }
+            }
+            var monthLength = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+            return day > 0 && day <= monthLength[month - 1];
+        }
+    }
+}

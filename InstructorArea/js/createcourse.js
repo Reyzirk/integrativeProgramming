@@ -130,7 +130,7 @@ function submitForm(){
     form = $("#form");
     Swal.fire({
         title: 'Confirmation',
-        text: "Are you sure you want to create a new holiday!",
+        text: "Are you sure you want to create a new course!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Confirm'

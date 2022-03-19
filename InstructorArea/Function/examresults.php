@@ -28,10 +28,6 @@ if (empty($_GET["id"])){
 }
 
 $dataArray = array(
-    "No" =>
-    array(
-        "Title" => "No",
-        "Width" => "10%"),
     "StudentID" =>
     array(
         "Title" => "Student ID",

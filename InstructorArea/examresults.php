@@ -64,6 +64,7 @@ $lang_action_btn = "Action";
                                 <table class="table table-hover" id="tableList">
                                     <thead>
                                         <tr class="table-active">
+                                            <th width="10%" class="text-center" style="cursor:default;">No.</th>
                                             <?php
                                             foreach ($dataArray as $key => $value) {
                                                 ?>

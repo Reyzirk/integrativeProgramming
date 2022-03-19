@@ -55,13 +55,13 @@ $lang_legendTitle = "Holiday Details";
                                             <div class="row">
                                                 <div class="col-md">
                                                     <label for="dateStart" class="col-form-label">Start Date <span class="required">*</span></label>
-                                                    <input type="date" class="bg-white form-control <?php echo empty($error["dateStart"])?"":"is-invalid"; ?>" id="dateStart" name="dateStart" oninput="validateDateStart()" 
+                                                    <input type="date" class="bg-white form-control <?php echo empty($error["dateStart"])?"":"is-invalid"; ?>" max="<?php echo empty($storedValue["dateEnd"])?"":$storedValue["dateEnd"]; ?>" id="dateStart" name="dateStart" oninput="validateDateStart()" 
                                                            value="<?php echo empty($storedValue["dateStart"])?"":$storedValue["dateStart"]; ?>"/>
                                                     <span class="invalid-feedback"><?php echo empty($error["dateStart"])?"":$error["dateStart"]; ?></span>
                                                 </div>
                                                 <div class="col-md">
                                                     <label for="dateEnd" class="col-form-label">End Date <span class="required">*</span></label>
-                                                    <input type="date" class="bg-white form-control <?php echo empty($error["dateEnd"])?"":"is-invalid"; ?>" id="dateEnd" name="dateEnd" oninput="validateDateEnd()"
+                                                    <input type="date" class="bg-white form-control <?php echo empty($error["dateEnd"])?"":"is-invalid"; ?>" min="<?php echo empty($storedValue["dateStart"])?"":$storedValue["dateStart"]; ?>" id="dateEnd" name="dateEnd" oninput="validateDateEnd()"
                                                             value="<?php echo empty($storedValue["dateEnd"])?"":$storedValue["dateEnd"]; ?>"/>
                                                     <span class="invalid-feedback"><?php echo empty($error["dateEnd"])?"":$error["dateEnd"]; ?></span>
                                                 </div>

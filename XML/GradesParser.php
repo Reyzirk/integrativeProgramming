@@ -50,7 +50,7 @@ class GradesParser implements Parser{
     }
     public function checkExist($grade):bool{
         $grade = $this->xml->xpath('/grades/grade[grade="'.strtoupper($grade).'"]');
-        if(count($course)>=1){
+        if(count($grade)>=1){
             return true;
         }else{
             return false;
@@ -58,7 +58,7 @@ class GradesParser implements Parser{
     }
     public function checkMarkBetween($mark):bool{
         $grade = $this->xml->xpath('/grades/grade[minMark <= '.$mark.' and '.$mark.' <= maxMark]');
-        if(count($course)>=1){
+        if(count($grade)>=1){
             return true;
         }else{
             return false;
@@ -66,7 +66,7 @@ class GradesParser implements Parser{
     }
     public function checkMarkLeast($mark):bool{
         $grade = $this->xml->xpath('/grades/grade[ '.$mark.'< minMark]');
-        if(count($course)>=1){
+        if(count($grade)>=1){
             return true;
         }else{
             return false;
@@ -74,7 +74,7 @@ class GradesParser implements Parser{
     }
     public function checkMarkGreaterMin($mark):bool{
         $grade = $this->xml->xpath('/grades/grade[ minMark > '.$mark.' ]');
-        if(count($course)>=1){
+        if(count($grade)>=1){
             return true;
         }else{
             return false;
@@ -82,7 +82,7 @@ class GradesParser implements Parser{
     }
     public function checkMarkLesserMax($mark):bool{
         $grade = $this->xml->xpath('/grades/grade[ maxMark < '.$mark.' ]');
-        if(count($course)>=1){
+        if(count($grade)>=1){
             return true;
         }else{
             return false;
@@ -90,7 +90,7 @@ class GradesParser implements Parser{
     }
     public function checkMarkGreatest($mark):bool{
         $grade = $this->xml->xpath('/grades/grade[ '.$mark.' > maxMark]');
-        if(count($course)>=1){
+        if(count($grade)>=1){
             return true;
         }else{
             return false;

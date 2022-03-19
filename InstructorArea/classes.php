@@ -68,6 +68,9 @@ $lang_action_btn = "Action";
                                                 <?php
                                             }
                                             ?>
+                                            <th width="85px" class="text-center" style="cursor:default;">
+                                                Homeworks
+                                            </th>
                                             <th width="15%" class="text-center" style="cursor:default;">
                                                 <?php echo $lang_action_btn; ?>
                                             </th>
