@@ -1,17 +1,65 @@
 <?php
+
 /*
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
  * Web Application is under GNU General Public License v3.0
  * ============================================
  * 
- * @author Oon Kheng Huang
+ * Description of edit announcement
  * 
+ * @author Oon Kheng Huang
  */
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Announcement.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AnnouncementDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Attachment.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AttachmentDB.php";
+
+if (empty($_GET["aID"])) {
+    $_SESSION["errorLog"] = "noid";
+    header('HTTP/1.1 307 Temporary Redirect');
+    header('Location: announcement.php');
+} else {
+    $id = $_GET["aID"];
+    $announceDB = new AnnouncementDB();
+    $attachDB = new AttachmentDB();
+    $getAnnounce = $announceDB->details($id);
+
+    if (!empty($getAnnounce)) {
+        $storedValue["announceID"] = $getAnnounce->announceID;
+        $storedValue["title"] = $getAnnounce->title;
+        $storedValue["desc"] = $getAnnounce->desc;
+        $storedValue["cat"] = trim($getAnnounce->cat);
+        $storedValue["instructorID"] = $getAnnounce->instructorID;
+        $storedValue["pin"] = $getAnnounce->pin;
+        $storedValue["allowC"] = $getAnnounce->allowC;
+        
+        if (!empty($attachDB->details($id))) {
+            $getAttach = $attachDB->details($id);
+            $file = array();
+            foreach ($getAttach as $row){
+                $file[] = $row->attachName;
+            }
+            $storedValue["attach"] = $file;
+
+        } else {
+            $storedValue["attach"] = null;
+            
+        }
+    } else {
+        $_SESSION["errorLog"] = "noid";
+        header('HTTP/1.1 307 Temporary Redirect');
+        header('Location: classes.php');
+    }
+}
+
+//*************Remove Attachment*************
+if(isset($_POST["confirmFile"])){
+    $id = $_GET["aID"];
+    $attachDB = new AttachmentDB();
+    $attachDB->delete($id);
+    $storedValue["attach"] = null;
+}
 
 if (isset($_POST["formDetect"])) {
     $date = trim($_POST["hiddenDate"]);
@@ -66,12 +114,12 @@ if (isset($_POST["formDetect"])) {
     $inputName = "attach";
     $inputTitle = "Attachment";
     $hasFile = false;
-    if (file_exists($_FILES[$inputName]['tmp_name']) || is_uploaded_file($_FILES[$inputName]['tmp_name'])) {
+    if (isset($_FILES[$inputName])) {
         $files = $_FILES[$inputName];
         for ($i = 0; $i < count($files["name"]); $i++) {
             $tempFile = $files["tmp_name"][$i];
             $errorCode = $files["error"][$i];
-            if ($errorCode > 0) {
+            if ($errorCode > 0 && $errorCode != 4) {
                 switch ($errorCode) {
                     case UPLOAD_ERR_FORM_SIZE:
                         $error[$inputName] = "<b>$inputTitle</b> uploaded is too large!";
@@ -99,36 +147,34 @@ if (isset($_POST["formDetect"])) {
 
     //***************************Connect Database************************************
     if (empty($error)) {
-        $id = genAnnounceID();
+        $id = $_GET["aID"];
         $announce = new Announcement($id, "I0001", $storedValue["titleA"], $storedValue["desc"], $storedValue["cat"], $date, $storedValue["pinTop"], $storedValue["allowC"]);
         $AnnounceDB = new AnnouncementDB();
 
-        if ($AnnounceDB->insert($announce)) {
+        if ($AnnounceDB->update($id, $announce)) {
             $_SESSION["modifyLog"] = "createannouncement";
 
             //*************if have attachments*******************
             if ($hasFile) {
                 $attachDB = new AttachmentDB();
-                $files = $_FILES["attach"];
+                    $files = $_FILES["attach"];
                 for ($i = 0; $i < count($files["name"]); $i++) {
-
+                    
                     $save_as = uniqid("", true) . '.' . $ext[$i];
                     move_uploaded_file($files['tmp_name'][$i], str_replace("InstructorArea", "", dirname(__DIR__)) . '/uploads/AnnounceAttachment/' . $save_as);
                     $attachment = new Attachment(genAttachID(), $announce, $save_as, '/uploads/AnnounceAttachment/' . $save_as);
                     if ($attachDB->insert($attachment)) {
                         $_SESSION["modifyLog"] = "createattachment";
                         header('HTTP/1.1 307 Temporary Redirect');
-                        header('Location: announcement.php');
+                        header('Location: announcement.php'); 
                     } else {
                         $_SESSION["errorLog"] = "sqlerror";
                         break;
                     }
                 }
-            } else {
-                ?>    
-                <?php
-                header('HTTP/1.1 307 Temporary Redirect');
-                header('Location: announcement.php');
+            }else{
+                 header('HTTP/1.1 307 Temporary Redirect');
+                 header('Location: announcement.php');
             }
         } else {
             $_SESSION["errorLog"] = "sqlerror";
@@ -152,47 +198,6 @@ if (isset($_POST["formDetect"])) {
         <?php
         unset($_SESSION["errorLog"]);
     }
-}
-
-//***************************Generate Announcement ID************************************
-function genAnnounceID() {
-    $announceBD = new AnnouncementDB();
-    $count = $announceBD->getCount();
-    $announceID = "";
-    if ($count == 0) {
-        $announceID = "AN0001";
-    } else {
-        $announceList = array();
-        $announceList = $announceBD->getAllID();
-        $lastID = $announceList[$count - 1];
-        $idNum = $lastID[2];
-        $idNum .= $lastID[3];
-        $idNum .= $lastID[4];
-        $idNum .= $lastID[5];
-        $idNum = (int) $idNum;
-        $idNum += 1;
-
-        if ($idNum < 10000) {
-            switch (strlen((string) $idNum)) {
-                case 1:
-                    $announceID = "AN000" . (string) $idNum;
-                    break;
-                case 2:
-                    $announceID = "AN00" . (string) $idNum;
-                    break;
-                case 3:
-                    $announceID = "AN0" . (string) $idNum;
-                    break;
-                default:
-                    $announceID = "AN" . (string) $idNum;
-                    break;
-            }
-        } else {
-            $announceID = "Error";
-        }
-    }
-
-    return $announceID;
 }
 
 //***************************Generate Attachment ID************************************
@@ -243,3 +248,4 @@ function eliminateExploit($str) {
     $str = htmlspecialchars($str);
     return $str;
 }
+

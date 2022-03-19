@@ -12,6 +12,7 @@
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/DBController.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/MySQLQueryBuilder.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Objects/Attachment.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Announcement.php";
 
 class AttachmentDB {
 
@@ -85,7 +86,7 @@ class AttachmentDB {
     public function details($id) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("attachment"), array("*"))
-                ->where("AttachID", $id)
+                ->where("AnnounceID", $id)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->execute();
@@ -94,10 +95,11 @@ class AttachmentDB {
             return NULL;
         } else {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $results = $stmt->fetchAll();
-            $row = $results[0];
-            $result = new Attachment($row["AttachID"], $row["AnnounceID"],$row["AttachName"], $row["FilePath"]);
-            $resultList = $result;
+            $results = $stmt->fetchAll();    
+            foreach ($results as $row) {
+                $result = new Attachment($row["AttachID"], new Announcement($row["AnnounceID"]),$row["AttachName"], $row["FilePath"]);
+                $resultList[] = $result;
+            }
             return $resultList;
         }
     }
@@ -105,7 +107,7 @@ class AttachmentDB {
     public function delete($id) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->delete("attachment")
-                ->where("AttachID", $id)
+                ->where("AnnounceID", $id)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->execute();

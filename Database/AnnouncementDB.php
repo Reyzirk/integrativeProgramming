@@ -12,6 +12,7 @@
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/DBController.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/MySQLQueryBuilder.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Objects/Announcement.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Enum/EnumLoad.php';
 
 class AnnouncementDB {
 
@@ -142,16 +143,22 @@ class AnnouncementDB {
 
     public function update($oldID, $updated) {
         $builder = new MySQLQueryBuilder();
-        $query = $builder->update("announcement", array("Title" => $updated->title, "Description" => $updated->desc, "Cat" => $updated->cat,
-                    "Date" => $updated->date, "Pin" => $updated->pin, "AllowComment" => $updated->allowC))
-                ->where("AnnounceID", $oldID)
+        $query = $builder->update("announcement", array("Title"=>\CustomSQLEnum::BIND_QUESTIONMARK, "Description"=>\CustomSQLEnum::BIND_QUESTIONMARK, "Cat"=>\CustomSQLEnum::BIND_QUESTIONMARK, "Date"=>\CustomSQLEnum::BIND_QUESTIONMARK, "Pin"=>\CustomSQLEnum::BIND_QUESTIONMARK, "AllowComment"=>\CustomSQLEnum::BIND_QUESTIONMARK))
+                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $updated->title, PDO::PARAM_STR);
+        $stmt->bindParam(2, $updated->desc, PDO::PARAM_STR);
+        $stmt->bindParam(3, $updated->cat, PDO::PARAM_STR);
+        $stmt->bindParam(4, $updated->date, PDO::PARAM_STR);
+        $stmt->bindParam(5, $updated->pin, PDO::PARAM_STR);
+        $stmt->bindParam(6, $updated->allowC, PDO::PARAM_STR);
+        $stmt->bindParam(7, $oldID, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
-        if ($totalrows == 0) {
+        if ($totalrows==0){
             return false;
-        } else {
+        }else{
             return true;
         }
     }

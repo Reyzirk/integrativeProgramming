@@ -1,6 +1,9 @@
 <?php
 include '../Function/load.php';
 ?>
+<?php
+include './Function/editAnnouncement.php';
+?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -29,6 +32,7 @@ Web Application is under GNU General Public License v3.0
                 min-height: 250px;
             }
         </style>
+        <script src="js/editAnnouncement.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -61,7 +65,7 @@ Web Application is under GNU General Public License v3.0
                                         <div class="row">
                                             <div class="col-md">
                                                 <label for="title" class="col-form-label">Title <span class="requiredF">*</span></label>
-                                                <input id="title" type="text" name="title" class="bg-white form-control <?php echo empty($error["title"]) ? "" : "is-invalid"; ?>" placeholder="Please enter an announcement title" 
+                                                <input id="titleA" type="text" name="titleA" class="bg-white form-control <?php echo empty($error["title"]) ? "" : "is-invalid"; ?>" placeholder="Please enter an announcement title" 
                                                        maxlength="50" oninput="validateTitle()" value="<?php echo empty($storedValue["title"]) ? "" : $storedValue["title"]; ?>"/>
                                                 <span class="invalid-feedback"><?php echo empty($error["title"]) ? "" : $error["title"]; ?></span>
                                             </div>
@@ -95,12 +99,25 @@ Web Application is under GNU General Public License v3.0
                                                 <span class="invalid-feedback"><?php echo empty($error["cat"]) ? "" : $error["cat"]; ?></span>
                                             </div>
                                             <!--************************Attachment***************************-->
+
                                             <div class="col-md-6">
                                                 <label for="attach" class="col-form-label">Attachment</label>
-                                                <input id="attach" type="file" class="form-control-file bg-white form-control <?php echo empty($error["attach"]) ? "" : "is-invalid"; ?>" oninput="validateAttach(this)" name="attach[]" multiple />
-                                                <span class="invalid-feedback" style="background-color:#f8f9fc;border:none;"><?php echo empty($error["attach"]) ? "" : $error["attach"]; ?></span>
-                                                <input type="hidden" name="hiddenAttach" value=""/>
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <input id="attach" type="file" class="form-control-file bg-white form-control <?php echo empty($error["attach"]) ? "" : "is-invalid"; ?>" oninput="validateAttach(this)" name="attach[]" multiple /> 
+                                                        <span class="invalid-feedback" style="background-color:#f8f9fc;border:none;"><?php echo empty($error["attach"]) ? "" : $error["attach"]; ?></span>
+                                                        <span style="padding-left: 5px;">File Name: <?php echo empty($storedValue["attach"]) ? "No File...." : implode("<br/>", $storedValue["attach"]); ?></span>
+                                                        <input type="hidden" name="hiddenAttach" value=""/>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <button type="button" class="btn btn-warning" onclick="clearFileFunction()">Clear</button>
+                                                    </div>
+                                                </div>
+
+
+
                                             </div>
+
                                         </div><br>
                                         <!--************************Comment***************************-->
                                         <div class="row">
@@ -133,6 +150,9 @@ Web Application is under GNU General Public License v3.0
                                     </div>
 
                                 </form>
+                                <form id="clearFile" name="clearFile" method="POST">
+                                    <input type="hidden" name="confirmFile" value="confirmFile">
+                                </form>
                             </div>
                         </div>                       
                     </div>
@@ -140,5 +160,29 @@ Web Application is under GNU General Public License v3.0
                 <?php include "Components/footer.php"; ?>
             </div>
         </div>
+        <script>
+            function clearFileFunction() {
+                document.getElementById("clearFile").submit();
+                return true;
+            }
+        </script>
+        <script>
+            ClassicEditor
+                    .create(document.querySelector('#desc'))
+                    .then(editor => {
+                        editor.model.document.on('change:data', (evt, data) => {
+                            //validateTextArea(editor.getData());
+
+
+                        });
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+<?php
+echo "maxFileSize = " . $generalSection["file_max_size"] . ";";
+?>
+
+        </script>
     </body>
 </html>
