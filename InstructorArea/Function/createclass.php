@@ -35,7 +35,7 @@ if (isset($_POST["formDetect"])){
         $storedValue["year"] = eliminateExploit($_POST["year"]);
         try{
             $storedValue["year"] = $year = intval($storedValue["year"]);
-            if ($year < 10000 || $year > 1999){
+            if ($year < 2000 || $year > 9999){
                 $error["year"] = "<b>Year</b> must between 2000 to 9999.";
             }
         } catch (Exception $ex) {
@@ -82,7 +82,7 @@ if (isset($_POST["formDetect"])){
         }
     }
     if (empty($error)){
-        $newClass = new Classes("Y".$storedValue["year"]."S".$storedValue["semester"]."-".substr(uniqid(),5),$storedValue["semester"],$storedValue["year"],$storedValue["instructor"],$storedValue["dateStart"],$storedValue["dateEnd"]);
+        $newClass = new Classes("C"."-".uniqid(),$storedValue["semester"],$storedValue["year"],$storedValue["instructor"],$storedValue["dateStart"],$storedValue["dateEnd"]);
         $classDB = new ClassDB();
         if ($classDB->insert($newClass)){
             $_SESSION["modifyLog"] = "createclass";

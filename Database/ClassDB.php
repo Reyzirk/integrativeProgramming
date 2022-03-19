@@ -55,12 +55,18 @@ class ClassDB {
                 ->values(array(\CustomSQLEnum::BIND_QUESTIONMARK,\CustomSQLEnum::BIND_QUESTIONMARK,\CustomSQLEnum::BIND_QUESTIONMARK,\CustomSQLEnum::BIND_QUESTIONMARK,\CustomSQLEnum::BIND_QUESTIONMARK,\CustomSQLEnum::BIND_QUESTIONMARK))
                 ->query();
         $stmt = $this->instance->con->prepare($query);
-        $stmt->bindParam(1, $class->classID, PDO::PARAM_STR);
-        $stmt->bindParam(2, $class->semester, PDO::PARAM_INT);
-        $stmt->bindParam(3, $class->year, PDO::PARAM_INT);
-        $stmt->bindParam(4, $class->formTeacher, PDO::PARAM_STR);
-        $stmt->bindParam(5, $class->classStart, PDO::PARAM_STR);
-        $stmt->bindParam(6, $class->classEnd, PDO::PARAM_STR);
+        $semester = $class->semester;
+        $year = $class->year;
+        $formTeacher = $class->formTeacher;
+        $classStart = $class->classStart;
+        $classEnd = $class->classEnd;
+        $classID = $class->classID;
+        $stmt->bindParam(1, $classID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $semester, PDO::PARAM_INT);
+        $stmt->bindParam(3, $year, PDO::PARAM_INT);
+        $stmt->bindParam(4, $formTeacher, PDO::PARAM_STR);
+        $stmt->bindParam(5, $classStart, PDO::PARAM_STR);
+        $stmt->bindParam(6, $classEnd, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows==0){

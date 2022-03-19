@@ -96,7 +96,7 @@ function displayListWithoutLoading() {
 function deleteDataRecord(value, value2) {
     Swal.fire({
         title: 'Confirmation',
-        text: "Are you sure you want to delete the child from the examination!",
+        text: "Are you sure you want to delete the student from the examination!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Confirm'
@@ -112,8 +112,8 @@ function deleteDataRecord(value, value2) {
                         Swal.close();
                         showErrorMessage("Please Try Again!");
                     } else if (response === "success") {
-                        loadingScreen();
-                        loadList(false);
+                        Swal.close();
+                        displayListWithoutLoading();
                         Toast.fire({
                             icon: 'success',
                             html: '<b>Successful</b><br/>Removed the child from the examination.'

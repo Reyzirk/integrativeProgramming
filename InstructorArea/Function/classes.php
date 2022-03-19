@@ -36,10 +36,6 @@ $dataArray = array(
     "students" =>
     array(
         "Title" => "Students",
-        "Width" => "80px"),
-    "Homeworks" =>
-    array(
-        "Title" => "Homeworks",
         "Width" => "80px"));
 
 function callLog() {

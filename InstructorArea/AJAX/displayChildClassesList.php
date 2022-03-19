@@ -32,7 +32,7 @@ $classdb = new ChildClassDB();
 if ($sortType==="Name"){
     $sortType = "ChildName";
 }else if ($sortType==="Parent Email"){
-    $sortType = "Parent Email";
+    $sortType = "ParentEmail";
 }else if ($sortType==="IC No"){
     $sortType = "ChildICNo";
 }
@@ -68,7 +68,6 @@ if ($totalCount == 0) {
         ->where("child.ParentID", "parent.ParentID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false )
         ->where("childclass.ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
         ->bracketWhere(WhereTypeEnum::AND)
-        ->groupby(array("childclass.ClassID"))
         ->order($sortType, $sortOrder)
         ->limit($beginIndex,$endIndex)
         ->query();

@@ -153,39 +153,45 @@ if (isset($_POST["formDetect"])){
     }
     $tmpFileStorage2 = array();
     if (empty($error)){
-        for($i = 0;$i < count($_POST[$inputName]);$i++){
-            $files = $_FILES["materialFile"];
-            $error = $files["error"][$i];
-            if (empty($_POST["materialHiddenFile"][$i])){
-                $save_as = uniqid("",true).'.'.$ext;
-                move_uploaded_file($files['tmp_name'][$i],str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$save_as);    
-            }else{
-                if ($error>0){
-                    switch($error){
-                        case UPLOAD_ERR_NO_FILE:
-                            $save_as = eliminateExploit($_POST["materialHiddenFile"][$i]);
-                            array_push($tmpFileStorage2,$save_as);
-                            break;
-                    }
-                }else{
-                    
-                    
+        $courseMaterials = array();
+        if (!empty($_POST[$inputName])){
+            
+            for($i = 0;$i < count($_POST[$inputName]);$i++){
+                $files = $_FILES["materialFile"];
+                $error = $files["error"][$i];
+                if (empty($_POST["materialHiddenFile"][$i])){
                     $save_as = uniqid("",true).'.'.$ext;
+                    move_uploaded_file($files['tmp_name'][$i],str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$save_as);    
+                }else{
+                    if ($error>0){
+                        switch($error){
+                            case UPLOAD_ERR_NO_FILE:
+                                $save_as = eliminateExploit($_POST["materialHiddenFile"][$i]);
+                                array_push($tmpFileStorage2,$save_as);
+                                break;
+                        }
+                    }else{
 
-                    move_uploaded_file($files['tmp_name'][$i],str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$save_as);
+
+                        $save_as = uniqid("",true).'.'.$ext;
+
+                        move_uploaded_file($files['tmp_name'][$i],str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$save_as);
+                    }
                 }
-            }
-            foreach($tmpFileStorage as $value){
-                if (!in_array($value, $tmpFileStorage2)) {
-                    unlink(str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$value);
+                foreach($tmpFileStorage as $value){
+                    if (!in_array($value, $tmpFileStorage2)) {
+                        unlink(str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$value);
+                    }
                 }
+                $courseMaterials[] = new CourseMaterial(uniqid("CM", true), $_POST[$inputName][$i], $save_as);
             }
-            $courseMaterials[] = new CourseMaterial(uniqid("CM", true), $_POST[$inputName][$i], $save_as);
         }
         $newCourse = new Course($storedValue["courseCode"],$storedValue["courseName"],$storedValue["courseDescription"],$courseMaterials);
         $parser->updateCourse($oriCode,$newCourse);
         $factory->saveXML("Courses");
         $_SESSION["modifyLog"] = "editcourse";
+        header('HTTP/1.1 307 Temporary Redirect');
+        header('Location: courses.php');
         
 
     }

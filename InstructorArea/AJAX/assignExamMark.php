@@ -18,11 +18,17 @@ if (empty($_POST["childID"])||empty($_POST["examID"])||empty($_POST["mark"])){
     $examid = eliminateExploit($_POST["examID"]);
     $error = false;
     try{
-        $mark = doubleval(eliminateExploit($_POST["mark"]));
-        if ($mark < 0 || $mark > 100){
-            echo "<b>Mark</b> must between 0 to 100.";
+        if (is_numeric(eliminateExploit($_POST["mark"]))){
+            $mark = doubleval(eliminateExploit($_POST["mark"]));
+            if ($mark < 0 || $mark > 100){
+                echo "<b>Mark</b> must between 0 to 100.";
+                $error = true;
+            }
+        }else{
+            echo "<b>Mark</b> must decimal.";
             $error = true;
         }
+        
     } catch (Exception $ex) {
         echo "<b>Mark</b> must decimal.";
         $error = true;

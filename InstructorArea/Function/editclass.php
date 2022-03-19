@@ -27,6 +27,8 @@ if (empty($_GET["id"])){
         $storedValue["semester"] = $retrievedClass->semester;
         $storedValue["year"] = $retrievedClass->year;
         $storedValue["instructor"] = $retrievedClass->formTeacher;
+        $storedValue["dateStart"] = $retrievedClass->classStart;
+        $storedValue["dateEnd"] = $retrievedClass->classEnd;
     }else{
         $_SESSION["errorLog"] = "noid";
         header('HTTP/1.1 307 Temporary Redirect');
@@ -54,7 +56,7 @@ if (isset($_POST["formDetect"])){
         $storedValue["year"] = eliminateExploit($_POST["year"]);
         try{
             $storedValue["year"] = $year = intval($storedValue["year"]);
-            if ($year < 10000 || $year > 1999){
+            if ($year < 2000 || $year > 9999){
                 $error["year"] = "<b>Year</b> must between 2000 to 9999.";
             }
         } catch (Exception $ex) {

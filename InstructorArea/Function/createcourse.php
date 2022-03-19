@@ -91,11 +91,14 @@ if (isset($_POST["formDetect"])){
     }
     
     if (empty($error)){
-        for($i = 0;$i < count($_POST[$inputName]);$i++){
-            $files = $_FILES["materialFile"];
-            $save_as = uniqid("",true).'.'.$ext;
-            move_uploaded_file($files['tmp_name'][$i],str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$save_as);
-            $courseMaterials[] = new CourseMaterial(uniqid("CM", true), $_POST[$inputName][$i], $save_as);
+        $courseMaterials = array();
+        if (isset($_FILES[$inputName])){
+            for($i = 0;$i < count($_POST[$inputName]);$i++){
+                $files = $_FILES["materialFile"];
+                $save_as = uniqid("",true).'.'.$ext;
+                move_uploaded_file($files['tmp_name'][$i],str_replace("InstructorArea", "", dirname(__DIR__)).'/uploads/CourseMaterial/'.$save_as);
+                $courseMaterials[] = new CourseMaterial(uniqid("CM", true), $_POST[$inputName][$i], $save_as);
+            }
         }
         $newCourse = new Course($storedValue["courseCode"],$storedValue["courseName"],$storedValue["courseDescription"],$courseMaterials);
         

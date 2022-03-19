@@ -109,11 +109,11 @@ function deleteDataRecord(value) {
                 data: {"scheduleID": value},
                 success: function (response) {
                     if (response === "fail") {
-                        Swal.close();
+                        displayListWithoutLoading();
                         showErrorMessage("Please Try Again!");
                     } else if (response === "success") {
-                        loadingScreen();
-                        loadList(false);
+                        Swal.close();
+                        displayListWithoutLoading();
                         Toast.fire({
                             icon: 'success',
                             html: '<b>Successful</b><br/>Removed the course from the class.'

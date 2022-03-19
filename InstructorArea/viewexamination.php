@@ -36,50 +36,47 @@ $lang_legendTitle = "Examination Details";
                     <div class="container-fluid">
                         <div id="formControl">
                             <div class="jumbotrun" id="container">
-                                <form method="POST" id="form" name="form">
-                                    <h1 class="display-4"><?php echo $lang_title; ?></h1>
-                                    <p class="lead"><?php echo $lang_description; ?> <span class="required"><?php echo $lang_required; ?></span></p>
-                                    <hr class="my-3">
-                                    <div class="form-group">
-                                        <fieldset>
-                                            <legend><?php echo $lang_legendTitle; ?></legend>
-                                            <div class="row">
-                                                <div class="col-md">
-                                                    <label for="examinationID" class="col-form-label">Examination ID </label>
-                                                    <p class="p-12 font-weight-bold"><?php echo $retrievedExam->examinationID; ?></p>
+                                <h1 class="display-4"><?php echo $lang_title; ?></h1>
+                                <p class="lead"><?php echo $lang_description; ?> <span class="required"><?php echo $lang_required; ?></span></p>
+                                <hr class="my-3">
+                                <div class="form-group">
+                                    <fieldset>
+                                        <legend><?php echo $lang_legendTitle; ?></legend>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <label for="examinationID" class="col-form-label">Examination ID </label>
+                                                <p class="p-12 font-weight-bold"><?php echo $retrievedExam->examinationID; ?></p>
 
-                                                </div>
-                                                <div class="col-md">
-                                                    <label for="courseName" class="col-form-label">Examination Time</label>
-                                                    <p class="p-12 font-weight-bold"><?php echo $retrievedExam->examStartTime; ?> - <?php echo $endtime->format('Y-m-d H:i:s'); ?>
-                                                    <br/>
-                                                    <?php echo convertMinute($retrievedExam->examDuration); ?>
-                                                    </p>
-                                                </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md">
-                                                    <label for="course" class="col-form-label">Course</label>
-                                                    <p class="p-12 font-weight-bold"><?php echo $retrievedExam->course; ?>
-                                                    <br/>
-                                                    <?php echo $retrievedCourse->courseName; ?></p>
-                                                </div>
+                                            <div class="col-md">
+                                                <label for="courseName" class="col-form-label">Examination Time</label>
+                                                <p class="p-12 font-weight-bold"><?php echo $retrievedExam->examStartTime; ?> - <?php echo $endtime->format('Y-m-d H:i:s'); ?>
+                                                <br/>
+                                                <?php echo convertMinute($retrievedExam->examDuration); ?>
+                                                </p>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md">
-                                                    <label for="instructor" class="col-form-label">Instructor</label>
-                                                    <p class="p-12 font-weight-bold"><?php echo $retrievedInstructor->instructorName; ?>(<?php echo $retrievedExam->examiner; ?>)</p>
-                                                </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <label for="course" class="col-form-label">Course</label>
+                                                <p class="p-12 font-weight-bold"><?php echo $retrievedExam->course; ?>
+                                                <br/>
+                                                <?php echo $retrievedCourse->courseName; ?></p>
                                             </div>
-                                        </fieldset>
-                                    </div>
-                                    <input hidden="true" name="formDetect" value="formDetect">
-                                    <center>
-                                        <button type="button" class="btn btn-success" id="submitBtn" onclick="submitForm();">Submit</button>
-                                        <button type="button" class="btn btn-warning" onclick="location.href = 'createexamination.php'">Reset</button>
-                                        <button type="button" class="btn btn-danger" onclick="location.href = 'examinations.php'">Cancel</button>
-                                    </center>
-                                </form>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <label for="instructor" class="col-form-label">Instructor</label>
+                                                <p class="p-12 font-weight-bold"><?php echo $retrievedInstructor->instructorName; ?>(<?php echo $retrievedExam->examiner; ?>)</p>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <input hidden="true" name="formDetect" value="formDetect">
+                                <center>
+                                    <button type="button" class="btn btn-warning" id="submitBtn" onclick="location.href='editexamination.php?id=<?php echo $id; ?>'">Modify</button>
+                                    <button type="button" class="btn btn-danger" onclick="location.href = 'examinations.php'">Cancel</button>
+                                </center>
                             </div>
                         </div>
                     </div>

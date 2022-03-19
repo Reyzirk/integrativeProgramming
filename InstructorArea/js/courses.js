@@ -68,7 +68,7 @@ function loadingScreen() {
 }
 function displayList() {
     loadingScreen();
-    loadList(true);
+    loadList(false);
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
@@ -77,6 +77,19 @@ function displayList() {
         data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
             Swal.close();
+            paginationContent.html(response);
+        }
+    });
+}
+function displayListWithoutLoading() {
+    loadList(false);
+    entry = $('#displayEntries');
+    paginationContent = $('#displayPagination');
+    $.ajax({
+        url: "AJAX/displayCoursePagination.php",
+        type: "POST",
+        data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        success: function (response) {
             paginationContent.html(response);
         }
     });
@@ -100,8 +113,8 @@ function deleteDataRecord(value) {
                         Swal.close();
                         showErrorMessage("Please Try Again!");
                     } else if (response === "success") {
-                        loadingScreen();
-                        loadList(false);
+                        Swal.close();
+                        displayListWithoutLoading();
                         Toast.fire({
                             icon: 'success',
                             html: '<b>Successful</b><br/>Removed the course.'

@@ -15,6 +15,7 @@
                 <a class="collapse-item <?php echo ($pageName=="classes.php"?"active":($pageName=="createclass.php"?"active":($pageName=="editclass.php"?"active":"")))?>" href="classes.php">Class List</a>
                 <a style="cursor:pointer;" class="collapse-item <?php echo ($pageName=="childclasses.php"?"active":"");?>" onclick="navigateToChildClass()">Student</a>
                 <a style="cursor:pointer;" class="collapse-item <?php echo ($pageName=="courseschedule.php"?"active":($pageName=="createcourseschedule.php"?"active":($pageName=="editcourseschedule.php"?"active":"")));?>" onclick="navigateToCourseSchedule()">Schedule</a>
+                <a style="cursor:pointer;" class="collapse-item <?php echo ($pageName=="homeworks.php"?"active":($pageName=="createhomework.php"?"active":($pageName=="edithomework.php"?"active":"")));?>" onclick="navigateToHomework()">Homeworks</a>
             </div>
         </div>
        

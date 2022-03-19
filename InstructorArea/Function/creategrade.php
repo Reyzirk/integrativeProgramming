@@ -75,6 +75,7 @@ if (isset($_POST["formDetect"])){
                     $error["maxMark"] = "<b>Range of Max Mark</b> is exist.";
                 }
             }
+            die();
         }else{
             if ($parser->checkMarkBetween($storedValue["minMark"])){
                 $error["minMark"] = "<b>Range of Min Mark</b> is exist.";

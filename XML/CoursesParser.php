@@ -15,6 +15,8 @@
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/XML/Parser.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Course.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/CourseMaterial.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ExaminationDB.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/CourseScheduleDB.php";
 class CoursesParser implements Parser{
     private $courses;
     private $xml;
@@ -60,6 +62,7 @@ class CoursesParser implements Parser{
             $course=$course[0];
             $dom= dom_import_simplexml($course);
             $material = $course->xpath('CourseMaterials');
+            $courseMaterials = array();
             if(count($material)>=1){
                 $material=$material[0];
                 $dom2= dom_import_simplexml($material);
@@ -107,6 +110,13 @@ class CoursesParser implements Parser{
             }
         }
         $this->addCourse($updatedCourse);
+        if ($oldID != $updatedCourse->courseCode){
+            $examdb = new ExaminationDB();
+            $examdb->updateCourseCode($oldID, $updatedCourse->courseCode);
+            $scheduledb = new CourseScheduleDB();
+            $scheduledb->updateCourseCode($oldID, $updatedCourse->courseCode);
+        }
+        
         return true;
     }
     public function removeCourse($id):bool{
