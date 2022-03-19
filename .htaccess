@@ -6,7 +6,17 @@
 #
 #
 #Don remove FilesMatch, else security straight die
+Options -Indexes
+
+<FilesMatch ".htaccess">
+    Require all denied
+</FilesMatch>
+
 <FilesMatch "config.ini">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "error.log">
     Require all denied
 </FilesMatch>
 

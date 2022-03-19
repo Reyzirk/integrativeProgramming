@@ -12,6 +12,7 @@
  *
  * @author Choo Meng
  */
+require_once "AJAXErrorHandler.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ExaminationDB.php";
 if (empty($_POST["examinationID"])){
     echo "fail";
@@ -30,7 +31,11 @@ if (empty($_POST["examinationID"])){
         if ($errorCode == "1451"){
             echo "Required to reassign the student that under this examination.";
         }else{
-            echo $ex->getMessage();
+            if ($generalSection["maintenance"]==true){
+                echo $ex->getMessage();
+            }else{
+                callPDOExceptionLog($ex);
+            }
         }
         
     }

@@ -1,4 +1,5 @@
 <?php include '../Function/load.php';$pageName = basename(__FILE__); ?>
+<?php include 'Function/classes.php' ?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -7,7 +8,7 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 
-<?php include 'Function/classes.php' ?>
+
 <?php
 #Page Languages
 $lang_search = "Filter the classes list";
@@ -21,6 +22,7 @@ $lang_action_btn = "Action";
     <head>
         <?php include 'Components/headmeta.php' ?>
         <script src="js/classes.js" type="text/javascript"></script>
+        
     </head>
     <body>
         <?php callLog(); ?>

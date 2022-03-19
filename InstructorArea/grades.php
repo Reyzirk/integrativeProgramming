@@ -1,4 +1,5 @@
 <?php include '../Function/load.php';$pageName = basename(__FILE__); ?>
+<?php include 'Function/grades.php' ?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -6,7 +7,7 @@ Copyright 2022 Omega International Junior School. All Right Reserved.
 Web Application is under GNU General Public License v3.0
 ============================================
 -->
-<?php include 'Function/grades.php' ?>
+
 <?php
 #Page Languages
 $lang_search = "Filter the grades list";

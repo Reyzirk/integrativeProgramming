@@ -6,7 +6,7 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
-
+require_once "AJAXErrorHandler.php";
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/CourseScheduleDB.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Objects/Course.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
@@ -46,7 +46,12 @@ if ($sortType==="Course Code"){
 try{
     $totalCount = $scheduledb->getCount($search,$id);
 } catch (PDOException $ex) {
-    echo 'Connection failed: ' . $ex->getMessage();
+    if ($generalSection["maintenance"]==true){
+        echo $ex->getMessage();
+    }else{
+        callPDOExceptionLog($ex);
+    }
+
 }
 $beginIndex = ($currentPage - 1) * $entry;
 $endIndex = ($currentPage * $entry) >= $totalCount ? $totalCount : ($currentPage * $entry);
@@ -77,7 +82,16 @@ if ($totalCount == 0) {
         ->order($sortType, $sortOrder)
         ->limit($beginIndex,$endIndex)
         ->query();
-    $results = $scheduledb->select($query);
+    try{
+        $results = $scheduledb->select($query);
+    } catch (PDOException $ex) {
+        if ($generalSection["maintenance"]==true){
+            echo $ex->getMessage();
+        }else{
+            callPDOExceptionLog($ex);
+        }
+
+    }
    
     foreach($results as $row){
         $timeStart = new DateTime($row["TimeStart"]);

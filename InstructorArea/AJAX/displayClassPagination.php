@@ -6,7 +6,7 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
-
+require_once "AJAXErrorHandler.php";
 /**
  * Description of displayClassNavigation
  *
@@ -23,7 +23,12 @@ $classdb = new ClassDB();
 try{
     $totalCount = $classdb->getCount($search);
 } catch (PDOException $ex) {
-    echo 'Connection failed: ' . $ex->getMessage();
+    if ($generalSection["maintenance"]==true){
+        echo $ex->getMessage();
+    }else{
+        callPDOExceptionLog($ex);
+    }
+
 }
 $totalPage = (int) (ceil($totalCount / $entry));
 $beginIndex = ($currentPage - 1) * $entry;

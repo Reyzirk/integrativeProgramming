@@ -6,7 +6,7 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
-
+require_once "AJAXErrorHandler.php";
 if (empty($_POST["gradeID"])){
     echo "fail";
 }else{

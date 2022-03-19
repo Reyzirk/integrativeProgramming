@@ -11,7 +11,7 @@
  *
  * @author Choo Meng
  */
-
+require_once "AJAXErrorHandler.php";
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ExaminationDB.php';
 $totalCount = 0;
 $sortType = trim(empty($_POST["sorttype"]) ? "Examination ID" : eliminateExploit($_POST["sorttype"]));
@@ -38,7 +38,12 @@ else if ($sortType==="Exam Duration"){
 try{
     $totalCount = $examdb->getCount($search);
 } catch (PDOException $ex) {
-    echo 'Connection failed: ' . $ex->getMessage();
+    if ($generalSection["maintenance"]==true){
+        echo $ex->getMessage();
+    }else{
+        callPDOExceptionLog($ex);
+    }
+
 }
 $beginIndex = ($currentPage - 1) * $entry;
 $endIndex = ($currentPage * $entry) >= $totalCount ? $totalCount : ($currentPage * $entry);
@@ -66,9 +71,16 @@ if ($totalCount == 0) {
         ->order($sortType, $sortOrder)
         ->limit($beginIndex,$endIndex)
         ->query();
-    
-    $results = $examdb->select($query);
-    
+    try{
+        $results = $examdb->select($query);
+    } catch (PDOException $ex) {
+        if ($generalSection["maintenance"]==true){
+            echo $ex->getMessage();
+        }else{
+            callPDOExceptionLog($ex);
+        }
+
+    }
    
     foreach($results as $row){
         ?>

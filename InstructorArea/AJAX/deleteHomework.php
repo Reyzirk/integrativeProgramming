@@ -12,6 +12,7 @@
  *
  * @author Choo Meng
  */
+require_once "AJAXErrorHandler.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/HomeworkDB.php";
 if (empty($_POST["homeworkID"])){
     echo "fail";
@@ -25,8 +26,12 @@ if (empty($_POST["homeworkID"])){
             echo "Unable to find the Homework.";
         }
     } catch (PDOException $ex) {
-        echo $ex->getMessage();
-        
+        if ($generalSection["maintenance"]==true){
+            echo $ex->getMessage();
+        }else{
+            callPDOExceptionLog($ex);
+        }
+
     }
    
     

@@ -12,6 +12,7 @@
  *
  * @author Choo Meng
  */
+require_once "AJAXErrorHandler.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
 $factory = new ParserFactory();
 $parser = $factory->getParser("Grades");

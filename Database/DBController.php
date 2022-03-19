@@ -21,7 +21,7 @@ class DBController {
         $this->connectionStatus = $this->connectDB();
     }
     private function connectDB($error = null):bool{
-        $ini_array = parse_ini_file(str_replace("InstructorArea", "", str_replace("AJAX", "", str_replace("Database", "", dirname(__DIR__)))) ."\config.ini",true);
+        $ini_array = parse_ini_file(str_replace("InstructorArea", "", str_replace("AJAX", "", str_replace("Database", "", dirname(__DIR__)))) ."/config.ini",true);
         $dbSection = $ini_array["Database"];
         $dsn = "mysql:host=".$dbSection["hostname"].";port=".$dbSection["port"].";dbname=".$dbSection["databaseName"]
                 .";charset=".$dbSection["charset"];

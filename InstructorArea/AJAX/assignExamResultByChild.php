@@ -6,9 +6,11 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
+require_once "AJAXErrorHandler.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ExamResultDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ChildDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/ExamResult.php";
+
 if (empty($_POST["childID"])||empty($_POST["examID"])){
     echo "fail";
 }else{
@@ -29,8 +31,12 @@ if (empty($_POST["childID"])||empty($_POST["examID"])){
             echo "Unable to find the child by using the child ID given.";
         }
     } catch (PDOException $ex) {
-        echo $ex->getMessage();
-        
+        if ($generalSection["maintenance"]==true){
+            echo $ex->getMessage();
+        }else{
+            callPDOExceptionLog($ex);
+        }
+
     }
    
     

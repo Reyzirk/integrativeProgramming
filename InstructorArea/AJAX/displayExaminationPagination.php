@@ -12,6 +12,7 @@
  *
  * @author Choo Meng
  */
+require_once "AJAXErrorHandler.php";
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ExaminationDB.php';
 $totalCount = 0;
 $sortType = trim(empty($_POST["sorttype"]) ? "Examination ID" : eliminateExploit($_POST["sorttype"]));
@@ -23,7 +24,12 @@ $examdb = new ExaminationDB();
 try{
     $totalCount = $examdb->getCount($search);
 } catch (PDOException $ex) {
-    echo 'Connection failed: ' . $ex->getMessage();
+    if ($generalSection["maintenance"]==true){
+        echo $ex->getMessage();
+    }else{
+        callPDOExceptionLog($ex);
+    }
+
 }
 $totalPage = (int) (ceil($totalCount / $entry));
 $beginIndex = ($currentPage - 1) * $entry;

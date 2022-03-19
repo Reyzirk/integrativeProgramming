@@ -1,4 +1,5 @@
 <?php include '../Function/load.php';$pageName = basename(__FILE__); ?>
+<?php include 'Function/childclasses.php' ?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -7,7 +8,7 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 
-<?php include 'Function/childclasses.php' ?>
+
 <?php
 #Page Languages
 $lang_search = "Filter the list";

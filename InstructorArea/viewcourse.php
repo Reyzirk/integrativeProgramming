@@ -1,4 +1,5 @@
 <?php include '../Function/load.php';$pageName = basename(__FILE__); ?>
+<?php include 'Function/viewcourse.php' ?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -7,7 +8,7 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 
-<?php include 'Function/viewcourse.php' ?>
+
 <?php
 #Page Languages
 $lang_legendTitle = "Course Details";
@@ -92,7 +93,7 @@ $lang_legendTitle2 = "Course Materials"
                                 <?php } ?>
                                 <br/>
                                 <center>
-                                    <button type="button" class="btn btn-warning" id="submitBtn" onclick="editcourse.php?id=<?php echo $id; ?>">Modify</button>
+                                    <button type="button" class="btn btn-warning" id="submitBtn" onclick="location.href='editcourse.php?id=<?php echo $id; ?>'">Modify</button>
                                     <button type="button" class="btn btn-danger" onclick="location.href = 'courses.php'">Back</button>
                                 </center>
                             </div>

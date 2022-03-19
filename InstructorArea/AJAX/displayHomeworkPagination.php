@@ -11,7 +11,7 @@
  *
  * @author Choo Meng
  */
-
+require_once "AJAXErrorHandler.php";
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/HomeworkDB.php';
 $totalCount = 0;
 $sortType = trim(empty($_POST["sorttype"]) ? "Date" : eliminateExploit($_POST["sorttype"]));
@@ -29,7 +29,12 @@ if (!isset($_POST["id"])){
 try{
     $totalCount = $homeworkdb->getCount($search,$id);
 } catch (PDOException $ex) {
-    echo 'Connection failed: ' . $ex->getMessage();
+    if ($generalSection["maintenance"]==true){
+        echo $ex->getMessage();
+    }else{
+        callPDOExceptionLog($ex);
+    }
+
 }
 $totalPage = (int) (ceil($totalCount / $entry));
 $beginIndex = ($currentPage - 1) * $entry;

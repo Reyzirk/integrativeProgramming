@@ -11,6 +11,12 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include_once 'ini_load.php';
 include_once 'exception_load.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/DBController.php";
+try{
+    DBController::getInstance();
+} catch (PDOException $ex) {
+    callErrorLog($ex);
+}
 
 
 

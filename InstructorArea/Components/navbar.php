@@ -12,7 +12,7 @@
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="nav-update" href="#" role="button" aria-haspopup="true" aria-expanded="true"><i class="fa-solid fa-chalkboard"></i> Classes</a>
         <div class="collapse">
             <div class="bg-white py-2 collapse-inner rounded mt-1">
-                <a class="collapse-item <?php echo ($pageName=="classes.php"?"active":($pageName=="createclass.php"?"active":($pageName=="editclass.php"?"active":$pageName=="childclasses.php"?"active":"")))?>" href="classes.php">Class List</a>
+                <a class="collapse-item <?php echo ($pageName=="classes.php"?"active":($pageName=="createclass.php"?"active":($pageName=="editclass.php"?"active":"")))?>" href="classes.php">Class List</a>
                 <a style="cursor:pointer;" class="collapse-item <?php echo ($pageName=="childclasses.php"?"active":"");?>" onclick="navigateToChildClass()">Student</a>
                 <a style="cursor:pointer;" class="collapse-item <?php echo ($pageName=="courseschedule.php"?"active":($pageName=="createcourseschedule.php"?"active":($pageName=="editcourseschedule.php"?"active":"")));?>" onclick="navigateToCourseSchedule()">Schedule</a>
             </div>

@@ -6,6 +6,7 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
+require_once "AJAXErrorHandler.php";
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ExamResultDB.php';
 $totalCount = 0;
 $sortType = trim(empty($_POST["sorttype"]) ? "Name" : eliminateExploit($_POST["sorttype"]));
@@ -30,7 +31,12 @@ $resultdb = new ExamResultDB();
 try{
     $totalCount = $resultdb->getCount($search,$id);
 } catch (PDOException $ex) {
-    echo 'Connection failed: ' . $ex->getMessage();
+    if ($generalSection["maintenance"]==true){
+        echo $ex->getMessage();
+    }else{
+        callPDOExceptionLog($ex);
+    }
+
 }
 $totalPage = (int) (ceil($totalCount / $entry));
 $beginIndex = ($currentPage - 1) * $entry;

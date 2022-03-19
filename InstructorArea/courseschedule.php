@@ -1,4 +1,5 @@
 <?php include '../Function/load.php';$pageName = basename(__FILE__); ?>
+<?php include 'Function/courseschedule.php' ?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -7,7 +8,7 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 
-<?php include 'Function/courseschedule.php' ?>
+
 <?php
 #Page Languages
 $lang_search = "Filter the course schedule list";

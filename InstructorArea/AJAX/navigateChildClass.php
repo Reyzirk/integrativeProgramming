@@ -6,7 +6,7 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
-
+require_once "AJAXErrorHandler.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ClassDB.php";
 if (empty($_POST["classID"])){
     echo "fail";
@@ -20,8 +20,12 @@ if (empty($_POST["classID"])){
             echo "Unable to find the class by using the Class ID given.";
         }
     } catch (PDOException $ex) {
-        echo $ex->getMessage();
-        
+        if ($generalSection["maintenance"]==true){
+            echo $ex->getMessage();
+        }else{
+            callPDOExceptionLog($ex);
+        }
+
     }
    
     

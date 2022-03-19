@@ -6,9 +6,12 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
+require_once "AJAXErrorHandler.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ChildClassDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ChildDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/ChildClass.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Function/ini_load.php";
+
 if (empty($_POST["childID"])||empty($_POST["classID"])){
     echo "fail";
 }else{
@@ -30,7 +33,11 @@ if (empty($_POST["childID"])||empty($_POST["classID"])){
             echo "Unable to find the child by using the child ID given.";
         }
     } catch (PDOException $ex) {
-        echo $ex->getMessage();
+        if ($generalSection["maintenance"]==true){
+            echo $ex->getMessage();
+        }else{
+            callPDOExceptionLog($ex);
+        }
         
     }
    

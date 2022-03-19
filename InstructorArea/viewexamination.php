@@ -1,6 +1,7 @@
 <?php
 include '../Function/load.php';
 $pageName = basename(__FILE__);
+include 'Function/viewexamination.php';
 ?>
 <!DOCTYPE html>
 <!--
@@ -10,9 +11,6 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 
-<?php
-include 'Function/viewexamination.php';
-?>
 <?php
 #Page Languages
 $lang_title = "View existing examination";

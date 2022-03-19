@@ -1,5 +1,6 @@
 <?php include '../Function/load.php';
 $pageName = basename(__FILE__);
+include 'Function/editcourseschedule.php';
 ?>
 <!DOCTYPE html>
 <!--
@@ -10,7 +11,7 @@ Web Application is under GNU General Public License v3.0
 -->
 
 <?php
-include 'Function/editcourseschedule.php';
+
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/XML/ParserFactory.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Objects/Course.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/InstructorDB.php';

@@ -1,4 +1,5 @@
 <?php include '../Function/load.php';$pageName = basename(__FILE__); ?>
+<?php include 'Function/editclass.php';require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/InstructorDB.php'; ?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -7,7 +8,7 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 
-<?php include 'Function/editclass.php';require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/InstructorDB.php'; ?>
+
 <?php
 #Page Languages
 $lang_title = "Edit existing class";
