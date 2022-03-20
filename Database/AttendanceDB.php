@@ -22,7 +22,7 @@ class AttendanceDB {
     }
     
     public function getRecordCount(){
-        $query = "SELECT * FROM ATTENDANCE";
+        $query = "SELECT * FROM attendance";
         $stmt = $this->instance->con->prepare($query);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
@@ -36,7 +36,7 @@ class AttendanceDB {
     }
     
     public function selectAll(){
-        $query = "SELECT * FROM ATTENDANCE";
+        $query = "SELECT * FROM attendance";
         $stmt = $this->instance->con->prepare($query);
         $stmt->execute();
         $totalrows = $stmt->rowCount();

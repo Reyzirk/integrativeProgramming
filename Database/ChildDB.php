@@ -37,7 +37,7 @@ class ChildDB {
     }
     
     public function getChildDetails($childID){
-        $query = "SELECT * FROM Child WHERE ChildID = ?";
+        $query = "SELECT * FROM child WHERE ChildID = ?";
         $stmt = $this->instance->con->prepare($query);
         $stmt->bindParam(1, $childID, PDO::PARAM_STR);
         $stmt->execute();

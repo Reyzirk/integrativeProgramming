@@ -53,14 +53,13 @@ Web Application is under GNU General Public License v3.0
                                             </div>
                                             <div class="col-sm-9">
                                                 <div class="input-group mb-3">
-                                                    <input type="text" class="bg-white form-control" placeholder="Please enter the search criteria!" name="searchInfo">
+                                                    <input type="text" class="bg-white form-control <?php echo empty($error["emptySearch"]) ? "" : "is-invalid" ?>" placeholder="Please enter the search criteria!" name="searchInfo">
                                                     <div class="input-group-append">
-                                                        <button class="btn btn-outline-info" type="submit" name="submit">Search</button>
+                                                        <button class="btn btn-outline-info" type="submit" name="submitBtn" value="searchBtn">Search</button>
                                                     </div>
+                                                    <span class="invalid-feedback"><?php echo empty($error["emptySearch"]) ? "" : $error['emptySearch'] ?></span>
                                                 </div>
                                             </div>
-
-                                            <span class="invalid-feedback"><?php echo empty($error["emptySearch"]) ? "123" : $error['emptySearch'] ?></span>
                                         </div>
                                         <br><br>
                                         <!--Student Table to be injected here  -->
@@ -79,16 +78,16 @@ Web Application is under GNU General Public License v3.0
                                                 ?>
                                             </tbody>
                                         </table>
-                                        </div>
                                     </fieldset>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <?php
-                    include 'Components/footer.php'
-                    ?>
                 </div>
+
+                <?php
+                include 'Components/footer.php'
+                ?>
             </div>
     </body>
 </html>

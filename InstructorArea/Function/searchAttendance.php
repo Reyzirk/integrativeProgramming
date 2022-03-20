@@ -12,19 +12,14 @@
  *
  * @author Ng Kar Kai
  */
-if (!isset($_POST['submit'])) {
-
+if (isset($_POST['submitBtn'])) {
     $criteria = antiExploit($_POST['searchCriteria']);
     $searchInfo = antiExploit($_POST['searchInfo']);
 
-    if (strlen($searchInfo) == 0) {
-        $error["emptySearch"] = "<b>Please do not leave the search bar empty</b>";
+    if (empty($searchInfo)) {
+        $error["emptySearch"] = "Please do not leave the search bar empty";
     }
-    if (!empty($error)) {
-
-        header('Location:addattendance.php');
-    }
-    else{
+    if (empty($error)) {
         
     }
 }
@@ -35,5 +30,4 @@ function antiExploit($str) {
     $str = htmlspecialchars($str);
     return $str;
 }
-
 ?>
