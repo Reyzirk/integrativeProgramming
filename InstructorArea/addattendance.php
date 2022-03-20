@@ -48,7 +48,7 @@ Web Application is under GNU General Public License v3.0
                                             <div class="col-sm-2">
                                                 <select class="form-control bg-white small" name="searchCriteria">
                                                     <option value="name">Name </option>
-                                                    <option value="class">Class</option>
+                                                    <option value="date">Date</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-9">

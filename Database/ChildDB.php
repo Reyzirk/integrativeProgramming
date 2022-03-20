@@ -51,7 +51,7 @@ class ChildDB {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $results = $stmt->fetchAll();
             $row = $results[0];
-            $record = new Child($row["ChildID"], $row["ChildName"], $row["BirthDate"], $row["ChildICNo"], $row["Status"]);
+            $record = new Child($row["ChildID"], $row["ParentID"], $row["ChildName"], $row["BirthDate"], $row["ChildICNo"], $row["Status"]);
             return $record;
         }
     }

@@ -52,4 +52,8 @@ class AttendanceFacade {
          return $this->classDB
                  ->details($classID);
     }
+    
+    public function getAttendanceRecords($childName){
+        return $this->attendanceDB->getAttendanceRecord($childName);
+    }
 }
