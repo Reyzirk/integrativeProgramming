@@ -45,6 +45,18 @@ class AttachmentDB {
         $totalrows = $stmt->rowCount();
         return $totalrows;
     }
+    
+    public function getCountByAID($id) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("attachment"), array("*"))
+                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        return $totalrows;
+    }
 
     public function getAllID() {
         $builder = new MySQLQueryBuilder();
@@ -71,9 +83,17 @@ class AttachmentDB {
     public function insert($attach) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->insert("attachment")
-                ->values(array($attach->attachID, $attach->announce->announceID,$attach->attachName, $attach->filePath))
+                ->values(array(\CustomSQLEnum::BIND_QUESTIONMARK , \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK))
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $attachID = $attach->attachID;
+        $announceID = $attach->announce->announceID;
+        $attachName = $attach->attachName;
+        $filePath = $attach->filePath;
+        $stmt->bindParam(1, $attachID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $announceID, PDO::PARAM_STR);
+        $stmt->bindParam(3, $attachName, PDO::PARAM_STR);
+        $stmt->bindParam(4, $filePath, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
@@ -86,9 +106,10 @@ class AttachmentDB {
     public function details($id) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("attachment"), array("*"))
-                ->where("AnnounceID", $id)
+                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
@@ -107,9 +128,10 @@ class AttachmentDB {
     public function delete($id) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->delete("attachment")
-                ->where("AnnounceID", $id)
+                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
@@ -121,10 +143,15 @@ class AttachmentDB {
 
     public function update($oldID, $updated) {
         $builder = new MySQLQueryBuilder();
-        $query = $builder->update("attachment", array("AttachName" => $updated->attachName, "FilePath" => $updated->filePath))
-                ->where("AttachID", $oldID)
+        $query = $builder->update("attachment", array("AttachName" => \CustomSQLEnum::BIND_QUESTIONMARK, "FilePath" => \CustomSQLEnum::BIND_QUESTIONMARK))
+                ->where("AttachID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $attachName = $updated->attachName;
+        $filePath = $updated->filePath;
+        $stmt->bindParam(1, $attachName, PDO::PARAM_STR);
+        $stmt->bindParam(2, $filePath, PDO::PARAM_STR);
+        $stmt->bindParam(3, $oldID, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {

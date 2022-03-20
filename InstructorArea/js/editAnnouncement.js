@@ -31,7 +31,7 @@ function validateA() {
 
         Swal.fire({
             title: 'Confirmation',
-            text: "Confirm to create a new annoucement?",
+            text: "Confirm to edit the annoucement?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Confirm'
