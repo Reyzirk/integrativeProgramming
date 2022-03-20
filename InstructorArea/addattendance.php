@@ -69,6 +69,7 @@ Web Application is under GNU General Public License v3.0
                                                     <th scope="col">Student ID</th>
                                                     <th scope="col">Name</th>
                                                     <th scope="col">Temperature</th>
+                                                    <th scope="col"> Class ID</th>
                                                     <th scope="col" class="w-25">Actions</th>
                                                 </tr>
                                             </thead>
@@ -84,7 +85,6 @@ Web Application is under GNU General Public License v3.0
                         </div>
                     </div>
                 </div>
-
                 <?php
                 include 'Components/footer.php'
                 ?>

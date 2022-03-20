@@ -15,6 +15,7 @@
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/DBController.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/MySQLQueryBuilder.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Objects/Child.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Objects/ChildClass.php';
 class ChildDB {
     private $instance;
     public function __construct(){
@@ -54,4 +55,25 @@ class ChildDB {
             return $record;
         }
     }
+    
+    public function getChildClass($childID){
+        $query = "SELECT * FROM childclass WHERE ChildID = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        
+        if ($totalrows == 0){
+            return NULL;
+        }
+        else
+        {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $row = $results[0];
+            $record = new ChildClass($row["ChildID"], $row["ClassID"], $row["Priority"]);
+            return $record;
+        }
+    }
+    
 }

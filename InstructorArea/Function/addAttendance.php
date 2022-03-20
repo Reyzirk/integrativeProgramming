@@ -11,13 +11,11 @@
  *
  * @author Ng Kar Kai
  */
-require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/AttendanceDB.php';
-require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ChildDB.php';
-$attendanceDB = new AttendanceDB();
-$childDB = new ChildDB();
-$totalRecords = $attendanceDB->getRecordCount();
-$attendanceRecords = $attendanceDB->selectAll();
+require_once ( str_replace("AJAX", "", dirname(__DIR__))) . '/Function/AttendanceFacade.php';
+$facade = new AttendanceFacade();
 
+$totalRecords = $facade->getTotalAttendanceRecord();
+$attendanceRecords = $facade->selectAllAttendanceRecord();
 
 if ($totalRecords == 0) {
     ?>
@@ -28,8 +26,9 @@ if ($totalRecords == 0) {
 } else {
     foreach ($attendanceRecords as $row) {
 
-        $childDetails = $childDB->getChildDetails($row["ChildID"]);
-        $childName = $childDetails->childName;
+        $childName = $facade->getChildName($row["ChildID"]);
+        $classDetails = $facade->getClassDetails($row["ChildID"]);
+        
         ?>
         <tr id="<?php echo $row["AttendanceID"] ?>">
             <td>
@@ -40,6 +39,9 @@ if ($totalRecords == 0) {
             </td>
             <td>
                 <?php echo $row["ChildTemperature"] ?>
+            </td>
+            <td>
+                <?php echo "S".$classDetails->semester."Y".$classDetails->year?>
             </td>
             <td>
                 <button type="button" class="btn btn-primary" onclick="window.location.href= 'updateNewAttendance.php?childID=<?php echo $row["ChildID"]?>'"><i class="fa-solid fa-pen-to-square"></i>Update Record</button>
