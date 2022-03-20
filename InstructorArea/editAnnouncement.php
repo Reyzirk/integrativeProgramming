@@ -170,8 +170,9 @@ Web Application is under GNU General Public License v3.0
             ClassicEditor
                     .create(document.querySelector('#desc'))
                     .then(editor => {
+                        validateTextArea(editor.getData());
                         editor.model.document.on('change:data', (evt, data) => {
-                            //validateTextArea(editor.getData());
+                            validateTextArea(editor.getData());
 
 
                         });

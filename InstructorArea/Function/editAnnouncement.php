@@ -1,5 +1,4 @@
 <?php
-
 /*
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
@@ -33,28 +32,26 @@ if (empty($_GET["aID"])) {
         $storedValue["instructorID"] = $getAnnounce->instructorID;
         $storedValue["pin"] = $getAnnounce->pin;
         $storedValue["allowC"] = $getAnnounce->allowC;
-        
+
         if (!empty($attachDB->details($id))) {
             $getAttach = $attachDB->details($id);
             $file = array();
-            foreach ($getAttach as $row){
+            foreach ($getAttach as $row) {
                 $file[] = $row->attachName;
             }
             $storedValue["attach"] = $file;
-
         } else {
             $storedValue["attach"] = null;
-            
         }
     } else {
         $_SESSION["errorLog"] = "noid";
         header('HTTP/1.1 307 Temporary Redirect');
-        header('Location: classes.php');
+        header('Location: announcement.php');
     }
 }
 
 //*************Remove Attachment*************
-if(isset($_POST["confirmFile"])){
+if (isset($_POST["confirmFile"])) {
     $id = $_GET["aID"];
     $attachDB = new AttachmentDB();
     $attachDB->delete($id);
@@ -114,18 +111,34 @@ if (isset($_POST["formDetect"])) {
     $inputName = "attach";
     $inputTitle = "Attachment";
     $hasFile = false;
-    if (isset($_FILES[$inputName])) {
+
+    //**************Check if has file****************
+    foreach (($_FILES[$inputName]['error']) as $row) {
+        switch ($row) {
+
+            case UPLOAD_ERR_NO_FILE:
+                $hasFile = false;
+                break;
+            case UPLOAD_ERR_OK:
+                $hasFile = true;
+                break;
+            default :
+                $hasFile = true;
+        }
+    }
+
+    if (isset($_FILES[$inputName]) && $hasFile) {
         $files = $_FILES[$inputName];
         for ($i = 0; $i < count($files["name"]); $i++) {
             $tempFile = $files["tmp_name"][$i];
             $errorCode = $files["error"][$i];
-            if ($errorCode > 0 && $errorCode != 4) {
+            if ($errorCode > 0) {
                 switch ($errorCode) {
                     case UPLOAD_ERR_FORM_SIZE:
                         $error[$inputName] = "<b>$inputTitle</b> uploaded is too large!";
                         break;
                     default:
-                        $error[$inputName] = "<b>$inputTitle</b> There was an error while uploading the file.";
+                        $error[$inputName] = "<b>$inputTitle</b> There was an error while uploading the file. Error Code: " . $errorCode;
                         break;
                 }
             } else if ($files["size"][$i] > $generalSection["file_max_size"]) {
@@ -142,49 +155,46 @@ if (isset($_POST["formDetect"])) {
             }
         }
 
-        $hasFile = true;
+       
     }
 
     //***************************Connect Database************************************
     if (empty($error)) {
-        $id = $_GET["aID"];
+
         $announce = new Announcement($id, "I0001", $storedValue["titleA"], $storedValue["desc"], $storedValue["cat"], $date, $storedValue["pinTop"], $storedValue["allowC"]);
         $AnnounceDB = new AnnouncementDB();
 
-        if ($AnnounceDB->update($id, $announce)) {
-            $_SESSION["modifyLog"] = "createannouncement";
+        $AnnounceDB->update($id, $announce);
+        $_SESSION["modifyLog"] = "createannouncement";
 
-            //*************if have attachments*******************
-            if ($hasFile) {
-                $attachDB = new AttachmentDB();
-                    $files = $_FILES["attach"];
-                for ($i = 0; $i < count($files["name"]); $i++) {
-                    
-                    $save_as = uniqid("", true) . '.' . $ext[$i];
-                    move_uploaded_file($files['tmp_name'][$i], str_replace("InstructorArea", "", dirname(__DIR__)) . '/uploads/AnnounceAttachment/' . $save_as);
-                    $attachment = new Attachment(genAttachID(), $announce, $save_as, '/uploads/AnnounceAttachment/' . $save_as);
-                    if ($attachDB->insert($attachment)) {
-                        $_SESSION["modifyLog"] = "createattachment";
-                        header('HTTP/1.1 307 Temporary Redirect');
-                        header('Location: announcement.php'); 
-                    } else {
-                        $_SESSION["errorLog"] = "sqlerror";
-                        break;
-                    }
+        //*************if have attachments*******************
+        if ($hasFile) {
+            $attachDB = new AttachmentDB();
+            $files = $_FILES["attach"];
+            for ($i = 0; $i < count($files["name"]); $i++) {
+
+                $save_as = uniqid("", true) . '.' . $ext[$i];
+                move_uploaded_file($files['tmp_name'][$i], str_replace("InstructorArea", "", dirname(__DIR__)) . '/uploads/AnnounceAttachment/' . $save_as);
+                $attachment = new Attachment(genAttachID(), $announce, $save_as, '/uploads/AnnounceAttachment/' . $save_as);
+                if ($attachDB->insert($attachment)) {
+                    $_SESSION["modifyLog"] = "createattachment";
+                    header('HTTP/1.1 307 Temporary Redirect');
+                    header('Location: announcement.php');
+                } else {
+                    $_SESSION["errorLog"] = "sqlerror";
+                    break;
                 }
-            }else{
-                 header('HTTP/1.1 307 Temporary Redirect');
-                 header('Location: announcement.php');
             }
         } else {
-            $_SESSION["errorLog"] = "sqlerror";
+            header('HTTP/1.1 307 Temporary Redirect');
+            header('Location: announcement.php');
         }
     }
 
     if (!empty($_SESSION["errorLog"])) {
 
-        if ($_SESSION["errorLog"] == "sqlerror") {
-            $successMsg = "Database error. Please try again!";
+        if ($_SESSION["errorLog"] == "sqlerror1") {
+            $successMsg = "Database error. Please try again1!";
         }
         ?>
         <script>
@@ -248,4 +258,3 @@ function eliminateExploit($str) {
     $str = htmlspecialchars($str);
     return $str;
 }
-
