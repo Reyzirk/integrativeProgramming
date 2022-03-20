@@ -162,6 +162,24 @@ function convertByteToMB(size) {
     }
 }
 
+function submitForm(){
+    form = $("#form");
+    Swal.fire({
+        title: 'Confirmation',
+        text: "Are you sure you want to create a new class!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Confirm'
+      }).then((result) => {
+        if (result.isConfirmed) {
+            var validated1 = validateDate();
+            if (validated1){
+                form.submit();
+            }
+        }
+      })
+}
+
 
 
 

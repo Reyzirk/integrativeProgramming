@@ -30,7 +30,7 @@ if (empty($_GET["aID"])) {
         $storedValue["desc"] = $getAnnounce->desc;
         $storedValue["cat"] = trim($getAnnounce->cat);
         $storedValue["instructorID"] = $getAnnounce->instructorID;
-        $storedValue["pin"] = $getAnnounce->pin;
+        $storedValue["pinTop"] = $getAnnounce->pin;
         $storedValue["allowC"] = $getAnnounce->allowC;
 
         if (!empty($attachDB->details($id))) {
