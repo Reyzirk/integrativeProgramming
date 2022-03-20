@@ -45,6 +45,9 @@ if ($submitBtn == false) {
                     <?php echo "S" . $classDetails->semester . "Y" . $classDetails->year ?>
                 </td>
                 <td>
+                    <?php echo $row["AttendingDate"] ?>
+                </td>
+                <td>
                     <button type="button" class="btn btn-primary" onclick="window.location.href = 'updateNewAttendance.php?childID=<?php echo $row["ChildID"] ?>'"><i class="fa-solid fa-pen-to-square"></i>Update Record</button>
                 </td>
             </tr>
@@ -78,7 +81,10 @@ if ($submitBtn == false) {
                         <?php echo "S" . $classDetails->semester . "Y" . $classDetails->year ?>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary" onclick="window.location.href = 'updateNewAttendance.php?childID=<?php echo $row["ChildID"] ?>'"><i class="fa-solid fa-pen-to-square"></i>Update Record</button>
+                        <?php echo $row["AttendingDate"] ?>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary" onclick="window.location.href = 'updateNewAttendance.php?childID=<?php echo $row["ChildID"] ?>'"><i class="fa-solid fa-pen-to-square"></i> Update Record</button>
                     </td>
                 </tr>
                 <?php
@@ -90,8 +96,7 @@ if ($submitBtn == false) {
             </tr>
             <?php
         }
-    }
-    else if ($criteria == "date"){
+    } else if ($criteria == "date") {
         
     }
 }
