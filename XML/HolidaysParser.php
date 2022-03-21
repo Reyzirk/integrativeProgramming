@@ -20,7 +20,7 @@ class HolidaysParser implements Parser{
     private $xml;
     private static $parser;
     public function __construct($filename){
-        $this->holidays = new SplObjectStorage();
+        $this->holidays = new XMLArray();
         $this->readFromXML($filename);
     }
     public static function getInstance($filename){
@@ -36,7 +36,7 @@ class HolidaysParser implements Parser{
         foreach($holidayList as $holiday){
             $attr = $holiday->attributes();
             $temp = new Holiday($attr->id,$holiday->name,$holiday->dateStart,$holiday->dateEnd);
-            $this->holidays->attach($temp);
+            $this->holidays->add($temp);
         }
         
     }
@@ -80,9 +80,9 @@ class HolidaysParser implements Parser{
         }else{
             return false;
         }
-        foreach ($this->holidays as $key) {
+        while($key = $this->holidays->next()){
             if ($key->id==$id){
-                $this->holidays->detach($key);
+                $this->holidays->remove();
                 return true;
             }
         }
@@ -93,6 +93,7 @@ class HolidaysParser implements Parser{
         $holiday->addChild('name',$newHoliday->name);
         $holiday->addChild('dateStart',$newHoliday->dateStart);
         $holiday->addChild('dateEnd',$newHoliday->dateEnd);
+        $this->holidays->add($newHoliday);
     }
     public function saveXML($filename){
         $this->xml->asXml($filename);

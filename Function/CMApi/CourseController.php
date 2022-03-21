@@ -44,9 +44,6 @@ class CourseController extends BaseController implements Controller{
                     if ($apiKey != $ini_array["General"]["apiKey"]) {
                         $output[] = array("Status" => "Failed", "Message" => "Invalid API Key to retrieve the data.");
                     } else {
-                        foreach ($courses as $key) {
-                            $courseList[] = $key;
-                        }
                         if (isset($params["limit"])) {
                             $entry = $params["limit"];
                         }
@@ -60,7 +57,7 @@ class CourseController extends BaseController implements Controller{
                         $data=array();
                         for ($i = $beginIndex; $i < $endIndex; $i++) {
                             $count++;
-                            $key = $courseList[$i];
+                            $key = $courses[$i];
                             $materials = $key->courseMaterials;
                             $material = array();
                             foreach($materials as $key2){

@@ -21,7 +21,7 @@ $search = empty($_POST["search"]) ? null : eliminateExploit($_POST["search"]);
 $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
 $count = 0;
 //Convert to indexed array
-foreach ($holidays as $key) {
+while($key = $holidays->next()){
     $valueDateStart = (string) $key->dateStart;
     $valueDateEnd = (string) $key->dateEnd;
     if (empty($search) ||

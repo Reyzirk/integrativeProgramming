@@ -1,2 +1,6 @@
 [2022-03-20 12:50:15] Call to undefined function convertCatToWord() 
 [2022-03-20 12:51:00] Call to undefined function convertCatToWord() 
+[2022-03-21 13:23:16] Return value of XMLArray::offsetGet() must be an instance of mixed, instance of Course returned 
+[2022-03-21 13:23:38] Return value of XMLArray::offsetGet() must be an instance of mixed, null returned 
+[2022-03-21 13:23:44] Return value of XMLArray::offsetGet() must be an instance of mixed, instance of Course returned 
+[2022-03-21 13:23:54] Return value of XMLArray::offsetGet() must be an instance of mixed, instance of Course returned 

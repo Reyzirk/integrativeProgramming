@@ -22,7 +22,7 @@ $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
 $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
 $count = 0;
 //Convert to indexed array
-foreach ($courses as $key) {
+while($key = $courses->next()){
     if (empty($search) ||
             (
             custom_str_contains($key->courseCode, empty($search) ? "" : $search) ||

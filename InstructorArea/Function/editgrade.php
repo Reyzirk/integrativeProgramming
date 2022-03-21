@@ -107,6 +107,7 @@ if (isset($_POST["formDetect"])){
                         $error["maxMark"] = "<b>Range of Max Mark</b> is exist.";
                     }
                 }
+                
             }else{
                 //Check the mark between min mark with xml file
                 if ($parser->checkMarkBetween($storedValue["minMark"])){
@@ -122,6 +123,7 @@ if (isset($_POST["formDetect"])){
                         $error["minMark"] = "<b>Range of Min Mark</b> is exist.";
                     }
                 }
+                
             }
         }else{
             

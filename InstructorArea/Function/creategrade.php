@@ -57,34 +57,55 @@ if (isset($_POST["formDetect"])){
             $error["maxMark"] = "<b>Max Mark</b> cannot less than min mark.";
         }
     }
-    if (empty($error["minMark"])){
+    if (empty($error)){
         $parser = $factory->getParser("Grades");
+        //Check the least mark
         if (!($parser->checkMarkLeast($storedValue["minMark"])&&$parser->checkMarkLeast($storedValue["maxMark"]))){
+            //Check the greatest mark
             if (!($parser->checkMarkGreatest($storedValue["minMark"])&&$parser->checkMarkGreatest($storedValue["maxMark"]))){
+                //Check the mark between min mark with xml file
                 if ($parser->checkMarkBetween($storedValue["minMark"])){
                     $error["minMark"] = "<b>Range of Min Mark</b> is exist.";
+                    $boolMin = true;
                 }
+                //Check the mark between max mark with xml file
                 if ($parser->checkMarkBetween($storedValue["maxMark"])){
                     $error["maxMark"] = "<b>Range of Max Mark</b> is exist.";
+                    $boolMax = true;
+                }
+                //Check whether min mark is the least and max mark is the greatest
+                if (empty($error)){
+                    if ($parser->checkMarkLeast($storedValue["minMark"])&&$parser->checkMarkGreatest($storedValue["maxMark"])){
+                        $error["maxMark"] = "<b>Range of Max Mark</b> is exist.";
+                    }
                 }
             }else{
+                //Check the mark between min mark with xml file
                 if ($parser->checkMarkBetween($storedValue["minMark"])){
                     $error["minMark"] = "<b>Range of Min Mark</b> is exist.";
                 }
+                //Check the mark between max mark with xml file
                 if ($parser->checkMarkBetween($storedValue["maxMark"])){
                     $error["maxMark"] = "<b>Range of Max Mark</b> is exist.";
                 }
+                //Check the min mark with (xml min mark) < (min mark) < (xml max mark)
+                if (empty($error)){
+                    if ($parser->checkMarkGreaterMin($storedValue["minMark"])&&$parser->checkMarkLesserMax($storedValue["minMark"])){
+                        $error["minMark"] = "<b>Range of Min Mark</b> is exist.";
+                    }
+                }
             }
-            die();
         }else{
+            
+            //Check the mark between min mark with xml file
             if ($parser->checkMarkBetween($storedValue["minMark"])){
                 $error["minMark"] = "<b>Range of Min Mark</b> is exist.";
             }
+            //Check the mark between max mark with xml file
             if ($parser->checkMarkBetween($storedValue["maxMark"])){
                 $error["maxMark"] = "<b>Range of Max Mark</b> is exist.";
             }
         }
-        
     }
     if (empty($error)){
         $newGrade = new Grade("G",$storedValue["grade"],$storedValue["minMark"],$storedValue["maxMark"]);

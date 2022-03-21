@@ -81,6 +81,19 @@ function displayList() {
         }
     });
 }
+function displayListWithoutLoading() {
+    loadList(false);
+    entry = $('#displayEntries');
+    paginationContent = $('#displayPagination');
+    $.ajax({
+        url: "AJAX/displayHolidayPagination.php",
+        type: "POST",
+        data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        success: function (response) {
+            paginationContent.html(response);
+        }
+    });
+}
 function deleteDataRecord(value) {
     Swal.fire({
         title: 'Confirmation',

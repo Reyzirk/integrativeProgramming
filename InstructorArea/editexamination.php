@@ -66,8 +66,7 @@ $lang_legendTitle = "Examination Details";
                                                         <?php
                                                         $factory = new ParserFactory();
                                                         $parser = $factory->getParser("Courses");
-                                                        $courses = $parser->getCourses();
-                                                        foreach ($courses as $course) {
+                                                        while($course = $parser->getCourses()->next()){
                                                             ?>
                                                             <option value="<?php echo $course->courseCode; ?>"><?php echo $course->courseName; ?></option>
 <?php } ?>

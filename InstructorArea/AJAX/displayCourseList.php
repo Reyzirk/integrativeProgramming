@@ -23,7 +23,7 @@ $search = empty($_POST["search"]) ? null : eliminateExploit($_POST["search"]);
 $entry = empty($_POST["entry"]) ? 20 : (int) $_POST["entry"];
 $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
 //Convert to indexed array
-foreach ($courses as $key) {
+while($key = $courses->next()){
     if (empty($search) ||
             (
             custom_str_contains($key->courseCode, empty($search) ? "" : $search) ||

@@ -46,9 +46,6 @@ class HolidayController extends BaseController implements Controller{
                     if ($apiKey != $ini_array["General"]["apiKey"]) {
                         $output[] = array("Status" => "Failed", "Message" => "Invalid API Key to retrieve the data.");
                     } else {
-                        foreach ($holidays as $key) {
-                            $holidayList[] = $key;
-                        }
                         if (isset($params["limit"])) {
                             $entry = $params["limit"];
                         }
@@ -71,7 +68,7 @@ class HolidayController extends BaseController implements Controller{
                         $data=array();
                         for ($i = $beginIndex; $i < $endIndex; $i++) {
                             $count++;
-                            $key = $holidayList[$i];
+                            $key = $holidays[$i];
                             $valueDateStart = (string) $key->dateStart;
                             $dateStart = new DateTime($valueDateStart);
                             if (!empty($month)) {
@@ -184,7 +181,7 @@ class HolidayController extends BaseController implements Controller{
             );
         }
     }
-    public function validateData($name,$start,$end){
+    private function validateData($name,$start,$end){
         $error = array();
         if (empty($name)){
             $error["holidayName"] = "<b>Holiday Name</b> cannot empty.";

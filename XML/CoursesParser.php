@@ -12,6 +12,7 @@
  *
  * @author Choo Meng
  */
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/XML/XMLArray.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/XML/Parser.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Course.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/CourseMaterial.php";
@@ -22,7 +23,7 @@ class CoursesParser implements Parser{
     private $xml;
     private static $parser = NULL;
     public function __construct($filename){
-        $this->courses = new SplObjectStorage();
+        $this->courses = new XMLArray();
         $this->readFromXML($filename);
     }
     private function readFromXML($filename){
@@ -37,7 +38,7 @@ class CoursesParser implements Parser{
                 $tempMaterial[] = new CourseMaterial($attrMaterial->id, $material->name, $material->link);
             }
             $temp = new Course($attr->code,$course->name,$course->desc,$tempMaterial);
-            $this->courses->attach($temp);
+            $this->courses->add($temp);
         }
         
     }
@@ -93,22 +94,10 @@ class CoursesParser implements Parser{
             }
             
         }
+        $this->courses->add($newCourse);
     }
     public function updateCourse($oldID, $updatedCourse):bool{
-        $course = $this->xml->xpath('course[@code="'.$oldID.'"]');
-        if(count($course)>=1){
-            $course=$course[0];
-            $dom= dom_import_simplexml($course);
-            $dom->parentNode->removeChild($dom);
-        }else{
-            return false;
-        }
-        foreach ($this->courses as $key) {
-            if ($key->courseCode==$oldID){
-                $this->courses->detach($key);
-                break;
-            }
-        }
+        $this->removeCourse($oldID);
         $this->addCourse($updatedCourse);
         if ($oldID != $updatedCourse->courseCode){
             $examdb = new ExaminationDB();
@@ -129,9 +118,9 @@ class CoursesParser implements Parser{
         }else{
             return false;
         }
-        foreach ($this->courses as $key) {
-            if ($key->courseCode==$id){
-                $this->courses->detach($key);
+        while($course = $this->courses->next()){
+            if ($course->courseCode == $id){
+                $this->courses->remove();
                 return true;
             }
         }
@@ -160,7 +149,7 @@ class CoursesParser implements Parser{
         $this->xml->asXml($filename);
     }
     private function updateList(){
-        $this->courses = new SplObjectStorage();
+        $this->courses = new XMLArray();
         $courseList = $this->xml->course;
         foreach($courseList as $course){
             $attr = $course->attributes();
@@ -170,7 +159,7 @@ class CoursesParser implements Parser{
                 $tempMaterial[] = new CourseMaterial($attrMaterial->id, $material->name, $material->link);
             }
             $temp = new Course($attr->code,$course->name,$course->desc,$tempMaterial);
-            $this->courses->attach($temp);
+            $this->courses->add($temp);
         }
     }
 }

@@ -59,11 +59,10 @@ $lang_legendTitle = "Course Schedule Details";
                                                         <?php
                                                         $factory = new ParserFactory();
                                                         $parser = $factory->getParser("Courses");
-                                                        $courses = $parser->getCourses();
-                                                        foreach ($courses as $course) {
+                                                        while($course = $parser->getCourses()->next()){
                                                             ?>
                                                             <option value="<?php echo $course->courseCode; ?>"><?php echo $course->courseName; ?></option>
-<?php } ?>
+                                                        <?php } ?>
                                                     </datalist>
                                                 </div>
                                                 <div class="col-md">
@@ -78,7 +77,7 @@ $lang_legendTitle = "Course Schedule Details";
                                                         foreach ($resultList as $row) {
                                                             ?>
                                                             <option value="<?php echo $row->instructorID; ?>"><?php echo $row->instructorName; ?></option>
-<?php } ?>
+                                                        <?php } ?>
                                                     </datalist>
                                                 </div>
                                             </div>

@@ -23,7 +23,7 @@ $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
 $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
 $count = 0;
 //Convert to indexed array
-foreach ($grades as $key) {
+while($key = $grades->next()){
     $minMark = $key->minMark;
     $maxMark = $key->maxMark;
     $mark = empty($search)?0:(is_double($search)? doubleval($search):0);

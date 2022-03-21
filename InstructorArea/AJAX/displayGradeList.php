@@ -24,7 +24,7 @@ $search = empty($_POST["search"]) ? null : eliminateExploit($_POST["search"]);
 $entry = empty($_POST["entry"]) ? 20 : (int) $_POST["entry"];
 $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
 //Convert to indexed array
-foreach ($grades as $key) {
+while($key = $grades->next()){
     $minMark = $key->minMark;
     $maxMark = $key->maxMark;
     $mark = empty($search)?0:(is_double($search)? doubleval($search):0);

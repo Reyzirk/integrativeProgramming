@@ -42,7 +42,7 @@ $result = $classdb->details($id);
 $classStart = new DateTime($result->classStart);
 $classEnd = new DateTime($result->classEnd);
 //Convert to indexed array
-foreach ($holidays as $key) {
+while($key = $holidays->next()){
     $valueDateStart = (string) $key->dateStart;
     $valueDateEnd = (string) $key->dateEnd;
     $dateStart = new DateTime($valueDateStart);

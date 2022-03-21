@@ -31,7 +31,7 @@ $classStart = new DateTime($result->classStart);
 $classEnd = new DateTime($result->classEnd);
 $count = 0;
 //Convert to indexed array
-foreach ($holidays as $key) {
+while($key = $holidays->next()){
     $valueDateStart = (string) $key->dateStart;
     $valueDateEnd = (string) $key->dateEnd;
     $dateStart = new DateTime($valueDateStart);

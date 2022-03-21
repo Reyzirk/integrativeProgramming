@@ -70,3 +70,5 @@
 [2022-03-20 12:50:15] [8]Undefined variable: desc | Fatal error on line 84 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\AJAX\displayAnnounceList.php 
 [2022-03-20 12:51:00] [8]Uninitialized string offset: 0 | Fatal error on line 63 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\AJAX\displayAnnounceList.php 
 [2022-03-20 12:51:00] [8]Undefined variable: desc | Fatal error on line 84 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\AJAX\displayAnnounceList.php 
+[2022-03-21 13:23:38] [8]Undefined variable: i | Fatal error on line 61 in file C:\xampp\htdocs\IPAssignment\InstructorArea\AJAX\displayCourseList.php 
+[2022-03-21 13:23:38] [8]Undefined index:  | Fatal error on line 114 in file C:\xampp\htdocs\IPAssignment\XML\XMLArray.php 

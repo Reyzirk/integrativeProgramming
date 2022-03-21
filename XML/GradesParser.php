@@ -12,6 +12,7 @@
  *
  * @author Choo Meng
  */
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/XML/XMLArray.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/XML/Parser.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Grade.php";
 
@@ -20,7 +21,7 @@ class GradesParser implements Parser{
     private $xml;
     private static $parser;
     public function __construct($filename){
-        $this->grades = new SplObjectStorage();
+        $this->grades = new XMLArray();
         $this->readFromXML($filename);
     }
     public static function getInstance($filename){
@@ -36,7 +37,7 @@ class GradesParser implements Parser{
         foreach($gradeList as $grade){
             $attr = $grade->attributes();
             $temp = new Grade($attr->gradeID,$grade->grade,$grade->minMark, $grade->maxMark);
-            $this->grades->attach($temp);
+            $this->grades->add($temp);
         }
         
     }
@@ -138,19 +139,20 @@ class GradesParser implements Parser{
         }else{
             return false;
         }
-        foreach ($this->grades as $key) {
+        while($key = $this->grades->next()){
             if ($key->gradeID==$id){
-                $this->grades->detach($key);
+                $this->grades->remove();
                 return true;
             }
         }
     }
     public function reputGrade($existgrade){
         $grade = $this->xml->addChild('grade');
-        $grade->addAttribute('gradeID', $existgrade->minMark);
+        $grade->addAttribute('gradeID', $existgrade->gradeID);
         $grade->addChild('grade',$existgrade->grade);
         $grade->addChild('minMark',$existgrade->minMark);
         $grade->addChild('maxMark',$existgrade->maxMark);
+        $this->grades->add($existgrade);
     }
     public function addGrade($newGrade){
         $grade = $this->xml->addChild('grade');
@@ -158,6 +160,7 @@ class GradesParser implements Parser{
         $grade->addChild('grade',strtoupper($newGrade->grade));
         $grade->addChild('minMark',$newGrade->minMark);
         $grade->addChild('maxMark',$newGrade->maxMark);
+        $this->grades->add($newGrade);
     }
     public function saveXML($filename){
         $this->xml->asXml($filename);
