@@ -331,4 +331,29 @@ function editDataRecord(childID){
 $(document).ready(function () {
     displayList();
 });
-
+function downloadPDF(){
+    const table = this.document.getElementById("tableList");
+    var opt = {
+        margin: 0.2,
+        filename: 'examresults.pdf',
+        image: { type: 'png', quality: 10 },
+        html2canvas: { scale: 3 },
+        jsPDF: { unit: 'in', format: 'A4', orientation: 'landscape' }
+    };
+    html2pdf().from(table).set(opt).save();
+}
+function downloadXLSX(){
+    var table = $('.table2excel');
+    if (table && table.length) {
+        $(table).table2excel({
+                exclude: ".noExl",
+                name: "Exam Results",
+                filename: "Exam Results" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
+                fileext: ".xls",
+                exclude_img: true,
+                exclude_links: true,
+                exclude_inputs: true,
+                preserveColors: true
+        });
+    }
+}

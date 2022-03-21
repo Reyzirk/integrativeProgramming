@@ -29,3 +29,8 @@
         </li>
     </ul>
 </nav>
+<!-- Scroll to top -->
+<button type="button" id="scrollToTop" class="scrollToTop" onclick="scrollFunction()">
+    <i class="fas fa-arrow-up"></i>
+</button>
+<script>initScrollToTop()</script>

@@ -49,7 +49,11 @@ $lang_action_btn = "Action";
                         <div class="jumbotrun" id="container">
                             <h2 class="text-center">Timetable</h2>
                             <br/>
-                            <div class="schedule">
+                            <div class="leftSide">
+                                <button class="btn btn-success" id="download" onclick="downloadSchedule()"><i class="fa-solid fa-download"></i> PDF Download</button>
+                            </div>
+                            <br/>
+                            <div class="schedule" id="schedule">
                                 <?php
                                 foreach ($scheduleList as $key => $value) {
                                     ?>
@@ -98,8 +102,12 @@ $lang_action_btn = "Action";
                                 </div>
                             </div>
                             <br/>
+                            <div class="leftSide">
+                                <button class="btn btn-success" id="download" onclick="downloadPDF()"><i class="fa-solid fa-download"></i> PDF Download</button>
+                                <button class="btn btn-success" id="downloadXLSX" onclick="downloadXLSX()"><i class="fa-solid fa-sheet-plastic"></i> Excel Download</button>
+                            </div>
                             <br/>
-                            <table class="table table-hover" id="tableList">
+                            <table class="table table-hover table2excel" id="tableList">
                                 <thead>
                                     <tr class="table-active">
                                         <?php

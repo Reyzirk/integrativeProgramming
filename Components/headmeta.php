@@ -46,3 +46,6 @@ echo("
 
 <link href="vendor/aos/aos.css" rel="stylesheet">
 <script src="vendor/aos/aos.js" type='text/javascript'></script>
+
+<script src="js/html2pdf.bundle.min.js" type='text/javascript'></script>
+<script src="js/jquery.table2excel.js" type='text/javascript'></script>

@@ -11,6 +11,9 @@ Web Application is under GNU General Public License v3.0
 /*
     Header
 */
+html {
+    scroll-behavior: smooth;
+}
 #title{
     margin-bottom: 0px;
     word-break: break-word;
@@ -136,4 +139,37 @@ input:disabled {
 }
 .fa-envelope:hover{
     color: skyblue;
+}
+
+/*Scroll to Top Button*/
+#scrollToTop {
+    height: 40px;
+    width: 40px;
+    background-color: rgba(78, 115, 223,0.75);
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    display: none;
+    bottom: 2%;
+    right: 1%;
+    position: fixed;
+    cursor: pointer;
+    z-index: 1;
+}
+
+#scrollToTop:hover {
+    background-color: rgb(46, 89, 217);
+    color:white;
+}
+
+#scrollToTop p {
+    color: black;
+    font-weight: bolder;
+    font-size: 1.5em;
+    margin: 0px;
+    cursor: pointer;
+}
+.leftSide .btn{
+    margin-top: 6px;
+    margin-bottom: 6px;
 }

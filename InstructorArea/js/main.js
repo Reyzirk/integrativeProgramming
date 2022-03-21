@@ -240,3 +240,22 @@ function navigateToCourseSchedule(){
         }
     })
 }
+function initScrollToTop(){
+    var topButton = document.getElementById("scrollToTop");
+    if (topButton != null) {
+        window.onscroll = function () { detectScroll() };
+        function detectScroll() {
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                topButton.style.display = "block";
+            } else {
+                topButton.style.display = "none";
+            }
+        }
+
+    }
+
+}
+//Scroll to the top button
+function scrollFunction() {
+    window.location.href = "#top"
+}

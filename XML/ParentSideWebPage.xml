@@ -14,6 +14,56 @@ Web Application is under GNU General Public License v3.0
         <PageDescription>Home page of the website.</PageDescription>
     </Page>
     <Page>
+        <PageLink>selectchild</PageLink>
+        <PageTitle>Select Child</PageTitle>
+        <PageDescription>Select child before proceed to view child details.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>holidays</PageLink>
+        <PageTitle>Holiday List</PageTitle>
+        <PageDescription>View holiday list</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>timetable</PageLink>
+        <PageTitle>View Timetable</PageTitle>
+        <PageDescription>View timetable details</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>timetableclasses</PageLink>
+        <PageTitle>Timetable Class Selection</PageTitle>
+        <PageDescription>Make class selection for timetable</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>homeworks</PageLink>
+        <PageTitle>Homework List</PageTitle>
+        <PageDescription>View homework list</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>homeworkclasses</PageLink>
+        <PageTitle>Homework Class Selection</PageTitle>
+        <PageDescription>Make class selection for homework</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>viewhomework</PageLink>
+        <PageTitle>View Homework</PageTitle>
+        <PageDescription>View homework details</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>examinations</PageLink>
+        <PageTitle>Examination List</PageTitle>
+        <PageDescription>View examination list</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>examinationclasses</PageLink>
+        <PageTitle>Examination Class Selection</PageTitle>
+        <PageDescription>Make class selection for examination</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>viewexamination</PageLink>
+        <PageTitle>View Examination</PageTitle>
+        <PageDescription>View examination details</PageDescription>
+    </Page>
+    <Page>
         <PageLink>index</PageLink>
         <PageTitle>Template Page</PageTitle>
         <PageDescription>Home page of the website.</PageDescription>
