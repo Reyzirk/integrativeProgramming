@@ -1,38 +1,26 @@
 <?php
 
-/*
+/* 
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
  * Web Application is under GNU General Public License v3.0
  * ============================================
  * 
- * Description of Announcement
- *
  * @author Oon Kheng Huang
- * 
  */
 
-class Announcement {
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Announcement.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Attachment.php";
 
-    protected $announceID;
-    protected $instructorID;
-    protected $title;
-    protected $desc;
-    protected $cat;
-    protected $date;
-    protected $pin;
-    protected $allowC;
-
-    public function __construct($announceID, $instructorID="", $title="", $desc="", $cat="", $date="", $pin="", $allowC="") {
-        $this->announceID = $announceID;
-        $this->instructorID = $instructorID;
-        $this->title = $title;
-        $this->desc = $desc;
-        $this->cat = $cat;
-        $this->date = $date;
-        $this->pin = $pin;
-        $this->allowC = $allowC;
+class AnnounceWithImgDoc extends Announcement{
+    
+    private $attach;    
+    
+    public function __construct($announce, $attach = array()) {
+        parent::__construct($announce->announceID, $announce->instructorID, $announce->title, $announce->desc, 
+                $announce->cat, $announce->date, $announce->pin, $announce->allowC);
         
+        $this->attach = $attach;
     }
     
     public function __get($name) {
@@ -51,5 +39,5 @@ class Announcement {
         }
     }
     
-
 }
+

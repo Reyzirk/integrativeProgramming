@@ -6,35 +6,18 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  * 
- * Description of Announcement
- *
  * @author Oon Kheng Huang
- * 
  */
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Announcement.php";
 
-class Announcement {
+class AnnounceWithNoAttach extends Announcement {
 
-    protected $announceID;
-    protected $instructorID;
-    protected $title;
-    protected $desc;
-    protected $cat;
-    protected $date;
-    protected $pin;
-    protected $allowC;
+    private $instance;
 
-    public function __construct($announceID, $instructorID="", $title="", $desc="", $cat="", $date="", $pin="", $allowC="") {
-        $this->announceID = $announceID;
-        $this->instructorID = $instructorID;
-        $this->title = $title;
-        $this->desc = $desc;
-        $this->cat = $cat;
-        $this->date = $date;
-        $this->pin = $pin;
-        $this->allowC = $allowC;
-        
+    public function __construct($announce) {
+        parent::__construct($announce->announceID, $announce->instructorID, $announce->title, $announce->desc, $announce->cat, $announce->date, $announce->pin, $announce->allowC);
     }
-    
+
     public function __get($name) {
         if (property_exists($this, $name)){
             return $this->$name;
@@ -50,6 +33,6 @@ class Announcement {
             trigger_error("Property $name doesn't exists", E_USER_ERROR);
         }
     }
-    
+
 
 }

@@ -54,27 +54,32 @@ $lang_legendTitle = "Announcement Details";
                                                     <div class="row">
                                                         <div class="col-md-4">
                                                             <label for="class" class="col-form-label font-weight-bold">Announcement ID</label>
-                                                            <p class="p-12"><?php echo $getAnnounce->announceID; ?></p>
+                                                            <p class="p-12"><?php echo $announceInfo->announceID; ?></p>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label for="cat" class="col-form-label font-weight-bold">Category</label>
-                                                            <p class="p-12"><?php echo convertCatToWord($getAnnounce->cat); ?></p>
+                                                            <p class="p-12"><?php echo convertCatToWord($announceInfo->cat); ?></p>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label for="date" class="col-form-label font-weight-bold">Date</label>
-                                                            <p class="p-12"><?php echo $getAnnounce->date; ?></p>
+                                                            <p class="p-12"><?php echo $announceInfo->date; ?></p>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md">
                                                             <label for="class" class="col-form-label font-weight-bold">Title</label>
-                                                            <p class="p-12"><span style="font-size: 20pt"><?php echo $getAnnounce->title; ?></span></p>
+                                                            <div style=" background-color: white; border-radius: 15px;box-shadow: 0px 5px 5px  rgba(51, 51, 51, 0.3);">
+                                                                <p class="p-12"><span style="font-size: 20pt;padding-left:10px"><?php echo $announceInfo->title; ?></span></p>
+                                                            </div>
+                                                            
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md">
                                                             <label for="class" class="col-form-label font-weight-bold">Description</label>
-                                                            <div><?php echo html_entity_decode($getAnnounce->desc); ?></div>
+                                                            <div style=" background-color: white; border-radius: 15px;box-shadow: 0px 5px 5px  rgba(51, 51, 51, 0.3); min-height: 100px">
+                                                                <div style="padding-left: 15px"><span style="background-color: white;"><?php echo html_entity_decode($announceInfo->desc); ?></span></div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <br/>
@@ -82,7 +87,7 @@ $lang_legendTitle = "Announcement Details";
                                                         <div class="col-md">
                                                             <h5>Attachments</h5>
                                                             <hr/>
-                                                            <?php echo htmlspecialchars_decode(""); ?>
+                                                            
                                                         </div>
 
                                                     </div>
@@ -91,7 +96,7 @@ $lang_legendTitle = "Announcement Details";
                                                         <div class="col-md">
                                                             <h5>Comment</h5>
                                                             <hr/>
-                                                            <?php echo htmlspecialchars_decode(""); ?>
+                                                            
                                                         </div>
 
                                                     </div>
