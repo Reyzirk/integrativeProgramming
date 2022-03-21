@@ -151,5 +151,22 @@ class ClassDB {
             return true;
         }
     }
+    public function access($childID, $id):bool{
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("childclass"), array("*"))
+                ->where("ChildID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->where("ClassID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
 
 }

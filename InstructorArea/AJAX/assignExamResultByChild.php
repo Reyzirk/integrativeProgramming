@@ -20,7 +20,7 @@ if (empty($_POST["childID"])||empty($_POST["examID"])){
         $childdb = new ChildDB();
         if ($childdb->validID($id)){
             $resultdb = new ExamResultDB();
-            $examresult = new ExamResult($examid,$id,0);
+            $examresult = new ExamResult($examid,$id,-1);
             if ($resultdb->validID($examresult)){
                 echo "The child already assigned to this examination.";
             }else{

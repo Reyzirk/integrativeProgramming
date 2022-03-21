@@ -9,6 +9,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+$_SESSION["parentID"] = "P00001";
 include_once 'ini_load.php';
 include_once 'exception_load.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/DBController.php";

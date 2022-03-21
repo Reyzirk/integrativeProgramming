@@ -42,7 +42,7 @@ function callLog() {
     if (!empty($_SESSION["errorLog"])) {
 
         if ($_SESSION["errorLog"] == "noid") {
-            $errorMsg = "Invalid Grade ID";
+            $errorMsg = "Invalid Class ID";
         }
         ?>
         <script>

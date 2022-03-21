@@ -29,10 +29,11 @@ class ChildClassDB {
         ->bracketWhere(WhereTypeEnum::OR)
         ->where("childclass.ChildID", "child.ChildID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
         ->where("child.ParentID", "parent.ParentID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false )
-        ->where("childclass.ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->where("childclass.ClassID", \CustomSQLEnum::BIND_QUESTIONMARK, WhereTypeEnum::AND, OperatorEnum::EQUAL)
         ->bracketWhere(WhereTypeEnum::AND)
         ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         return $totalrows;
@@ -98,6 +99,26 @@ class ChildClassDB {
                 ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->bindParam(1, $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return array();
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+    }
+    
+    public function listClass($childID){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("childclass","classes","instructor"), array("*"))
+                ->where("childclass.ClassID", "classes.ClassID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
+                ->where("classes.InstructorID", "instructor.InstructorID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
+                ->where("ChildID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows==0){

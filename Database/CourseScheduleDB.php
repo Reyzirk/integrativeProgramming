@@ -33,10 +33,11 @@ class CourseScheduleDB {
         ->bracketWhere(WhereTypeEnum::OR)
         ->where("courseschedule.ClassID", "classes.ClassID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false )
         ->where("courseschedule.InstructorID", "instructor.InstructorID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false )
-        ->where("courseschedule.ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->where("courseschedule.ClassID", \CustomSQLEnum::BIND_QUESTIONMARK, WhereTypeEnum::AND, OperatorEnum::EQUAL)
         ->bracketWhere(WhereTypeEnum::AND)
         ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         return $totalrows;
@@ -83,6 +84,26 @@ class CourseScheduleDB {
             return false;
         }else{
             return true;
+        }
+    }
+    public function list($classID){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("courseschedule","classes","instructor"), array("*"))
+        ->where("courseschedule.ClassID", "classes.ClassID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false )
+        ->where("courseschedule.InstructorID", "instructor.InstructorID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false )
+        ->where("courseschedule.ClassID", \CustomSQLEnum::BIND_QUESTIONMARK, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->bracketWhere(WhereTypeEnum::AND)
+        ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $classID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return NULL;
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            return $results;
         }
     }
     public function delete($scheduleID){

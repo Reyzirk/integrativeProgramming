@@ -1,46 +1,57 @@
 <?php
 
-/*
+/* 
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
-
 /**
- * Description of childclasses
+ * Description of examination
  *
  * @author Choo Meng
  */
-require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ExaminationDB.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ClassDB.php";
 if (empty($_GET["id"])){
     $_SESSION["errorLog"] = "noid";
     header('HTTP/1.1 307 Temporary Redirect');
-    header('Location: examinations.php');
+    header('Location: examinationclasses.php');
 }else{
     $id = $_GET["id"];
-    $examDB = new ExaminationDB();
-    if (!$examDB->validID($id)){
+    $classDB = new ClassDB();
+    if (!$classDB->validID($id)){
         $_SESSION["errorLog"] = "noid";
         header('HTTP/1.1 307 Temporary Redirect');
-        header('Location: examinations.php');
+        header('Location: examinationclasses.php');
+    }else{
+        if (!$classDB->access($_SESSION["childID"],$id)){
+            $_SESSION["errorLog"] = "noaccess";
+            header('HTTP/1.1 307 Temporary Redirect');
+            header('Location: examinationclasses.php');
+        }
     }
 }
-
 $dataArray = array(
-    "StudentID" =>
+    "courseCode" =>
     array(
-        "Title" => "Student ID",
+        "Title" => "Course Code",
         "Width" => "15%"),
-    "StudentName" =>
+    "instructorID" =>
     array(
-        "Title" => "Student Name",
-        "Width" => "25%"),
-    "Mark" =>
+        "Title" => "Examiner",
+        "Width" => "18%"),
+    "examStartTime" =>
+    array(
+        "Title" => "Exam Start Time",
+        "Width" => "20%"),
+    "examDuration" =>
+    array(
+        "Title" => "Exam Duration",
+        "Width" => "10%"),
+    "marks" =>
     array(
         "Title" => "Marks",
-        "Width" => "15%")
-    );
+        "Width" => "10%"));
 
 function callLog() {
     if (!empty($_SESSION["errorLog"])) {
@@ -60,21 +71,5 @@ function callLog() {
         <?php
         unset($_SESSION["errorLog"]);
     }
-    if (!empty($_SESSION["modifyLog"])) {
-
-        if ($_SESSION["modifyLog"] == "assignexamresults") {
-            $successMsg = "Assigned new student to the examination.";
-        }
-        ?>
-        <script>
-            setTimeout(function (){
-                Toast.fire({
-                    icon: 'success',
-                    html: '<b>Sucessful</b><br/><?php echo $successMsg; ?>.'
-                })
-            },1500);
-        </script>
-        <?php
-        unset($_SESSION["modifyLog"]);
-    }
+    
 }

@@ -28,9 +28,10 @@ class HomeworkDB {
         ->where("Date", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
         ->where("HomeworkDesc", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
         ->bracketWhere(WhereTypeEnum::OR)
-        ->where("ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->where("ClassID", \CustomSQLEnum::BIND_QUESTIONMARK, WhereTypeEnum::AND, OperatorEnum::EQUAL)
         ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         return $totalrows;
@@ -148,4 +149,23 @@ class HomeworkDB {
             return true;
         }
     }
+    public function access($childID, $id):bool{
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("homework","childclass"), array("*"))
+                ->where("homework.ClassID", "childclass.ClassID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
+                ->where("ChildID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->where("HomeworkID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
 }

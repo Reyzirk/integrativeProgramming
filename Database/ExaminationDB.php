@@ -36,6 +36,26 @@ class ExaminationDB {
         $totalrows = $stmt->rowCount();
         return $totalrows;
     }
+    public function getCountWithID($search,$id){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("examination"), array("examination.ExaminationID","CourseCode","InstructorName","ExamDuration","ExamStartTime","Marks"))
+        ->join("instructor","examination.InstructorID","instructor.InstructorID")
+        ->join("examresults","examination.ExaminationID","examresults.ExaminationID")
+        ->join("childclass","examresults.ChildID","childclass.ChildID")
+        ->where("examination.ExaminationID", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        ->where("CourseCode", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        ->where("ExamDuration", $search, WhereTypeEnum::OR, OperatorEnum::EQUAL)
+        ->where("ExamStartTime", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        ->where("InstructorName", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        ->where("Marks", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        ->bracketWhere(WhereTypeEnum::OR)
+        ->where("childclass.ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        return $totalrows;
+    }
     public function select($query){
         
         $stmt = $this->instance->con->prepare($query);
@@ -161,6 +181,49 @@ class ExaminationDB {
             return false;
         }else{
             return true;
+        }
+    }
+    public function access($childID,$id): bool{
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("examination"), array("*"))
+            ->join("instructor","examination.InstructorID","instructor.InstructorID")
+            ->join("examresults","examination.ExaminationID","examresults.ExaminationID")
+            ->join("childclass","examresults.ChildID","childclass.ChildID")
+            ->where("examresults.ChildID", \CustomSQLEnum::BIND_QUESTIONMARK, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+            ->where("examination.ExaminationID", \CustomSQLEnum::BIND_QUESTIONMARK, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+            ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    public function getClassID($examID, $childID){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->SELECT(array("examination"), array("childclass.ClassID"))
+            ->join("instructor","examination.InstructorID","instructor.InstructorID")
+            ->join("examresults","examination.ExaminationID","examresults.ExaminationID")
+            ->join("childclass","examresults.ChildID","childclass.ChildID")
+            ->where("examresults.ChildID", \CustomSQLEnum::BIND_QUESTIONMARK, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+            ->where("examination.ExaminationID", \CustomSQLEnum::BIND_QUESTIONMARK, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+            ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $examID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return NULL;
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $row = $results[0];
+            return $row["ClassID"];
         }
     }
 

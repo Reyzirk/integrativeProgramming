@@ -43,3 +43,6 @@ echo("
 
 <link href="css/main.css" rel="stylesheet">
 <script src="js/main.js" type='text/javascript'></script>
+
+<link href="vendor/aos/aos.css" rel="stylesheet">
+<script src="vendor/aos/aos.js" type='text/javascript'></script>

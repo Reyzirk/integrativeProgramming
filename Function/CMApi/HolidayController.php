@@ -154,6 +154,7 @@ class HolidayController extends BaseController implements Controller{
                                 $newHoliday = new Holiday("H",$params["name"],$params["start"],$params["end"]);
                                 $parser->addHoliday($newHoliday);
                                 $factory->saveXML("Holidays");
+                                $output[] = array("Status"=>"Success","Data" => $data);
                             }else{
                                 $output[] = array("Status" => "Failed", "Error Messages"=>$errorReturnedData);
                             }

@@ -4,9 +4,10 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
-var sortType = "ExaminationID";
+var sortType = "Date";
 var sortOrder = "ASC";
 var pageIndex = 1;
+var url = new URL(window.location.href);
 function sortCol(element) {
     loadingScreen();
     if (sortType === element.innerText) {
@@ -19,6 +20,7 @@ function sortCol(element) {
         sortOrder = "ASC";
     }
     sortType = element.innerText;
+
     headerRow = $('#tableList') > $('thead') > $('tr');
     headerRow > $('th').each(function () {
         var icon = $(this).find('i');
@@ -45,9 +47,9 @@ function loadList(closeBool) {
     entry = $('#displayEntries');
 
     $.ajax({
-        url: "AJAX/displayExaminationList.php",
+        url: "AJAX/displayHolidayList.php",
         type: "POST",
-        data: {"search": inputSearch.val(), "sorttype": sortType, "sortorder": sortOrder, "currentPage": pageIndex, "entry": entry.val()},
+        data: {"id":url.searchParams.get("id"),"search": inputSearch.val(), "sorttype": sortType, "sortorder": sortOrder, "currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {
             tableContent.html(response);
             if (closeBool) {
@@ -71,24 +73,11 @@ function displayList() {
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayExaminationPagination.php",
+        url: "AJAX/displayHolidayPagination.php",
         type: "POST",
-        data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
             Swal.close();
-            paginationContent.html(response);
-        }
-    });
-}
-function displayListWithoutLoading() {
-    loadList(false);
-    entry = $('#displayEntries');
-    paginationContent = $('#displayPagination');
-    $.ajax({
-        url: "AJAX/displayExaminationPagination.php",
-        type: "POST",
-        data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
-        success: function (response) {
             paginationContent.html(response);
         }
     });
@@ -96,7 +85,7 @@ function displayListWithoutLoading() {
 function deleteDataRecord(value) {
     Swal.fire({
         title: 'Confirmation',
-        text: "Are you sure you want to delete the examination!",
+        text: "Are you sure you want to delete the holiday!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Confirm'
@@ -104,9 +93,9 @@ function deleteDataRecord(value) {
         if (result.isConfirmed) {
             loadingScreen();
             $.ajax({
-                url: "AJAX/deleteExamination.php",
+                url: "AJAX/deleteHoliday.php",
                 type: "POST",
-                data: {"examinationID": value},
+                data: {"holidayID": value},
                 success: function (response) {
                     if (response === "fail") {
                         Swal.close();
@@ -116,7 +105,7 @@ function deleteDataRecord(value) {
                         displayListWithoutLoading();
                         Toast.fire({
                             icon: 'success',
-                            html: '<b>Successful</b><br/>Removed the examination.'
+                            html: '<b>Successful</b><br/>Removed the holiday.'
                         })
 
                     } else {
@@ -138,9 +127,9 @@ function updatePageIndex(index) {
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayExaminationPagination.php",
+        url: "AJAX/displayHolidayPagination.php",
         type: "POST",
-        data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
             paginationContent.html(response);
         }
@@ -153,17 +142,36 @@ function updatePageEntry() {
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayExaminationPagination.php",
+        url: "AJAX/displayHolidayPagination.php",
         type: "POST",
-        data: {"currentPage": pageIndex, "entry": entry.val()},
+        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {
             paginationContent.html(response);
         }
     });
     loadList(true);
 }
+function getCourseDetails(coursecode) {
+    loadingScreen();
+    $.ajax({
+        url: "AJAX/displayCourseDetails.php",
+        type: "POST",
+        data: {"courseCode":coursecode},
+        success: function (response) {
+            Swal.close();
+            var result = JSON.parse(response);
+            $('#courseTitle').html(result.code+" "+result.name);
+            $('#courseDesc').html(result.desc);
+            str = "";
+            for (let i = 0; i < result.material.length; i++) {
+                str += "<a href='uploads/CourseMaterial/"+result.material[i].link+"'>"+result.material[i].name+" (Click to access) </a><br/>"
+            }
+            $('#courseMaterials').html(str);
+            $('#courseModal').modal('show')
+            
+        }
+    });
+}
 $(document).ready(function() {
    displayList(); 
 });
-
-

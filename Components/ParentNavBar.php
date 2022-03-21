@@ -18,9 +18,9 @@ Web Application is under GNU General Public License v3.0
                 <li><a href="#">Announcement</a></li>
                 <li class="dropdown"><a href="#" onclick="toggleMobileNavBarDropdown(this)"><span>Course</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="#">View Examination</a></li>
-                        <li><a href="#">Timetable</a></li>
-                        <li><a href="#">Homework</a></li> <!--Optional, may delete it-->
+                        <li><a href="examinationclasses.php">Examination</a></li>
+                        <li><a href="timetableclasses.php">Timetable</a></li>
+                        <li><a href="homeworkclasses.php">Homework</a></li> <!--Optional, may delete it-->
                     </ul>
                 </li>
                 <li class="dropdown"><a href="#" onclick="toggleMobileNavBarDropdown(this)"><span>Child</span> <i class="bi bi-chevron-down"></i></a>

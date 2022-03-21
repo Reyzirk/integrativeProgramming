@@ -123,7 +123,7 @@ class CourseController extends BaseController implements Controller{
                                     $material[] = array("Material Name"=>(string)$key2->materialName,"Link"=>(string)$key2->materialLink);
                                 }
                                 $data = array("Course Code" => (string) $course->courseCode, "Course Name" => (string) $course->courseName, "Course Description" => (string) $course->courseDesc, "Course Materials"=>$materials);
-                                $output[] = array("Status"=>"Success","Data" => $data, "Total Record Retrieved" => $count);
+                                $output[] = array("Status"=>"Success","Data" => $data);
                                 
                             }
                         }

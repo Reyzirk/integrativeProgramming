@@ -103,7 +103,7 @@ if ($totalCount == 0) {
                 <br/>
                 <?php echo $row["ParentEmail"]; ?> <i class="fa-solid fa-envelope" onclick="location.href='mailto: <?php echo $row["ParentEmail"]; ?>'"></i>
             </td>
-            <td class="text-center"><?php echo $row["Marks"]; ?> <b>[<?php echo $gradeResult; ?>]</b></td>
+            <td class="text-center"><?php echo ($row["Marks"]==-1?"NA":$row["Marks"]); ?> <b>[<?php echo $gradeResult; ?>]</b></td>
             <td class="text-center">
                 <button class='btn btn-outline-warning' onclick="editDataRecord('<?php echo $row["ChildID"]; ?>');"><i class="fa-solid fa-pen-to-square"></i> Modify</button>
                 <button class='btn btn-outline-danger' onclick="deleteDataRecord('<?php echo $row["ExaminationID"]; ?>','<?php echo $row["ChildID"]; ?>');"><i class="fa-solid fa-trash"></i> Delete</button>

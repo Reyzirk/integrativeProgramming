@@ -4,9 +4,10 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
-var sortType = "ExaminationID";
-var sortOrder = "ASC";
+var sortType = "Date";
+var sortOrder = "DESC";
 var pageIndex = 1;
+var url = new URL(window.location.href);
 function sortCol(element) {
     loadingScreen();
     if (sortType === element.innerText) {
@@ -43,11 +44,10 @@ function loadList(closeBool) {
     inputSearch = $('#inputSearch');
     tableContent = $('#tableContent');
     entry = $('#displayEntries');
-
     $.ajax({
-        url: "AJAX/displayExaminationList.php",
+        url: "AJAX/displayHomeworkList.php",
         type: "POST",
-        data: {"search": inputSearch.val(), "sorttype": sortType, "sortorder": sortOrder, "currentPage": pageIndex, "entry": entry.val()},
+        data: {"id":url.searchParams.get("id"),"search": inputSearch.val(), "sorttype": sortType, "sortorder": sortOrder, "currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {
             tableContent.html(response);
             if (closeBool) {
@@ -71,9 +71,9 @@ function displayList() {
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayExaminationPagination.php",
+        url: "AJAX/displayHomeworkPagination.php",
         type: "POST",
-        data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
             Swal.close();
             paginationContent.html(response);
@@ -85,9 +85,9 @@ function displayListWithoutLoading() {
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayExaminationPagination.php",
+        url: "AJAX/displayHomeworkPagination.php",
         type: "POST",
-        data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
             paginationContent.html(response);
         }
@@ -96,7 +96,7 @@ function displayListWithoutLoading() {
 function deleteDataRecord(value) {
     Swal.fire({
         title: 'Confirmation',
-        text: "Are you sure you want to delete the examination!",
+        text: "Are you sure you want to delete the homework!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Confirm'
@@ -104,9 +104,9 @@ function deleteDataRecord(value) {
         if (result.isConfirmed) {
             loadingScreen();
             $.ajax({
-                url: "AJAX/deleteExamination.php",
+                url: "AJAX/deleteHomework.php",
                 type: "POST",
-                data: {"examinationID": value},
+                data: {"homeworkID": value},
                 success: function (response) {
                     if (response === "fail") {
                         Swal.close();
@@ -116,7 +116,43 @@ function deleteDataRecord(value) {
                         displayListWithoutLoading();
                         Toast.fire({
                             icon: 'success',
-                            html: '<b>Successful</b><br/>Removed the examination.'
+                            html: '<b>Successful</b><br/>Removed the homework.'
+                        })
+
+                    } else {
+                        Swal.close();
+                        showErrorMessage(response);
+                    }
+
+                }
+            });
+        }
+    });
+}
+function deleteAllBtn() {
+    Swal.fire({
+        title: 'Confirmation',
+        text: "Are you sure you want to delete all the homework!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Confirm'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            loadingScreen();
+            $.ajax({
+                url: "AJAX/deleteAllHomework.php",
+                type: "POST",
+                data: {"classID": url.searchParams.get("id")},
+                success: function (response) {
+                    if (response === "fail") {
+                        Swal.close();
+                        showErrorMessage("Please Try Again!");
+                    } else if (response === "success") {
+                        loadingScreen();
+                        loadList(false);
+                        Toast.fire({
+                            icon: 'success',
+                            html: '<b>Successful</b><br/>Removed all the homework.'
                         })
 
                     } else {
@@ -131,16 +167,15 @@ function deleteDataRecord(value) {
 }
 
 
-
 function updatePageIndex(index) {
     loadingScreen();
     pageIndex = index;
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayExaminationPagination.php",
+        url: "AJAX/displayHomeworkPagination.php",
         type: "POST",
-        data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
             paginationContent.html(response);
         }
@@ -153,9 +188,9 @@ function updatePageEntry() {
     entry = $('#displayEntries');
     paginationContent = $('#displayPagination');
     $.ajax({
-        url: "AJAX/displayExaminationPagination.php",
+        url: "AJAX/displayHomeworkPagination.php",
         type: "POST",
-        data: {"currentPage": pageIndex, "entry": entry.val()},
+        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {
             paginationContent.html(response);
         }
@@ -165,5 +200,4 @@ function updatePageEntry() {
 $(document).ready(function() {
    displayList(); 
 });
-
 

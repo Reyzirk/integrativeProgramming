@@ -36,8 +36,29 @@ class ChildDB {
         }
     }
     
+    public function validParent($id,$parentID): bool{
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("child"), array("*"))
+                ->where("ChildID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+        $stmt->bindParam(2, $parentID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
     public function getChildDetails($childID){
-        $query = "SELECT * FROM Child WHERE ChildID = ?";
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("child"), array("*"))
+                ->where("ChildID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->bindParam(1, $childID, PDO::PARAM_STR);
         $stmt->execute();
@@ -54,4 +75,26 @@ class ChildDB {
             return $record;
         }
     }
+    
+    public function getChildList($parentID){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("child"), array("*"))
+                ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $parentID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        
+        if ($totalrows == 0 ){
+            return NULL;
+        }
+        else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+    }
+    
+
 }

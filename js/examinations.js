@@ -7,6 +7,7 @@
 var sortType = "ExaminationID";
 var sortOrder = "ASC";
 var pageIndex = 1;
+var url = new URL(window.location.href);
 function sortCol(element) {
     loadingScreen();
     if (sortType === element.innerText) {
@@ -47,7 +48,7 @@ function loadList(closeBool) {
     $.ajax({
         url: "AJAX/displayExaminationList.php",
         type: "POST",
-        data: {"search": inputSearch.val(), "sorttype": sortType, "sortorder": sortOrder, "currentPage": pageIndex, "entry": entry.val()},
+        data: {"id":url.searchParams.get("id"),"search": inputSearch.val(), "sorttype": sortType, "sortorder": sortOrder, "currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {
             tableContent.html(response);
             if (closeBool) {
@@ -73,7 +74,7 @@ function displayList() {
     $.ajax({
         url: "AJAX/displayExaminationPagination.php",
         type: "POST",
-        data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
             Swal.close();
             paginationContent.html(response);
@@ -87,7 +88,7 @@ function displayListWithoutLoading() {
     $.ajax({
         url: "AJAX/displayExaminationPagination.php",
         type: "POST",
-        data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
             paginationContent.html(response);
         }
@@ -140,7 +141,7 @@ function updatePageIndex(index) {
     $.ajax({
         url: "AJAX/displayExaminationPagination.php",
         type: "POST",
-        data: {"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
             paginationContent.html(response);
         }
@@ -155,7 +156,7 @@ function updatePageEntry() {
     $.ajax({
         url: "AJAX/displayExaminationPagination.php",
         type: "POST",
-        data: {"currentPage": pageIndex, "entry": entry.val()},
+        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {
             paginationContent.html(response);
         }

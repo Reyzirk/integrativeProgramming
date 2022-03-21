@@ -15,6 +15,7 @@
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/DBController.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/MySQLQueryBuilder.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Objects/ExamResult.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Objects/Examination.php';
 class ExamResultDB {
     private $instance;
     public function __construct(){
@@ -31,10 +32,11 @@ class ExamResultDB {
         ->where("examresults.ExaminationID", "examination.ExaminationID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
         ->where("examresults.ChildID", "child.ChildID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false )
         ->where("child.ParentID", "parent.ParentID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false )
-        ->where("examresults.ExaminationID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->where("examresults.ExaminationID", \CustomSQLEnum::BIND_QUESTIONMARK, WhereTypeEnum::AND, OperatorEnum::EQUAL)
         ->bracketWhere(WhereTypeEnum::AND)
         ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         return $totalrows;
@@ -134,4 +136,103 @@ class ExamResultDB {
             return true;
         }
     }
+    public function getResultByExaminationID($id){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->SELECT(array("examresults","examination","child"), array("Marks","examresults.ChildID","ChildName","examresults.ExaminationID","ExamStartTime","ExamDuration","CourseCode"))
+                ->where("examresults.ExaminationID", "examination.ExaminationID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
+                ->where("examresults.ChildID", "child.ChildID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
+                ->where("examresults.ExaminationID",\CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+        
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return NULL;
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $resultList = array();
+            foreach($results as $row){
+                $exam = new Examination($row["ExaminationID"],$row["CourseCode"],"NA",$row["ExamStartTime"],$row["ExamDuration"]);
+                $result = new ExamResult($exam, $row["ChildName"], $row["Marks"]);
+                $resultList[] = $result;
+            }
+            return $resultList;
+        }
+    }
+    public function getResultByClass($classID,$id){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->SELECT(array("examresults","examination"), array("Marks","ChildID","examresults.ExaminationID","ExamStartTime","ExamDuration","CourseCode"))
+                ->where("examresults.ExaminationID", "examination.ExaminationID", WhereTypeEnum::AND, OperatorEnum::EQUAL, false)
+                ->where("ClassID",\CustomSQLEnum::BIND_QUESTIONMARK)
+                ->where("ChildID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $classID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $id, PDO::PARAM_STR);
+        
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return NULL;
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $resultList = array();
+            foreach($results as $row){
+                $exam = new Examination($row["ExaminationID"],$row["CourseCode"],"NA",$row["ExamStartTime"],$row["ExamDuration"]);
+                $result = new ExamResult($exam, $id, $row["Marks"]);
+                $resultList[] = $result;
+            }
+            return $resultList;
+        }
+    }
+    public function getResult($id){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->SELECT(array("examresults"), array("*"))
+                ->where("ChildID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->groupby("ClassID")
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+        
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return NULL;
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $resultList = array();
+            foreach($results as $row){
+               
+                $resultList[] = $row["ClassID"];
+            }
+            return $resultList;
+        }
+    }
+    public function getResultByExamAndChild($examID, $childID){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->SELECT(array("examresults"), array("*"))
+                ->where("ExaminationID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->where("ChildID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $examID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $childID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return NULL;
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $row = $results[0];
+            return $row["Marks"];
+        }
+    }
+
+    
 }
