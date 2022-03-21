@@ -46,13 +46,27 @@ class AnnouncementDB {
         return $totalrows;
     }
 
+    public function getCountBySearch($search) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("announcement"), array("*"))
+                ->where("AnnounceID", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+                ->where("Date", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+                ->where("Title", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+                ->where("Cat", "%" . (empty($search) ? "" : strtoupper($search[0])) . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        return $totalrows;
+    }
+
     public function getAllID() {
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("announcement"), array("AnnounceID"))
                 ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->execute();
-        
+
         $resultList = array();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
@@ -92,10 +106,28 @@ class AnnouncementDB {
     public function insert($announce) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->insert("announcement")
-                ->values(array($announce->announceID, $announce->instructorID, $announce->title, $announce->desc, $announce->cat,
-                    $announce->date, $announce->pin, $announce->allowC))
+                ->values(array(\CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK,
+                    \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK))
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        
+        $announceID = $announce->announceID;
+        $instructorID = $announce->instructorID;
+        $title = $announce->title;
+        $desc = $announce->desc;
+        $cat = $announce->cat;
+        $date = $announce->date;
+        $pin = $announce->pin;
+        $allowC = $announce->allowC;
+        
+        $stmt->bindParam(1, $announceID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $instructorID, PDO::PARAM_STR);
+        $stmt->bindParam(3, $title, PDO::PARAM_STR);
+        $stmt->bindParam(4, $desc, PDO::PARAM_STR);
+        $stmt->bindParam(5, $cat, PDO::PARAM_STR);
+        $stmt->bindParam(6, $date, PDO::PARAM_STR);
+        $stmt->bindParam(7, $pin, PDO::PARAM_STR);
+        $stmt->bindParam(8, $allowC, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
@@ -108,9 +140,10 @@ class AnnouncementDB {
     public function details($id) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("announcement"), array("*"))
-                ->where("AnnounceID", $id)
+                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
@@ -129,9 +162,10 @@ class AnnouncementDB {
     public function delete($id) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->delete("announcement")
-                ->where("AnnounceID", $id)
+                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
@@ -143,22 +177,34 @@ class AnnouncementDB {
 
     public function update($oldID, $updated) {
         $builder = new MySQLQueryBuilder();
-        $query = $builder->update("announcement", array("Title"=>\CustomSQLEnum::BIND_QUESTIONMARK, "Description"=>\CustomSQLEnum::BIND_QUESTIONMARK, "Cat"=>\CustomSQLEnum::BIND_QUESTIONMARK, "Date"=>\CustomSQLEnum::BIND_QUESTIONMARK, "Pin"=>\CustomSQLEnum::BIND_QUESTIONMARK, "AllowComment"=>\CustomSQLEnum::BIND_QUESTIONMARK))
+        $query = $builder->update("announcement", array("Title" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "Description" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "Cat" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "Date" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "Pin" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "AllowComment" => \CustomSQLEnum::BIND_QUESTIONMARK))
                 ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
+        $announceID = $oldID;
+        $title = $updated->title;
+        $desc = $updated->desc;
+        $cat = $updated->cat;
+        $date = $updated->date;
+        $pin = $updated->pin;
+        $allowC = $updated->allowC;
         $stmt = $this->instance->con->prepare($query);
-        $stmt->bindParam(1, $updated->title, PDO::PARAM_STR);
-        $stmt->bindParam(2, $updated->desc, PDO::PARAM_STR);
-        $stmt->bindParam(3, $updated->cat, PDO::PARAM_STR);
-        $stmt->bindParam(4, $updated->date, PDO::PARAM_STR);
-        $stmt->bindParam(5, $updated->pin, PDO::PARAM_STR);
-        $stmt->bindParam(6, $updated->allowC, PDO::PARAM_STR);
+        $stmt->bindParam(1, $title, PDO::PARAM_STR);
+        $stmt->bindParam(2, $desc, PDO::PARAM_STR);
+        $stmt->bindParam(3, $cat, PDO::PARAM_STR);
+        $stmt->bindParam(4, $date, PDO::PARAM_STR);
+        $stmt->bindParam(5, $pin, PDO::PARAM_STR);
+        $stmt->bindParam(6, $allowC, PDO::PARAM_STR);
         $stmt->bindParam(7, $oldID, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
-        if ($totalrows==0){
+        if ($totalrows == 0) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }

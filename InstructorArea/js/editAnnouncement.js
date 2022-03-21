@@ -9,7 +9,7 @@
 
 
 var maxFileSize = 0;
-
+var textvalidate = false;
 //Validate Announcement Input
 function validateA() {
 
@@ -21,11 +21,17 @@ function validateA() {
         $('#attach').removeClass("is-invalid");
         $('#attach').removeClass("is-valid");
     }
-    if (cat && title) {
+    
+     if (textvalidate === false) {
+        descF.html("<b>Description</b> cannot be empty");
+        $("#desc").addClass("is-invalid");
+        $("#desc").focus();
+        return false;
+    } else if (cat && title) {
 
         Swal.fire({
             title: 'Confirmation',
-            text: "Confirm to create a new annoucement?",
+            text: "Confirm to edit the annoucement?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Confirm'

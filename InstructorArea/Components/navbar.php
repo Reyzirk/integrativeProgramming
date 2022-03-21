@@ -8,10 +8,11 @@
     <li class='nav-item <?php echo ($pageName=="announcement.php"?"active":($pageName=="createAnnouncement.php"?"active":($pageName=="editAnnouncement.php"?"active":($pageName=="viewAnnouncement.php"?"active":""))))?>'>
         <a class="nav-link" id="nav-update" href="announcement.php"><i class="fa-solid fa-bullhorn"></i> Announcement</a>
     </li>
-    <li class='nav-item dropdown <?php echo ($pageName=="classes.php"?"active":($pageName=="createclass.php"?"active":($pageName=="editclass.php"?"active":$pageName=="childclasses.php"?"active":($pageName=="courseschedule.php"?"active":($pageName=="createcourseschedule.php"?"active":($pageName=="editcourseschedule.php"?"active":""))))))?>' onclick="dropdown(this)">
+    <li class='nav-item dropdown <?php echo ($pageName=="classes.php"?"active":($pageName=="createclass.php"?"active":($pageName=="editclass.php"?"active":($pageName=="childclasses.php"?"active":($pageName=="courseschedule.php"?"active":($pageName=="createcourseschedule.php"?"active":($pageName=="editcourseschedule.php"?"active":"")))))))?>' onclick="dropdown(this)">
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="nav-update" href="#" role="button" aria-haspopup="true" aria-expanded="true"><i class="fa-solid fa-chalkboard"></i> Classes</a>
         <div class="collapse">
             <div class="bg-white py-2 collapse-inner rounded mt-1">
+                <a class="collapse-item <?php echo ($pageName=="addattendance.php"?"active":"");?>" href="addattendance.php">Attendance</a>
                 <a class="collapse-item <?php echo ($pageName=="classes.php"?"active":($pageName=="createclass.php"?"active":($pageName=="editclass.php"?"active":"")))?>" href="classes.php">Class List</a>
                 <a style="cursor:pointer;" class="collapse-item <?php echo ($pageName=="childclasses.php"?"active":"");?>" onclick="navigateToChildClass()">Student</a>
                 <a style="cursor:pointer;" class="collapse-item <?php echo ($pageName=="courseschedule.php"?"active":($pageName=="createcourseschedule.php"?"active":($pageName=="editcourseschedule.php"?"active":"")));?>" onclick="navigateToCourseSchedule()">Schedule</a>

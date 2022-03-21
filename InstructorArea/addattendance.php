@@ -18,6 +18,7 @@ Web Application is under GNU General Public License v3.0
         include './Components/headmeta.php';
         ?>
         <link rel="stylesheet" href="./css/addattendance.css" type="text/css">
+        <script src="js/addattendance.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -46,31 +47,32 @@ Web Application is under GNU General Public License v3.0
                                         <br><br>
                                         <div class="row">
                                             <div class="col-sm-2">
-                                                <select class="form-control bg-white small" name="searchCriteria">
+                                                <select class="form-control bg-white small" name="searchCriteria" id="criteriaDropdown" onchange="searchBarConversion()">
                                                     <option value="name">Name </option>
-                                                    <option value="class">Class</option>
+                                                    <option value="date">Date</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-9">
                                                 <div class="input-group mb-3">
-                                                    <input type="text" class="bg-white form-control" placeholder="Please enter the search criteria!" name="searchInfo">
+                                                    <input type="text" class="bg-white form-control <?php echo empty($error["emptySearch"]) ? "" : "is-invalid" ?>" placeholder="Please enter the search criteria!" name="searchInfo" id="searchInfo">
                                                     <div class="input-group-append">
-                                                        <button class="btn btn-outline-info" type="submit" name="submit">Search</button>
+                                                        <button class="btn btn-outline-info" type="submit" name="submitBtn" value="searchBtn">Search</button>
                                                     </div>
+                                                    <span class="invalid-feedback"><?php echo empty($error["emptySearch"]) ? "" : $error['emptySearch'] ?></span>
                                                 </div>
                                             </div>
-
-                                            <span class="invalid-feedback"><?php echo empty($error["emptySearch"]) ? "123" : $error['emptySearch'] ?></span>
                                         </div>
                                         <br><br>
                                         <!--Student Table to be injected here  -->
                                         <table class="table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">Student ID</th>
-                                                    <th scope="col">Name</th>
-                                                    <th scope="col">Temperature</th>
-                                                    <th scope="col" class="w-25">Actions</th>
+                                                    <th scope="col" style="width: 12%">Student ID</th>
+                                                    <th scope="col"style="width: 20.6%">Name</th>
+                                                    <th scope="col"style="width: 15.6%">Temperature</th>
+                                                    <th scope="col"style="width: 16.6%"> Class ID</th>
+                                                    <th scope="col"style="width: 17.6%">Date Taken</th>
+                                                    <th scope="col"style="width: 17.6%">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -79,16 +81,15 @@ Web Application is under GNU General Public License v3.0
                                                 ?>
                                             </tbody>
                                         </table>
-                                        </div>
                                     </fieldset>
                                 </form>
                             </div>
                         </div>
                     </div>
-                    <?php
-                    include 'Components/footer.php'
-                    ?>
                 </div>
+                <?php
+                include 'Components/footer.php'
+                ?>
             </div>
     </body>
 </html>

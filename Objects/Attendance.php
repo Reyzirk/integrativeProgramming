@@ -8,20 +8,19 @@
  */
 
 /**
- * Description of Child
+ * Description of Attendance
  *
  * @author clhsk
  */
-class Child {
-    private $childID, $parentID, $childName, $birthDate, $childICNo, $status; 
+class Attendance {
+    private $attendanceID, $childID, $childTemp, $masked, $attending;
     
-    public function __construct($childID, $parentID, $childName, $birthDate, $childICNo, $status) {
-        $this->childID = $childID;
-        $this->parentID = $parentID;
-        $this->childName = $childName;
-        $this->birthDate = $birthDate; 
-        $this->childICNo = $childICNo;
-        $this->status= $status; 
+    public function __construct() {
+        $this->attendanceID;
+        $this->childID;
+        $this->childTemp;
+        $this->masked;
+        $this->attending;
     }
     
     public function __get($name) {

@@ -1,5 +1,5 @@
 <?php
-include '../Function/load.php';
+include '../Function/load.php';$pageName = basename(__FILE__); 
 ?>
 <!DOCTYPE html>
 <!--

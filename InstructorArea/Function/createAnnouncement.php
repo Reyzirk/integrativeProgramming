@@ -13,6 +13,8 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/An
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Attachment.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AttachmentDB.php";
 
+$instructorID = "I0001";
+
 if (isset($_POST["formDetect"])) {
     $date = trim($_POST["hiddenDate"]);
 
@@ -66,7 +68,23 @@ if (isset($_POST["formDetect"])) {
     $inputName = "attach";
     $inputTitle = "Attachment";
     $hasFile = false;
-    if (file_exists($_FILES[$inputName]['tmp_name']) || is_uploaded_file($_FILES[$inputName]['tmp_name'])) {
+    
+    //**************Check if has file****************
+    foreach (($_FILES[$inputName]['error']) as $row) {
+        switch ($row) {
+
+            case UPLOAD_ERR_NO_FILE:
+                $hasFile = false;
+                break;
+            case UPLOAD_ERR_OK:
+                $hasFile = true;
+                break;
+            default :
+                $hasFile = true;
+        }
+    }
+    
+    if (isset($_FILES[$inputName]) && $hasFile) {
         $files = $_FILES[$inputName];
         for ($i = 0; $i < count($files["name"]); $i++) {
             $tempFile = $files["tmp_name"][$i];
@@ -93,14 +111,13 @@ if (isset($_POST["formDetect"])) {
                 break;
             }
         }
-
-        $hasFile = true;
+ 
     }
 
     //***************************Connect Database************************************
     if (empty($error)) {
         $id = genAnnounceID();
-        $announce = new Announcement($id, "I0001", $storedValue["titleA"], $storedValue["desc"], $storedValue["cat"], $date, $storedValue["pinTop"], $storedValue["allowC"]);
+        $announce = new Announcement($id, $instructorID, $storedValue["titleA"], $storedValue["desc"], $storedValue["cat"], $date, $storedValue["pinTop"], $storedValue["allowC"]);
         $AnnounceDB = new AnnouncementDB();
 
         if ($AnnounceDB->insert($announce)) {

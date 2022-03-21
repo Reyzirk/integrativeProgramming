@@ -1,5 +1,5 @@
 <?php
-include '../Function/load.php';
+include '../Function/load.php';$pageName = basename(__FILE__); 
 ?>
 <?php
 include './Function/editAnnouncement.php';
@@ -56,11 +56,15 @@ Web Application is under GNU General Public License v3.0
                                         <legend>Announcement Details</legend>
                                         <!--************************Date***************************-->
                                         <div class="row">
-                                            <div class="col-md">
+                                            <div class="col-md-6">
+                                                Announcement ID: <?php echo empty($storedValue["announceID"]) ? "" : $storedValue["announceID"]; ?>
+                                            </div>
+                                            <div class="col-md-6">
                                                 Modify Date: <?php echo date("Y-m-d") . " (" . date("l") . ")" ?>
                                                 <input type="hidden" name="hiddenDate" value="<?php echo date("Y-m-d") ?>"/>
                                             </div>
-                                        </div><br/>
+                                        </div>
+                                        <br/>
                                         <!--************************Title***************************-->
                                         <div class="row">
                                             <div class="col-md">
@@ -106,7 +110,7 @@ Web Application is under GNU General Public License v3.0
                                                     <div class="col-md-10">
                                                         <input id="attach" type="file" class="form-control-file bg-white form-control <?php echo empty($error["attach"]) ? "" : "is-invalid"; ?>" oninput="validateAttach(this)" name="attach[]" multiple /> 
                                                         <span class="invalid-feedback" style="background-color:#f8f9fc;border:none;"><?php echo empty($error["attach"]) ? "" : $error["attach"]; ?></span>
-                                                        <span style="padding-left: 5px;">File Name: <?php echo empty($storedValue["attach"]) ? "No File...." : implode("<br/>", $storedValue["attach"]); ?></span>
+                                                        <span style="padding-left: 5px;">File Name: <?php echo empty($storedValue["attach"]) ? "No file in the database..." : "<br/>".implode("<br/>", $storedValue["attach"]); ?></span>
                                                         <input type="hidden" name="hiddenAttach" value=""/>
                                                     </div>
                                                     <div class="col-md-2">
@@ -170,8 +174,9 @@ Web Application is under GNU General Public License v3.0
             ClassicEditor
                     .create(document.querySelector('#desc'))
                     .then(editor => {
+                        validateTextArea(editor.getData());
                         editor.model.document.on('change:data', (evt, data) => {
-                            //validateTextArea(editor.getData());
+                            validateTextArea(editor.getData());
 
 
                         });

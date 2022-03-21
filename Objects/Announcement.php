@@ -23,7 +23,7 @@ class Announcement {
     private $pin;
     private $allowC;
 
-    public function __construct($announceID, $instructorID, $title, $desc, $cat, $date, $pin, $allowC) {
+    public function __construct($announceID, $instructorID="", $title="", $desc="", $cat="", $date="", $pin="", $allowC="") {
         $this->announceID = $announceID;
         $this->instructorID = $instructorID;
         $this->title = $title;
