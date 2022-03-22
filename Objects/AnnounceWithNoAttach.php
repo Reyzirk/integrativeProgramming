@@ -12,8 +12,6 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Ann
 
 class AnnounceWithNoAttach extends Announcement {
 
-    private $instance;
-
     public function __construct($announce) {
         parent::__construct($announce->announceID, $announce->instructorID, $announce->title, $announce->desc, $announce->cat, $announce->date, $announce->pin, $announce->allowC);
     }
@@ -21,8 +19,8 @@ class AnnounceWithNoAttach extends Announcement {
     public function __get($name) {
         if (property_exists($this, $name)){
             return $this->$name;
-        }else{
-            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+        }else{ 
+            return parent::__get($name);
         }
     }
     
@@ -30,7 +28,7 @@ class AnnounceWithNoAttach extends Announcement {
         if (property_exists($this, $name)){
             $this->$name = $value;
         }else{
-            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+            parent::__set($name, $value);
         }
     }
 

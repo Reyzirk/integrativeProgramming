@@ -29,7 +29,7 @@ class AnnounceWithImg extends Announcement{
         if (property_exists($this, $name)){
             return $this->$name;
         }else{
-            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+            return parent::__get($name);
         }
     }
     
@@ -37,7 +37,7 @@ class AnnounceWithImg extends Announcement{
         if (property_exists($this, $name)){
             $this->$name = $value;
         }else{
-            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+            parent::__set($name, $value);
         }
     }
 }

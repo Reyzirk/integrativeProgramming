@@ -71,32 +71,92 @@ $lang_legendTitle = "Announcement Details";
                                                             <div style=" background-color: white; border-radius: 15px;box-shadow: 0px 5px 5px  rgba(51, 51, 51, 0.3);">
                                                                 <p class="p-12"><span style="font-size: 20pt;padding-left:10px"><?php echo $announceInfo->title; ?></span></p>
                                                             </div>
-                                                            
+
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md">
                                                             <label for="class" class="col-form-label font-weight-bold">Description</label>
                                                             <div style=" background-color: white; border-radius: 15px;box-shadow: 0px 5px 5px  rgba(51, 51, 51, 0.3); min-height: 100px">
-                                                                <div style="padding-left: 15px"><span style="background-color: white;"><?php echo html_entity_decode($announceInfo->desc); ?></span></div>
+                                                                <div style="padding: 15px;"><span style="background-color: white;">
+                                                                        <?php
+                                                                        //*************Implementation of AnnounceDecorator
+                                                                        $parent = new InstructorsAnnounceDecorator($announceInfo);
+                                                                        echo html_entity_decode($parent->getAnnounceDesc());
+                                                                        ?></span></div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <br/>
-                                                    <div class="row">
-                                                        <div class="col-md">
-                                                            <h5>Attachments</h5>
-                                                            <hr/>
-                                                            
-                                                        </div>
+                                                    <?php if (!($announceInfo instanceof AnnounceWithNoAttach)) { ?>
+                                                        <div class="row">
+                                                            <div class="col-md">
+                                                                <h5>Attachments</h5>
+                                                                <hr/>
+                                                                <?php
+                                                                if ($announceInfo instanceof AnnounceWithImg) {
+                                                                    $attach = $announceInfo->attach;
 
-                                                    </div>
-                                                    <br/>
-                                                     <div class="row">
+                                                                    foreach ($attach as $row) {
+                                                                        ?>
+
+                                                                        <a href="..<?php echo $row->filePath; ?>" target="_blank"><img src="..<?php echo $row->filePath ?>" width="auto" height="300" style="padding-right: 10px" /></a>
+
+                                                                        <?php
+                                                                    }
+                                                                } else if ($announceInfo instanceof AnnounceWithImgDoc) {
+                                                                    $img = array();
+                                                                    $doc = array();
+                                                                    $docName = array();
+                                                                    $attach = $announceInfo->attach;
+                                                                    foreach ($attach as $row) {
+
+                                                                        $path = pathinfo($row->attachName, PATHINFO_EXTENSION);
+
+                                                                        if ($path != "png" && $path != "jpeg" && $path != "svg" && $path != "jpg" && $path != "gif") {
+                                                                            $doc[] = $row->filePath;
+                                                                            $docName[] = $row->attachName;
+                                                                        } else {
+                                                                            $img[] = $row->filePath;
+                                                                        }
+                                                                    }
+                                                                    foreach ($img as $row) {
+                                                                        ?>
+                                                                        <a href="..<?php echo $row; ?>" target="_blank"><img src="..<?php echo $row ?>" width="auto" height="300" style="padding-right: 10px" /></a>    
+
+                                                                        <?php
+                                                                    }
+                                                                    echo "<br/><br/>";
+                                                                    $i = 0;
+                                                                    foreach ($doc as $row) {
+                                                                        ?>
+                                                                        <img src="../images/docIcon.gif" width="20px" height="20px" /><a href="..<?php echo $row ?>" target="_blank"><?php echo $docName[$i] ?></a><br/>
+                                                                        <?php
+                                                                        $i++;
+                                                                    }
+                                                                } else {
+                                                                    $attach = $announceInfo->attach;
+                                                                    foreach ($attach as $row) {
+                                                                        ?>
+                                                                        <img src="../images/docIcon.gif" width="20px" height="20px" /><a href="..<?php echo $row->filePath ?>" target="_blank"><?php echo $row->attachName ?></a><br/>
+
+                                                                        <?php
+                                                                    }
+                                                                }
+                                                                ?>
+
+                                                            </div>
+
+                                                        </div>
+                                                        <br/>
+                                                        <?php
+                                                    }
+                                                    ?>
+                                                    <div class="row">
                                                         <div class="col-md">
                                                             <h5>Comment</h5>
                                                             <hr/>
-                                                            
+
                                                         </div>
 
                                                     </div>
@@ -104,7 +164,7 @@ $lang_legendTitle = "Announcement Details";
                                             </div>
                                             <input hidden="true" name="formDetect" value="formDetect">
                                             <center>
-                                                <button type="button" class="btn btn-warning" id="submitBtn" onclick="location.href='editAnnouncement.php?aID=<?php echo $id; ?>'">Modify</button>
+                                                <button type="button" class="btn btn-warning" id="submitBtn" onclick="location.href = 'editAnnouncement.php?aID=<?php echo $id; ?>'">Modify</button>
                                                 <button type="button" class="btn btn-danger" onclick="location.href = 'announcement.php'">Back</button>
                                             </center>
                                         </form>

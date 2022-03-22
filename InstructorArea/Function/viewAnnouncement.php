@@ -22,6 +22,7 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Ann
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/AnnounceWithImg.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/AnnounceWithImgDoc.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/AnnounceWithNoAttach.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/InstructorsAnnounceDecorator.php";
 require_once dirname(__DIR__) . "/Function/AttachmentFactory.php";
 
 

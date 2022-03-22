@@ -12,16 +12,18 @@
  * 
  */
 
-class Announcement {
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/AnnouncementInterface.php";
 
-    protected $announceID;
-    protected $instructorID;
-    protected $title;
-    protected $desc;
-    protected $cat;
-    protected $date;
-    protected $pin;
-    protected $allowC;
+class Announcement implements AnnouncementInterface{
+
+    private $announceID;
+    private $instructorID;
+    private $title;
+    private $desc;
+    private $cat;
+    private $date;
+    private $pin;
+    private $allowC;
 
     public function __construct($announceID, $instructorID="", $title="", $desc="", $cat="", $date="", $pin="", $allowC="") {
         $this->announceID = $announceID;
@@ -51,5 +53,9 @@ class Announcement {
         }
     }
     
+    public function getAnnounceDesc() {
+        return $this->desc;
+    }
+
 
 }

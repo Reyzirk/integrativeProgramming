@@ -34,7 +34,7 @@ class AttachmentFactory{
             foreach($attach as $row){
                 $path = pathinfo($row->attachName,PATHINFO_EXTENSION);
                 
-                if($path != "png" && $path != "jpeg" && $path!="svg" && $path != "jpg"){
+                if($path != "png" && $path != "jpeg" && $path!="svg" && $path != "jpg" && $path!="gif"){
                     $docNum++;
                 }else{
                     $imgNum++;
