@@ -18,12 +18,12 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Annou
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/AnnouncementDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Attachment.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/AttachmentDB.php";
-require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/AttachmentDB.php";
-require_once dirname(__DIR__).'/Function/AnnounceWithDoc.php';
-require_once dirname(__DIR__).'/Function/AnnounceWithImg.php';
-require_once dirname(__DIR__).'/Function/AnnounceWithImgDoc.php';
-require_once dirname(__DIR__).'/Function/AnnounceWithNoAttach.php';
-require_once dirname(__DIR__).'/Function/AttachmentFactory.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/AnnounceWithDoc.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/AnnounceWithImg.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/AnnounceWithImgDoc.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/AnnounceWithNoAttach.php";
+require_once dirname(__DIR__) . "/Function/AttachmentFactory.php";
+
 
 $announceDB = new AnnouncementDB();
 $attachDB = new AttachmentDB();

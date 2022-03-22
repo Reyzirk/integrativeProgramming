@@ -11,11 +11,11 @@
 
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Announcement.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Attachment.php";
-require_once dirname(__DIR__).'/Function/AnnounceWithDoc.php';
-require_once dirname(__DIR__).'/Function/AnnounceWithImg.php';
-require_once dirname(__DIR__).'/Function/AnnounceWithImgDoc.php';
-require_once dirname(__DIR__).'/Function/AnnounceWithNoAttach.php';
-require_once dirname(__DIR__).'/Function/AttachmentFactory.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/AnnounceWithDoc.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/AnnounceWithImg.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/AnnounceWithImgDoc.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/AnnounceWithNoAttach.php";
+
 
 class AttachmentFactory{
 
