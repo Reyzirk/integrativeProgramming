@@ -27,6 +27,12 @@ Web Application is under GNU General Public License v3.0
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <div class="container">
+                        <?php
+                        if (isset($_SESSION["attendanceExistError"])) {
+                            $error["attendanceExistErr"] = $_SESSION["attendanceExistError"];
+                            unset($_SESSION["attendanceExistError"]);
+                        }
+                        ?>
                         <div class="row">
                             <div class="col-md">
                                 <br>
@@ -54,11 +60,11 @@ Web Application is under GNU General Public License v3.0
                                             </div>
                                             <div class="col-sm-9">
                                                 <div class="input-group mb-3">
-                                                    <input type="text" class="bg-white form-control <?php echo empty($error["emptySearch"]) ? "" : "is-invalid" ?>" placeholder="Please enter the search criteria!" name="searchInfo" id="searchInfo">
+                                                    <input type="text" class="bg-white form-control <?php echo empty($error["emptySearch"]) || $error["attendanceExistErr"] ? "" : "is-invalid" ?>" placeholder="Please enter the search criteria!" name="searchInfo" id="searchInfo">
                                                     <div class="input-group-append">
                                                         <button class="btn btn-outline-info" type="submit" name="submitBtn" value="searchBtn">Search</button>
                                                     </div>
-                                                    <span class="invalid-feedback"><?php echo empty($error["emptySearch"]) ? "" : $error['emptySearch'] ?></span>
+                                                    <span class="invalid-feedback"><?php echo empty($error["emptySearch"]) ? "" : $error['emptySearch'] ?> <?php echo empty($error["attendanceExistErr"]) ? "" : $error["attendanceExistErr"]?></span>
                                                 </div>
                                             </div>
                                         </div>

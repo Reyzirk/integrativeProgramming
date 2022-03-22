@@ -73,4 +73,20 @@ class AttendanceDB {
         }
 
     }
+    
+    public function ifAttendanceExist($childID, $attendanceDate){
+        $query = "SELECT * FROM attendance WHERE ChildID = ? AND AttendingDate = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $attendanceDate, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        
+        if ($totalrows==0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
 }

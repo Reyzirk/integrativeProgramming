@@ -1,6 +1,6 @@
 <?php
 include '../Function/load.php';
-
+include 'Function/updateAttendance.php';
 ?>
 <!DOCTYPE html>
 <!--
@@ -8,6 +8,7 @@ include '../Function/load.php';
 Copyright 2022 Omega International Junior School. All Right Reserved.
 Web Application is under GNU General Public License v3.0
 ============================================
+@author: Ng Kar Kai
 -->
 <html>
     <head>
@@ -19,6 +20,7 @@ Web Application is under GNU General Public License v3.0
         <title>Update Student Attendance</title>
     </head>
     <body>
+        
         <div id="wrapper">
             <?php include 'Components/navbar.php' ?>
             <div id="content-wrapper">
@@ -28,10 +30,32 @@ Web Application is under GNU General Public License v3.0
                         <div class="row">
                             <div class="col-md">
                                 <br>
-                                <h1 class="display-4">Update Student Attendance</h1>
-                                <p class="lead">Update student attendances here </p>
+                                <h1 class="display-4">Update <?php echo $childName."'s"?> Attendance</h1>
+                                <p class="lead">Update <?php echo $childName."'s"?> attendances here </p>
                                 <hr class="my-3">
-                                
+                                <br>
+                                <form method="POST" id="attendanceUpdate" name="updateAttendance">
+                                    <fieldset>
+                                        <legend>
+                                            Log <?php echo $childName."'s" ?> attendance for <?php echo $todayDate;?>
+                                        </legend>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                Date Today: <?php echo date("Y/m/d") . " " . date("l") ?>
+                                                <input type="hidden" name="hiddenDate" value="<?php echo date("Y/m/d") ?>"/>
+                                            </div>
+                                        </div>
+                                        <br><br>
+                                        <div class="row">
+                                            <div class="col-md">
+                                                <label class="col-form-label">Child Temperature:<span class="required">*</span></label>
+                                                <input class="bg-white form-control" type="number" step="0.1" min="36.0" value="36.0" placeholder="Enter <?php echo $childName."'s"?> temperature here."/>
+                                            </div>
+                                            <div class="col-md"></div>
+                                            <div class="col-md"></div>
+                                        </div>
+                                    </fieldset>
+                                </form>
                             </div>
                         </div>
                     </div>

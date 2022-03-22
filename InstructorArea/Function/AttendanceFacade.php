@@ -56,4 +56,12 @@ class AttendanceFacade {
     public function getAttendanceRecords($childName){
         return $this->attendanceDB->getAttendanceRecord($childName);
     }
+    
+    public function checkForValidChildID($childID){
+        return $this->childDB->validChildID($childID);
+    }
+    
+    public function checkIfAttendanceExists($childID, $attendanceDate){
+        return $this->attendanceDB->ifAttendanceExist($childID, $attendanceDate);
+    }
 }

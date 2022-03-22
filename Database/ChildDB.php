@@ -118,4 +118,19 @@ class ChildDB {
         }
     }
     
+    public function validChildID($childID){
+        $query = "SELECT * FROM child WHERE ChildID = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        
+        if ($totalrows==0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    
 }
