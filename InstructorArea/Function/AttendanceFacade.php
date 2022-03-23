@@ -15,17 +15,20 @@
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/AttendanceDB.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ChildDB.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ClassDB.php';
+require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ChildClassDB.php';
 
 class AttendanceFacade {
 
     protected $attendanceDB;
     protected $childDB;
     protected $classDB;
+    protected $childClassDB;
 
     public function __construct() {
         $this->attendanceDB = new AttendanceDB();
         $this->childDB = new ChildDB();
         $this->classDB = new ClassDB();
+        $this->childClassDB = new ChildClassDB();
     }
 
     public function getTotalAttendanceRecord() {
@@ -75,6 +78,14 @@ class AttendanceFacade {
     
     public function getClassCountSearch($search){
         return $this->classDB->getCount($search);
+    }
+    
+    public function checkForValidClassID($classID){
+        return $this->classDB->validID($classID);
+    }
+    
+    public function getChildIDFromClassID($query){
+        return $this->childClassDB->select($query);
     }
 
 }

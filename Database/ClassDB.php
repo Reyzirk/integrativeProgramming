@@ -20,6 +20,20 @@ class ClassDB {
     public function __construct(){
         $this->instance = DBController::getInstance();
     }
+    
+    public function getTotalRows(){
+        $query = "SELECT * FROM classes";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        
+        if ($totalrows == 0 ){
+            return 0;
+        }
+        else{
+            return $totalrows;
+        }
+    }
     public function getCount($search){
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("classes","instructor"), array("*"))

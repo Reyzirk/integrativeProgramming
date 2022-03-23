@@ -18,6 +18,12 @@ Web Application is under GNU General Public License v3.0
         <title>Class Attendances</title>
     </head>
     <body>
+        <?php
+        if (isset($_SESSION["attendanceExistError"])) {
+            $error["attendanceExistErr"] = $_SESSION["attendanceExistError"];
+            unset($_SESSION["attendanceExistError"]);
+        }
+        ?>
         <div id="wrapper">
             <?php include 'Components/navbar.php' ?>
             <div id="content-wrapper">
@@ -51,11 +57,11 @@ Web Application is under GNU General Public License v3.0
                                             <div class="col-md-1"></div>
                                             <div class="col-md-9">
                                                 <div class="input-group mb-3">
-                                                    <input type="text" class="bg-white form-control <?php echo empty($error["emptySearch"]) ? "" : "is-invalid" ?>" placeholder="Enter class ID here..." name="searchInfo" id="searchInfo">
+                                                    <input type="text" class="bg-white form-control <?php echo empty($error["emptySearch"]) || empty($error["attendanceExistErr"]) ? "" : "is-invalid" ?>" placeholder="Enter class ID here..." name="searchInfo" id="searchInfo">
                                                     <div class="input-group-append">
                                                         <button class="btn btn-outline-info" type="submit" name="submitBtn" value="searchBtn">Search</button>
                                                     </div>
-                                                    <span class="invalid-feedback"><?php echo empty($error["emptySearch"]) ? "" : $error['emptySearch'] ?></span>
+                                                    <span class="invalid-feedback"><?php echo empty($error["emptySearch"]) ? "" : $error["emptySearch"] ?> <?php echo empty($error["attendanceExistErr"]) ? "" : $error["attendanceExistErr"] ?></span>
                                                 </div>
                                             </div>
                                             <div class="col-md-2"></div>
