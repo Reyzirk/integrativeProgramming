@@ -11,19 +11,20 @@
  * @author Oon Kheng Huang
  * 
  */
-require_once './Announcement.php';
+
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Announcement.php";
 
 class Comment{
     private $commentID;
     private $userID;
-    private $annouce;
+    private $announce;
     private $desc;
     private $date;
     
-    public function __construct($commentID, $userID, Announcement $annouce, $desc, $date) {
+    public function __construct($commentID, $userID, Announcement $announce, $desc, $date) {
         $this->commentID = $commentID;
         $this->userID = $userID;
-        $this->annouce = $annouce;
+        $this->announce = $announce;
         $this->desc = $desc;
         $this->date = $date;
     }

@@ -1,6 +1,6 @@
 <?php
 
-/*
+/* 
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
  * Web Application is under GNU General Public License v3.0
@@ -12,10 +12,10 @@
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/DBController.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/MySQLQueryBuilder.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Objects/Announcement.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Objects/Comment.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Enum/EnumLoad.php';
 
-class AnnouncementDB {
-
+class CommentDB{
     private $instance;
 
     public function __construct() {
@@ -38,23 +38,21 @@ class AnnouncementDB {
 
     public function getCount() {
         $builder = new MySQLQueryBuilder();
-        $query = $builder->select(array("announcement"), array("*"))
+        $query = $builder->select(array("comment"), array("*"))
                 ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         return $totalrows;
     }
-
-    public function getCountBySearch($search) {
+    
+    public function getCountByAID($id) {
         $builder = new MySQLQueryBuilder();
-        $query = $builder->select(array("announcement"), array("*"))
-                ->where("AnnounceID", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
-                ->where("Date", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
-                ->where("Title", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
-                ->where("Cat", "%" . (empty($search) ? "" : strtoupper($search[0])) . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        $query = $builder->select(array("comment"), array("*"))
+                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         return $totalrows;
@@ -62,8 +60,8 @@ class AnnouncementDB {
 
     public function getAllID() {
         $builder = new MySQLQueryBuilder();
-        $query = $builder->select(array("announcement"), array("AnnounceID"))
-                ->order("AnnounceID", \OrderTypeEnum::ASC)
+        $query = $builder->select(array("comment"), array("CommentID"))
+                ->order("CommentID", \OrderTypeEnum::ASC)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->execute();
@@ -76,18 +74,20 @@ class AnnouncementDB {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $results = $stmt->fetchAll();
             foreach ($results as $row) {
-                $result = $row["AnnounceID"];
+                $result = $row["CommentID"];
                 $resultList[] = $result;
             }
             return $resultList;
         }
     }
 
-    public function list() {
+    public function list($id) {
         $builder = new MySQLQueryBuilder();
-        $query = $builder->select(array("announcement"), array("*"))
+        $query = $builder->select(array("comment"), array("*"))
+                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $resultList = array();
         $totalrows = $stmt->rowCount();
@@ -97,38 +97,33 @@ class AnnouncementDB {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $results = $stmt->fetchAll();
             foreach ($results as $row) {
-                $result = new Announcement($row["AnnounceID"], $row["InstructorID"], $row["Title"], $row["Description"], $row["Cat"], $row["Date"], $row["Pin"], $row["AllowComment"]);
+                $result = new Comment($row["CommentID"], $row["UserID"], new Announcement($row["AnnounceID"]), $row["Description"],  $row["Date"]);
                 $resultList[] = $result;
             }
             return $resultList;
         }
     }
 
-    public function insert($announce) {
+    public function insert($comment) {
         $builder = new MySQLQueryBuilder();
-        $query = $builder->insert("announcement")
-                ->values(array(\CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK,
+        $query = $builder->insert("comment")
+                ->values(array(\CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, 
                     \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK))
                 ->query();
         $stmt = $this->instance->con->prepare($query);
-
-        $announceID = $announce->announceID;
-        $instructorID = $announce->instructorID;
-        $title = $announce->title;
-        $desc = $announce->desc;
-        $cat = $announce->cat;
-        $date = $announce->date;
-        $pin = $announce->pin;
-        $allowC = $announce->allowC;
-
-        $stmt->bindParam(1, $announceID, PDO::PARAM_STR);
-        $stmt->bindParam(2, $instructorID, PDO::PARAM_STR);
-        $stmt->bindParam(3, $title, PDO::PARAM_STR);
+        
+        $commentID = $comment->commentID;
+        $userID = $comment->userID;
+        $announceID = $comment->announce->announceID;       
+        $desc = $comment->desc;
+        $date = $comment->date;
+        
+        $stmt->bindParam(1, $commentID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $userID, PDO::PARAM_STR);
+        $stmt->bindParam(3, $announceID, PDO::PARAM_STR);
         $stmt->bindParam(4, $desc, PDO::PARAM_STR);
-        $stmt->bindParam(5, $cat, PDO::PARAM_STR);
-        $stmt->bindParam(6, $date, PDO::PARAM_STR);
-        $stmt->bindParam(7, $pin, PDO::PARAM_STR);
-        $stmt->bindParam(8, $allowC, PDO::PARAM_STR);
+        $stmt->bindParam(5, $date, PDO::PARAM_STR);
+
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
@@ -137,10 +132,11 @@ class AnnouncementDB {
             return true;
         }
     }
+    
 
     public function details($id) {
         $builder = new MySQLQueryBuilder();
-        $query = $builder->select(array("announcement"), array("*"))
+        $query = $builder->select(array("comment"), array("*"))
                 ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
@@ -153,8 +149,7 @@ class AnnouncementDB {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $results = $stmt->fetchAll();
             $row = $results[0];
-            $result = new Announcement($row["AnnounceID"], $row["InstructorID"], $row["Title"], $row["Description"],
-                    $row["Cat"], $row["Date"], $row["Pin"], $row["AllowComment"]);
+            $result = new Comment($row["CommentID"], $row["UserID"], new Announcement($row["AnnounceID"]), $row["Description"],  $row["Date"]);
             $resultList = $result;
             return $resultList;
         }
@@ -162,8 +157,8 @@ class AnnouncementDB {
 
     public function delete($id) {
         $builder = new MySQLQueryBuilder();
-        $query = $builder->delete("announcement")
-                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
+        $query = $builder->delete("comment")
+                ->where("CommentID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->bindParam(1, $id, PDO::PARAM_STR);
@@ -176,38 +171,8 @@ class AnnouncementDB {
         }
     }
 
-    public function update($oldID, $updated) {
-        $builder = new MySQLQueryBuilder();
-        $query = $builder->update("announcement", array("Title" => \CustomSQLEnum::BIND_QUESTIONMARK,
-                    "Description" => \CustomSQLEnum::BIND_QUESTIONMARK,
-                    "Cat" => \CustomSQLEnum::BIND_QUESTIONMARK,
-                    "Date" => \CustomSQLEnum::BIND_QUESTIONMARK,
-                    "Pin" => \CustomSQLEnum::BIND_QUESTIONMARK,
-                    "AllowComment" => \CustomSQLEnum::BIND_QUESTIONMARK))
-                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
-                ->query();
-        $announceID = $oldID;
-        $title = $updated->title;
-        $desc = $updated->desc;
-        $cat = $updated->cat;
-        $date = $updated->date;
-        $pin = $updated->pin;
-        $allowC = $updated->allowC;
-        $stmt = $this->instance->con->prepare($query);
-        $stmt->bindParam(1, $title, PDO::PARAM_STR);
-        $stmt->bindParam(2, $desc, PDO::PARAM_STR);
-        $stmt->bindParam(3, $cat, PDO::PARAM_STR);
-        $stmt->bindParam(4, $date, PDO::PARAM_STR);
-        $stmt->bindParam(5, $pin, PDO::PARAM_STR);
-        $stmt->bindParam(6, $allowC, PDO::PARAM_STR);
-        $stmt->bindParam(7, $oldID, PDO::PARAM_STR);
-        $stmt->execute();
-        $totalrows = $stmt->rowCount();
-        if ($totalrows == 0) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
+    
 }
+
+
+

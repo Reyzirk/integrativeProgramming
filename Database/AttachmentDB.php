@@ -12,7 +12,7 @@
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/DBController.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/MySQLQueryBuilder.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Objects/Attachment.php';
-require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Announcement.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Announcement.php";
 
 class AttachmentDB {
 
@@ -21,7 +21,7 @@ class AttachmentDB {
     public function __construct() {
         $this->instance = DBController::getInstance();
     }
-    
+
     public function select($query) {
 
         $stmt = $this->instance->con->prepare($query);
@@ -45,7 +45,7 @@ class AttachmentDB {
         $totalrows = $stmt->rowCount();
         return $totalrows;
     }
-    
+
     public function getCountByAID($id) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("attachment"), array("*"))
@@ -61,10 +61,11 @@ class AttachmentDB {
     public function getAllID() {
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("attachment"), array("AttachID"))
+                ->order("AttachID", \OrderTypeEnum::ASC)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->execute();
-        
+
         $resultList = array();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
@@ -79,11 +80,11 @@ class AttachmentDB {
             return $resultList;
         }
     }
-    
+
     public function insert($attach) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->insert("attachment")
-                ->values(array(\CustomSQLEnum::BIND_QUESTIONMARK , \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK))
+                ->values(array(\CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK))
                 ->query();
         $stmt = $this->instance->con->prepare($query);
         $attachID = $attach->attachID;
@@ -116,9 +117,9 @@ class AttachmentDB {
             return NULL;
         } else {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $results = $stmt->fetchAll();    
+            $results = $stmt->fetchAll();
             foreach ($results as $row) {
-                $result = new Attachment($row["AttachID"], new Announcement($row["AnnounceID"]),$row["AttachName"], $row["FilePath"]);
+                $result = new Attachment($row["AttachID"], new Announcement($row["AnnounceID"]), $row["AttachName"], $row["FilePath"]);
                 $resultList[] = $result;
             }
             return $resultList;

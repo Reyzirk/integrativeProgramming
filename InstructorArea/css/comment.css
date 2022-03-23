@@ -1,0 +1,94 @@
+/*
+============================================
+Copyright 2022 Omega International Junior School. All Right Reserved.
+Web Application is under GNU General Public License v3.0
+============================================
+*/
+/* 
+    Created on : Mar 23, 2022, 3:49:24 PM
+    Author     : Oon Kheng Huang
+*/
+
+.comment-form-container {
+	background: #F0F0F0;
+	border: #e0dfdf 1px solid;
+	padding: 20px;
+	border-radius: 2px;
+}
+
+.input-row {
+	margin-bottom: 20px;
+}
+
+.input-field {
+	width: 100%;
+	border-radius: 2px;
+	padding: 10px;
+	border: #e0dfdf 1px solid;
+}
+
+.btn-submit {
+	padding: 10px 20px;
+	background: #4e73df;
+	border: #4e73df 1px solid;
+	color: #f0f0f0;
+	font-size: 0.9em;
+	width: 100px;
+	border-radius: 2px;
+    cursor:pointer;
+}
+
+#frm-comment ul {
+	list-style-type: none;
+}
+
+#frm-comment .comment-row {
+	border-bottom: #e0dfdf 1px solid;
+	margin-bottom: 15px;
+	padding: 15px;
+}
+
+#frm-comment .outer-comment {
+	background: #F0F0F0;
+	padding: 20px;
+	border: #dedddd 1px solid;
+}
+
+#frm-comment span.commet-row-label {
+	font-style: italic;
+}
+
+#frm-comment span.posted-by {
+	color: #09F;
+}
+
+#frm-comment .comment-info {
+	font-size: 0.8em;
+}
+#frm-comment .comment-text {
+    margin: 10px 0px;
+}
+#frm-comment .btn-reply {
+    font-size: 0.8em;
+    text-decoration: underline;
+    color: #888787;
+    cursor:pointer;
+}
+#frm-comment #comment-message {
+    margin-left: 20px;
+    color: #189a18;
+    display: none;
+}
+
+.btnNoStyle{
+  all:unset;
+  text-decoration: underline;
+  color: blue;
+  font-size: 10pt;
+}
+
+.btnNoStyle:active{
+  outline: none;
+  background: transparent;
+  border: 1px solid transparent;
+}
