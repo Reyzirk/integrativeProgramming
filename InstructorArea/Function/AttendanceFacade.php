@@ -17,51 +17,64 @@ require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(_
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ClassDB.php';
 
 class AttendanceFacade {
-    
+
     protected $attendanceDB;
     protected $childDB;
     protected $classDB;
-    
+
     public function __construct() {
         $this->attendanceDB = new AttendanceDB();
         $this->childDB = new ChildDB();
         $this->classDB = new ClassDB();
     }
-    
-    public function getTotalAttendanceRecord(){
+
+    public function getTotalAttendanceRecord() {
         return $this->attendanceDB
-                ->getRecordCount();
+                        ->getRecordCount();
     }
-    public function selectAllAttendanceRecord(){
+
+    public function selectAllAttendanceRecord() {
         return $this->attendanceDB
-                ->selectAll();
+                        ->selectAll();
     }
-    
-    public function getChildName($childID){
-        return 
-        $this->childDB
-                ->getChildDetails($childID)
+
+    public function getChildName($childID) {
+        return
+                        $this->childDB
+                        ->getChildDetails($childID)
                 ->childName;
     }
-    
-    public function getClassDetails($childID){
-         $classID = 
-                 $this->childDB
-                ->getChildClass($childID)
+
+    public function getClassDetails($childID) {
+        $classID = $this->childDB
+                        ->getChildClass($childID)
                 ->classID;
-         return $this->classDB
-                 ->details($classID);
+        return $this->classDB
+                        ->details($classID);
     }
-    
-    public function getAttendanceRecords($childName){
+
+    public function getAttendanceRecords($childName) {
         return $this->attendanceDB->getAttendanceRecord($childName);
     }
-    
-    public function checkForValidChildID($childID){
+
+    public function checkForValidChildID($childID) {
         return $this->childDB->validChildID($childID);
     }
-    
-    public function checkIfAttendanceExists($childID, $attendanceDate){
+
+    public function checkIfAttendanceExists($childID, $attendanceDate) {
         return $this->attendanceDB->ifAttendanceExist($childID, $attendanceDate);
     }
+
+    public function selectClasses($query) {
+        return $this->classDB->select($query);
+    }
+
+    public function getClassCount() {
+        return $this->classDB->getTotalRows();
+    }
+    
+    public function getClassCountSearch($search){
+        return $this->classDB->getCount($search);
+    }
+
 }

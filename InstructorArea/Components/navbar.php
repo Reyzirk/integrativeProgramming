@@ -12,7 +12,7 @@
         <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="nav-update" href="#" role="button" aria-haspopup="true" aria-expanded="true"><i class="fa-solid fa-chalkboard"></i> Classes</a>
         <div class="collapse">
             <div class="bg-white py-2 collapse-inner rounded mt-1">
-                <a class="collapse-item <?php echo ($pageName=="addattendance.php"?"active":"");?>" href="addattendance.php">Attendance</a>
+                <a class="collapse-item <?php echo ($pageName=="viewClassAttendance.php"?"active":($pageName=="insertChildAttendance.php"?"active":""));?>" href="viewClassAttendance.php">Attendance</a>
                 <a class="collapse-item <?php echo ($pageName=="classes.php"?"active":($pageName=="createclass.php"?"active":($pageName=="editclass.php"?"active":"")))?>" href="classes.php">Class List</a>
                 <a style="cursor:pointer;" class="collapse-item <?php echo ($pageName=="childclasses.php"?"active":"");?>" onclick="navigateToChildClass()">Student</a>
                 <a style="cursor:pointer;" class="collapse-item <?php echo ($pageName=="courseschedule.php"?"active":($pageName=="createcourseschedule.php"?"active":($pageName=="editcourseschedule.php"?"active":"")));?>" onclick="navigateToCourseSchedule()">Schedule</a>
@@ -39,6 +39,9 @@
     </li>
     <li class='nav-item <?php echo ($pageName=="grades.php"?"active":($pageName=="creategrade.php"?"active":($pageName=="editgrade.php"?"active":"")))?>'>
         <a class="nav-link" id="nav-update" href="grades.php"><i class="fa-solid fa-a"></i> Grades</a>
+    </li>
+    <li class='nav-item <?php echo $pageName=="addattendance.php"?"active":""?>'>
+        <a class="nav-link" id="nav-update" href="addattendance.php"><i class="fa fa-address-card"></i> Attendance Log</a>
     </li>
     <div class="middleButton d-none d-md-inline" onclick="toggle(this)">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
