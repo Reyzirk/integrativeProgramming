@@ -60,8 +60,8 @@ Web Application is under GNU General Public License v3.0
                                         <br>
                                         <input type="<?php echo empty($error["attendanceExistErr"]) ? "hidden" : "textbox" ?>" <?php echo empty($error["attendanceExistErr"]) ? "" : "disabled" ?> 
                                                placeholder="<?php echo empty($error["attendanceExistErr"]) ? "" : $error["attendanceExistErr"] ?>">
-                                        <table class="table table-striped table-hover">
-                                            <thead>
+                                        <table class="table table-hover">
+                                            <thead class="thead-light">
                                                 <tr>
                                                     <th scope="col" style="width: 25%">Child ID</th>
                                                     <th scope="col"style="width: 30%">Child Name</th>

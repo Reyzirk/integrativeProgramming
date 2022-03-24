@@ -66,8 +66,8 @@ Web Application is under GNU General Public License v3.0
                                             </div>
                                             <div class="col-md-2"></div>
                                         </div>
-                                        <table class="table table-striped table-hover">
-                                            <thead>
+                                        <table class="table table-hover">
+                                            <thead class="thead-light">
                                                 <tr>
                                                     <th scope="col" style="width: 30%">Class ID</th>
                                                     <th scope="col"style="width: 25%">Semester</th>
