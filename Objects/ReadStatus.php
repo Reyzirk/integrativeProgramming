@@ -11,19 +11,17 @@
  * @author Oon Kheng Huang
  * 
  */
-require_once './Announcement.php';
 
 class ReadStatus{
-    private $annouce;
-    private $parent;
+    private $announceID;
+    private $parentID;
     private $date;
-    private $status;
-    
-    public function __construct(Announcement $annouce, $parent, $date, $status) {
-        $this->annouce = $annouce;
-        $this->parent = $parent;
+
+    public function __construct($annouceID, $parentID, $date="") {
+        $this->announceID = $annouceID;
+        $this->parentID = $parentID;
         $this->date = $date;
-        $this->status = $status;
+
     }
     
     public function __get($name) {

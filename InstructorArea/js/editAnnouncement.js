@@ -71,8 +71,8 @@ function validateTitle() {
         title.removeClass("is-valid");
         title.focus();
         return false;
-    } else if (title.val().length > 50) {
-        title.next().html("<b>Title</b> cannot contain more than 50 characters");
+    } else if (title.val().length > 100) {
+        title.next().html("<b>Title</b> cannot contain more than 100 characters");
         title.addClass("is-invalid");
         title.removeClass("is-valid");
         return false;

@@ -45,6 +45,19 @@ class AnnouncementDB {
         $totalrows = $stmt->rowCount();
         return $totalrows;
     }
+    
+    public function getCountPinTop() {
+        $status = 1;
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("announcement"), array("*"))
+                ->where("Pin", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $status, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        return $totalrows;
+    }
 
     public function getCountBySearch($search) {
         $builder = new MySQLQueryBuilder();
@@ -137,6 +150,29 @@ class AnnouncementDB {
             return true;
         }
     }
+    
+    public function pinTop() {
+        $status = 1;
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("announcement"), array("*"))
+                ->where("Pin", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $status, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return NULL;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $row = $results[0];
+            $result = new Announcement($row["AnnounceID"], $row["InstructorID"], $row["Title"], $row["Description"],
+                    $row["Cat"], $row["Date"], $row["Pin"], $row["AllowComment"]);
+            $resultList = $result;
+            return $resultList;
+        }
+    }
 
     public function details($id) {
         $builder = new MySQLQueryBuilder();
@@ -201,6 +237,26 @@ class AnnouncementDB {
         $stmt->bindParam(5, $pin, PDO::PARAM_STR);
         $stmt->bindParam(6, $allowC, PDO::PARAM_STR);
         $stmt->bindParam(7, $oldID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public function updatePinTop0($oldID) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->update("announcement", array("Pin" => \CustomSQLEnum::BIND_QUESTIONMARK))
+                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $announceID = $oldID;
+        $pin = 0;
+        
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $pin, PDO::PARAM_STR);
+        $stmt->bindParam(2, $announceID, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {

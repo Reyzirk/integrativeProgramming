@@ -68,8 +68,8 @@ if (isset($_POST["formDetect"])) {
         $error[$inputName] = "<b>$inputTitle</b> cannot be empty.";
     } else {
         $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
-        if (strlen($storedValue[$inputName]) > 50) {
-            $error[$inputName] = "<b>$inputTitle</b> cannot contain more than 50 characters";
+        if (strlen($storedValue[$inputName]) > 100) {
+            $error[$inputName] = "<b>$inputTitle</b> cannot contain more than 100 characters";
         }
     }
 
@@ -154,8 +154,6 @@ if (isset($_POST["formDetect"])) {
                 break;
             }
         }
-
-       
     }
 
     //***************************Connect Database************************************
@@ -163,6 +161,14 @@ if (isset($_POST["formDetect"])) {
 
         $announce = new Announcement($id, "I0001", $storedValue["titleA"], $storedValue["desc"], $storedValue["cat"], $date, $storedValue["pinTop"], $storedValue["allowC"]);
         $AnnounceDB = new AnnouncementDB();
+        
+        //Check if there is a pinned announcement
+        if ($storedValue["pinTop"] == 1) {
+            if (($AnnounceDB->getCountPinTop()) != 0) {
+                $checkPinTop = $AnnounceDB->pinTop();
+                $AnnounceDB->updatePinTop0($checkPinTop->announceID);
+            }
+        }
 
         $AnnounceDB->update($id, $announce);
         $_SESSION["modifyLog"] = "createannouncement";
