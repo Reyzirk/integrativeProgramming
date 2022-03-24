@@ -59,7 +59,7 @@ Web Application is under GNU General Public License v3.0
                                             <div class="col-md-2"></div>
                                             <div class="col-md">
                                                 <label class="col-form-label">Attendance Recorded By:</label>
-                                                <input class="form-control" type="text" placeholder="Instructor ID here..." readonly>
+                                                <input class="form-control" name = "instructorID" type="text" placeholder="Instructor ID here..." readonly>
                                             </div>
                                         </div>
                                         <br><br>

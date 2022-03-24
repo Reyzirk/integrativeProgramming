@@ -34,6 +34,10 @@ if (isset($_POST["submitAttendance"])){
     
 }
 
+function proxyClient(AttendanceInterface $attendanceInterface){
+    $attendanceInterface->registerAttendance();
+}
+
 function antiExploit($str) {
     $str = trim($str);
     $str = stripcslashes($str);

@@ -12,18 +12,18 @@
  *
  * @author Ng Kar Kai
  */
-require_once ( str_replace("AJAX", "", dirname(__DIR__))) . '/AttendanceFacade.php';
-interface Attendance {
+require_once 'AttendanceFacade.php';
+interface AttendanceInterface {
     public function registerAttendance():void;
 }
 
-class AttendanceLogger implements Attendance{
+class AttendanceLogger implements AttendanceInterface{
     public function registerAttendance(): void {
         
     }
 }
 
-class AttendanceProxy implements Attendance{
+class AttendanceProxy implements AttendanceInterface{
     private $attendanceLogger;
     
     public function __construct(AttendanceLogger $attendanceLogger) {
