@@ -13,14 +13,12 @@
  * @author clhsk
  */
 class Attendance {
-    private $attendanceID, $childID, $childTemp, $masked, $attending;
+    private  $childID, $childTemp, $attending;
     
-    public function __construct() {
-        $this->attendanceID;
-        $this->childID;
-        $this->childTemp;
-        $this->masked;
-        $this->attending;
+    public function __construct($childID, $childTemp, $attending) {
+        $this->childID = $childID;
+        $this->childTemp = $childTemp;
+        $this->attending = $attending;
     }
     
     public function __get($name) {

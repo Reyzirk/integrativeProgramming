@@ -9,6 +9,7 @@
 //Author: Ng Kar Kai
 require_once ( str_replace("AJAX", "", dirname(__DIR__))) . '/Function/AttendanceFacade.php';
 require_once ( str_replace("AJAX", "", dirname(__DIR__))) . '/Function/AttendanceProxy.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Attendance.php";
 $facade = new AttendanceFacade();
 $submitButton = false;
 if (!isset($_GET['childID'])) { // if child ID is empty
@@ -20,22 +21,26 @@ if (!isset($_GET['childID'])) { // if child ID is empty
         $childName = $facade->getChildName($childID);
         $childClass = $facade->getClassDetails($childID);
         $todayDate = date("Y-m-d");
-        if ($facade->checkIfAttendanceExists($childID, $todayDate) == true) { // If Attendance does exist
-            $_SESSION["attendanceExistError"] = "<b>Attendance record for $childName exists for today.</b>";
-            redirectsToPreviousPage();
-        }
     } else {
         redirectsToPreviousPage();
     }
 }
 
-if (isset($_POST["submitAttendance"])){
+if (isset($_POST["submitAttendance"])) {
     $submitButton = true;
-    
+
+    $attendance = new Attendance($childID, antiExploit($_POST["temperature"]), $todayDate);
+    //$attendance->childID = $childID;
+    //$attendance->childTemp = antiExploit($_POST["temperature"]);
+    //$attendance->attending = $todayDate;
+    //print_r($attendance);
+    $attendanceLogger = new AttendanceLogger();
+    $attendanceProxy = new AttendanceProxy($attendanceLogger);
+    proxyClient($attendanceProxy,$attendance);
 }
 
-function proxyClient(AttendanceInterface $attendanceInterface){
-    $attendanceInterface->registerAttendance();
+function proxyClient(AttendanceInterface $attendanceInterface, Attendance $attendance) {
+    $attendanceInterface->registerAttendance($attendance);
 }
 
 function antiExploit($str) {

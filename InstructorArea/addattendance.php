@@ -68,7 +68,9 @@ Web Application is under GNU General Public License v3.0
                                             </div>
                                             <div class="col-sm-9">
                                                 <div class="input-group mb-3">
-                                                    <input type="text" class="bg-white form-control <?php echo empty($error["emptySearch"]) || $error["attendanceExistErr"] ? "" : "is-invalid" ?>" placeholder="Please enter the search criteria!" name="searchInfo" id="searchInfo">
+                                                    <input type="text" class="bg-white form-control 
+                                                        <?php echo empty($error["emptySearch"])? "" : "is-invalid" ?><?php echo empty($error["attendanceExistErr"])?"":"is-invalid"?>" 
+                                                           placeholder="Please enter the search criteria!" name="searchInfo" id="searchInfo">
                                                     <div class="input-group-append">
                                                         <button class="btn btn-outline-info" type="submit" name="submitBtn" value="searchBtn">Search</button>
                                                     </div>

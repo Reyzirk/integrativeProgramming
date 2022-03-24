@@ -16,6 +16,7 @@ require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(_
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ChildDB.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ClassDB.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ChildClassDB.php';
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Attendance.php";
 
 class AttendanceFacade {
 
@@ -58,6 +59,10 @@ class AttendanceFacade {
 
     public function getAttendanceRecords($childName) {
         return $this->attendanceDB->getAttendanceRecord($childName);
+    }
+    
+    public function insertAttendance(Attendance $attendance){
+        return $this->attendanceDB->insertAttendanceRecord($attendance);
     }
 
     public function checkForValidChildID($childID) {

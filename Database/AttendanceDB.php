@@ -52,6 +52,24 @@ class AttendanceDB {
         }
     }
     
+    public function insertAttendanceRecord(Attendance $attendance){
+        $query="INSERT INTO attendance (ChildID, ChildTemperature, AttendingDate) VALUES (?,?,?)";
+        $stmt = $this->instance->con->prepare($query);
+        $childID = $attendance->childID;
+        $temperature = $attendance->childTemp;
+        $attendingDate = $attendance->attending;
+        $stmt->bindParam(1,$childID, PDO::PARAM_STR);
+        $stmt->bindParam(2,$temperature, PDO::PARAM_STR);
+        $stmt->bindParam(3,$attendingDate, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
     public function getAttendanceRecord($childName){
         $query = "SELECT * "
                 . "FROM attendance AS a "
