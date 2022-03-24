@@ -77,7 +77,7 @@ if ($totalCount == 0) {
         <tr id="<?php echo $row["AnnounceID"]; ?>">
             <td class="text-center" style="word-break: break-all;"><?php echo $row["AnnounceID"]; ?></td>
             <td class="text-center"><?php echo $row["Date"]; ?></td>
-            <td><?php echo strlen($title) > 150 ? substr($title, 0, 150) : $title; ?></td>
+            <td style="word-break: break-all;"><?php echo strlen($title) > 150 ? substr($title, 0, 150) : $title; ?></td>
             <td class="text-center"><?php echo convertCatToWord($row["Cat"]); ?></td>
             <td class="text-center">
                 <button class='btn btn-outline-info' onclick="location.href = 'viewAnnouncement.php?id=<?php echo $row["AnnounceID"]; ?>';"><i class="fa-solid fa-eye"></i> View</button>

@@ -1,8 +1,7 @@
 <?php
-include '../Function/load.php';
-$pageName = basename(__FILE__);
-include './Function/viewAnnouncement.php';
-include './Function/addComment.php';
+include 'Function/load.php';
+include 'Function/viewAnnouncement.php';
+include 'Function/addComment.php';
 ?>
 <!DOCTYPE html>
 <!--
@@ -10,39 +9,38 @@ include './Function/addComment.php';
 Copyright 2022 Omega International Junior School. All Right Reserved.
 Web Application is under GNU General Public License v3.0
 ============================================
-
-@author Oon Kheng Huang
 -->
-
 <?php
 #Page Languages
 $lang_title = "View announcement";
 $lang_description = "View an existing announcement.";
 $lang_legendTitle = "Announcement Details";
-$LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change to session user ID
+$LoginID = "P001"; //++++++++++++++++++++++++++++++++++++++++++++To be change to session user ID
 ?>
 <html>
     <head>
         <meta charset="UTF-8">
         <title>View Announcement</title>
         <?php
-        include './Components/headmeta.php';
+        include 'Components/headmeta.php';
         ?>
-        <script src="js/createAnnouncement.js" type="text/javascript"></script>
-        <link rel="stylesheet" href="css/comment.css" />
+        <script src="InstructorArea/js/createAnnouncement.js" type="text/javascript"></script>
+        <link rel="stylesheet" href="InstructorArea/css/comment.css" />
     </head>
     <body>
         <div id="wrapper">
-            <?php include 'Components/navbar.php' ?>
+            <?php include 'Components/ParentNavBar.php' ?>
             <div id="content-wrapper">
                 <div id="content">
-                    <?php include 'Components/header.php' ?>
-                    <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                        <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
-                        <li class="breadcrumb-item active">View Announcement</li>
-                    </ol>
-                    <div class="container">
+
+                     <div class="breadcrumbs shadow container">
+                        <ol class="breadcrumb" id="breadcrumb">
+                            <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
+                            <li class="breadcrumb-item active">View Announcement</li>
+                        </ol>
+
+                    </div>
+                    <div class="container aos-init aos-animate" data-aos="fade-up">
                         <div class="row">
                             <div class="col-md">
                                 <div id="formControl">
@@ -57,34 +55,34 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                     <legend><?php echo $lang_legendTitle; ?></legend>
                                                     <div class="row">
                                                         <div class="col-md-4">
-                                                            <label for="class" class="col-form-label font-weight-bold">Announcement ID</label>
+                                                            <label for="class" class="col-form-label font-weight-bold"><b>Announcement ID</b></label>
                                                             <p class="p-12"><?php echo $announceInfo->announceID; ?></p>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <label for="cat" class="col-form-label font-weight-bold">Category</label>
+                                                            <label for="cat" class="col-form-label font-weight-bold"><b>Category</b></label>
                                                             <p class="p-12"><?php echo convertCatToWord($announceInfo->cat); ?></p>
                                                         </div>
                                                         <div class="col-md-4">
-                                                            <label for="date" class="col-form-label font-weight-bold">Date</label>
+                                                            <label for="date" class="col-form-label font-weight-bold"><b>Date</b></label>
                                                             <p class="p-12"><?php echo $announceInfo->date; ?></p>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-md">
-                                                            <label for="class" class="col-form-label font-weight-bold">Title</label>
-                                                            <div style=" background-color: white; border-radius: 15px;box-shadow: 0px 5px 5px  rgba(51, 51, 51, 0.3);padding: 10px">
-                                                                <span style="font-size: 20pt;padding-left:10px; word-break: break-word;"><?php echo $announceInfo->title; ?></span>
+                                                            <label for="class" class="col-form-label font-weight-bold"><b>Title</b></label>
+                                                            <div style="border:1px solid black; background-color: white; border-radius: 15px;box-shadow: 0px 5px 5px  rgba(51, 51, 51, 0.3);padding:10px;word-break: break-word">
+                                                                <span style="font-size: 20pt;"><?php echo $announceInfo->title; ?></span>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div><br/>
                                                     <div class="row">
                                                         <div class="col-md">
-                                                            <label for="class" class="col-form-label font-weight-bold">Description</label>
-                                                            <div style=" background-color: white; border-radius: 15px;box-shadow: 0px 5px 5px  rgba(51, 51, 51, 0.3); min-height: 100px">
-                                                                <div style="padding: 15px;"><span style="background-color: white;word-break: break-word;">
+                                                            <label for="class" class="col-form-label font-weight-bold"><b>Description</b></label>
+                                                            <div style="border:1px solid black; background-color: white; border-radius: 15px;box-shadow: 0px 5px 5px  rgba(51, 51, 51, 0.3); min-height: 100px">
+                                                                <div style="padding: 15px;"><span style="background-color: white;word-break: break-word">
                                                                         <?php
                                                                         //*************Implementation of AnnounceDecorator
-                                                                        $parent = new InstructorsAnnounceDecorator($announceInfo);
+                                                                        $parent = new ParentsAnnounceDecorator($announceInfo);
                                                                         echo html_entity_decode($parent->getAnnounceDesc());
                                                                         ?></span></div>
                                                             </div>
@@ -93,23 +91,25 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                     <input hidden="true" name="formDetect" value="formDetect">
                                                 </form>
                                                 <br/>
-                       <!--******************************************************Attachment********************************************************-->
+                                                <!--******************************************************Attachment********************************************************-->
                                                 <?php if (!($announceInfo instanceof AnnounceWithNoAttach)) { ?>
                                                     <div class="row">
                                                         <div class="col-md">
                                                             <h5>Attachments</h5>
                                                             <hr/>
                                                             <?php
+                                                            //************************Announce With Img******************************
                                                             if ($announceInfo instanceof AnnounceWithImg) {
                                                                 $attach = $announceInfo->attach;
 
                                                                 foreach ($attach as $row) {
                                                                     ?>
 
-                                                                    <a href="..<?php echo $row->filePath; ?>" target="_blank"><img src="..<?php echo $row->filePath ?>" width="auto" height="300" style="padding-right: 10px" /></a>
+                                                                    <a href="<?php echo substr($row->filePath, 1); ?>" target="_blank"><img src="<?php echo substr($row->filePath, 1) ?>" width="auto" height="300" style="padding-right: 10px" /></a>
 
                                                                     <?php
                                                                 }
+                                                                //************************Announce With ImgDoc******************************
                                                             } else if ($announceInfo instanceof AnnounceWithImgDoc) {
                                                                 $img = array();
                                                                 $doc = array();
@@ -128,7 +128,7 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                                 }
                                                                 foreach ($img as $row) {
                                                                     ?>
-                                                                    <a href="..<?php echo $row; ?>" target="_blank"><img src="..<?php echo $row ?>" width="auto" height="300" style="padding-right: 10px" /></a>
+                                                                    <a href="<?php echo substr($row, 1); ?>" target="_blank"><img src="<?php echo substr($row, 1) ?>" width="auto" height="300" style="padding-right: 10px" /></a>
 
                                                                     <?php
                                                                 }
@@ -136,15 +136,16 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                                 $i = 0;
                                                                 foreach ($doc as $row) {
                                                                     ?>
-                                                                    <img src="../images/docIcon.gif" width="20px" height="20px" /><a href="..<?php echo $row ?>" target="_blank"><?php echo $docName[$i] ?></a><br/>
+                                                                    <img src="images/docIcon.gif" width="20px" height="20px" /><a href="<?php echo substr($row, 1) ?>" target="_blank"><?php echo $docName[$i] ?></a><br/>
                                                                     <?php
                                                                     $i++;
                                                                 }
+                                                                //************************Announce With Doc******************************
                                                             } else {
                                                                 $attach = $announceInfo->attach;
                                                                 foreach ($attach as $row) {
                                                                     ?>
-                                                                    <img src="../images/docIcon.gif" width="20px" height="20px" /><a href="..<?php echo $row->filePath ?>" target="_blank"><?php echo $row->attachName ?></a><br/>
+                                                                    <img src="images/docIcon.gif" width="20px" height="20px" /><a href="<?php echo substr($row->filePath, 1) ?>" target="_blank"><?php echo $row->attachName ?></a><br/>
 
                                                                     <?php
                                                                 }
@@ -158,7 +159,7 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                     <?php
                                                 }
                                                 ?>
-                                                    <!--******************************************************Comment********************************************************-->
+                                                <!--******************************************************Comment********************************************************-->
                                                 <?php if ($announceInfo->allowC == 0) { ?>
                                                     <div class="row">
                                                         <div class="col-md">
@@ -172,8 +173,8 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                                         $instructor = $intructorDB->details($announceInfo->instructorID);
                                                                         $instructorName = $instructor->instructorName;
                                                                         ?>
-                                                                        <input type="hidden" name="userID" id="commentId" placeholder="Name" value="<?php echo $announceInfo->instructorID ?>"/>
-                                                                        <input class="input-field" disabled="true" type="text" name="userName" id="name" placeholder="Name" value="<?php echo empty($instructorName) ? "" : $instructorName ?>" />
+                                                                        <input type="hidden" name="userID" id="commentId" placeholder="Name" value="<?php echo $LoginID ?>"/>
+                                                                        <input class="input-field" disabled="true" type="text" name="userName" id="name" placeholder="Name" value="<?php echo empty($instructorName) ? "" : $instructorName //Change to parent Name ?>" />
                                                                     </div>
                                                                     <div class="input-row">
                                                                         <textarea class="input-field" type="text" name="desc"
@@ -219,7 +220,7 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                                                     <?php } ?>
                                                                                     <br/>
                                                                                 </div>
-                                                                                <p style="font-size: 16pt; padding:5px; word-break: break-word;"><?php echo $row->desc ?></p>
+                                                                                <p style="font-size: 16pt; padding:5px"><?php echo $row->desc ?></p>
                                                                             </div>
                                                                         </form>
                                                                         <?php
@@ -247,10 +248,9 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                     </div>
                                                 <?php } ?>
                                             </fieldset>
-                                        </div>
+                                        </div><br/>
 
-                                        <center>
-                                            <button type="button" class="btn btn-warning" id="submitBtn" onclick="location.href = 'editAnnouncement.php?aID=<?php echo $id; ?>'">Modify</button>
+                                        <center>                                        
                                             <button type="button" class="btn btn-danger" onclick="location.href = 'announcement.php'">Back</button>
                                         </center>
 
@@ -259,7 +259,7 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                             </div>
                         </div>
                     </div>
-                </div>
+                </div><br/><br/>
                 <?php include "Components/footer.php"; ?>
             </div>
         </div>

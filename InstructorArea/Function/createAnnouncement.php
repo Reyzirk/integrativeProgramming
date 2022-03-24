@@ -13,7 +13,7 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/An
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Attachment.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AttachmentDB.php";
 
-$instructorID = "I0001";
+$instructorID = "I0001"; //+++++++++++++++++++++++++++++++++++++++++++Session++++++++++++++++++++++++++++++++
 
 if (isset($_POST["formDetect"])) {
     $date = trim($_POST["hiddenDate"]);
@@ -25,8 +25,8 @@ if (isset($_POST["formDetect"])) {
         $error[$inputName] = "<b>$inputTitle</b> cannot be empty.";
     } else {
         $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
-        if (strlen($storedValue[$inputName]) > 50) {
-            $error[$inputName] = "<b>$inputTitle</b> cannot contain more than 50 characters";
+        if (strlen($storedValue[$inputName]) > 100) {
+            $error[$inputName] = "<b>$inputTitle</b> cannot contain more than 100 characters";
         }
     }
 

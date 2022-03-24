@@ -70,7 +70,7 @@ Web Application is under GNU General Public License v3.0
                                             <div class="col-md">
                                                 <label for="title" class="col-form-label">Title <span class="requiredF">*</span></label>
                                                 <input id="titleA" type="text" name="titleA" class="bg-white form-control <?php echo empty($error["title"]) ? "" : "is-invalid"; ?>" placeholder="Please enter an announcement title" 
-                                                       maxlength="50" oninput="validateTitle()" value="<?php echo empty($storedValue["title"]) ? "" : $storedValue["title"]; ?>"/>
+                                                       maxlength="100" oninput="validateTitle()" value="<?php echo empty($storedValue["title"]) ? "" : $storedValue["title"]; ?>"/>
                                                 <span class="invalid-feedback"><?php echo empty($error["title"]) ? "" : $error["title"]; ?></span>
                                             </div>
                                         </div><br/>

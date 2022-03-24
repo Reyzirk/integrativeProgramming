@@ -63,7 +63,7 @@ Web Application is under GNU General Public License v3.0
                                             <div class="col-md">
                                                 <label for="titleA" class="col-form-label">Title <span class="requiredF">*</span></label>
                                                 <input id="titleA" type="text" name="titleA" class="bg-white form-control <?php echo empty($error["titleA"]) ? "" : "is-invalid"; ?>" placeholder="Please enter an announcement title" 
-                                                       maxlength="50" oninput="validateTitle()" value="<?php echo empty($storedValue["titleA"]) ? "" : $storedValue["titleA"]; ?>"/>
+                                                       maxlength="100" oninput="validateTitle()" value="<?php echo empty($storedValue["titleA"]) ? "" : $storedValue["titleA"]; ?>"/>
                                                 <span class="invalid-feedback"><?php echo empty($error["titleA"]) ? "" : $error["titleA"]; ?></span>
                                             </div>
                                         </div><br/>
