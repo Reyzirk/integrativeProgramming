@@ -21,6 +21,7 @@ if ($submitBtn == false) {
         </tr>
         <?php
     } else {
+        
         printResults($childIDRecord, $todayDate,$facade,$classID);
     }
 } else {
@@ -39,7 +40,9 @@ function printResults($childIDRecord, $todayDate,$facade,$classID) {
                 <?php echo $classID?>
             </td>>
             <td>
-                <button type="button" class="btn btn-primary" onclick="window.location.href = 'updateNewAttendance.php?childID=<?php echo $childID?>'"><i class="fa-solid fa-pen-to-square"></i>Take Attendance</button>
+                <button type="button" class="btn btn-primary" 
+                    <?php echo $facade->checkIfAttendanceExists($childID, $todayDate) ? "disabled":"" ?> onclick="window.location.href = 'updateNewAttendance.php?childID=<?php echo $childID?>'">
+                    <i class="fa-solid fa-pen-to-square"></i>Take Attendance</button>
             </td>
         </tr>
         <?php

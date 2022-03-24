@@ -18,6 +18,12 @@ Web Application is under GNU General Public License v3.0
         <title>Record child Attendances</title>
     </head>
     <body>
+        <?php
+        if (isset($_SESSION["attendanceExistError"])) {
+            $error["attendanceExistErr"] = $_SESSION["attendanceExistError"];
+            unset($_SESSION["attendanceExistError"]);
+        }
+        ?>
         <div id="wrapper">
             <?php include 'Components/navbar.php' ?>
             <div id="content-wrapper">
@@ -36,6 +42,10 @@ Web Application is under GNU General Public License v3.0
                                 <p class="lead">Take children attendances here</p>
                                 <hr class="my-3">
                                 <form method="POST" id="takeChildrenAttendance" name="takeChildrenAttendance">
+                                    <input type="hidden" name="prevPage" id="prevPage">
+                                    <script>
+                                        document.getElementById("prevPage").value = window.location.href;
+                                    </script>
                                     <fieldset class="form-group">
                                         <legend>
                                             Select children's name to record temperature and take attendance
@@ -48,6 +58,8 @@ Web Application is under GNU General Public License v3.0
                                         </div>
                                         <br>
                                         <br>
+                                        <input type="<?php echo empty($error["attendanceExistErr"]) ? "hidden" : "textbox" ?>" <?php echo empty($error["attendanceExistErr"]) ? "" : "disabled" ?> 
+                                               placeholder="<?php echo empty($error["attendanceExistErr"]) ? "" : $error["attendanceExistErr"] ?>">
                                         <table class="table table-striped table-hover">
                                             <thead>
                                                 <tr>
@@ -58,7 +70,7 @@ Web Application is under GNU General Public License v3.0
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php include 'Function/recordChildAttendance.php';?>
+                                                <?php include 'Function/recordChildAttendance.php'; ?>
                                             </tbody>
                                         </table>
                                     </fieldset>

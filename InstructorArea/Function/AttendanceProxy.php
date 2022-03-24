@@ -15,7 +15,6 @@
 require_once ( str_replace("AJAX", "", dirname(__DIR__))) . '/AttendanceFacade.php';
 interface Attendance {
     public function registerAttendance():void;
-    
 }
 
 class AttendanceLogger implements Attendance{

@@ -28,7 +28,7 @@ Web Application is under GNU General Public License v3.0
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
                         <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="addattendance.php">Attendance List</a></li>
+                        <li class="breadcrumb-item active"><a href="addattendance.php">Attendance Log</a></li>
                     </ol>
                     <div class="container">
                         <?php
@@ -44,6 +44,10 @@ Web Application is under GNU General Public License v3.0
                                 <p class="lead">View student attendances here </p>
                                 <hr class="my-3">
                                 <form method="POST" id="attendanceCreation" name="attendanceForm">
+                                    <input type="hidden" name="prevPage" id="prevPage">
+                                    <script>
+                                        document.getElementById("prevPage").value = window.location.href;
+                                    </script>
                                     <fieldset>
                                         <legend>
                                             Attendance Entry

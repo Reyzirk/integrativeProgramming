@@ -8,7 +8,9 @@
  */
 //Author: Ng Kar Kai
 require_once ( str_replace("AJAX", "", dirname(__DIR__))) . '/Function/AttendanceFacade.php';
+require_once ( str_replace("AJAX", "", dirname(__DIR__))) . '/Function/AttendanceProxy.php';
 $facade = new AttendanceFacade();
+$submitButton = false;
 if (!isset($_GET['childID'])) { // if child ID is empty
     redirectsToPreviousPage();
 } else {
@@ -27,6 +29,11 @@ if (!isset($_GET['childID'])) { // if child ID is empty
     }
 }
 
+if (isset($_POST["submitAttendance"])){
+    $submitButton = true;
+    
+}
+
 function antiExploit($str) {
     $str = trim($str);
     $str = stripcslashes($str);
@@ -35,7 +42,7 @@ function antiExploit($str) {
 }
 
 function redirectsToPreviousPage() {
-    header('Location: addattendance.php');
+    header("location:javascript://history.go(-1)");
     die();
 }
 ?>

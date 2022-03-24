@@ -25,9 +25,8 @@ else{
     }
 }
 
-if (isset($_POST['submitAttendanceRecord'])){
-    $submitBtn = true;
-    print_r($_POST);
+if(isset($_POST["prevPage"])){
+    $_SESSION["prevPage"] = antiExploit($_POST["prevPage"]);
 }
 
 function antiExploit($str) {

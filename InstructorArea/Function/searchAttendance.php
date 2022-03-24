@@ -22,6 +22,7 @@ if (isset($_POST['submitBtn'])) {
     }
 }
 
+
 function antiExploit($str) {
     $str = trim($str);
     $str = stripcslashes($str);
