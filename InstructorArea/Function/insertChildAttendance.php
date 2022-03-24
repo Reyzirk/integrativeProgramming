@@ -18,15 +18,12 @@ else{
     $classID = antiExploit($_GET['classID']);
     if($facade->checkForValidClassID($classID) == true){
         $todayDate = date("Y-m-d");
+        $_SESSION["classID"] = $classID;
     }
     else {
         $_SESSION["attendanceExistError"] = "<b>Invalid Class ID attempted.</b>";
         redirectsToPreviousPage();
     }
-}
-
-if(isset($_POST["prevPage"])){
-    $_SESSION["prevPage"] = antiExploit($_POST["prevPage"]);
 }
 
 function antiExploit($str) {

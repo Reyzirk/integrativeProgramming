@@ -24,10 +24,12 @@ class AttendanceLogger implements AttendanceInterface{
         $success = $facade->insertAttendance($attendance);
         
         if ($success == true){
-            echo "Insertion successful";
+            $_SESSION["attendanceSuccess"] = "<b>Attendance updated</b>";
+            redirectsBack();
         }
         else{
-            echo "Insertion Failed";
+            $_SESSION["attendanceFailed"] = "<b>Attendance Failed</b>";
+            redirectsBack();
         }
     }
 }
@@ -58,4 +60,12 @@ class AttendanceProxy implements AttendanceInterface{
         }
         
     }
+}
+
+
+function redirectsBack() {
+    $classID = $_SESSION["classID"];
+    unset($_SESSION["classID"]);
+    header("location:insertChildAttendance.php?classID=$classID");
+    die();
 }
