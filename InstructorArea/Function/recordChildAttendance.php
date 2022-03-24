@@ -21,13 +21,13 @@ if ($submitBtn == false) {
         </tr>
         <?php
     } else {
-        printResults($childIDRecord, $todayDate,$facade);
+        printResults($childIDRecord, $todayDate,$facade,$classID);
     }
 } else {
     
 }
 
-function printResults($childIDRecord, $todayDate,$facade) {
+function printResults($childIDRecord, $todayDate,$facade,$classID) {
     foreach ($childIDRecord as $rowRecord) {
         $childID = $rowRecord["ChildID"];
         $childName = $facade->getChildName($childID);
@@ -35,12 +35,11 @@ function printResults($childIDRecord, $todayDate,$facade) {
         <tr>
             <td><?php echo $childID ?></td>
             <td><?php echo $childName ?></td>
-            <td style="text-align: center; vertical-align: middle;">
-                <input class="bg-white form-control w-50" type="number" step="0.1" min="36.0" value="36.0" placeholder="Enter <?php echo $childName . "'s" ?> temperature here." name="temperatureInput"/>
+            <td>
+                <?php echo $classID?>
             </td>>
-            <td style="text-align: center; vertical-align: middle;">
-                <input name="attendanceCheck" type="checkbox" 
-                    <?php echo $facade->checkIfAttendanceExists($childID, $todayDate) ? "checked" : "" ?> value="<?php echo $facade->checkIfAttendanceExists($childID, $todayDate) ? "attendanceTaken" : "" ?>">
+            <td>
+                <button type="button" class="btn btn-primary" onclick="window.location.href = 'updateNewAttendance.php?childID=<?php echo $childID?>'"><i class="fa-solid fa-pen-to-square"></i>Take Attendance</button>
             </td>
         </tr>
         <?php

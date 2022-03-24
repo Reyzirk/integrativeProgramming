@@ -38,7 +38,7 @@ Web Application is under GNU General Public License v3.0
                                 <form method="POST" id="takeChildrenAttendance" name="takeChildrenAttendance">
                                     <fieldset class="form-group">
                                         <legend>
-                                            Tick options that are applicable.
+                                            Select children's name to record temperature and take attendance
                                         </legend>
                                         <div class="row">
                                             <div class="col-md">
@@ -51,19 +51,16 @@ Web Application is under GNU General Public License v3.0
                                         <table class="table table-striped table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col" style="width: 30%">Child ID</th>
-                                                    <th scope="col"style="width: 35%">Child Name</th>
-                                                    <th scope="col"style="width: 20%">Temperature</th>
-                                                    <th scope="col"style="width: 15%">Attendance</th>
+                                                    <th scope="col" style="width: 25%">Child ID</th>
+                                                    <th scope="col"style="width: 30%">Child Name</th>
+                                                    <th scope="col"style="width: 20%">Class ID</th>
+                                                    <th scope="col"style="width: 25%">Attendance</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php include 'Function/recordChildAttendance.php';?>
                                             </tbody>
                                         </table>
-                                        <div class="d-flex flex-row-reverse">
-                                            <input class="btn btn-primary p-2" type="submit" value="Submit Attendance Record" name="submitAttendanceRecord">
-                                        </div>
                                     </fieldset>
                                 </form>
                             </div>

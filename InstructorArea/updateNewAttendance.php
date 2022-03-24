@@ -51,8 +51,16 @@ Web Application is under GNU General Public License v3.0
                                                 <label class="col-form-label">Child Temperature:<span class="required">*</span></label>
                                                 <input class="bg-white form-control" type="number" step="0.1" min="36.0" value="36.0" placeholder="Enter <?php echo $childName."'s"?> temperature here."/>
                                             </div>
-                                            <div class="col-md"></div>
-                                            <div class="col-md"></div>
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md">
+                                                <label class="col-form-label">Attendance Recorded By:</label>
+                                                <input class="form-control" type="text" placeholder="Readonly input here…" readonly>
+                                            </div>
+                                        </div>
+                                        <br><br>
+                                        <div class="d-flex justify-content-center">
+                                            <input class="btn btn-danger m-2" type="button" value="Back" onclick="history.back()">
+                                            <input class="btn btn-primary m-2" type="submit" value="Submit" name="takeAttendance">
                                         </div>
                                     </fieldset>
                                 </form>
