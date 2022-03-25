@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+============================================
+Copyright 2022 Omega International Junior School. All Right Reserved.
+Web Application is under GNU General Public License v3.0
+============================================
+
+@author Oon Kheng Huang
+-->
+
+<!--<!DOCTYPE announcement SYSTEM 'announcement.dtd'>-->
+
+<announcement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="announcement.xsd">
+    <category catID="A">
+        <name>Activity</name>
+        <shortForm>A</shortForm>
+        <description>Activity announcement is related to school activities such as sports, co-curricular, and event as well.</description>
+    </category>
+    <category catID="C">
+        <name>Covid-19</name>
+        <shortForm>C</shortForm>
+        <description>The covid-19 announcement is the notice related to the SOP or the updates of the new regulation.</description>
+    </category>
+    <category catID="E">
+        <name>Examination</name>
+        <shortForm>E</shortForm>
+        <description>Examination announcement is related to student exam information such as the examination date, result, etc.</description>
+    </category>
+    <category catID="H">
+        <name>Homework</name>
+        <shortForm>H</shortForm>
+        <description>Homework announcement is related to student coursework, this includes student assignments, projects, and artwork.</description>
+    </category>
+    <category catID="N">
+        <name>Notice</name>
+        <shortForm>N</shortForm>
+        <description>An announcement to inform the parents of important notice to take note of.</description>
+    </category>
+    <category catID="T">
+        <name>Tuition</name>
+        <shortForm>T</shortForm>
+        <description>Announcement related to tuition class, mainly for the student who has applied for tuition.</description>
+    </category>
+    <category catID="W">
+        <name>News</name>
+        <shortForm>W</shortForm>
+        <description>Announcement of the latest information including any latest happen event and newsletter.</description>
+    </category>
+   
+</announcement>
+
