@@ -120,6 +120,14 @@ if (isset($_POST["formDetect"])) {
         $announce = new Announcement($id, $instructorID, $storedValue["titleA"], $storedValue["desc"], $storedValue["cat"], $date, $storedValue["pinTop"], $storedValue["allowC"]);
         $AnnounceDB = new AnnouncementDB();
 
+        //Check if there is a pinned announcement
+        if ($storedValue["pinTop"] == 1) {
+            if (($AnnounceDB->getCountPinTop()) != 0) {
+                $checkPinTop = $AnnounceDB->pinTop();
+                $AnnounceDB->updatePinTop0($checkPinTop->announceID);
+            }
+        }
+        
         if ($AnnounceDB->insert($announce)) {
             $_SESSION["modifyLog"] = "createannouncement";
 

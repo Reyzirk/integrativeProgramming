@@ -206,7 +206,9 @@ $LoginID = "P001"; //++++++++++++++++++++++++++++++++++++++++++++To be change to
                                                                         $userID = $row->userID;
                                                                         if ($userID[0] == "I") {
                                                                             $commentName = $instructorName . " (Instructor)";
-                                                                        }//else Parent+++++++++++++++++++++++++++++++++++++++++To be added after parent database created
+                                                                        }else{//else Parent+++++++++++++++++++++++++++++++++++++++++To be added after parent database created
+                                                                            $commentName = "";
+                                                                        }
                                                                         ?>
                                                                         <form id="deleteComment" name="deleteComment" method="POST">
                                                                             <div class="col-md" style="background-color: white; border-radius: 5px; margin-bottom: 5px">

@@ -151,6 +151,23 @@ class AnnouncementDB {
         }
     }
     
+    public function hasPinTop(){
+        $status = 1;
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("announcement"), array("*"))
+                ->where("Pin", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $status, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return 0;
+        } else { 
+            return $totalrows;
+        }
+    }
+    
     public function pinTop() {
         $status = 1;
         $builder = new MySQLQueryBuilder();

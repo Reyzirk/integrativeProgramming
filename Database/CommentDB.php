@@ -170,6 +170,22 @@ class CommentDB{
             return true;
         }
     }
+    
+    public function deleteByAnnounceID($id) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->delete("comment")
+                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
     
 }

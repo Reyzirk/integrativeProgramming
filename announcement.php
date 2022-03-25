@@ -53,6 +53,10 @@ Web Application is under GNU General Public License v3.0
                             <div class="shadow announceLeftBar">    
                                 <h5 class="text-center"><b>&#x1F4CC; Pinned Announcement</b></h5>
                                 <hr/>
+                                <?php
+                                    $announceDB = new AnnouncementDB();
+                                    if(($announceDB->hasPinTop()) != 0){
+                                ?>
                                 <div>
                                     Date: <?php echo $pinAnnounce->date ?>
                                 </div>
@@ -63,9 +67,11 @@ Web Application is under GNU General Public License v3.0
                                 <div style="word-break: break-word">
                                     <p class="breakLine"><?php echo html_entity_decode($pinAnnounce->desc) ?></p> 
                                 </div>
-                                <div>
-
+                                    <?php }else{?>
+                                <div class="itemTitle" style="text-align: center">
+                                    No Pinned Announcement...
                                 </div>
+                                    <?php } ?>
 
 
                             </div>

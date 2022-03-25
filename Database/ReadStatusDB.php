@@ -45,6 +45,18 @@ class ReadStatusDB{
         $totalrows = $stmt->rowCount();
         return $totalrows;
     }
+    
+    public function getCountByAID($id) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("readstatus"), array("*"))
+                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        return $totalrows;
+    }
 
     public function list($id) {
         $builder = new MySQLQueryBuilder();
@@ -120,6 +132,22 @@ class ReadStatusDB{
         $builder = new MySQLQueryBuilder();
         $query = $builder->delete("readstatus")
                 ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public function deleteByAnnounceID($id) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->delete("readstatus")
+                ->where("AnnounceID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->bindParam(1, $id, PDO::PARAM_STR);
