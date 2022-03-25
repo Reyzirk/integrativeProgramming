@@ -24,5 +24,4 @@ Web Application is under GNU General Public License v3.0
         </xs:sequence>
         <xs:attribute name="catID" type="xs:string" use="required" />
     </xs:complexType>
-    
 </xs:schema>
