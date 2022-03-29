@@ -60,7 +60,7 @@ $LoginID = "P001"; //++++++++++++++++++++++++++++++++++++++++++++To be change to
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label for="cat" class="col-form-label font-weight-bold"><b>Category</b></label>
-                                                            <p class="p-12"><?php echo convertCatToWord($announceInfo->cat); ?></p>
+                                                            <p class="p-12"><a href="announceCategory.php?cat=<?php echo $announceInfo->cat?>" style="text-decoration: none"><?php echo convertCatToWord($announceInfo->cat); ?></a></p>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <label for="date" class="col-form-label font-weight-bold"><b>Date</b></label>

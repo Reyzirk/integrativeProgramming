@@ -8,7 +8,7 @@ Web Application is under GNU General Public License v3.0
 @author Oon Kheng Huang
 -->
 
-<!--<!DOCTYPE announcement SYSTEM 'announcement.dtd'>-->
+<?xml-stylesheet type="text/xsl" href="announcement.xsl"?>
 
 <announcement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="announcement.xsd">
     <category catID="A">
@@ -19,7 +19,7 @@ Web Application is under GNU General Public License v3.0
     <category catID="C">
         <name>Covid-19</name>
         <shortForm>C</shortForm>
-        <description>The covid-19 announcement is the notice related to the SOP or the updates of the new regulation.</description>
+        <description>The covid-19 announcement is the notice that related to the SOPs or the updates of the new regulation.</description>
     </category>
     <category catID="E">
         <name>Examination</name>

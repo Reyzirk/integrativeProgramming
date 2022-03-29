@@ -26,7 +26,7 @@ class AnnouncementParser{
         
         foreach ($announceList as $row){
             $attr = $row->attributes();
-            $announceTmp = new AnnounceCategory($attr->catID, $row->name, $row->shortF, $row->desc);
+            $announceTmp = new AnnounceCategory($attr->catID, $row->name, $row->shortForm, $row->description);
             $this->announceCat->attach($announceTmp);
         }
     }
