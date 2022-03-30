@@ -48,30 +48,34 @@ Web Application is under GNU General Public License v3.0
 
                     </div>
                     <div class="row" style="margin-top: 30px">
+                        <?php $announceDB = new AnnouncementDB(); ?>
 
                         <div class="col-md-3">
                             <div class="shadow announceLeftBar">    
                                 <h5 class="text-center"><b>&#x1F4CC; Pinned Announcement</b></h5>
                                 <hr/>
                                 <?php
-                                    $announceDB = new AnnouncementDB();
-                                    if(($announceDB->hasPinTop()) != 0){
-                                ?>
-                                <div>
-                                    Date: <?php echo $pinAnnounce->date ?>
-                                </div>
-                                <div>
-                                    Category: <?php echo convertCatToWord($pinAnnounce->cat) ?>
-                                </div>
-                                <div class="itemTitle"><a href="viewannouncement.php?id=<?php echo $pinAnnounce->announceID ?>"><?php echo $pinAnnounce->title ?></a></div>
-                                <div style="word-break: break-word">
-                                    <p class="breakLine"><?php echo html_entity_decode($pinAnnounce->desc) ?></p> 
-                                </div>
-                                    <?php }else{?>
-                                <div class="itemTitle" style="text-align: center">
-                                    No Pinned Announcement...
-                                </div>
-                                    <?php } ?>
+                                if (($announceDB->hasPinTop()) != 0) {
+                                    ?>
+                                    <div onclick="location.href = 'viewannouncement.php?id=<?php echo $pinAnnounce->announceID ?>'" style="cursor:pointer">
+                                        <div>
+                                            Date: <?php echo $pinAnnounce->date ?>
+                                        </div>
+                                        <div>
+                                            Category: <?php echo convertCatToWord($pinAnnounce->cat) ?>
+                                        </div>
+                                        <div class="itemTitle"><?php echo $pinAnnounce->title ?></div>
+                                        <div style="word-break: break-word">
+                                            <p class="breakLine"><?php echo html_entity_decode($pinAnnounce->desc) ?></p> 
+                                        </div>
+                                    </div>
+                                <?php } else { ?>
+                                    <div class="itemTitle" style="text-align: center">
+                                        No Pinned Announcement...
+                                    </div> 
+
+
+                                <?php } ?>
 
 
                             </div>
@@ -81,50 +85,53 @@ Web Application is under GNU General Public License v3.0
                         <div class="col-md-9">
                             <?php
                             $readDB = new ReadStatusDB();
-                            if(!empty($results)){
-                            foreach ($results as $row) {
-                                ?>
-                                <div class="shadow announceItem">
-                                    <div class="row">
-                                        <div class="col-md-7">
-                                            <span class="itemTitle"><a href="viewannouncement.php?id=<?php echo $row["AnnounceID"] ?>"><?php echo $row["Title"] ?></a></span>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <?php
-                                            $read = new ReadStatus($row["AnnounceID"], $parentID);
-                                            if ($readDB->checkExist($read)) {
-                                                ?>
-                                                <div class="readStatusRead">Read</div>
-                                            <?php } else {
-                                                ?>
-                                                <div class="readStatus">New</div>
-                                            <?php } ?>
+                            if (!empty($results)) {
+                                foreach ($results as $row) {
+                                    ?>
+                                    <div class="shadow announceItem" onclick="location.href = 'viewannouncement.php?id=<?php echo $row["AnnounceID"] ?>'" >
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <span class="itemTitle"><?php echo $row["Title"] ?></span>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <?php
+                                                $read = new ReadStatus($row["AnnounceID"], $parentID);
+                                                if ($readDB->checkExist($read)) {
+                                                    ?>
+                                                    <div class="readStatusRead">Read</div>
+                                                <?php } else {
+                                                    ?>
+                                                    <div class="readStatus">New</div>
+                                                <?php } ?>
 
-                                        </div>
-                                        <div class="col-md-2">
-                                            <?php echo convertCatToWord($row["Cat"]) ?>
-                                        </div>
-                                        <div class="col-md-2">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <?php echo convertCatToWord($row["Cat"]) ?>
+                                            </div>
+                                            <div class="col-md-2">
 
-                                            <?php echo $row["Date"] ?>
+                                                <?php echo $row["Date"] ?>
 
+                                            </div>
                                         </div>
+
+
+
+
                                     </div>
-
-
-
-
-                                </div>
-                            <?php }}else{
+                                    <?php
+                                }
+                            } else {
                                 echo "<center><h3>No result found...</h3></center>";
-                            } ?>
+                            }
+                            ?>
 
                         </div>
 
                     </div>
                 </div><br/><br/>
             </section>
-        <?php include "Components/footer.php"; ?>
+            <?php include "Components/footer.php"; ?>
 
         </div>
     </body>
