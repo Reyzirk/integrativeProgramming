@@ -12,19 +12,19 @@ Registration page
  -->
  
  <?php
- $userID = "";
+ $parentID = "";
  $password = "";
  $confirm_password = "";
  
  if($_SERVER["REQUEST_METHOD"] == "POST")
  {
      //check validation of user ID
-     if(empty(trim($_POST["userID"])))
+     if(empty(trim($_POST["parentID"])) )
      {
-         $userID_err = "Please enter user ID.";
-     }else if(!preg_match(trim($_POST["$userID_err"],'/^[a-zA-Z0-9]+$/' )))
+         $parentID_err = "Please enter user ID.";
+     }else if(!preg_match(trim($_POST["$parentID_err"],'/^[a-zA-Z0-9]+$/' )))
      {
-         $userID_err = "User ID only can contain alphametical and numbers. Please re-enter!";
+         $parentID_err = "User ID only can contain alphametical and numbers. Please re-enter!";
      }
      
      //check validation of password
@@ -78,7 +78,7 @@ Registration page
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="form-group">
                     <label>User ID</label>
-                    <input type="text" name="username" class="form-control <?php echo (!empty($userID_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $userID; ?>">
+                    <input type="text" name="username" class="form-control <?php echo (!empty($parentID_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $parentID; ?>">
                 </div>    
                 <div class="form-group">
                     <label>Password</label>

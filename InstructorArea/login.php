@@ -6,7 +6,15 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 
+<!--
+Login page
+@author Shu Ling
+ -->
+
 <?php
+$instructorID = "";
+$password = "";
+
     session_start();
 
     //check if user already logged in
@@ -20,12 +28,12 @@ Web Application is under GNU General Public License v3.0
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
             //check if user id is empty
-        if(empty(trim($_POST["userID"])))
+        if(empty(trim($_POST["instructorID"])))
         {
-            $userID_err = "Please enter user ID.";
+            $instructorID_err = "Please enter user ID.";
         } else
         {
-            $userID = trim($_POST["userID"]);
+            $instructorID = trim($_POST["instructorID"]);
         }
 
         //check if password is empty
@@ -38,7 +46,7 @@ Web Application is under GNU General Public License v3.0
         }
 
         //validate users' credentials
-        if(empty($userID_err) && (empty($password_err)))
+        if(empty($instructorID_err) && (empty($password_err)))
         {
             //retrieve data form mySQL
             
@@ -46,7 +54,7 @@ Web Application is under GNU General Public License v3.0
                     
             //store data into session
             $_SESSION["login"] = 'true';
-            $_SESSION["userID"] = '$userID';
+            $_SESSION["instructorID"] = '$instructorID';
            
             //direct user to homepage
             header("location: index.php");
@@ -55,7 +63,7 @@ Web Application is under GNU General Public License v3.0
         {
             //user id or password invalid
             $login_err = "Invalid user ID or password.";
-
+        }
     }
     
 ?>
@@ -89,7 +97,7 @@ Web Application is under GNU General Public License v3.0
                 
                 <div class="login">
                     <label>User ID</label>
-                    <input type="userID" name="userID" class="form-control <?php echo (!empty($userID_err)) ? 'is-invalid' : ''; ?>" 
+                    <input type="instructorID" name="instructorID" class="form-control <?php echo (!empty($instructorID_err)) ? 'is-invalid' : ''; ?>" 
                            value="<?php echo $userID; ?>">
                 </div>
                 
@@ -97,6 +105,8 @@ Web Application is under GNU General Public License v3.0
                     <label>Password</label>
                     <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
                 </div>
+                
+                <br>
                 
                 <div class="login">
                     <input type="submit" class="btn btn-primary" value="Login">
