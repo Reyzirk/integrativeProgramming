@@ -92,6 +92,23 @@ class AttendanceDB {
 
     }
     
+    public function getAttendanceRecordDate($date){
+        $query="SELECT * FROM  attendance WHERE AttendingDate = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $date, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        
+        if ($totalrows == 0){
+            return NULL;
+        }
+        else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+    }
+    
     public function ifAttendanceExist($childID, $attendanceDate){
         $query = "SELECT * FROM attendance WHERE ChildID = ? AND AttendingDate = ?";
         $stmt = $this->instance->con->prepare($query);

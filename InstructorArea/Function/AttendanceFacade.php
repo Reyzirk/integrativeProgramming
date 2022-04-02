@@ -61,6 +61,10 @@ class AttendanceFacade {
         return $this->attendanceDB->getAttendanceRecord($childName);
     }
     
+    public function getAttendanceRecordDate($date){
+        return $this->attendanceDB->getAttendanceRecordDate($date);
+    }
+    
     public function insertAttendance(Attendance $attendance){
         return $this->attendanceDB->insertAttendanceRecord($attendance);
     }
