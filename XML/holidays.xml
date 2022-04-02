@@ -5,6 +5,9 @@ Copyright 2022 Omega International Junior School. All Right Reserved.
 Web Application is under GNU General Public License v3.0
 ============================================
 -->
+<?xml-stylesheet type="text/xsl" href="holidaylist.xsl"?>
 <holidays xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="holidays.xsd">
 
-<holiday id="H623889dfb2f7a2.95118963"><name>test</name><dateStart>2022-03-07</dateStart><dateEnd>2022-03-29</dateEnd></holiday></holidays>
+    
+    
+<holiday id="H624891c32a8ed4.29027739"><name>test</name><dateStart>2022-04-14</dateStart><dateEnd>2022-04-19</dateEnd></holiday><holiday id="H624891eb1e5568.03568490"><name>ab</name><dateStart>2022-04-28</dateStart><dateEnd>2022-05-02</dateEnd></holiday></holidays>

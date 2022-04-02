@@ -30,7 +30,7 @@ while($key = $grades->next()){
     if (empty($search) ||
             (
             custom_str_contains($key->grade, empty($search) ? "" : $search) ||
-            ($mark>=$minMark && $mark <= maxMark)
+            ($mark>=$minMark && $mark <= $maxMark)
             )
     ) {
         $count++;

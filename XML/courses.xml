@@ -5,6 +5,7 @@ Copyright 2022 Omega International Junior School. All Right Reserved.
 Web Application is under GNU General Public License v3.0
 ============================================
 -->
+<?xml-stylesheet type="text/xsl" href="courselist.xsl"?>
 <courses xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="courses.xsd">
 
 <course code="BAIT3176"><name>Integrative Programming</name><desc>&lt;p&gt;test&lt;/p&gt;</desc><CourseMaterials><CourseMaterial id="CM6235e8862fdb54.48221858"><name>test</name><link>62260fbaf046e2.40843446.png</link></CourseMaterial></CourseMaterials></course><course code="test25"><name>test255</name><desc>&lt;p&gt;test&lt;/p&gt;</desc></course></courses>
