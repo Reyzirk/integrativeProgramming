@@ -48,7 +48,7 @@ if ($submitBtn == false) {
                     <?php echo $row["AttendingDate"] ?>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" onclick="window.location.href = 'updateRecord.php?childID=<?php echo $row["ChildID"] ?>'"><i class="fa-solid fa-pen-to-square"></i>Update Record</button>
+                    <button type="button" class="btn btn-danger" >Delete</button>
                 </td>
             </tr>
             <?php
@@ -61,43 +61,48 @@ if ($submitBtn == false) {
 } else {
     if ($criteria == "name") {
         $searchResult = $facade->getAttendanceRecords($searchInfo);
+        printSearchResults($searchResult, $facade);
+    } else if ($criteria == "date") {
+        $searchResult = $facade->getAttendanceRecordDate($searchInfo);
+        printSearchResults($searchResult, $facade);
+    }
+}
 
-        if ($searchResult != NULL) {
-            foreach ($searchResult as $row) {
-                $childName = $facade->getChildName($row["ChildID"]);
-                $classDetails = $facade->getClassDetails($row["ChildID"]);
-                ?>
-                <tr id="<?php echo $row["AttendanceID"] ?>">
-                    <td>
-                        <?php echo $row["ChildID"] ?>
-                    </td>
-                    <td>
-                        <?php echo $childName ?>
-                    </td>
-                    <td>
-                        <?php echo $row["ChildTemperature"] ?>
-                    </td>
-                    <td>
-                        <?php echo "S" . $classDetails->semester . "Y" . $classDetails->year ?>
-                    </td>
-                    <td>
-                        <?php echo $row["AttendingDate"] ?>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-primary" onclick="window.location.href = 'updateRecord.php?childID=<?php echo $row["ChildID"] ?>'"><i class="fa-solid fa-pen-to-square"></i> Update Record</button>
-                    </td>
-                </tr>
-                <?php
-            }
-        } else {
+function printSearchResults($searchResult, $facade) {
+    
+    if ($searchResult != NULL) {
+        foreach ($searchResult as $row) {
+            $childName = $facade->getChildName($row["ChildID"]);
+            $classDetails = $facade->getClassDetails($row["ChildID"]);
             ?>
-            <tr>
-                <td colspan="5" class="noRecordsFound"><b>NO RESULTS FOUND</b></td>
+            <tr id="<?php echo $row["AttendanceID"] ?>">
+                <td>
+                    <?php echo $row["ChildID"] ?>
+                </td>
+                <td>
+                    <?php echo $childName ?>
+                </td>
+                <td>
+                    <?php echo $row["ChildTemperature"] ?>
+                </td>
+                <td>
+                    <?php echo "S" . $classDetails->semester . "Y" . $classDetails->year ?>
+                </td>
+                <td>
+                    <?php echo $row["AttendingDate"] ?>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </td>
             </tr>
             <?php
         }
-    } else if ($criteria == "date") {
-        
+    } else {
+        ?>
+        <tr>
+            <td colspan="5" class="noRecordsFound"><b>NO RESULTS FOUND</b></td>
+        </tr>
+        <?php
     }
 }
 ?>
