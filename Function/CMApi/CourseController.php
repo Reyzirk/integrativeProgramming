@@ -78,6 +78,7 @@ class CourseController extends BaseController implements Controller{
             $errorDesc = "Method not found";
             $errorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
+        
         if (empty($errorDesc)) {
             $this->sendOutput(
                     $response,
