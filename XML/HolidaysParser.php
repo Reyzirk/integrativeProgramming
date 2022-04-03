@@ -40,7 +40,6 @@ class HolidaysParser implements Parser{
         }
         
     }
-    
     public function getHolidays(){
         return $this->holidays;
     }
@@ -48,8 +47,11 @@ class HolidaysParser implements Parser{
     public function getXML(){
         return $this->xml;
     }
+    private function getPath($pathFormula){
+        return $this->xml->xpath($pathFormula);
+    }
     public function updateHoliday($holidayItem):bool{
-        $holiday = $this->xml->xpath('holiday[@id="'.$holidayItem->id.'"]');
+        $holiday = $this->getPath('holiday[@id="'.$holidayItem->id.'"]');
         if(count($holiday)>=1){
             $holiday=$holiday[0];
             $dom= dom_import_simplexml($holiday);
@@ -62,7 +64,7 @@ class HolidaysParser implements Parser{
         return true;
     }
     public function getHoliday($id){
-        $holiday = $this->xml->xpath('holiday[@id="'.$id.'"]');
+        $holiday = $this->getPath('holiday[@id="'.$id.'"]');
         if(count($holiday)>=1){
             $holiday=$holiday[0];
             $dom= dom_import_simplexml($holiday);
@@ -72,7 +74,7 @@ class HolidaysParser implements Parser{
         }
     }
     public function removeHoliday($id):bool{
-        $holiday = $this->xml->xpath('holiday[@id="'.$id.'"]');
+        $holiday = $this->getPath('holiday[@id="'.$id.'"]');
         if(count($holiday)>=1){
             $holiday=$holiday[0];
             $dom= dom_import_simplexml($holiday);

@@ -53,12 +53,14 @@ class CoursesParser implements Parser{
     public function getCourses(){
         return $this->courses;
     }
-    
     public function getXML(){
         return $this->xml;
     }
+    private function getPath($pathFormula){
+        return $this->xml->xpath($pathFormula);
+    }
     public function getCourse($code){
-        $course = $this->xml->xpath('course[@code="'.$code.'"]');
+        $course = $this->getPath('course[@code="'.$code.'"]');
         if(count($course)>=1){
             $course=$course[0];
             $dom= dom_import_simplexml($course);
@@ -126,7 +128,7 @@ class CoursesParser implements Parser{
         }
     }
     public function checkExist($code):bool{
-        $course = $this->xml->xpath('course[@code="'.$code.'"]');
+        $course = $this->getPath('course[@code="'.$code.'"]');
         if(count($course)>=1){
             return true;
         }else{
@@ -134,7 +136,7 @@ class CoursesParser implements Parser{
         }
     }
     public function removeCourseMaterial($path){
-        $material = $path->xpath('CourseMaterials');
+        $material = $this->getPath('CourseMaterials');
         if(count($material)>=1){
             $material=$material[0];
             $dom= dom_import_simplexml($material);

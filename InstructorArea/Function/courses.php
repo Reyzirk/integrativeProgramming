@@ -15,11 +15,7 @@ $dataArray = array(
     "code" =>
     array(
         "Title" => "Course Code",
-        "Width" => "30%"),
-    "name" =>
-    array(
-        "Title" => "Name",
-        "Width" => "50%"));
+        "Width" => "30%"));
 
 function callLog() {
     if (!empty($_SESSION["errorLog"])) {

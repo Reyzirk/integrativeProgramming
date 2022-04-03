@@ -173,3 +173,7 @@ input:disabled {
     margin-top: 6px;
     margin-bottom: 6px;
 }
+#tableContent .btn{
+    margin-right: 5px;
+    margin-left: 5px;
+}
