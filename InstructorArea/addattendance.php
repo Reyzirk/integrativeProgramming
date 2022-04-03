@@ -79,8 +79,13 @@ Web Application is under GNU General Public License v3.0
                                             </div>
                                         </div>
                                         <br><br>
+                                        <div class="d-flex flex-row-reverse">
+                                            <div class="p-2">
+                                                <button type="button" class="btn btn-primary" onclick="downloadPDF()">Download to PDF</button>
+                                            </div>
+                                        </div>
                                         <!--Student Table to be injected here  -->
-                                        <table class="table table-striped table-hover">
+                                        <table class="table table-striped table-hover" id="attendanceTable">
                                             <thead>
                                                 <tr>
                                                     <th scope="col" style="width: 12%">Student ID</th>

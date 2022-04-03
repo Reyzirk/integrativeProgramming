@@ -52,6 +52,38 @@ class AttendanceDB {
         }
     }
     
+    public function getAttendanceRecordID($attendanceID){
+        $query="SELECT * FROM  attendance WHERE AttendanceID = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $attendanceID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        
+        if ($totalrows == 0){
+            return NULL;
+        }
+        else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+    }
+    
+    public function deleteAttendanceRecord($attendanceID){
+        $query="DELETE FROM attendance WHERE AttendanceID = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $attendanceID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        
+        if ($totalrows == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    
     public function insertAttendanceRecord(Attendance $attendance){
         $query="INSERT INTO attendance (ChildID, ChildTemperature, AttendingDate) VALUES (?,?,?)";
         $stmt = $this->instance->con->prepare($query);

@@ -48,7 +48,7 @@ if ($submitBtn == false) {
                     <?php echo $row["AttendingDate"] ?>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-danger" >Delete</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteAttendanceRecord(<?php echo $row["AttendanceID"]?>)">Delete</button>
                 </td>
             </tr>
             <?php
@@ -92,7 +92,7 @@ function printSearchResults($searchResult, $facade) {
                     <?php echo $row["AttendingDate"] ?>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-danger" onclick="deleteAttendanceRecord(<?php echo $row['AttendanceID']?>)">Delete</button>
                 </td>
             </tr>
             <?php

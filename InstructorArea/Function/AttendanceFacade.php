@@ -16,6 +16,7 @@ require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(_
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ChildDB.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ClassDB.php';
 require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/ChildClassDB.php';
+require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/deletionLogDB.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Attendance.php";
 
 class AttendanceFacade {
@@ -24,12 +25,14 @@ class AttendanceFacade {
     protected $childDB;
     protected $classDB;
     protected $childClassDB;
+    protected $deletionLogDB;
 
     public function __construct() {
         $this->attendanceDB = new AttendanceDB();
         $this->childDB = new ChildDB();
         $this->classDB = new ClassDB();
         $this->childClassDB = new ChildClassDB();
+        $this->deletionLogDB = new deletionLogDB();
     }
 
     public function getTotalAttendanceRecord() {
@@ -95,6 +98,22 @@ class AttendanceFacade {
     
     public function getChildIDFromClassID($query){
         return $this->childClassDB->select($query);
+    }
+    
+    public function deleteAttendanceLog($attendanceID){
+        $results = $this->attendanceDB->getAttendanceRecordID($attendanceID);
+        foreach ($results as $row){
+            $attendance = new Attendance($row["ChildID"],$row["ChildTemperature"],$row["AttendingDate"]);
+            
+        }
+        //print_r($attendance);
+        if ($this->attendanceDB->deleteAttendanceRecord($attendanceID) == true){
+            return $this->deletionLogDB->recordDeletionLog($attendance,$attendanceID);
+        }
+        else{
+            return false;
+        }
+        
     }
 
 }
