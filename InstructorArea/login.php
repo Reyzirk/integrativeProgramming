@@ -12,7 +12,7 @@ Login page
  -->
 
 <?php
-$instructorID = "";
+$instructorEmail = "";
 $password = "";
 
     session_start();
@@ -28,12 +28,12 @@ $password = "";
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
             //check if user id is empty
-        if(empty(trim($_POST["instructorID"])))
+        if(empty(trim($_POST["instructorEmail"])))
         {
-            $instructorID_err = "Please enter user ID.";
+            $instructorEmail_err = "Please enter user email.";
         } else
         {
-            $instructorID = trim($_POST["instructorID"]);
+            $instructorEmail = trim($_POST["instructorEmail"]);
         }
 
         //check if password is empty
@@ -54,7 +54,7 @@ $password = "";
                     
             //store data into session
             $_SESSION["login"] = 'true';
-            $_SESSION["instructorID"] = '$instructorID';
+            $_SESSION["instructorEmail"] = '$instructorEmail';
            
             //direct user to homepage
             header("location: index.php");
@@ -62,7 +62,7 @@ $password = "";
         }else
         {
             //user id or password invalid
-            $login_err = "Invalid user ID or password.";
+            $login_err = "Invalid email or password.";
         }
     }
     
@@ -77,6 +77,7 @@ $password = "";
             { 
                 font: 14px;
                 font-family: sans-serif;
+                background-image: "../images/loginBackground";
             }
             .wrapper
             { 
@@ -97,8 +98,8 @@ $password = "";
                 
                 <div class="login">
                     <label>User ID</label>
-                    <input type="instructorID" name="instructorID" class="form-control <?php echo (!empty($instructorID_err)) ? 'is-invalid' : ''; ?>" 
-                           value="<?php echo $userID; ?>">
+                    <input type="instructorEmail" name="instructorEmail" class="form-control <?php echo (!empty($instructorID_err)) ? 'is-invalid' : ''; ?>" 
+                           value="<?php echo $instructorEmail; ?>">
                 </div>
                 
                 <div class="login">
@@ -112,7 +113,7 @@ $password = "";
                     <input type="submit" class="btn btn-primary" value="Login">
                 </div>
                 
-                <p>Do not have an account? <a href="register.php">Register Now!</a></p>  
+                <br><p>Forget your password? <a href="#">Change Password!</a></p>  
             </form>
         </div>   
     </body>
