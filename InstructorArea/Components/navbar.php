@@ -45,6 +45,13 @@
     <li class='nav-item <?php echo $pageName=="addattendance.php"?"active":""?>'>
         <a class="nav-link" id="nav-update" href="addattendance.php"><i class="fa fa-address-card"></i> Attendance Log</a>
     </li>
+    
+    <!--
+    ***The add parent logo need to change***
+    -->
+    <li class='nav-item <?php echo $pageName=="parent.php"?"active":""?>'>
+        <a class="nav-link" id="nav-update" href="parent.php"><i class="fa fa-address-card"></i> Parent</a>
+    </li>
     <div class="middleButton d-none d-md-inline" onclick="toggle(this)">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
