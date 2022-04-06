@@ -1,0 +1,23 @@
+/*
+============================================
+Copyright 2022 Omega International Junior School. All Right Reserved.
+Web Application is under GNU General Public License v3.0
+============================================
+*/
+/* 
+    Created on : Apr 6, 2022, 7:55:59 PM
+    Author     : Shu Ling
+*/
+
+body
+{ 
+    font: 14px;
+    font-family: sans-serif;
+    background-image: "../images/loginBackground";
+}
+.wrapper
+{ 
+    padding-right: 40%; 
+    padding-left: 40%; 
+    padding-top: 15%;
+}

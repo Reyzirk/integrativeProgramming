@@ -13,46 +13,46 @@
 $parentID = "P00001"; //++++++++++++++++++++++++++to be changed to session
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AnnouncementDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/ReadStatus.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Announcement.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/ReadStatusDB.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Function/KhengHuangAPI/searchAnnounceController.php";
 
 $announceDB = new AnnouncementDB();
-if(empty($_POST["inputSearch"])){
+$searchClick = false;
+
+if (empty($_POST["inputSearch"])) {
     $search = "";
-}else{
-    $search = eliminateExploit($_POST["inputSearch"]);
+} else {
+    //*******************************************>>>Client Side API Call<<<*********************************************
+    
+    $search = $_POST["inputSearch"];
+    $url = "http://localhost/integrativeProgramming/Function/KhengHuangAPI/api.php?search=" . urlencode($search);
+    $client = curl_init($url);
+    curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($client);
+    $result = json_decode($response, true);
+    $results = array();
+
+    if (!empty($result) && $result["status_message"] == "Result Found") {
+        $temp = array();
+        for($i=0; $i < count(array($result["results"])); $i++) {
+            foreach($result["results"][$i] as $name => $value){
+                $temp[$name] = $value;
+            }
+            $results[] = new Announcement($temp["announceID"], $temp["instructorID"], $temp["title"], $temp["desc"], 
+                    $temp["cat"], $temp["date"], $temp["pin"], $temp["allowC"]);
+        }
+    }
+
+    $searchClick = true;
 }
 
-try {
-    $totalCount = $announceDB->getCountBySearch($search); 
-} catch (PDOException $ex) {
-    if ($generalSection["maintenance"] == true) {
-        echo $ex->getMessage();
-    } else {
-        callPDOExceptionLog($ex);
-    }
-}
-
-$builder = new MySQLQueryBuilder();
-$query = $builder->select(array("announcement"), array("*"))
-        ->where("AnnounceID", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
-        ->where("Date", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
-        ->where("Title", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
-        ->where("Cat", "%" . (empty($search) ? "" : strtoupper($search[0])) . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
-        ->order("Date", "DESC")
-        ->query();
-try {
-    $results = $announceDB->select($query);
-} catch (PDOException $ex) {
-    if ($generalSection["maintenance"] == true) {
-        echo $ex->getMessage();
-    } else {
-        callPDOExceptionLog($ex);
-    }
+//Initialize Announcement/ Display Announcement List
+if (!$searchClick) {
+    $results = $announceDB->list();
 }
 
 $pinAnnounce = $announceDB->pinTop();
-
-
 
 function eliminateExploit($str) {
     $str = trim($str);

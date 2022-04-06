@@ -99,6 +99,7 @@ class AnnouncementDB {
     public function list() {
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("announcement"), array("*"))
+                ->order("Date", \OrderTypeEnum::DESC)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->execute();
@@ -115,6 +116,32 @@ class AnnouncementDB {
             }
             return $resultList;
         }
+    }
+    
+    public function searchAnnounce($search){
+         $builder = new MySQLQueryBuilder();
+         $query = $builder->select(array("announcement"), array("*"))
+            ->where("AnnounceID", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+            ->where("Date", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+            ->where("Title", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+            ->where("Description", "%" . $search . "%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+            ->order("Date", "DESC")
+            ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $resultList = array();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return $resultList;
+        } else {
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            foreach ($results as $row) {
+                $result = new Announcement($row["AnnounceID"], $row["InstructorID"], $row["Title"], $row["Description"], $row["Cat"], $row["Date"], $row["Pin"], $row["AllowComment"]);
+                $resultList[] = $result;
+            }
+            return $resultList;
+        }     
     }
 
     public function insert($announce) {

@@ -72,8 +72,8 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                     <div class="row">
                                                         <div class="col-md">
                                                             <label for="class" class="col-form-label font-weight-bold">Title</label>
-                                                            <div style=" background-color: white; border-radius: 15px;box-shadow: 0px 5px 5px  rgba(51, 51, 51, 0.3);padding: 10px">
-                                                                <span style="font-size: 20pt;padding-left:10px; word-break: break-word;"><?php echo $announceInfo->title; ?></span>
+                                                            <div style=" background-color: white; border-radius: 15px;box-shadow: 0px 5px 5px  rgba(51, 51, 51, 0.3);padding: 15px">
+                                                                <span style="font-size: 20pt; word-break: break-word;"><?php echo $announceInfo->title; ?></span>
                                                             </div>
                                                         </div>
                                                     </div>

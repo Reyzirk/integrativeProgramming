@@ -88,14 +88,14 @@ Web Application is under GNU General Public License v3.0
                             if (!empty($results)) {
                                 foreach ($results as $row) {
                                     ?>
-                                    <div class="shadow announceItem" onclick="location.href = 'viewannouncement.php?id=<?php echo $row["AnnounceID"] ?>'" >
+                                    <div class="shadow announceItem" onclick="location.href = 'viewannouncement.php?id=<?php echo $row->announceID ?>'" >
                                         <div class="row">
                                             <div class="col-md-7">
-                                                <span class="itemTitle"><?php echo $row["Title"] ?></span>
+                                                <span class="itemTitle"><?php echo $row->title ?></span>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1" style="margin: auto">
                                                 <?php
-                                                $read = new ReadStatus($row["AnnounceID"], $parentID);
+                                                $read = new ReadStatus($row->announceID, $parentID);
                                                 if ($readDB->checkExist($read)) {
                                                     ?>
                                                     <div class="readStatusRead">Read</div>
@@ -105,12 +105,12 @@ Web Application is under GNU General Public License v3.0
                                                 <?php } ?>
 
                                             </div>
-                                            <div class="col-md-2">
-                                                <?php echo convertCatToWord($row["Cat"]) ?>
+                                            <div class="col-md-2" style="margin: auto">
+                                                <?php echo convertCatToWord($row->cat) ?>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-md-2" style="margin: auto">
 
-                                                <?php echo $row["Date"] ?>
+                                                <?php echo $row->date ?>
 
                                             </div>
                                         </div>
