@@ -23,12 +23,21 @@ if (!empty($_GET["key"])) {
         //print_r($output);
         sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
     } else {
-        
+        $facade = new AttendanceFacade();
+        $results = $facade->selectAllAttendanceRecord();
+        $count = $facade->getTotalAttendanceRecord();
+        $attendanceListData = array();
+        foreach ($results as $row) {
+            $attendanceData = array("AttendanceID" => $row["AttendanceID"], "ChildID" => $row["ChildID"], "Child Temperature" => $row["ChildTemperature"], "AttendingDate" => $row["AttendingDate"]);
+            $attendanceListData[] = $attendanceData;
+        }
+        $output[] = array("Status" => "Successful", "Attendance List" => $attendanceListData, "TotalRecords" => $count);
+        $response = json_encode($output, JSON_PRETTY_PRINT);
+        sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
     }
-}
-else{
-    $output[] = array("Status" =>"Failed", "Message"=>"API Key doesn't exist");
-    $response= json_encode($output,JSON_PRETTY_PRINT);
+} else {
+    $output[] = array("Status" => "Failed", "Message" => "API Key doesn't exist");
+    $response = json_encode($output, JSON_PRETTY_PRINT);
     sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
 }
 
@@ -39,7 +48,7 @@ function antiExploit($str) {
     return $str;
 }
 
-function printResponses(){
+function printResponses() {
     
 }
 
@@ -55,4 +64,3 @@ function sendOutput($data, $httpHeaders) {
     echo $data;
     return;
 }
-
