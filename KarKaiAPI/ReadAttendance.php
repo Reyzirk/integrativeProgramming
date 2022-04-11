@@ -24,16 +24,47 @@ if (!empty($_GET["key"])) {
         sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
     } else {
         $facade = new AttendanceFacade();
-        $results = $facade->selectAllAttendanceRecord();
-        $count = $facade->getTotalAttendanceRecord();
-        $attendanceListData = array();
-        foreach ($results as $row) {
-            $attendanceData = array("AttendanceID" => $row["AttendanceID"], "ChildID" => $row["ChildID"], "Child Temperature" => $row["ChildTemperature"], "AttendingDate" => $row["AttendingDate"]);
-            $attendanceListData[] = $attendanceData;
+        if (!empty($_GET["date"])) {
+            $date = antiExploit($_GET["date"]);
+            $results = $facade->getAttendanceRecordDate($date);
+            $attendanceListData = array();
+            $count = 0;
+            foreach($results as $row){
+                $attendanceData = array("AttendanceID" => $row["AttendanceID"], "ChildID" => $row["ChildID"], "Child Temperature" => $row["ChildTemperature"], "AttendingDate" => $row["AttendingDate"]);
+                $attendanceListData[] = $attendanceData;
+                $count++;
+            }
+            $output[] = array("Status" => "Successful", "Attendance List" => $attendanceListData, "TotalRecords" => $count);
+            $response = json_encode($output, JSON_PRETTY_PRINT);
+            sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
+            
         }
-        $output[] = array("Status" => "Successful", "Attendance List" => $attendanceListData, "TotalRecords" => $count);
-        $response = json_encode($output, JSON_PRETTY_PRINT);
-        sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
+        else if (!empty($_GET["childname"])) {
+            $childName = antiExploit($_GET["childname"]);
+            $results = $facade->getAttendanceRecords($childName);
+            $attendanceListData = array();
+            $count = 0;
+            foreach($results as $row){
+                $attendanceData = array("AttendanceID" => $row["AttendanceID"], "ChildID" => $row["ChildID"], "Child Temperature" => $row["ChildTemperature"], "AttendingDate" => $row["AttendingDate"]);
+                $attendanceListData[] = $attendanceData;
+                $count++;
+            }
+            $output[] = array("Status" => "Successful", "Attendance List" => $attendanceListData, "TotalRecords" => $count);
+            $response = json_encode($output, JSON_PRETTY_PRINT);
+            sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
+        }
+        else {
+            $results = $facade->selectAllAttendanceRecord();
+            $count = $facade->getTotalAttendanceRecord();
+            $attendanceListData = array();
+            foreach ($results as $row) {
+                $attendanceData = array("AttendanceID" => $row["AttendanceID"], "ChildID" => $row["ChildID"], "Child Temperature" => $row["ChildTemperature"], "AttendingDate" => $row["AttendingDate"]);
+                $attendanceListData[] = $attendanceData;
+            }
+            $output[] = array("Status" => "Successful", "Attendance List" => $attendanceListData, "TotalRecords" => $count);
+            $response = json_encode($output, JSON_PRETTY_PRINT);
+            sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
+        }
     }
 } else {
     $output[] = array("Status" => "Failed", "Message" => "API Key doesn't exist");

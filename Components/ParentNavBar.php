@@ -31,7 +31,7 @@ Web Application is under GNU General Public License v3.0
                 </li>
                 <li class="dropdown"><a href="#" onclick="toggleMobileNavBarDropdown(this)"><span>Attendance</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="#">Child Attendance</a></li>
+                        <li><a href="attendance.php">Child Attendance</a></li>
                         <li class="dropdown"><a href="#" onclick="toggleMobileNavBarDropdown(this)"><span>COVID-19</span> <i class="bi bi-chevron-right"></i></a>
                             <ul>
                                 <li><a href="#">Temperature</a></li>
