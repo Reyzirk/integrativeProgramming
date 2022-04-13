@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+============================================
+Copyright 2022 Omega International Junior School. All Right Reserved.
+Web Application is under GNU General Public License v3.0
+============================================
+-->
+<?xml-stylesheet type="text/xsl" href="attendance.xsl"?>
+
+<attendance xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="attendance.xsd">
+    <childTemperature temperature = "36.9">
+        <code>Green</code>
+        <description>Normal body temperature. The common body temperature of a person.</description>
+        <safetyLevel>Safe</safetyLevel>
+    </childTemperature>
+    
+    <childTemperature temperature="37.0">
+        <code>Green</code>
+        <description>>Normal body temperature. The common body temperature of a person.</description>
+        <safetyLevel>>Safe</safetyLevel>
+    </childTemperature>
+    
+    <childTemperature temperature="37.1">
+        <code>Green</code>
+        <description>>Suspected mild fever. Continuous observation is required. Temperature is taken for every 2 hours.</description>
+        <safetyLevel>Risky</safetyLevel>
+    </childTemperature>
+    
+    <childTemperature temperature="37.2">
+        <code>Yellow</code>
+        <description>Mild fever confirmed. Parents will be informed immediately about the child's condition. Temperature is taken every 2 hours for observation purposes.</description>
+        <safetyLevel>Risky</safetyLevel>
+    </childTemperature>
+    
+    <childTemperature temperature="37.5">
+        <code>Orange</code>
+        <description>Fever is confirmed. Child will be observed with any associated side symtoms and such symtoms will be recorded regularly. Temperature is taken every 30 minutes for monitoring purposes</description>
+        <safetyLevel>Unsafe</safetyLevel>
+    </childTemperature>
+    
+    <childTemperature temperature="37.8">
+        <code>Orange</code>
+        <description>>Condition of fever is escalating. Parents will be notified again and approval to deliver Paracetamol as a temporary solution will be sought from parents. The child will be placed in quarantine if he/she is displaying signs and symtoms of Covid infection.</description>
+        <safetyLevel>Unsafe</safetyLevel>
+    </childTemperature>
+    
+    <childTemperature temperature="38.0">
+        <code>Red</code>
+        <description>Fever has escalated int o serious phase. Parents will be advised to bring their children home to seek medical advice from a professional. The child will be quarantined and Paracetamol will be immediately delivered to ease the fever</description>
+        <safetyLevel>Unsafe</safetyLevel>
+    </childTemperature>
+    
+    <childTemperature temperature="38.5">
+        <code>Red</code>
+        <description>The body temperature of the child has risen to dangerous levels. Parents will be informed immediately, and the school will immediately send the child for medical attention to any nearby hospitals for further care. </description>
+        <safetyLevel>Unsafe</safetyLevel>
+    </childTemperature>
+    
+    <childTemperature temperature="39.0">
+        <code>Red</code>
+        <description>The body temperature is extremely dangerous and may leave permanent damage to the child even after recoevery. Parents will be notified immediately and medical attention will be called upon. </description>
+        <safetyLevel>Dangerous</safetyLevel>
+    </childTemperature>
+    
+    <childTemperature temperature="40.0">
+        <code>Red</code>
+        <description>The body temperature is now beyond control. Drastic measures such as cooling the body with a wet cloth will be immediately executed. Such high body temperatures can be proven fatal if not cared upon. Emergency medical services will be called upon in order to take over the situation.</description>
+        <safetyLevel>Dangerous</safetyLevel>
+    </childTemperature>
+    
+</attendance>

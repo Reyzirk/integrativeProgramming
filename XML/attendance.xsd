@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+============================================
+Copyright 2022 Omega International Junior School. All Right Reserved.
+Web Application is under GNU General Public License v3.0
+============================================
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    <xs:element name="attendance">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="childTemperature" type="temperatureType" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="temperatureType">
+        <xs:sequence>
+            <xs:element name="code" type="xs:string"/>
+            <xs:element name="description" type="xs:string"/>
+            <xs:element name="safetyLevel" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="temperature" type="xs:string" use="required"/>
+    </xs:complexType>
+
+</xs:schema>
