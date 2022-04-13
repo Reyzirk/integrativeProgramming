@@ -22,6 +22,7 @@
         </html>
     </xsl:template>
     <xsl:template match="announcement">
+        <option value=""><xsl:value-of select="fullname"/></option>
         <table align="center" class="table table-hover">
             <tr>
                 <th>No.</th>

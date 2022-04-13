@@ -43,3 +43,13 @@ class BaseController {
         return;
     }
 }
+//For PHP version that below 8.0
+function custom_str_contains(string $haystack, string $needle): bool {
+    return '' === $needle || false !== strpos($haystack, $needle);
+}
+function eliminateExploit($str){
+    $str = trim($str);
+    $str = stripcslashes($str);
+    $str = htmlspecialchars($str);
+    return $str;
+}

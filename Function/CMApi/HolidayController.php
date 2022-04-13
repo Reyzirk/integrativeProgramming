@@ -13,7 +13,7 @@
  * @author Choo Meng
  */
 require_once str_replace("InstructorArea", "", str_replace("Function", "", dirname(__DIR__))) . '/XML/ParserFactory.php';
-require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Holiday.php";
+require_once str_replace("InstructorArea", "", str_replace("Function", "", dirname(__DIR__)))."/Objects/Holiday.php";
 require_once "BaseController.php";
 require_once "Controller.php";
 
@@ -61,6 +61,7 @@ class HolidayController extends BaseController implements Controller{
                         if (!empty($params["day"])) {
                             $day = $params["day"];
                         }
+                        
                         $totalCount = count($holidays);
                         $beginIndex = ($currentPage - 1) * $entry;
                         $endIndex = ($currentPage * $entry) >= $totalCount ? $totalCount : ($currentPage * $entry);
@@ -69,6 +70,16 @@ class HolidayController extends BaseController implements Controller{
                         for ($i = $beginIndex; $i < $endIndex; $i++) {
                             $count++;
                             $key = $holidays[$i];
+                            if (!empty($params["search"])) {
+                                if (!(custom_str_contains($key->id, empty($params["search"]) ? "" : $params["search"]) ||
+                                custom_str_contains($key->name, empty($params["search"]) ? "" : $params["search"])||
+                                custom_str_contains($key->dateStart, empty($params["search"]) ? "" : $params["search"])||
+                                custom_str_contains($key->dateEnd, empty($params["search"]) ? "" : $params["search"]))){
+                                    $totalCount--;
+                                    continue;
+                                }
+                                
+                            }
                             $valueDateStart = (string) $key->dateStart;
                             $dateStart = new DateTime($valueDateStart);
                             if (!empty($month)) {
@@ -88,7 +99,7 @@ class HolidayController extends BaseController implements Controller{
                             }
                             $data[] = array("ID" => (string) $key->id, "Name" => (string) $key->name, "Start Date" => (string) $key->dateStart, "End Date" => (string) $key->dateEnd);
                         }
-                        $output[] = array("Status"=>"Success","Data" => $data, "Total Record Retrieved" => $count);
+                        $output[] = array("Status"=>"Success","Data" => $data, "Total Record Retrieved" => $count, "Total Record in Database" => $totalCount);
                     }
                 }
 
@@ -145,13 +156,13 @@ class HolidayController extends BaseController implements Controller{
                             $errorData[] = array("Message" => "Required end date to insert the data.");
                             $noparam = true;
                         }
-                        if (!noparam){
+                        if (!$noparam){
                             $errorReturnedData = $this->validateData($params["name"], $params["start"], $params["end"]);
                             if (empty($errorReturnedData)){
-                                $newHoliday = new Holiday("H",$params["name"],$params["start"],$params["end"]);
+                                $newHoliday = new Holiday(uniqid("H",true),$params["name"],$params["start"],$params["end"]);
                                 $parser->addHoliday($newHoliday);
                                 $factory->saveXML("Holidays");
-                                $output[] = array("Status"=>"Success","Data" => $data);
+                                $output[] = array("Status"=>"Success");
                             }else{
                                 $output[] = array("Status" => "Failed", "Error Messages"=>$errorReturnedData);
                             }
