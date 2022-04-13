@@ -31,7 +31,7 @@ class DBController {
         return true;
     }
     private function closeDB(){
-        $con = null;
+        $this->con = null;
     }
     public static function getInstance(){
         if (self::$dbConnection==NULL){
@@ -40,7 +40,8 @@ class DBController {
         return self::$dbConnection;
     }
     public static function closeConnection(){
-        self::$dbConnection.$this->closeDB();
+        //self::closeDB();
+        //$this->con = null;
         self::$dbConnection = NULL;
     }
     public function __get($name) {
