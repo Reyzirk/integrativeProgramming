@@ -10,7 +10,7 @@
 /**
  * Description of Child
  *
- * @author clhsk
+ * @author Ng Kar Kai
  */
 class Child {
     private $childID, $parentID, $childName, $birthDate, $childICNo, $status; 

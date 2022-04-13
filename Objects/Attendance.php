@@ -10,7 +10,7 @@
 /**
  * Description of Attendance
  *
- * @author clhsk
+ * @author Ng Kar Kai
  */
 class Attendance {
     private  $childID, $childTemp, $attending;

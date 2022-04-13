@@ -1,6 +1,7 @@
 <?php
 include '../Function/load.php';
 include 'Function/insertChildAttendance.php';
+//Author: Poh Choo Meng
 ?>
 <!DOCTYPE html>
 <!--

@@ -9,6 +9,7 @@ Web Application is under GNU General Public License v3.0
 
 
 <?php
+//Author: Poh Choo Meng
 #Page Languages
 $lang_title = "Create new holiday";
 $lang_description = "Create a new holiday.";

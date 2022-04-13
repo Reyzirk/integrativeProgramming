@@ -1,4 +1,5 @@
 <?php include '../Function/ini_load.php';session_status() === PHP_SESSION_NONE?session_start():"";
+//Author: Poh Choo Meng
 ?>
 <?php
     if (empty($_SESSION["exceptionerror"])){

@@ -6,6 +6,7 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
+//Author: Poh Choo Meng
 class QueryTypeEnum{
     const SELECT = "SELECT";
     const INSERT = "INSERT";

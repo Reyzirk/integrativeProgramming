@@ -6,6 +6,7 @@ $lang_search_tooltip = "Type in any word that you want to search";
 $lang_refresh_btn = "Refresh";
 $lang_action_btn = "Action";
 $lang_create_btn = "Create new holiday";
+//Author: Poh Choo Meng
 ?>
 <html>
     <head>

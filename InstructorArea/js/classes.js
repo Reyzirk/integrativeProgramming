@@ -4,6 +4,8 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
+
+//Author: Poh Choo Meng
 var sortType = "Class ID";
 var sortOrder = "ASC";
 var pageIndex = 1;

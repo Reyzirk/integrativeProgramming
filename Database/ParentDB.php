@@ -8,7 +8,7 @@
  * 
  * Database/ParentDB.php
  * 
- * @author Tang Khai Li
+ * @author Tang Khai Li, Fong Shu Ling
  */
 
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/DBController.php';
