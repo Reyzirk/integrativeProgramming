@@ -22,6 +22,45 @@ class ParentDB{
         $this->instance = DBController::getInstance();
     }
     
+    public function details($id){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("parent"), array("*"))
+                ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return NULL;
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $row = $results[0];
+            $result = new Parents($row["ParentID"],$row["ParentName"],$row["ParentGender"],$row["ParentBirth"],$row["ParentEmail"],$row["ParentPhoneNo"],$row["ParentIcNo"],$row["ParentType"],$row["AddressID"],$row["Password"]);
+            $resultList = $result;
+            return $resultList;
+        }
+    }
+    
+    public function updatePassword($parentID, $password) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->update("parent", array("Password" => \CustomSQLEnum::BIND_QUESTIONMARK))
+                ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $password, PDO::PARAM_STR);
+        $stmt->bindParam(2, $parentID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
     
     
 }

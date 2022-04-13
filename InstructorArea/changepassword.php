@@ -1,5 +1,6 @@
 <?php
 include '../Function/load.php';$pageName = basename(__FILE__); 
+include './Function/changepassword.php';
 ?>
 <!DOCTYPE html>
 <!--
@@ -80,7 +81,7 @@ Web Application is under GNU General Public License v3.0
                                                 <!-- Prevent implicit submission of the form -->
                                                 <button type="submit" disabled style="display: none" aria-hidden="true"></button>
                                                 <input type="hidden" name="formDetect" value="formDetect">
-                                                <button type="button" class="btn btn-success" onclick="//put js validation here">Submit</button>
+                                                <button type="submit" class="btn btn-success">Submit</button>
                                                 <button type="button" class="btn btn-danger" onclick="location.href = 'parent.php'">Cancel</button>
                                             </center>
                                         </div>
