@@ -17,7 +17,7 @@
     <xsl:template match="/">
         <html>
             <head>
-                <title>attendance.xsl</title>
+                <title>Temperature Declarations</title>
             </head>
             <body>
                 <xsl:apply-templates/>
@@ -50,5 +50,4 @@
             </xsl:for-each>
         </table>
     </xsl:template>
-
 </xsl:stylesheet>
