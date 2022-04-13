@@ -16,13 +16,13 @@ Web Application is under GNU General Public License v3.0
     
     <childTemperature temperature="37.0">
         <code>Green</code>
-        <description>>Normal body temperature. The common body temperature of a person.</description>
-        <safetyLevel>>Safe</safetyLevel>
+        <description>Normal body temperature. The common body temperature of a person.</description>
+        <safetyLevel>Safe</safetyLevel>
     </childTemperature>
     
     <childTemperature temperature="37.1">
         <code>Green</code>
-        <description>>Suspected mild fever. Continuous observation is required. Temperature is taken for every 2 hours.</description>
+        <description>Suspected mild fever. Continuous observation is required. Temperature is taken for every 2 hours.</description>
         <safetyLevel>Risky</safetyLevel>
     </childTemperature>
     
@@ -40,7 +40,7 @@ Web Application is under GNU General Public License v3.0
     
     <childTemperature temperature="37.8">
         <code>Orange</code>
-        <description>>Condition of fever is escalating. Parents will be notified again and approval to deliver Paracetamol as a temporary solution will be sought from parents. The child will be placed in quarantine if he/she is displaying signs and symtoms of Covid infection.</description>
+        <description>Condition of fever is escalating. Parents will be notified again and approval to deliver Paracetamol as a temporary solution will be sought from parents. The child will be placed in quarantine if he/she is displaying signs and symtoms of Covid infection.</description>
         <safetyLevel>Unsafe</safetyLevel>
     </childTemperature>
     
