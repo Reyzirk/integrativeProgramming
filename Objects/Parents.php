@@ -11,28 +11,21 @@
  * @author Tang Khai Li
  */
 
-class Parents{
+class Parents extends User{
     
     private $parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $parentType, $addressID, $password;
     
     public function __construct($parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $parentType, $addressID, $password) {
-        $this->parentID = $parentID;
-        $this->parentName = $parentName;
-        $this->parentGender = $parentGender;
-        $this->parentBirth = $parentBirth;
-        $this->parentEmail = $parentEmail;
-        $this->parentPhoneNo = $parentPhoneNo;
-        $this->parentIcNo = $parentIcNo;
+        parent::__construct($parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $password);
         $this->parentType = $parentType;
         $this->addressID = $addressID;
-        $this->password = $password;
     }
     
     public function __get($name) {
         if (property_exists($this, $name)){
             return $this->$name;
         }else{
-            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+            parent::_get($name);
         }
     }
     
@@ -40,7 +33,7 @@ class Parents{
         if (property_exists($this, $name)){
             $this->$name = $value;
         }else{
-            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+            parent::__set($name, $value);
         }
     }
     

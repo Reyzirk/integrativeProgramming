@@ -24,10 +24,9 @@ Web Application is under GNU General Public License v3.0
                         <li><a href="homeworkclasses.php">Homework</a></li> <!--Optional, may delete it-->
                     </ul>
                 </li>
-                <li class="dropdown"><a href="#" onclick="toggleMobileNavBarDropdown(this)"><span>Child</span> <i class="bi bi-chevron-down"></i></a>
+                <li class="dropdown"><a href="childlist.php" onclick="toggleMobileNavBarDropdown(this)"><span>Child</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="#">View Child Details</a></li>
-                        <li><a href="#">Update Child Details</a></li>
+                        <li><a href="viewchild.php">View Child Details</a></li>
                     </ul>
                 </li>
                 <li class="dropdown"><a href="attendance.php" onclick="toggleMobileNavBarDropdown(this)"><span>Attendance</span> <i class="bi bi-chevron-down"></i></a>
