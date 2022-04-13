@@ -26,26 +26,87 @@
     </xsl:template>
     <xsl:template match="attendance">
         <table class="table table-hover " align="center">
-            <tr>
+            <tr style = "text-align: center">
                 <th>No</th>
+                <th>Temperature</th>
                 <th>Code</th>
                 <th>Description</th>
                 <th>Safety Level</th>
             </tr>
             <xsl:for-each select="childTemperature">
                 <tr>
-                    <td>
-                        <xsl:value-of select="position()"/>
-                    </td>
-                    <td>
-                        <xsl:value-of select="code"/>
-                    </td>
-                    <td>
-                        <xsl:value-of select = "description"/>
-                    </td>
-                    <td>
-                        <xsl:value-of select = "safetyLevel"/>
-                    </td>
+                    
+                    <xsl:if test="code = 'Green'">
+                        <td class= "bg-success text-white">
+                            <xsl:value-of select="position()"/>
+                        </td>
+                        <td class= "bg-success text-white" style="text-align: center">
+                            <xsl:value-of select="temperature"/> &#8451;
+                        </td>
+                        <td class= "bg-success text-white">
+                            <xsl:value-of select="code"/>
+                        </td>
+                        <td class= "bg-success text-white">
+                            <xsl:value-of select = "description"/>
+                        </td>
+                        <td class= "bg-success text-white" style="text-align: center">
+                            <xsl:value-of select = "safetyLevel"/>
+                        </td>
+                    </xsl:if>
+                    
+                    <xsl:if test="code = 'Yellow'">
+                        <td class = "bg-warning">
+                            <xsl:value-of select="position()"/>
+                        </td>
+                        <td class = "bg-warning" style="text-align: center">
+                            <xsl:value-of select="temperature"/> &#8451;
+                        </td>
+                        <td class = "bg-warning">
+                            <xsl:value-of select="code"/>
+                        </td>
+                        <td class = "bg-warning">
+                            <xsl:value-of select = "description"/>
+                        </td>
+                        <td class = "bg-warning" style="text-align: center">
+                            <xsl:value-of select = "safetyLevel"/>
+                        </td>
+                    </xsl:if>
+                    
+                    <xsl:if test="code = 'Orange'">
+                        <td class = "bg-warning">
+                            <xsl:value-of select="position()"/>
+                        </td>
+                        <td class = "bg-warning" style="text-align: center">
+                            <xsl:value-of select="temperature"/> &#8451;
+                        </td>
+                        <td class = "bg-warning">
+                            <xsl:value-of select="code"/>
+                        </td>
+                        <td class = "bg-warning">
+                            <xsl:value-of select = "description"/>
+                        </td>
+                        <td class = "bg-warning" style="text-align: center">
+                            <xsl:value-of select = "safetyLevel"/>
+                        </td>
+                    </xsl:if>
+                    
+                    <xsl:if test="code = 'Red'">
+                        <td class="bg-danger text-white">
+                            <xsl:value-of select="position()"/>
+                        </td>
+                        <td class="bg-danger text-white" style="text-align: center">
+                            <xsl:value-of select="temperature"/> &#8451;
+                        </td>
+                        <td class="bg-danger text-white">
+                            <xsl:value-of select="code"/>
+                        </td>
+                        <td class="bg-danger text-white">
+                            <xsl:value-of select = "description"/>
+                        </td>
+                        <td class="bg-danger text-white" style="text-align: center">
+                            <xsl:value-of select = "safetyLevel"/>
+                        </td>
+                    </xsl:if>
                 </tr>
             </xsl:for-each>
         </table>

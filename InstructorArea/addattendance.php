@@ -112,5 +112,6 @@ Web Application is under GNU General Public License v3.0
                 include 'Components/footer.php'
                 ?>
             </div>
+        </div>
     </body>
 </html>

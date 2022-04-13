@@ -115,5 +115,9 @@ class AttendanceFacade {
         }
         
     }
+    
+    public function getAttendanceRecordFromParentID($parentID){
+        return $this->attendanceDB->getAttendanceRecordParentID($parentID);
+    }
 
 }
