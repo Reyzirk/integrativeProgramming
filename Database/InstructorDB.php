@@ -95,4 +95,17 @@ class InstructorDB {
         }
     }
     
+        public function checkLogin ($email, $password){
+        $query = "SELECT * FROM parent WHERE Email = ? AND Password = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if($totalrows == 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    
 }
