@@ -29,7 +29,6 @@ if (empty($uri[$defaultApi+1])){
     header("HTTP/1.1 404 Not Found");
     return;
 }else if (!isset ($uri[$defaultApi+2])){
-    die();
     header("HTTP/1.1 404 Not Found");
     return;
 }
@@ -48,8 +47,11 @@ if ($dataType == 'holiday'){
     $type = $uri[$defaultApi+2];
     if ($type=="list"){
         $courseController->list();
-    }else if ($type=="get"){
-        $courseController->get();
+    }else if ($type=="details"){
+        $courseController->details();
+    }else{
+        header("HTTP/1.1 404 Not Found");
+        return;
     }
 }else if ($dataType == "grade"){
     $gradeController = $factory->getController("Grade");
@@ -58,5 +60,8 @@ if ($dataType == 'holiday'){
         $gradeController->list();
     }else if ($type=="details"){
         $gradeController->details();
+    }else{
+        header("HTTP/1.1 404 Not Found");
+        return;
     }
 }
