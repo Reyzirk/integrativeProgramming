@@ -36,7 +36,7 @@ Web Application is under GNU General Public License v3.0
 
             <section class="course">
                 <div class="container aos-init aos-animate" data-aos="fade-up">
-                    <h2 class="text-center">Dangerous Temperature Levels</h2>
+                    <h2 class="text-center">Temperature Levels</h2>
                     <div class="row" style="margin-top: 30px">
                         <div class="col-md">
                             <?php
