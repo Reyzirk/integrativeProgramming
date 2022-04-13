@@ -32,10 +32,13 @@ class AttendanceDB {
         $totalrows = $stmt->rowCount();
 
         if ($totalrows == 0) {
+            DBController::closeConnection();
             return 0;
         } else {
+            DBController::closeConnection();
             return $totalrows;
         }
+        
     }
 
     public function selectAll() {
@@ -45,10 +48,12 @@ class AttendanceDB {
         $totalrows = $stmt->rowCount();
 
         if ($totalrows == 0) {
+            DBController::closeConnection();
             return NULL;
         } else {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
+            DBController::closeConnection();
             return $result;
         }
     }
@@ -61,10 +66,12 @@ class AttendanceDB {
         $totalrows = $stmt->rowCount();
 
         if ($totalrows == 0) {
+            DBController::closeConnection();
             return NULL;
         } else {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
+            DBController::closeConnection();
             return $result;
         }
     }
@@ -77,8 +84,10 @@ class AttendanceDB {
         $totalrows = $stmt->rowCount();
 
         if ($totalrows == 0) {
+            DBController::closeConnection();
             return false;
         } else {
+            DBController::closeConnection();
             return true;
         }
     }
@@ -95,8 +104,10 @@ class AttendanceDB {
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
+            DBController::closeConnection();
             return false;
         } else {
+            DBController::closeConnection();
             return true;
         }
     }
@@ -113,10 +124,12 @@ class AttendanceDB {
         $totalrows = $stmt->rowCount();
 
         if ($totalrows == 0) {
+            DBController::closeConnection();
             return NULL;
         } else {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
+            DBController::closeConnection();
             return $result;
         }
     }
@@ -129,10 +142,12 @@ class AttendanceDB {
         $totalrows = $stmt->rowCount();
 
         if ($totalrows == 0) {
+            DBController::closeConnection();
             return NULL;
         } else {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
+            DBController::closeConnection();
             return $result;
         }
     }
@@ -151,10 +166,12 @@ class AttendanceDB {
         $totalrows = $stmt->rowCount();
         
         if ($totalrows == 0) {
+            DBController::closeConnection();
             return NULL;
         } else {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $result = $stmt->fetchAll();
+            DBController::closeConnection();
             return $result;
         }
     }
@@ -168,8 +185,10 @@ class AttendanceDB {
         $totalrows = $stmt->rowCount();
 
         if ($totalrows == 0) {
+            DBController::closeConnection();
             return false;
         } else {
+            DBController::closeConnection();
             return true;
         }
     }
