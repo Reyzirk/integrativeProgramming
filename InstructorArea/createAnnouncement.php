@@ -38,7 +38,7 @@ Web Application is under GNU General Public License v3.0
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
                         <li class="breadcrumb-item active">Create Announcement</li>
                     </ol>

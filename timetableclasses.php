@@ -19,7 +19,7 @@ Web Application is under GNU General Public License v3.0
         <div id="content">
             <div class="breadcrumbs shadow container">
                 <ol class="breadcrumb" id="breadcrumb">
-                    <li class="breadcrumb-item"><a href="dashboard.php">Announcement</a></li>
+                    <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
                     <li class="breadcrumb-item active">Classes for timetable</li>
                 </ol>
             </div>

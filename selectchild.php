@@ -19,7 +19,7 @@ Web Application is under GNU General Public License v3.0
         <div id="content">
             <div class="breadcrumbs shadow container">
                 <ol class="breadcrumb" id="breadcrumb">
-                    <li class="breadcrumb-item"><a href="dashboard.php">Announcement</a></li>
+                    <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
                     <li class="breadcrumb-item active">Select Child</li>
                 </ol>
             </div>
@@ -50,6 +50,7 @@ Web Application is under GNU General Public License v3.0
                                                             <option value="<?php echo $row["ChildID"]; ?>"><?php echo $row["ChildName"]; ?></option>
                                                         <?php } ?>
                                                 </select>
+                                                <span class="invalid-feedback"></span>
                                             </div>
                                             <div class="col-md-3">
                                             </div>

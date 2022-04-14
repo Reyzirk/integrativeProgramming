@@ -42,10 +42,9 @@ if(isset($_POST["formDetect"])){
             $error["confirmPass"] = "Password not match";  
         }else{
             $instructorDB = new InstructorDB();
-            $instructor = $instructorDB->details($instructorID);
             
             //Check current password incorrect
-            if($currentPass != $instructor->password){
+            if(!$instructorDB->checkPassword($_SESSION["instructorID"], $currentPass)){
                 $error["currentPass"] = "Wrong password";
             }else{
                 if($instructorDB->updatePassword($instructorID, $newPass)){

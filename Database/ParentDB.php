@@ -93,17 +93,17 @@ class ParentDB{
                     "ParentEmail" => \CustomSQLEnum::BIND_QUESTIONMARK,
                     "ParentPhoneNo" => \CustomSQLEnum::BIND_QUESTIONMARK,
                     "ParentIcNo" => \CustomSQLEnum::BIND_QUESTIONMARK, 
-                    "ParentType" => \CustomSQLEnum::BIND_QUESTIONMARK,))
+                    "ParentType" => \CustomSQLEnum::BIND_QUESTIONMARK))
                 ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         
         $parentID = $oldID;
-        $parentName = $updated->parentName;
-        $parentGender = $updated->parentGender;
-        $parentBirth = $updated->parentBirth;
-        $parentEmail = $updated->parentEmail;
-        $parentPhoneNo = $updated->parentPhoneNo;
-        $parentIcNo = $updated->parentIcNo;
+        $parentName = $updated->name;
+        $parentGender = $updated->gender;
+        $parentBirth = $updated->birthDate;
+        $parentEmail = $updated->email;
+        $parentPhoneNo = $updated->contactNumber;
+        $parentIcNo = $updated->icNo;
         $parentType = $updated->parentType;
         
         $stmt = $this->instance->con->prepare($query);
@@ -115,6 +115,42 @@ class ParentDB{
         $stmt->bindParam(6, $parentIcNo, PDO::PARAM_STR);
         $stmt->bindParam(7, $parentType, PDO::PARAM_STR);
         $stmt->bindParam(8, $oldID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public function updateParentSide($oldID, $updated) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->update("parent", array("ParentName" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "ParentGender" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "ParentBirth" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "ParentPhoneNo" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "ParentIcNo" => \CustomSQLEnum::BIND_QUESTIONMARK, 
+                    "ParentType" => \CustomSQLEnum::BIND_QUESTIONMARK))
+                ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        
+        $parentID = $oldID;
+        $parentName = $updated->name;
+        $parentGender = strtoupper(substr($updated->gender,0,1));
+        $parentBirth = $updated->birthDate;
+        $parentPhoneNo = $updated->contactNumber;
+        $parentIcNo = $updated->icNo;
+        $parentType = $updated->parentType;
+        
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $parentName, PDO::PARAM_STR);
+        $stmt->bindParam(2, $parentGender, PDO::PARAM_STR);
+        $stmt->bindParam(3, $parentBirth, PDO::PARAM_STR);
+        $stmt->bindParam(4, $parentPhoneNo, PDO::PARAM_STR);
+        $stmt->bindParam(5, $parentIcNo, PDO::PARAM_STR);
+        $stmt->bindParam(6, $parentType, PDO::PARAM_STR);
+        $stmt->bindParam(7, $parentID, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
@@ -165,7 +201,7 @@ class ParentDB{
         $stmt = $this->instance->con->prepare($query);
         $parents = $parent->userID;
         $parentName = $parent->name;
-        $parentGender = substr($parent->gender,0,1);
+        $parentGender = strtoupper(substr($parent->gender,0,1));
         $parentBirth = $parent->birthDate;
         $parentEmail = $parent->email;
         $parentPhoneNo = $parent->contactNumber;

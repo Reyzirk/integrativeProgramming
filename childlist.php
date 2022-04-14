@@ -50,6 +50,7 @@ $lang_action_btn = "Action";
                                     <?php 
                                         $db = new ChildDB();
                                         $result = $db->getChildList($_SESSION["parentID"]);
+                                        if ($result!=null){
                                         foreach($result as $row){
                                     ?>
                                     <tr>
@@ -59,7 +60,11 @@ $lang_action_btn = "Action";
                                     <td><?php echo $row["Status"]; ?></td>
                                     <td><button class='btn btn-outline-info' onclick="location.href = 'viewchild.php?id=<?php echo $row["ChildID"]; ?>';"><i class="fa-solid fa-eye"></i> View</button></td>
                                     </tr>
-                                        <?php } ?>
+                                        <?php }}else{
+                                            ?>
+                                <td colspan="5">RESULT NOT FOUND</td>
+                                    <?php
+                                        } ?>
                                 </tbody>
                             </table>
 

@@ -25,12 +25,46 @@ Registration page
         <meta charset="UTF-8">
         <link rel="stylesheet" href="css/login.css" />
         <?php
-            include 'Components/headmeta.php';
-            
-            if (isset($_SESSION["clientId"])){
-                header('location: index.php');
-            }
+        require_once 'XML/WebPageParser.php';
+        $author = "Ng Kar Kai, Oon Kheng Huang, Tang Khai Li, Fong Shu Ling, Poh Choo Meng";
+        $keywords = "Kindergarden, Education, Learning";
+        $fileName = pathinfo($_SERVER['PHP_SELF'], PATHINFO_BASENAME);
+        $companyName = $generalSection["companyName"];
+        $parser = new WebPageParser("XML/ParentSideWebPage.xml");
+        $webpage = empty($parser->getWebpage()[str_replace(".php", "", strtolower($fileName))]) ? "" :
+                $parser->getWebpage()[str_replace(".php", "", strtolower($fileName))];
+        $pageTitle = empty($webpage) ? "" : $webpage->pageTitle;
+        $description = empty($webpage) ? "" : $webpage->pageDescription;
+
+        echo("
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='author' content='$author'>
+    <meta name='keywords' content='$keywords'>
+    <meta name='description' content='$description'>
+    <title>$pageTitle | $companyName</title>
+    <link href='css/sweetalert2.min.css' rel='stylesheet' type='text/css'/>
+    <script src='https://kit.fontawesome.com/3f628a0091.js' crossorigin='anonymous'></script>
+    <script src='js/jquery-3.6.0.js' type='text/javascript'></script>
+    <script src='js/sweetalert2.all.min.js' type='text/javascript'></script>
+    <script src='js/ckeditor.js' type='text/javascript'></script>
+    <script src='js/bootstrap.bundle.min.js' type='text/javascript'></script>
+        ");
         ?>
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+        <link href="css/main.css" rel="stylesheet">
+
+        <link href="vendor/aos/aos.css" rel="stylesheet">
+        <script src="vendor/aos/aos.js" type='text/javascript'></script>
+
+        <script src="js/html2pdf.bundle.min.js" type='text/javascript'></script>
+        <script src="js/jquery.table2excel.js" type='text/javascript'></script>
     </head>
     <body>
         <div class="wrapper">
@@ -47,26 +81,26 @@ Registration page
                 </div>
                 <div class="form-group">
                     <br><label>Gender</label><br>
-                    <input type="radio" id="male" name="parentGender" value="male">
-                    <label for="male" <?php echo empty($gender)?"":($gender=="Male"?"selected":"") ?>>Male</label><br>
-                    <input type="radio" id="female" name="parentGender" value="female">
-                    <label for="female" <?php echo empty($gender)?"":($gender=="Female"?"selected":"") ?>>Female</label><br>
+                    <input type="radio" id="male" name="parentGender" value="male" <?php echo empty($parentGender)?"":($parentGender=="Male"?"checked":"") ?>>
+                    <label for="male">Male</label><br>
+                    <input type="radio" id="female" name="parentGender" value="female" <?php echo empty($parentGender)?"":($parentGender=="Female"?"checked":"") ?>>
+                    <label for="female">Female</label><br>
                     
                 </div>
                 
                 <div class="form-group">
                     <br><label>Parent Type</label><br>   
-                    <input type="radio" id="mother" name="parentType" value="mother">
-                    <label for="mother" <?php echo empty($gender)?"":($gender=="mother"?"selected":"") ?>>Mother</label><br>
-                    <input type="radio" id="father" name="parentType" value="father">
-                    <label for="father" <?php echo empty($gender)?"":($gender=="father"?"selected":"") ?>>Father</label><br>
-                    <input type="radio" id="guardian" name="parentType" value="guardian">
-                    <label for="guardian" <?php echo empty($gender)?"":($gender=="guardian"?"selected":"") ?>>Guardian</label>       
+                    <input type="radio" id="mother" name="parentType" value="mother" <?php echo empty($parentType)?"":($parentType=="mother"?"checked":"") ?>>
+                    <label for="mother">Mother</label><br>
+                    <input type="radio" id="father" name="parentType" value="father" <?php echo empty($parentType)?"":($parentType=="father"?"checked":"") ?>>
+                    <label for="father">Father</label><br>
+                    <input type="radio" id="guardian" name="parentType" value="guardian" <?php echo empty($parentType)?"":($parentType=="guardian"?"checked":"") ?>>
+                    <label for="guardian">Guardian</label>       
                 </div>
                 
                 <div class="form-group">
                     <br><label>Date of Birth</label><br>
-                    <input type="date" id="parentBirth" name="parentBirth">
+                    <input type="date" id="parentBirth" name="parentBirth" value = "<?php echo !isset($parentBirth)?"":$parentBirth; ?>">
                 </div>
                 <div class="form-group">
                     <br><label>Phone Number</label>

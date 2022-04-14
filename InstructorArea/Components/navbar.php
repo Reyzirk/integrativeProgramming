@@ -1,10 +1,6 @@
 <ul class="navbar-nav bg-primary sidebar sidebar-dark accordion">
     <li class="list-brand"><h1 class="sidebar-brand" id="title"><div class="sidebar-brand-icon"><img src="../images/logo.gif"/></div><?php echo $generalSection["shortName"]; ?> <sub><span class="badge badge-light ">V1.0</span></sub></h1></li>
     <li><hr class="sidebar-divider" id="divider"></li>
-    <li class='nav-item <?php echo $pageName=="dashboard.php"?"active":""?>'>
-        <a class="nav-link" id="nav-update" href="dashboard.php"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-    </li>
-    
     <li class='nav-item <?php echo ($pageName=="announcement.php"?"active":($pageName=="createAnnouncement.php"?"active":($pageName=="editAnnouncement.php"?"active":($pageName=="viewAnnouncement.php"?"active":""))))?>'>
         <a class="nav-link" id="nav-update" href="announcement.php"><i class="fa-solid fa-bullhorn"></i> Announcement</a>
     </li>

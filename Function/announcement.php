@@ -87,3 +87,20 @@ function convertCatToWord($cat) {
             break;
     }
 }
+function callLog() {
+    if (!empty($_SESSION["successUpdate"])) {
+
+        
+        ?>
+        <script>
+            setTimeout(function (){
+                Toast.fire({
+                    icon: 'success',
+                    html: '<b>Sucessful</b><br/>Update the user profile.'
+                })
+            },1500);
+        </script>
+        <?php
+        unset($_SESSION["successUpdate"]);
+    }
+}

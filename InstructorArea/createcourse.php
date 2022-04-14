@@ -29,7 +29,7 @@ $lang_legendTitle2 = "Course Materials"
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item"><a href="courses.php">Courses</a></li>
                         <li class="breadcrumb-item active">Create Course</li>
                     </ol>
