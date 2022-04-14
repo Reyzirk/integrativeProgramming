@@ -16,7 +16,7 @@ Web Application is under GNU General Public License v3.0
 $lang_title = "View announcement";
 $lang_description = "View an existing announcement.";
 $lang_legendTitle = "Announcement Details";
-$LoginID = "P001"; //++++++++++++++++++++++++++++++++++++++++++++To be change to session user ID
+$LoginID = $_SESSION["parentID"]; 
 ?>
 <html>
     <head>

@@ -15,10 +15,10 @@
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/User.php";
 
 class Instructor extends User {
-    private $employeeData;
-    public function __construct($instructorID, $instructorName, $employeeData, $gender, $birthDate, $email, $contactNumber, $icNo, $password = NULL) {
+    private $employeeDate;
+    public function __construct($instructorID, $instructorName, $employeeDate, $gender, $birthDate, $email, $contactNumber, $icNo, $password = NULL) {
         parent::__construct($instructorID, $instructorName, $gender, $birthDate, $email, $contactNumber, $icNo, $password);
-        $this->employeeData = $employeeData;
+        $this->employeeDate = $employeeDate;
 
     }
 

@@ -69,20 +69,20 @@ Login page
         <script src="js/jquery.table2excel.js" type='text/javascript'></script>
     </head>
     <body>
-        <div class="wrapper">
-
+        <div class="wrapper" style="background-image: '../images/loginBackground.jpg'">
+            
             <h2>Login</h2><br>
 
             <form action="login.php" method="post" style="text-align: center;">
                 <div class="text-danger"><?php echo empty($login_err) ? "" : $login_err; ?></div>
 
                 <div class="login">
-                    <label>Email</label>
+                    <label class="email">Email</label>
                     <input type="parentEmail" name="parentEmail"<?php echo (!empty($parentEmail_err)) ? 'is-invalid' : ''; ?>" >
                 </div>
 
                 <div class="login">
-                    <br><label>Password</label>
+                    <br><label class="password">Password</label>
                     <input type="password" name="password" <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
                 </div>
 
@@ -93,7 +93,7 @@ Login page
                 </div>
 
                 <br><p>Do not have an account? <a href="register.php">Register Now!</a></p>
-                <p>Forget your password? <a href="forgotPassword.php">Change Password!</a></p>  
+                <p>Forget your password? <a href="forgotPassword.php">Click here to reset your password!</a></p>  
             </form>
         </div>   
     </body>
