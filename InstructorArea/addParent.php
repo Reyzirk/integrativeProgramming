@@ -59,7 +59,7 @@ include 'Function/addParent.php';
                                             <label class="col-form-label">Enter Parent Birthday:
                                                 <span class="required">*</span></label>
                                             <input name = "parentBirthday" class="bg-white form-control" 
-                                                   type="text" placeholder="Enter parent birthday here."/>
+                                                   type="date" placeholder="Enter parent birthday here."/>
                                         </div>
                                         <div class="col-md">
                                             <label class="col-form-label">Enter Parent Email:
@@ -83,26 +83,46 @@ include 'Function/addParent.php';
                                                    type="text" placeholder="Enter parent IC numbers."/>
                                         </div>
                                     </div>
+                                    <br/>
                                     <div class="row">
                                         <div class="col-md">
                                             <div class="form-group">
-                                                <label for="exampleSelect1" class="form-label mt-4">Select a parent type:</label>
+                                                <label for="parentType" class="form-label mt-4">Select a parent type:</label>
                                                 <br>
                                                 <select class="form-select" name="parentType" 
-                                                        id="exampleSelect1">
+                                                        id="parentType">
                                                     <option value="Guardian">Guardian</option>
                                                     <option value="Father">Father</option>
                                                     <option value="Mother">Mother</option>
                                                 </select>
                                             </div>
                                         </div>
+                                        
                                         <div class="col-md">
-                                            <div class="form-group">
-                                                <label for="parentAddress" class="form-label mt-4">Parent Address</label>
-                                                <textarea class="form-control" id="parentAddress" rows="3" name="parentAddress"></textarea>
-                                            </div>
+                                            <label class="col-form-label">Enter Address Location:
+                                                <span class="required">*</span></label>
+                                            <input name = "address" class="bg-white form-control" 
+                                                   type="text" placeholder="Enter Address."/>
+                                            <br>
+                                            <input name = "city" class="bg-white form-control" 
+                                                   type="text" placeholder="Enter City"/>
+                                            <br>
+                                            <input name = "state" class="bg-white form-control" 
+                                                   type="text" placeholder="Enter State"/>
+                                            <br>
+                                            <input name = "postcode" class="bg-white form-control" 
+                                                   type="text" placeholder="Enter postcode."/>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md">
+                                            <label class="col-form-label">Enter Password:
+                                                <span class="required">*</span></label>
+                                            <input name = "password" class="bg-white form-control" 
+                                                   type="text" placeholder="Enter Password here."/>
+                                        </div>
+                                    </div>
+                                    <br/>
                                     <div class="row">
                                         <div class="col-md"></div>
                                         <div class="col-md">
