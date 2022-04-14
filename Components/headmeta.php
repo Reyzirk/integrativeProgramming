@@ -37,6 +37,7 @@ echo("
     <meta name='author' content='$author'>
     <meta name='keywords' content='$keywords'>
     <meta name='description' content='$description'>
+        <link rel='icon' type='image/x-icon' href='images/favicon.png'>
     <title>$pageTitle | $companyName</title>
     <link href='css/sweetalert2.min.css' rel='stylesheet' type='text/css'/>
     <script src='https://kit.fontawesome.com/3f628a0091.js' crossorigin='anonymous'></script>

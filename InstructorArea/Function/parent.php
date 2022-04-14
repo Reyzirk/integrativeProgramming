@@ -38,7 +38,8 @@ foreach ($results as $row) {
         <td><?php echo $parentIC?></td>
         <td><?php echo $parentType?></td>
         <td>
-            <button type="button" class="btn btn-primary" onclick = "window.location.href = ''" >Add Child</button>
+            <button type="button" class="btn btn-primary" onclick = "window.location.href = 'addChild.php?parentID=<?php echo $parentID?>'" >Add Child</button>
+            <button type="button" class="btn btn-primary" onclick = "window.location.href = 'viewChildDetails.php?id=<?php echo $parentID?>'" >View Child</button>
         </td>
     </tr>
     <?php
