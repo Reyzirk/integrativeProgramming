@@ -41,4 +41,3 @@ class Parents extends User{
     }
     
 }
-

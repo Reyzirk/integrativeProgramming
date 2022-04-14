@@ -22,36 +22,44 @@ class ParentDB{
         $this->instance = DBController::getInstance();
     }
     
-    public function details($id){
-        $builder = new MySQLQueryBuilder();
-        $query = $builder->select(array("parent"), array("*"))
-                ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
-                ->query();
+    public function select($query){
         $stmt = $this->instance->con->prepare($query);
-        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
-        if ($totalrows==0){
+        if ($totalrows == 0) {
             return NULL;
-        }else{
+        } else{
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $results = $stmt->fetchAll();
-            $row = $results[0];
-            $result = new Parents($row["ParentID"],$row["ParentName"],$row["ParentGender"],$row["ParentBirth"],$row["ParentEmail"],$row["ParentPhoneNo"],$row["ParentIcNo"],$row["ParentType"],$row["AddressID"],$row["Password"]);
-            $resultList = $result;
-            return $resultList;
+            $result = $stmt->fetchAll();
+            return $result;
         }
     }
     
-    public function updatePassword($parentID, $password) {
+    public function insert($parent) {
         $builder = new MySQLQueryBuilder();
-        $query = $builder->update("parent", array("Password" => \CustomSQLEnum::BIND_QUESTIONMARK))
-                ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
+        $query = $builder->insert("parent")
+                ->values(array(\CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, 
+                    \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK))
                 ->query();
-        
         $stmt = $this->instance->con->prepare($query);
-        $stmt->bindParam(1, $password, PDO::PARAM_STR);
-        $stmt->bindParam(2, $parentID, PDO::PARAM_STR);
+
+        $parentID = $parent->parentID;
+        $parentName = $parent->parentName;
+        $parentGender = $parent->parentGender;
+        $parentBirth = $parent->parentBirth;
+        $parentEmail = $parent->parentEmail;
+        $parentPhoneNo = $parent->parentPhoneNo;
+        $parentIcNo = $parent->parentIcNo;
+        $parentType = $parent->parentType;
+
+        $stmt->bindParam(1, $parentID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $parentName, PDO::PARAM_STR);
+        $stmt->bindParam(3, $parentGender, PDO::PARAM_STR);
+        $stmt->bindParam(4, $parentBirth, PDO::PARAM_STR);
+        $stmt->bindParam(5, $parentEmail, PDO::PARAM_STR);
+        $stmt->bindParam(6, $parentPhoneNo, PDO::PARAM_STR);
+        $stmt->bindParam(7, $parentIcNo, PDO::PARAM_STR);
+        $stmt->bindParam(8, $parentType, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
@@ -63,67 +71,83 @@ class ParentDB{
     
     public function login($email){
         $query = "SELECT * FROM parent WHERE ParentEmail = ?";
+    public function delete($id) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->delete("parent")
+                ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
         $stmt = $this->instance->con->prepare($query);
         $stmt->bindParam(1, $email, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
-        if ($totalrows==0){
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public function update($oldID, $updated) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->update("parent", array("ParentName" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "ParentGender" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "ParentBirth" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "ParentEmail" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "ParentPhoneNo" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "ParentIcNo" => \CustomSQLEnum::BIND_QUESTIONMARK, 
+                    "ParentType" => \CustomSQLEnum::BIND_QUESTIONMARK,))
+                ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        
+        $parentID = $oldID;
+        $parentName = $updated->parentName;
+        $parentGender = $updated->parentGender;
+        $parentBirth = $updated->parentBirth;
+        $parentEmail = $updated->parentEmail;
+        $parentPhoneNo = $updated->parentPhoneNo;
+        $parentIcNo = $updated->parentIcNo;
+        $parentType = $updated->parentType;
+        
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $parentName, PDO::PARAM_STR);
+        $stmt->bindParam(2, $parentGender, PDO::PARAM_STR);
+        $stmt->bindParam(3, $parentBirth, PDO::PARAM_STR);
+        $stmt->bindParam(4, $parentEmail, PDO::PARAM_STR);
+        $stmt->bindParam(5, $parentPhoneNo, PDO::PARAM_STR);
+        $stmt->bindParam(6, $parentIcNo, PDO::PARAM_STR);
+        $stmt->bindParam(7, $parentType, PDO::PARAM_STR);
+        $stmt->bindParam(8, $oldID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public function details($id) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("parent"), array("*"))
+                ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
             return NULL;
-        }else{
+        } else {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $results = $stmt->fetchAll();
             $row = $results[0];
-            $result = new Parents($row["ParentID"],$row["ParentName"],$row["ParentGender"],$row["ParentBirth"],$row["ParentEmail"],$row["ParentPhoneNo"],$row["ParentIcNo"],$row["ParentType"],$row["AddressID"],$row["Password"]);
+            $result = new Announcement($row["ParentID"], $row["ParentName"], $row["ParentGender"], $row["ParentBirth"],
+                    $row["ParentEmail"], $row["ParentPhoneNo"], $row["ParentIcNo"], $row["ParentType"]);
             $resultList = $result;
             return $resultList;
         }
     }
     
-    public function insertNewAccount($parent){
-        $query = "INSERT INTO parent (parentID, parentName, ParentGender, ParentBirth,ParentEmail, ParentPhoneNo, ParentIcNo, ParentType, Password, AddressID) VALUES (?,?,?,?,?,?,?,?,?,?)";
-        $stmt = $this->instance->con->prepare($query);
-        $parents = $parent->userID;
-        $parentName = $parent->name;
-        $parentGender = substr($parent->gender,0,1);
-        $parentBirth = $parent->birthDate;
-        $parentEmail = $parent->email;
-        $parentPhoneNo = $parent->contactNumber;
-        $parentIcNo = $parent->icNo;
-        $parentType = $parent->parentType;
-        $password = $parent->password;
-        $addressid = $parent->addressID;
-        $stmt->bindParam(1, $parents, PDO::PARAM_STR);
-        $stmt->bindParam(2, $parentName, PDO::PARAM_STR);
-        $stmt->bindParam(3, $parentGender, PDO::PARAM_STR);
-        $stmt->bindParam(4, $parentBirth, PDO::PARAM_STR);
-        $stmt->bindParam(5, $parentEmail, PDO::PARAM_STR);
-        $stmt->bindParam(6, $parentPhoneNo, PDO::PARAM_STR);
-        $stmt->bindParam(7, $parentIcNo, PDO::PARAM_STR);
-        $stmt->bindParam(8, $parentType, PDO::PARAM_STR);
-        $stmt->bindParam(9, $password, PDO::PARAM_STR);
-        $stmt->bindParam(10, $addressid, PDO::PARAM_STR);
-        $stmt->execute();
-        $totalrows = $stmt->rowCount();
-        if ($totalrows == 0 ){
-            return 0;
-        }
-        else{
-            return $totalrows;
-        }
-    }
     
-    public function checkEmail($email){
-        $query = "SELECT ParentEmail FROM parent WHERE ParentEmail = ?";
-        $stmt = $this->instance->con->prepare($query);
-        $stmt->bindParam(1, $parentEmail, PDO::PARAM_STR);
-        $stmt->execute();
-        $totalrows = $stmt->rowCount();
-        if($totalrows == 0){
-            return false;
-        }else{
-            return $totalrows;
-        }
-    }
-        
 }
 
