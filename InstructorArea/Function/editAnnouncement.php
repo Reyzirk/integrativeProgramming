@@ -159,7 +159,7 @@ if (isset($_POST["formDetect"])) {
     //***************************Connect Database************************************
     if (empty($error)) {
 
-        $announce = new Announcement($id, "I0001", $storedValue["titleA"], $storedValue["desc"], $storedValue["cat"], $date, $storedValue["pinTop"], $storedValue["allowC"]);
+        $announce = new Announcement($id, $storedValue["instructorID"], $storedValue["titleA"], $storedValue["desc"], $storedValue["cat"], $date, $storedValue["pinTop"], $storedValue["allowC"]);
         $AnnounceDB = new AnnouncementDB();
         
         //Check if there is a pinned announcement

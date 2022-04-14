@@ -10,7 +10,7 @@
  * 
  * @author Oon Kheng Huang
  */
-$parentID = $_SESSION["parentID"]; //++++++++++++++++++++++++++to be changed to session
+$parentID = $_SESSION["parentID"]; 
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AnnouncementDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/ReadStatus.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Announcement.php";

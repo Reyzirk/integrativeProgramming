@@ -19,7 +19,7 @@ Web Application is under GNU General Public License v3.0
 $lang_title = "View announcement";
 $lang_description = "View an existing announcement.";
 $lang_legendTitle = "Announcement Details";
-$LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change to session user ID
+$LoginID = $_SESSION["instructorID"];  
 ?>
 <html>
     <head>
@@ -169,10 +169,10 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                                     <div class="input-row">
                                                                         <?php
                                                                         $intructorDB = new InstructorDB();
-                                                                        $instructor = $intructorDB->details($announceInfo->instructorID);
+                                                                        $instructor = $intructorDB->details($LoginID);
                                                                         $instructorName = $instructor->name;
                                                                         ?>
-                                                                        <input type="hidden" name="userID" id="commentId" placeholder="Name" value="<?php echo $announceInfo->instructorID ?>"/>
+                                                                        <input type="hidden" name="userID" id="commentId" placeholder="Name" value="<?php echo $LoginID ?>"/>
                                                                         <input class="input-field" disabled="true" type="text" name="userName" id="name" placeholder="Name" value="<?php echo empty($instructorName) ? "" : $instructorName ?>" />
                                                                     </div>
                                                                     <div class="input-row">
@@ -197,6 +197,9 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                             if ($count != 0) {
                                                                 $commentList = $commentDB->list($id);
                                                                 //ParentDB+++++++++++++++++++++++++++++++++++++++++To be added after parent database created
+                                                                $parentDB = new ParentDB();
+                                                                $instructorDB = new InstructorDB()
+                                                                
                                                                 ?>
                                                                 <div class="comment-form-container">
                                                                     <h6>Comments (<?php echo $count ?>)</h6><hr/>
@@ -204,9 +207,11 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                                     foreach ($commentList as $row) {
                                                                         $userID = $row->userID;
                                                                         if ($userID[0] == "I") {
-                                                                            $commentName = $instructorName . " (Instructor)";
+                                                                            $instructor = $instructDB->details($userID);
+                                                                            $commentName = $instructor->name . " (Instructor)";
                                                                         }else{//else Parent+++++++++++++++++++++++++++++++++++++++++To be added after parent database created
-                                                                            $commentName ="";
+                                                                            $parents = $parentDB->details($userID);
+                                                                            $commentName = $parents->name;
                                                                         }
                                                                         ?>
                                                                         <form id="deleteComment" name="deleteComment" method="POST">
