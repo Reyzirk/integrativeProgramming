@@ -1,3 +1,11 @@
+ <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+        
+    }
+    include_once '../Function/ini_load.php';
+    include 'Function/Instructorlogin.php';
+ ?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -10,35 +18,32 @@ Web Application is under GNU General Public License v3.0
 Login page
 @author Shu Ling
  -->
- <?php
-    include 'Function/login.php';
-    require_once str_replace("vendor", "", dirname(__DIR__))."/Objects/Parents.php";
-    require_once str_replace("vendor", "", dirname(__DIR__))."/Database/ParentDB.php";
- ?>
+
  
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="css/login.css" />
-        <?php include 'Components/headmeta.php'?>
+        <link rel="stylesheet" href="../css/login.css" />
+        <?php 
+            include 'Components/headmeta.php' 
+        ?>
     </head>
     <body>
         <div class="wrapper">
             
             <h2>Login</h2><br>
             
-            <form action="login.php" method="post">
-                <?php if(isset($_GET['error']))?>
+            <form action="login.php" method="post" style="text-align: center;">
+                <div class="text-danger"><?php echo empty($login_err)?"":$login_err; ?></div>
                 
                 <div class="login">
-                    <label>User ID</label>
-                    <input type="InstructorEmail" name="InstructorEmail" class="form-control <?php echo (!empty($instructorID_err)) ? 'is-invalid' : ''; ?>" 
-                           value="<?php echo $instructorEmail; ?>">
+                    <label class="email">Email</label>
+                    <input type="instructorEmail" name="instructorEmail"<?php echo (!empty($instructorEmail_err)) ? 'is-invalid' : ''; ?>" >
                 </div>
                 
                 <div class="login">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                    <br><label class="password">Password</label>
+                    <input type="password" name="password" <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
                 </div>
                 
                 <br>
@@ -47,7 +52,7 @@ Login page
                     <input type="submit" class="btn btn-primary" value="Login">
                 </div>
                 
-                <br><p>Forget your password? <a href="#">Change Password!</a></p>  
+                <br><p>Forget your password? <a href="forgotPassword.php">Click here to reset your password!</a></p>  
             </form>
         </div>   
     </body>

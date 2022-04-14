@@ -69,7 +69,7 @@ Login page
         <script src="js/jquery.table2excel.js" type='text/javascript'></script>
     </head>
     <body>
-        <div class="wrapper" style="background-image: '../images/loginBackground.jpg'">
+        <div class="wrapper">
             
             <h2>Login</h2><br>
 
