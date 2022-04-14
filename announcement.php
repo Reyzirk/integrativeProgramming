@@ -19,7 +19,7 @@ Web Application is under GNU General Public License v3.0
         <link rel="stylesheet" href="css/announcement.css" />
     </head>
     <body>
-        <?php include 'Components/ParentNavBar.php' ?>
+        <?php include 'Components/ParentNavBar.php';callLog(); ?>
         <div id="content">
             <div class="breadcrumbs shadow container">
                 <ol class="breadcrumb" id="breadcrumb">

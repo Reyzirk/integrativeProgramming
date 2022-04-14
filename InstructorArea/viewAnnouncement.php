@@ -38,7 +38,7 @@ $LoginID = $_SESSION["instructorID"];
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
                         <li class="breadcrumb-item active">View Announcement</li>
                     </ol>

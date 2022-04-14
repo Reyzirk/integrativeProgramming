@@ -1,4 +1,17 @@
 <?php
+if(!isset($_SESSION["parentID"])){
+    header('HTTP/1.1 307 Temporary Redirect');
+    header('Location: login.php');
+}else{
+    $parentdb = new ParentDB();
+    $details = $parentdb->details($_SESSION["parentID"]);
+    if ($details==null){
+        header('HTTP/1.1 307 Temporary Redirect');
+        header('Location: login.php');
+    }else{
+        $_SESSION["parentName"] = $details->name;
+    }
+}
 /*
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.

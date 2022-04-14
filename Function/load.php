@@ -11,18 +11,10 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 include_once 'ini_load.php';
-require_once dirname(__DIR__)."/Database/ParentDB.php";
-if(!isset($_SESSION["parentID"])){
-    header('HTTP/1.1 307 Temporary Redirect');
-    header('Location: login.php');
-}else{
-    $parentdb = new ParentDB();
-    $details = $parentdb->details($_SESSION["parentID"]);
-    if ($details==null){
-        header('HTTP/1.1 307 Temporary Redirect');
-        header('Location: login.php');
-    }
-}
+require_once str_replace("InstructorArea", "", str_replace("Demo", "", str_replace("Function", "", dirname(__DIR__))))."/Database/ParentDB.php";
+require_once str_replace("InstructorArea", "", str_replace("Demo", "", str_replace("Function", "", dirname(__DIR__))))."/Database/InstructorDB.php";
+
+
 include_once 'exception_load.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/DBController.php";
 try{
@@ -31,6 +23,9 @@ try{
     callErrorLog($ex);
 }
 
-
+//For PHP version that below 8.0
+function custom_str_contains2(string $haystack, string $needle): bool {
+    return '' === $needle || false !== strpos($haystack, $needle);
+}
 
 

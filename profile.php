@@ -1,5 +1,7 @@
-<?php include 'Function/load.php';
-include 'Function/profile.php'; ?>
+<?php
+include 'Function/load.php';
+include 'Function/profile.php';
+?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -16,8 +18,7 @@ Web Application is under GNU General Public License v3.0
         <div id="content">
             <div class="breadcrumbs shadow container">
                 <ol class="breadcrumb" id="breadcrumb">
-                    <li class="breadcrumb-item"><a href="dashboard.php">Announcement</a></li>
-                    <li class="breadcrumb-item active">Profile</li>
+                    <li class="breadcrumb-item active">My Account</li>
                 </ol>
 
             </div>
@@ -40,26 +41,26 @@ Web Application is under GNU General Public License v3.0
                                 </div>
                                 <div class="form-group">
                                     <br><label>Gender</label><br>
-                                    <input type="radio" id="male" name="parentGender" value="male">
-                                    <label for="male">Male</label><br>
-                                    <input type="radio" id="female" name="parentGender" value="female">
-                                    <label for="female">Female</label><br>
+                                    <input type="radio" id="male" name="parentGender" value="male" <?php echo empty($parentGender) ? "" : ($parentGender == "M" ? "checked" : "") ?>>
+                                    <label for="male" >Male</label><br>
+                                    <input type="radio" id="female" name="parentGender" value="female" <?php echo empty($parentGender) ? "" : ($parentGender == "F" ? "checked" : "") ?>>
+                                    <label for="female" >Female</label><br>
 
                                 </div>
 
                                 <div class="form-group">
                                     <br><label>Parent Type</label><br>   
-                                    <input type="radio" id="mother" name="parentType" value="mother">
-                                    <label for="mother">Mother</label><br>
-                                    <input type="radio" id="father" name="parentType" value="father">
-                                    <label for="father">Father</label><br>
-                                    <input type="radio" id="guardian" name="parentType" value="guardian">
-                                    <label for="guardian">Guardian</label>       
+                                    <input type="radio" id="mother" name="parentType" value="mother" <?php echo empty($parentType) ? "" : ($parentType == "mother" ? "checked" : "") ?>>
+                                    <label for="mother" >Mother</label><br>
+                                    <input type="radio" id="father" name="parentType" value="father" <?php echo empty($parentType) ? "" : ($parentType == "father" ? "checked" : "") ?>>
+                                    <label for="father" >Father</label><br>
+                                    <input type="radio" id="guardian" name="parentType" value="guardian" <?php echo empty($parentType) ? "" : ($parentType == "guardian" ? "checked" : "") ?>>
+                                    <label for="guardian" >Guardian</label>       
                                 </div>
 
                                 <div class="form-group">
                                     <br><label>Date of Birth</label><br>
-                                    <input type="date" id="parentBirth" name="parentBirth">
+                                    <input type="date" id="parentBirth" name="parentBirth" value = "<?php echo !isset($parentBirth)?"":$parentBirth; ?>">
                                 </div>
                                 <div class="form-group">
                                     <br><label>Phone Number</label>
@@ -67,10 +68,10 @@ Web Application is under GNU General Public License v3.0
                                 </div>
                                 <div class="form-group">
                                     <br><label>Address</label>
-                                    <input type="text" name="Address" class="form-control <?php echo (!empty($Address_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo!isset($Address) ? "" : $Address; ?>"></input>
+                                    <input type="text" name="Address" class="form-control <?php echo (!empty($Address_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo!isset($address) ? "" : $address; ?>"></input>
 
                                     <br><label>City</label>
-                                    <select name="City" id="City" class="form-control <?php echo (!empty($City_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo!isset($City) ? "" : $City; ?>">
+                                    <select name="City" id="City" class="form-control <?php echo (!empty($City_err)) ? 'is-invalid' : ''; ?>">
                                         <option value="George Town" <?php echo empty($city) ? "" : ($city == "George Town" ? "selected" : "") ?>>George Town</option>
                                         <option value="Kuala Lumpur" <?php echo empty($city) ? "" : ($city == "Kuala Lumpur" ? "selected" : "") ?>>Kuala Lumpur</option>
                                         <option value="Ipoh" <?php echo empty($city) ? "" : ($city == "Ipoh" ? "selected" : "") ?>>Ipoh</option>
@@ -94,7 +95,7 @@ Web Application is under GNU General Public License v3.0
                                     </select>
 
                                     <br><label>State</label>
-                                    <select name="State" id="State" class="form-control <?php echo (!empty($State_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo!isset($State) ? "" : $State; ?>">
+                                    <select name="State" id="State" class="form-control <?php echo (!empty($State_err)) ? 'is-invalid' : ''; ?>">
                                         <option value="Johor" <?php echo empty($state) ? "" : ($state == "Johor" ? "selected" : "") ?>>Johor</option>
                                         <option value="Kedah" <?php echo empty($state) ? "" : ($state == "Kedah" ? "selected" : "") ?>>Kedah</option>
                                         <option value="Kelantan" <?php echo empty($state) ? "" : ($state == "Kelantan" ? "selected" : "") ?>>Kelantan</option>
@@ -111,25 +112,17 @@ Web Application is under GNU General Public License v3.0
                                     </select>
 
                                     <br><label>Post Code</label>
-                                    <input type="text" name="PostCode" class="form-control <?php echo (!empty($PostCode_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo!isset($PostCode) ? "" : $PostCode; ?>"></input>
+                                    <input type="text" name="PostCode" class="form-control <?php echo (!empty($PostCode_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo!isset($postCode) ? "" : $postCode; ?>"></input>
 
                                 </div>
                                 <div class="form-group">
                                     <br><label>Email</label>
-                                    <input type="text" name="parentEmail" class="form-control <?php echo (!empty($parentEmail_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo!isset($parentEmail) ? "" : $parentEmail; ?>">
-                                </div>    
-                                <div class="form-group">
-                                    <br><label>Password</label>
-                                    <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo!isset($password) ? "" : $password; ?>">
-                                </div>
-                                <div class="form-group">
-                                    <br/>
-                                    <label>Confirm Password</label>
-                                    <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo!isset($confirm_password) ? "" : $confirm_password; ?>">
-                                </div>
+                                    <input type="text" name="parentEmail" readonly class="form-control <?php echo (!empty($parentEmail_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo!isset($parentEmail) ? "" : $parentEmail; ?>">
+                                </div>   
+                                <br/>
                                 <center>
                                     <input type="submit" class="btn btn-primary" value="Submit">
-                                    <input type="reset" class="btn btn-secondary ml-2" value="Reset">
+                                    <input class="btn btn-secondary ml-2" value="Reset" onclick="location.href = 'profile.php'">
                                 </center>
                             </form>
                         </div>

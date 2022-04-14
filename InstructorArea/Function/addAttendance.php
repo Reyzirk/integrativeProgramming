@@ -99,7 +99,7 @@ function printSearchResults($searchResult, $facade) {
     } else {
         ?>
         <tr>
-            <td colspan="5" class="noRecordsFound"><b>NO RESULTS FOUND</b></td>
+            <td colspan="6" class="noRecordsFound"><b>NO RESULTS FOUND</b></td>
         </tr>
         <?php
     }

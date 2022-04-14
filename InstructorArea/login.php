@@ -11,33 +11,67 @@ Login page
 @author Shu Ling
  -->
  <?php
-    require_once 'Database/InstructorDB.php';
-    include 'Function/login.php' 
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+        
+    }
+    include_once '../Function/ini_load.php';
+    include 'Function/login.php' ;
  ?>
  
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="css/login.css" />
-        <?php include 'Components/headmeta.php' ?>
+        <link rel="stylesheet" href="../css/login.css" />
+        <?php 
+            require_once '../XML/WebPageParser.php';
+    $author = "Ng Kar Kai, Oon Kheng Huang, Tang Khai Li, Fong Shu Ling, Poh Choo Meng";
+    $keywords = "Kindergarden, Education, Learning";
+    $fileName = pathinfo($_SERVER['PHP_SELF'],PATHINFO_BASENAME);
+    $parser = new WebPageParser("../XML/InstructorSideWebPage.xml");
+    $webpage = empty($parser->getWebpage()[ str_replace(".php","",strtolower($fileName))])?"":
+            $parser->getWebpage()[ str_replace(".php","",strtolower($fileName))];
+    $pageTitle = empty($webpage)?"":$webpage->pageTitle;
+    $description = empty($webpage)?"":$webpage->pageDescription;
+
+    echo("
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <meta name='author' content='$author'>
+        <meta name='keywords' content='$keywords'>
+        <meta name='description' content='$description'>
+        <link rel='icon' type='image/x-icon' href='../images/favicon.png'>
+        <title>$pageTitle | Instructor Section</title>
+        <link href='css/main.css' rel='stylesheet' type='text/css'/>
+        <link href='css/sb-admin-2.css' rel='stylesheet' type='text/css'/>
+        <link href='../css/sweetalert2.min.css' rel='stylesheet' type='text/css'/>
+        <script src='https://kit.fontawesome.com/3f628a0091.js' crossorigin='anonymous'></script>
+        <script src='../js/jquery-3.6.0.js' type='text/javascript'></script>
+        <script src='../js/sweetalert2.all.min.js' type='text/javascript'></script>
+        <script src='../js/ckeditor.js' type='text/javascript'></script>
+        <script src='../js/html2pdf.bundle.min.js' type='text/javascript'></script>
+        <script src='../js/jquery.table2excel.js' type='text/javascript'></script>
+        <script src='js/sb-admin-2.min.js' type='text/javascript'></script>
+        <script src='js/main.js' type='text/javascript'></script>
+            ");
+        ?>
     </head>
     <body>
         <div class="wrapper">
             
             <h2>Login</h2><br>
             
-            <form action="login.php" method="post">
-                <?php if(isset($_GET['error']))?>
+            <form action="login.php" method="post" style="text-align: center;">
+                <div class="text-danger"><?php echo empty($login_err)?"":$login_err; ?></div>
                 
                 <div class="login">
-                    <label>User ID</label>
-                    <input type="instructorEmail" name="instructorEmail" class="form-control <?php echo (!empty($instructorID_err)) ? 'is-invalid' : ''; ?>" 
-                           value="<?php echo $instructorEmail; ?>">
+                    <label>Email</label>
+                    <input type="instructorEmail" name="instructorEmail"<?php echo (!empty($instructorEmail_err)) ? 'is-invalid' : ''; ?>" >
                 </div>
                 
                 <div class="login">
-                    <label>Password</label>
-                    <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                    <br><label>Password</label>
+                    <input type="password" name="password" <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
                 </div>
                 
                 <br>

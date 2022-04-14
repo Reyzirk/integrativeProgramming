@@ -9,7 +9,7 @@
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Instructor.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/InstructorDB.php";
 
-$instructorID = "I0001"; //$_SESSION["instructorID"]; <------------------------------------------Reminder: instructor ID session
+$instructorID = $_SESSION["instructorID"];
 
 $instructorDB = new InstructorDB();
 $getInstructor = $instructorDB->details($instructorID);
@@ -44,7 +44,9 @@ if (isset($_POST["formDetect"])) {
     $inputTitle = "Email";
     if (empty($_POST[$inputName])) {
         $error[$inputName] = "<b>$inputTitle</b> cannot empty.";
-    } else {
+    } else if(!filter_var($_POST["parentEmail"], FILTER_VALIDATE_EMAIL)){
+        $error[$inputName] = "<b>$inputTitle</b> format is not correct. e.g.: abc@gmail.com";
+    }else{
         $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
     }
 
@@ -53,7 +55,9 @@ if (isset($_POST["formDetect"])) {
     $inputTitle = "Contact Number";
     if (empty($_POST[$inputName])) {
         $error[$inputName] = "<b>$inputTitle</b> cannot empty.";
-    } else {
+    } else if(!preg_match( '/[0-9]{3}-[0-9]{7,9}/',$_POST["parentPhoneNo"])){
+        $error[$inputName] = "<b>$inputTitle</b> format is incorrect. e.g.: xxx-xxxxxxx";
+    }else{
         $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
     }
 
@@ -69,8 +73,16 @@ if (isset($_POST["formDetect"])) {
     //***************************Connect Database************************************
     if (empty($error)) {
 
-        $instruct = new Instructor($storedValue["instructID"], $storedValue["name"], $storedValue["employDate"], $storedValue["gender"], $storedValue["birthDate"],
-                $storedValue["email"], $storedValue["contact"], $storedValue["icNo"], $getInstructor->password);
+        $instruct = new Instructor($storedValue["instructID"], 
+                $storedValue["name"], 
+                $storedValue["employDate"], 
+                $storedValue["gender"], 
+                $storedValue["birthDate"],
+                $storedValue["email"], 
+                $storedValue["contact"], 
+                $storedValue["icNo"], 
+                $getInstructor->password);
+        
         $instructorDB = new InstructorDB();
 
         if ($instructorDB->update($storedValue["instructID"], $instruct)) {

@@ -11,12 +11,12 @@ Web Application is under GNU General Public License v3.0
  -->
  
 <?php
-require_once dirname(__DIR__)."/Database/ParentDB.php";
-$instructorEmail = "";
+require_once dirname(__DIR__)."/../Database/InstructorDB.php";
+$email = "";
 $password = "";
 
     //check if user already logged in
-    if(isset($_SESSION["parentID"]))
+    if(isset($_SESSION["instructorID"]))
     {
         header("location: index.php");
         exit;
@@ -26,12 +26,12 @@ $password = "";
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
             //check if user id is empty
-        if(empty(trim($_POST["parentEmail"])))
+        if(empty(trim($_POST["email"])))
         {
-            $instructorEmail_err = "Please enter user email.";
+            $email_err = "Please enter user email.";
         } else
         {
-            $instructorEmail = trim($_POST["parentEmail"]);
+            $email = trim($_POST["email"]);
         }
 
         //check if password is empty
@@ -44,15 +44,14 @@ $password = "";
         }
 
         //validate users' credentials
-        if(empty($instructorEmail_err) && (empty($password_err)))
+        if(empty($instructorID_err) && (empty($password_err)))
         {
             
             $db = new ParentDB();
-            $parent = $db->login($instructorEmail);
+            $instructor = $db->login($email);
             if ($db!=null){
                 if (password_verify($password, $parent->password)){
                     $_SESSION["parentID"] = $parent->userID;
-                    $_SESSION["parentName"] = $parent->name;
                     header("location: announcement.php");
                 }else{
                     $login_err = "Invalid email or password.";

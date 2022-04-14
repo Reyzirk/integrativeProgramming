@@ -7,6 +7,21 @@ require_once dirname(__DIR__)."/Database/AddressDB.php";
 if(isset($_SESSION["parentID"])){
     $parentdb = new ParentDB();
     $result = $parentdb->details($_SESSION["parentID"]);
+    $oldID = $result->userID;
+    $parentEmail=$result->email;
+    $parentType=$result->parentType;
+    $parentGender=$result->gender;
+    $parentBirth=$result->birthDate;
+    $parentPhoneNo = $result->contactNumber;
+    $parentICNo = $result->icNo;
+    $addressdb = new AddressDB();
+    $result2 = $addressdb->details($result->addressID);
+    $address = $result2->address;
+    $city = $result2->city;
+    $state = $result2->state;
+    $postCode = $result2->postcode;
+    $parentName = $result->name;
+    
 }
  if($_SERVER["REQUEST_METHOD"] == "POST")
  {
@@ -25,33 +40,6 @@ if(isset($_SESSION["parentID"])){
         $parentEmail_err = "The email had already been used. Please enter another email!";
     }else{
     $parentEmail = trim($_POST["parentEmail"]);
-    }
-     
-     //check validation of password
-     if(empty($_POST["password"]))
-     {
-         $password_err = "Please enter password.";
-         $valid = false;
-     }else if(!(strlen($_POST["password"]) < 60))
-     {
-         die();
-         $password_err = "Password can not more than 60 characters.";
-         $valid = false;
-     }else
-     {
-         $password = ($_POST["password"]);
-     }
-     
-     //validate confirm password same with password or not
-     if(empty($_POST["confirm_password"])){
-        $confirm_password_err = "Please re-enter the password"; 
-        $valid = false;
-    } else{
-        $confirm_password = ($_POST["confirm_password"]);
-        if(empty($password_err) && ($password != $confirm_password)){
-            $confirm_password_err = "Password did not match, please re-enter.";
-            $valid = false;
-        }
     }
     
     if (empty($_POST["parentType"])){
@@ -140,15 +128,16 @@ if(isset($_SESSION["parentID"])){
         $parentName =($_POST["parentName"]);
     }
     if ($valid){
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $addressID = uniqid("A",true);
         $address = new Address($addressID, $address, $city, $state, $postCode);
-        $parent = new Parents(uniqid("P", true),$parentName,$parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentICNo, $parentType, $addressID, $hashed_password);
+        $parent = new Parents("",$parentName,$parentGender, $parentBirth, "", $parentPhoneNo, $parentICNo, $parentType, $addressID, "");
         $addressdb = new AddressDB();
         $addressdb->insertNewAddress($address);
         $parentdb = new ParentDB();
-        $parentdb->insertNewAccount($parent);
-        header("location: login.php");
+        $parentdb->updateParentSide($oldID, $parent);
+        $_SESSION["successUpdate"] = "profile";
+        header("location: announcement.php");
+        
     }
  }
  ?>

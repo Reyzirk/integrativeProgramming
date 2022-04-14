@@ -10,7 +10,7 @@ Web Application is under GNU General Public License v3.0
     if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-    include_once 'Function/ini_load.php'; ?>
+    include_once '../Function/ini_load.php'; ?>
 <html>
     <head>
         <script>
@@ -24,8 +24,7 @@ Web Application is under GNU General Public License v3.0
     </head>
     <body>
         <?php 
-            unset($_SESSION['parentID']);
-            unset($_SESSION['childID']);
+            unset($_SESSION['instructorID']);
         ?>
         <h1>Logout Successful!</h1>
         <p class="login">Redirect to home page after <span id="time">3</span> seconds..</p>
