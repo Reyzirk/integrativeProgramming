@@ -37,20 +37,19 @@ class ParentDB{
     
     public function insert($parent) {
         $builder = new MySQLQueryBuilder();
-        $query = $builder->insert("parent")
-                ->values(array(\CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, 
-                    \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK, \CustomSQLEnum::BIND_QUESTIONMARK))
-                ->query();
+        $query = "INSERT INTO parent VALUES(?,?,?,?,?,?,?,?,?,?)";
         $stmt = $this->instance->con->prepare($query);
 
-        $parentID = $parent->parentID;
-        $parentName = $parent->parentName;
-        $parentGender = $parent->parentGender;
-        $parentBirth = $parent->parentBirth;
-        $parentEmail = $parent->parentEmail;
-        $parentPhoneNo = $parent->parentPhoneNo;
-        $parentIcNo = $parent->parentIcNo;
+        $parentID = $parent->userID;
+        $parentName = $parent->name;
+        $parentGender = $parent->gender;
+        $parentBirth = $parent->birthDate;
+        $parentEmail = $parent->email;
+        $parentPhoneNo = $parent->contactNumber;
+        $parentIcNo = $parent->icNo;
         $parentType = $parent->parentType;
+        $addressID = $parent->addressID;
+        $password = $parent->password;
 
         $stmt->bindParam(1, $parentID, PDO::PARAM_STR);
         $stmt->bindParam(2, $parentName, PDO::PARAM_STR);
@@ -60,6 +59,8 @@ class ParentDB{
         $stmt->bindParam(6, $parentPhoneNo, PDO::PARAM_STR);
         $stmt->bindParam(7, $parentIcNo, PDO::PARAM_STR);
         $stmt->bindParam(8, $parentType, PDO::PARAM_STR);
+        $stmt->bindParam(9, $addressID, PDO::PARAM_STR);
+        $stmt->bindParam(10, $password, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {

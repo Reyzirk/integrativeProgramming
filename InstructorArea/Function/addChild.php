@@ -1,5 +1,4 @@
 <?php
-
 /* 
  * =====================================================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
@@ -9,68 +8,29 @@
  * @author Tang Khai Li
  */
 
+
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Child.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/ChildClass.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/ChildDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/ChildClassDB.php";
 
 
-if (isset($_POST["formDetect"])){
-    $inputName = "nameC";
-    $inputTitle = "Child Name";
-    if (empty($_POST[$inputName])) {
-        $error[$inputName] = "<b>$inputTitle</b> cannot be empty.";
-    } else {
-        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
-        if (strlen($storedValue[$inputName]) > 100) {
-            $error[$inputName] = "<b>$inputTitle</b> cannot contain more than 50 characters";
-        }
-    }
+if (isset($_POST["submitBtn"])){
     
-    $inputName = "birthDateC";
-    $inputTitle = "Child Birth Date";
-    if (empty($_POST[$inputName])){
-        $error[$inputName] = "<b>$inputTitle</b> cannot empty.";
-    }else{
-        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
-        if (DateTime::createFromFormat("Y-m-d", $storedValue[$inputName])==false){
-            $error[$inputName] = "<b>$inputTitle</b> invalid type.";
-        }
-    }
+    //Put empty validations
+    $parentID = eliminateExploit($_GET["parentID"]);
+    $childID = "C".generateRandomString();
+    $childName = eliminateExploit($_POST["childName"]);
+    $childBirthdate = eliminateExploit($_POST["childBirthDate"]);
+    $childIC = eliminateExploit($_POST["childIC"]);
+    $childStatus = eliminateExploit($_POST["childStatus"]);
     
-    $inputName = "icC";
-    $inputTitle = "Child IC No";
-    if (empty($_POST[$inputName])) {
-        $error[$inputName] = "<b>$inputTitle</b> cannot be empty.";
-    } else {
-        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
-        if (strlen($storedValue[$inputName]) > 13) {
-            $error[$inputName] = "<b>$inputTitle</b> cannot contain more than 12 digits";
-        }
-    }
+    $child = new Child($childID, $parentID, $childName, $childBirthdate, $childIC, $childStatus);
+    $childDB = new ChildDB();
     
-    $inputName = "statusC";
-    $inputTitle = "Child Status";
-    if (empty($_POST[$inputName])) {
-        $error[$inputName] = "<b>$inputTitle</b> is not selected";
-    } else {
-        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
+    if ($childDB->insertChildRecords($child) == true){
+        header("location:parent.php");
     }
-    
-    if (empty($error)){
-        $newChild = new Child(uniqid("E", true),$storedValue["nameC"],$storedValue["birthDateC"],
-                $storedValue["icC"],$storedValue["statusC"]);
-        
-        $childDB = new ChildDB();
-        if ($childDB->insert($newChild)){
-            $_SESSION["modifyLog"] = "addChils";
-            header('HTTP/1.1 307 Temporary Redirect');
-            header('Location: child.php');
-        }else{
-            $_SESSION["errorLog"] = "sqlerror";
-        }
-    }
-    
 }
 
 function eliminateExploit($str){
@@ -80,3 +40,15 @@ function eliminateExploit($str){
     return $str;
 }
 
+function generateRandomString(){
+    $char = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $randomStr = '';
+    
+    for ($i = 0; $i < 5; $i++) {
+        $index = rand(0, strlen($char) - 1);
+        $randomStr .= $char[$index];
+    }
+    return $randomStr;
+}
+
+?>

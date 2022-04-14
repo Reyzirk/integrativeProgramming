@@ -37,6 +37,35 @@ class ChildDB {
         }
     }
     
+    public function insertChildRecords($child):bool{
+        $query = "INSERT INTO child VALUES (?,?,?,?,?,?)";
+        $stmt = $this->instance->con->prepare($query);
+        
+        $childID = $child->childID; 
+        $parentID = $child->parentID;
+        $name = $child->childName;
+        $birthdate = $child -> birthDate;
+        $ic = $child->childICNo;
+        $status = $child->status;
+        
+        $stmt->bindParam(1, $childID, PDO::PARAM_STR);
+        $stmt->bindParam(2, $parentID, PDO::PARAM_STR);
+        $stmt->bindParam(3, $name, PDO::PARAM_STR);
+        $stmt->bindParam(4, $birthdate, PDO::PARAM_STR);
+        $stmt->bindParam(5, $ic, PDO::PARAM_STR);
+        $stmt->bindParam(6, $status, PDO::PARAM_STR);
+        
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        
+        if ($totalrows == 0){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+    
     public function validParent($id,$parentID): bool{
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("child"), array("*"))
@@ -54,6 +83,7 @@ class ChildDB {
             return true;
         }
     }
+    
     
     public function getChildDetails($childID){
         $builder = new MySQLQueryBuilder();
