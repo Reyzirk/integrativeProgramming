@@ -35,7 +35,7 @@ $lang_legendTitle = "Parent Details";
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item"><a href="parent.php">Parent</a></li>
                         <li class="breadcrumb-item active">View Parent</li>
                     </ol>

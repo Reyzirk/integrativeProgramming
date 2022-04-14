@@ -7,7 +7,6 @@
     require 'mail/PHPMailer.php';
     require 'mail/SMTP.php';
     
-    date_default_timezone_set(TIMEZONE);
     $error=array();
     if(isset($_POST['forgotPassword']))
     {
@@ -29,6 +28,7 @@
             }
         }    
     }
+    
 //    //Prevent hacker to exploit the system
 //    function antiExploit($data){
 //        $data = trim($data);

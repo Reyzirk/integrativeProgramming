@@ -59,4 +59,25 @@ class AddressDB{
         }
     }
     
+    public function details($address){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("address"), array("*"))
+                ->where("AddressID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $address, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return NULL;
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $row = $results[0];
+            $result = new Address($row["AddressID"],$row["Address"],$row["City"],$row["State"],$row["PostCode"]);
+            $resultList = $result;
+            return $resultList;
+        }
+    }
+    
 }

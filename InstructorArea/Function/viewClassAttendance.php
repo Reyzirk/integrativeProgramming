@@ -34,7 +34,7 @@ function printResults($classCount, $classesRecord) {
             <tr>
                 <td><?php echo $row["ClassID"] ?></td>
                 <td><?php echo $row["Semester"] ?></td>
-                <td><?php echo $row["Year"] ?></td>>
+                <td><?php echo $row["Year"] ?></td>
                 <td>
                     <button type="button" class="btn btn-primary" onclick="window.location.href = 'insertChildAttendance.php?classID=<?php echo $row["ClassID"]?>'"><i class="fa-solid fa-pen-to-square"></i>Take Attendance</button>
                 </td>

@@ -13,17 +13,18 @@ body
 { 
     font: 14px;
     font-family: sans-serif;
-    background-image: url("../images/login.jpg");
-    background-size: 100%;
+    background-image: url("../images/register.jpg");
+    background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 .wrapper
 { 
-    background-color: #E5F5F8;
-    width:30%;
-    margin-top: 15%;
+    background-color: #F2F3D9;
+    width: 30%;
+    margin-top: 10%;
     margin-left: 35%;
     margin-right: 50%;
+    margin-bottom: 10%;
     border: 1px solid grey;
     border-radius: 25px;
     box-shadow: 10px 10px lightblue;
@@ -32,10 +33,18 @@ body
     text-align:center;
 }
 
-.email{
-    margin-right: 6%;
+.btn-primary {
+    margin-left: 5%;
 }
 
-.password{
-    margin-right: 1%;
+parentName{
+    width: 10%;
+}
+
+.form-group{
+    margin-left: 30%;
+}
+
+.login{
+    margin-left: 22%;
 }

@@ -35,7 +35,7 @@ $lang_legendTitle = "Examination Details";
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item"><a href="examinations.php">Examinations</a></li>
                         <li class="breadcrumb-item active">Edit Examination</li>
                     </ol>
@@ -84,7 +84,7 @@ $lang_legendTitle = "Examination Details";
                                                         $resultList = $instructorDB->list();
                                                         foreach ($resultList as $row) {
                                                             ?>
-                                                            <option value="<?php echo $row->instructorID; ?>"><?php echo $row->instructorName; ?></option>
+                                                            <option value="<?php echo $row->userID; ?>"><?php echo $row->name; ?></option>
 <?php } ?>
                                                     </datalist>
                                                 </div>

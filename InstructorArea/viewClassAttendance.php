@@ -1,5 +1,6 @@
 <?php
 include '../Function/load.php';
+$pageName = basename(__FILE__);
 include 'Function/searchClasses.php';
 ?>
 <!DOCTYPE html>
@@ -31,8 +32,8 @@ Web Application is under GNU General Public License v3.0
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                        <li class="breadcrumb-item active"><a href="addattendance.php">Class Attendance List</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
+                        <li class="breadcrumb-item active">Class Attendance List</li>
                     </ol>
                     <div class="container">
                         <div class="row">
