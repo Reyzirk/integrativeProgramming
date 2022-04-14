@@ -1,8 +1,9 @@
 <?php
 include '../Function/load.php';
+$pageName = basename(__FILE__);
 include 'Function/searchAttendance.php';
 //$instructorID = $_SESSION["instructorID"];
-//$instructorID = "I0001";
+$instructorID = $_SESSION["instructorID"];
 ?>
 <!DOCTYPE html>
 <!--

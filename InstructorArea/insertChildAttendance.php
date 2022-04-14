@@ -1,5 +1,6 @@
 <?php
 include '../Function/load.php';
+$pageName = basename(__FILE__);
 include 'Function/insertChildAttendance.php';
 //Author: Poh Choo Meng
 ?>
@@ -33,7 +34,7 @@ Web Application is under GNU General Public License v3.0
                     <ol class="breadcrumb shadow" id="breadcrumb">
                         <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item"><a href="viewClassAttendance.php">Class Attendance List</a></li>
-                        <li class="breadcrumb-item active"><a href="insertChildAttendance.php">Record Child Attendance</a></li>
+                        <li class="breadcrumb-item active">Record Child Attendance</li>
                     </ol>
                     <div class="container">
                         <div class="row">

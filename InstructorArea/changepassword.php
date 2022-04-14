@@ -13,7 +13,6 @@ Web Application is under GNU General Public License v3.0
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Change Password</title>
         <?php
         include './Components/headmeta.php';
         ?>

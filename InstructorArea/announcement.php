@@ -38,6 +38,7 @@ $lang_delete_all_btn = "Delete All";
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item active">Announcement</li>
                     </ol>
                     <div class="container">
