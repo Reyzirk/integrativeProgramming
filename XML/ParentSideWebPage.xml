@@ -9,9 +9,29 @@ Web Application is under GNU General Public License v3.0
 
 <Pages>
     <Page>
-        <PageLink>dashboard</PageLink>
-        <PageTitle>Dashboard</PageTitle>
-        <PageDescription>Home page of the website.</PageDescription>
+        <PageLink>announcement</PageLink>
+        <PageTitle>Announcement</PageTitle>
+        <PageDescription>Display announcement of the OIJS.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>announcecategory</PageLink>
+        <PageTitle>Announcement Category</PageTitle>
+        <PageDescription>Display category for the announcement.</PageDescription>
+    </Page>
+     <Page>
+        <PageLink>viewannouncement</PageLink>
+        <PageTitle>View Announcement</PageTitle>
+        <PageDescription>View announcement details.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>attendance</PageLink>
+        <PageTitle>Attendance</PageTitle>
+        <PageDescription>Mark attendance.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>changepassword</PageLink>
+        <PageTitle>Change Password</PageTitle>
+        <PageDescription>Change the account password.</PageDescription>
     </Page>
     <Page>
         <PageLink>selectchild</PageLink>
@@ -54,6 +74,11 @@ Web Application is under GNU General Public License v3.0
         <PageDescription>View examination list</PageDescription>
     </Page>
     <Page>
+        <PageLink>childlist</PageLink>
+        <PageTitle>Child List</PageTitle>
+        <PageDescription>View child list</PageDescription>
+    </Page>
+    <Page>
         <PageLink>examinationclasses</PageLink>
         <PageTitle>Examination Class Selection</PageTitle>
         <PageDescription>Make class selection for examination</PageDescription>
@@ -62,6 +87,16 @@ Web Application is under GNU General Public License v3.0
         <PageLink>viewexamination</PageLink>
         <PageTitle>View Examination</PageTitle>
         <PageDescription>View examination details</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>viewchild</PageLink>
+        <PageTitle>View Child</PageTitle>
+        <PageDescription>View child details</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>temperaturelevels</PageLink>
+        <PageTitle>Display Temperature Level</PageTitle>
+        <PageDescription>Temperature level details</PageDescription>
     </Page>
     <Page>
         <PageLink>index</PageLink>

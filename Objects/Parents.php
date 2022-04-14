@@ -10,10 +10,10 @@
  * 
  * @author Tang Khai Li
  */
-
+require_once "User.php";
 class Parents extends User{
     
-    private $parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $parentType, $addressID, $password;
+    private $parentType, $addressID;
     
     public function __construct($parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $parentType, $addressID, $password) {
         parent::__construct($parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $password);
@@ -25,7 +25,7 @@ class Parents extends User{
         if (property_exists($this, $name)){
             return $this->$name;
         }else{
-            parent::_get($name);
+            return parent::__get($name);
         }
     }
     

@@ -171,7 +171,7 @@ $LoginID = "P001"; //++++++++++++++++++++++++++++++++++++++++++++To be change to
                                                                         <?php
                                                                         $intructorDB = new InstructorDB();
                                                                         $instructor = $intructorDB->details($announceInfo->instructorID);
-                                                                        $instructorName = $instructor->instructorName;
+                                                                        $instructorName = $instructor->name;
                                                                         ?>
                                                                         <input type="hidden" name="userID" id="commentId" placeholder="Name" value="<?php echo $LoginID ?>"/>
                                                                         <input class="input-field" disabled="true" type="text" name="userName" id="name" placeholder="Name" value="<?php echo empty($instructorName) ? "" : $instructorName //Change to parent Name ?>" />

@@ -13,7 +13,7 @@
  * @author Choo Meng
  */
 class User {
-    private $userID, $name, $gender, $birthDate, $email, $contactNumber, $icNo, $password, $passwordSalt;
+    private $userID, $name, $gender, $birthDate, $email, $contactNumber, $icNo, $password;
     
     public function __construct($userID, $name, $gender, $birthDate, $email, $contactNumber, $icNo, $password=null) {
         $this->userID = $userID;

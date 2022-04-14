@@ -67,7 +67,7 @@ $lang_legendTitle = "Examination Details";
                                         <div class="row">
                                             <div class="col-md">
                                                 <label for="instructor" class="col-form-label">Instructor</label>
-                                                <p class="p-12 font-weight-bold"><?php echo $retrievedInstructor->instructorName; ?>(<?php echo $retrievedExam->examiner; ?>)</p>
+                                                <p class="p-12 font-weight-bold"><?php echo $retrievedInstructor->name; ?>(<?php echo $retrievedExam->examiner; ?>)</p>
                                             </div>
                                         </div>
                                     </fieldset>

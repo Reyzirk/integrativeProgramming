@@ -170,7 +170,7 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                                         <?php
                                                                         $intructorDB = new InstructorDB();
                                                                         $instructor = $intructorDB->details($announceInfo->instructorID);
-                                                                        $instructorName = $instructor->instructorName;
+                                                                        $instructorName = $instructor->name;
                                                                         ?>
                                                                         <input type="hidden" name="userID" id="commentId" placeholder="Name" value="<?php echo $announceInfo->instructorID ?>"/>
                                                                         <input class="input-field" disabled="true" type="text" name="userName" id="name" placeholder="Name" value="<?php echo empty($instructorName) ? "" : $instructorName ?>" />

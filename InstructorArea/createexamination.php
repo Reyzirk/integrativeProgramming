@@ -76,7 +76,7 @@ $lang_legendTitle = "Examination Details";
                                                         $resultList = $instructorDB->list();
                                                         foreach ($resultList as $row) {
                                                             ?>
-                                                            <option value="<?php echo $row->instructorID; ?>"><?php echo $row->instructorName; ?></option>
+                                                            <option value="<?php echo $row->userID; ?>"><?php echo $row->name; ?></option>
                                                             <?php } ?>
                                                     </datalist>
                                                 </div>
