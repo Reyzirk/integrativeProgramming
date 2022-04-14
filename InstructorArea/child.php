@@ -1,22 +1,22 @@
 <?php
 include '../Function/load.php';
 $pageName = basename(__FILE__);
-include './Function/parent.php';
+include './Function/child.php';
 ?>
+
 <!DOCTYPE html>
-<!--
-/* 
+<!--/* 
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
  * Web Application is under GNU General Public License v3.0
  * ============================================
- */
-@author Tang Khai Li
--->
+ * 
+ * @author Tang Khai Li
+ */-->
 
 <?php
 #Page Languages
-$lang_add_btn = "Add New Parent";
+$lang_add_btn = "Add New Child";
 $lang_refresh_btn = "Refresh";
 $lang_action_btn = "Action";
 ?>
@@ -24,11 +24,11 @@ $lang_action_btn = "Action";
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Parent</title>
+        <title>Child</title>
         <?php
         include './Components/headmeta.php';
         ?>
-        <script src="js/parent.js" type="text/javascript"></script>
+        <script src="js/child.js" type="text/javascript"></script>
     </head>
     
     <body>
@@ -39,7 +39,7 @@ $lang_action_btn = "Action";
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
                         <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                        <li class="breadcrumb-item active">Parent</li>
+                        <li class="breadcrumb-item active">Child</li>
                     </ol>
                     
                     <div class="container">
@@ -48,7 +48,7 @@ $lang_action_btn = "Action";
                             <div id="displayList">
                                 <div class="jumbotrun" id="container">
                                     <div class="rightSide">
-                                        <button class="btn btn-info" onclick="location.href = 'addParent.php'"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_add_btn; ?></button> 
+                                        <button class="btn btn-info" onclick="location.href = 'addChild.php'"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_add_btn; ?></button> 
                                     </div>
                                     <div class="leftSide">
                                         <button class="btn btn-warning" onclick="displayList()"><?php echo $lang_refresh_btn; ?></button>

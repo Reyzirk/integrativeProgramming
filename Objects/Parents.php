@@ -13,9 +13,9 @@
 
 class Parents{
     
-    private $parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $parentType, $addressID;
+    private $parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $parentType;
     
-    public function __construct($parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $parentType, $addressID) {
+    public function __construct($parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $parentType) {
         $this->parentID = $parentID;
         $this->parentName = $parentName;
         $this->parentGender = $parentGender;
@@ -24,7 +24,6 @@ class Parents{
         $this->parentPhoneNo = $parentPhoneNo;
         $this->parentIcNo = $parentIcNo;
         $this->parentType = $parentType;
-        $this->addressID = $addressID;
     }
     
     public function __get($name) {
