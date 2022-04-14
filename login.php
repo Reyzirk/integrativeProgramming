@@ -29,7 +29,7 @@ Login page
         ?>
     </head>
     <body>
-        <div class="wrapper" style="background-image: '../images/loginBackground.jpg'">
+        <div class="wrapper">
             
             <h2>Login</h2><br>
             
