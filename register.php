@@ -23,7 +23,7 @@ Registration page
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="css/login.css" />
+        <link rel="stylesheet" href="css/register.css" />
         <?php
             include 'Components/headmeta.php';
             
@@ -39,11 +39,11 @@ Registration page
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                 <div class="form-group">
                     <label>Name</label>
-                    <input type="text" name="parentName" class="form-control <?php echo (!empty($parentName_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentName)?"":$parentName; ?>"> 
+                    <input type="text" name="parentName" style="width: 50%" class="form-control <?php echo (!empty($parentName_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentName)?"":$parentName; ?>"> 
                 </div>
                 <div class="form-group">
                     <br><label>IC Number</label>
-                    <input type="text" name="parentICNo" class="form-control <?php echo (!empty($parentICNo_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentICNo)?"":$parentICNo; ?>"> 
+                    <input type="text" name="parentICNo" style="width: 50%" class="form-control <?php echo (!empty($parentICNo_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentICNo)?"":$parentICNo; ?>"> 
                 </div>
                 <div class="form-group">
                     <br><label>Gender</label><br>
@@ -70,14 +70,14 @@ Registration page
                 </div>
                 <div class="form-group">
                     <br><label>Phone Number</label>
-                    <input type="text" name="parentPhoneNo" class="form-control <?php echo (!empty($parentPhoneNo_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentPhoneNo)?"":$parentPhoneNo; ?>">
+                    <input type="text" name="parentPhoneNo" style="width: 50%" class="form-control <?php echo (!empty($parentPhoneNo_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentPhoneNo)?"":$parentPhoneNo; ?>">
                 </div>
                 <div class="form-group">
                     <br><label>Address</label>
-                    <input type="text" name="Address" class="form-control <?php echo (!empty($Address_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($address)?"":$address; ?>"></input>
+                    <input type="text" name="Address" style="width: 50%" class="form-control <?php echo (!empty($Address_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($address)?"":$address; ?>"></input>
                     
                     <br><label>City</label>
-                    <select name="City" id="City" class="form-control <?php echo (!empty($City_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($city)?"":$city; ?>">
+                    <select name="City" id="City" style="width: 50%" class="form-control <?php echo (!empty($City_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($city)?"":$city; ?>">
                         <option value="George Town" <?php echo empty($city)?"":($city=="George Town"?"selected":"") ?>>George Town</option>
                         <option value="Kuala Lumpur" <?php echo empty($city)?"":($city=="Kuala Lumpur"?"selected":"") ?>>Kuala Lumpur</option>
                         <option value="Ipoh" <?php echo empty($city)?"":($city=="Ipoh"?"selected":"") ?>>Ipoh</option>
@@ -101,7 +101,7 @@ Registration page
                     </select>
                     
                     <br><label>State</label>
-                    <select name="State" id="State" class="form-control <?php echo (!empty($State_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($State)?"":$State; ?>">
+                    <select name="State" id="State" style="width: 50%" class="form-control <?php echo (!empty($State_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($State)?"":$State; ?>">
                         <option value="Johor" <?php echo empty($state)?"":($state=="Johor"?"selected":"") ?>>Johor</option>
                         <option value="Kedah" <?php echo empty($state)?"":($state=="Kedah"?"selected":"") ?>>Kedah</option>
                         <option value="Kelantan" <?php echo empty($state)?"":($state=="Kelantan"?"selected":"") ?>>Kelantan</option>
@@ -118,28 +118,28 @@ Registration page
                     </select>
                     
                     <br><label>Post Code</label>
-                    <input type="text" name="PostCode" class="form-control <?php echo (!empty($PostCode_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($postCode)?"":$postCode; ?>"></input>
+                    <input type="text" name="PostCode" style="width: 50%" class="form-control <?php echo (!empty($PostCode_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($postCode)?"":$postCode; ?>"></input>
                     
                 </div>
                 <div class="form-group">
                     <br><label>Email</label>
-                    <input type="text" name="parentEmail" class="form-control <?php echo (!empty($parentEmail_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentEmail)?"":$parentEmail; ?>">
+                    <input type="text" name="parentEmail" style="width: 50%" class="form-control <?php echo (!empty($parentEmail_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentEmail)?"":$parentEmail; ?>">
                 </div>    
                 <div class="form-group">
                     <br><label>Password</label>
-                    <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($password)?"":$password; ?>">
+                    <input type="password" name="password" style="width: 50%" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($password)?"":$password; ?>">
                 </div>
                 <div class="form-group">
                     <br/>
                     <label>Confirm Password</label>
-                    <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo !isset($confirm_password)?"":$confirm_password; ?>">
+                    <input type="password" name="confirm_password" style="width: 50%" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo !isset($confirm_password)?"":$confirm_password; ?>">
                 </div>
                 <div class="form-group">
                     <br>
                     <input type="submit" class="btn btn-primary" value="Submit">
                     <input type="reset" class="btn btn-secondary ml-2" value="Reset">
                 </div>
-                <p>Already have an account? <a href="login.php">Login here</a>.</p>
+                <br><p class="login">Already have an account? <a href="login.php">Login here</a>.</p>
             </form>
         </div>    
     </body>
