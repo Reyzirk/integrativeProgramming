@@ -71,18 +71,21 @@ if(isset($_SESSION["parentID"]))
     
     if (empty($_POST["parentType"])){
         $parentType_err = "Please select a parent type";
+        $valid = false;
     }else{
         $parentType = $_POST["parentType"];
     }
     
     if (empty($_POST["parentGender"])){
         $parentGender_err = "Please select a gender";
+        $valid = false;
     }else{
         $parentGender = $_POST["parentGender"];
     }
     
     if (empty($_POST["parentBirth"])){
         $parentBirth_err = "Please type the birthdate";
+        $valid = false;
     }else{
         $parentBirth = $_POST["parentBirth"];
     }
