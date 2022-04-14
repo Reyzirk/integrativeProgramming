@@ -9,6 +9,7 @@ Web Application is under GNU General Public License v3.0
 -->
 
 <?php
+//Author: Poh Choo Meng
 #Page Languages
 $lang_search = "Filter the grades list";
 $lang_search_btn = "Search";

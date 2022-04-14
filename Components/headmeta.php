@@ -5,6 +5,8 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
+
+//Author: Poh Choo Meng, Oon Kheng Huang, Ng Kar Kai, Fong Shu Ling
 require_once dirname(__DIR__) . '/XML/WebPageParser.php';
 $author = "Ng Kar Kai, Oon Kheng Huang, Tang Khai Li, Fong Shu Ling, Poh Choo Meng";
 $keywords = "Kindergarden, Education, Learning";

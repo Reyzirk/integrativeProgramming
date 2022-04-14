@@ -5,6 +5,7 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
+//Author: Poh Choo Meng, Oon Kheng Huang, Ng Kar Kai, Fong Shu Ling
 //Load the config ini file
 $ini_array = parse_ini_file(dirname(__DIR__)."/config.ini",true);
 $dbSection = $ini_array["Database"];

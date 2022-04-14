@@ -4,6 +4,7 @@
 Copyright 2022 Omega International Junior School. All Right Reserved.
 Web Application is under GNU General Public License v3.0
 ============================================
+//Author: Poh Choo Meng
 -->
 <?xml-stylesheet type="text/xsl" href="holidaylist.xsl"?>
 <holidays xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="holidays.xsd">

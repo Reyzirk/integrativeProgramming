@@ -1,5 +1,6 @@
 
 <?php 
+//Author: Poh Choo Meng
 if (empty($_GET["id"])){
     
     header('HTTP/1.1 307 Temporary Redirect');

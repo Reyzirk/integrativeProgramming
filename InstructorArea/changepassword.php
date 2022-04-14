@@ -3,6 +3,7 @@ include '../Function/load.php';$pageName = basename(__FILE__);
 include './Function/changepassword.php';
 ?>
 <!DOCTYPE html>
+<--<!-- Author: Fong Shu Ling -->
 <!--
 ============================================
 Copyright 2022 Omega International Junior School. All Right Reserved.

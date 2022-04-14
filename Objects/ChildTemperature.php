@@ -10,7 +10,7 @@
 /**
  * Description of ChildTemperature
  *
- * @author clhsk
+ * @author Ng Kar Kai
  */
 class ChildTemperature {
     

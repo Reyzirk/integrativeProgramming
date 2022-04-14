@@ -20,7 +20,13 @@ Registration page
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="css/login.css" />
-        <?php include 'Components/headmeta.php' ?>
+        <?php
+            include 'Components/headmeta.php';
+            
+            if (isset($_SESSION["clientId"])){
+                header('location: index.php');
+            }
+        ?>
     </head>
     <body>
         <div class="wrapper">

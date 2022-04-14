@@ -6,6 +6,7 @@ $apiKey = "d61a42d239989eb9df075a70b5ad0e1435f7b186";
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
+//Author: Poh Choo Meng
 require_once str_replace("InstructorArea", "", str_replace("Demo", "", dirname(__DIR__)))."/Objects/Holiday.php";
 if (isset($_POST["formDetect"])){
     if (empty($_POST["holidayName"])){

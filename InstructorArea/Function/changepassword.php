@@ -1,5 +1,5 @@
 <?php
-
+//Author: Fong Shu Ling
 /* 
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
@@ -7,11 +7,12 @@
  * ============================================
  */
 
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/User.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Instructor.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/InstructorDB.php";
 
 if(isset($_POST["formDetect"])){
-    $instructorID = "I0001"; //$_SESSION["instructorID"];
+    $instructorID = "I0001"; //$_SESSION["instructorID"]; <----------------------------------Reminder: parent ID session
     
     $storedValue["confirmPass"] = $_POST["confirmPass"];
     $storedValue["newPass"] = $_POST["newPass"];

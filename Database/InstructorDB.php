@@ -10,7 +10,7 @@
 /**
  * Description of InstructorDB
  *
- * @author Choo Meng
+ * @author Fong Shu Ling
  */
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/DBController.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/MySQLQueryBuilder.php';

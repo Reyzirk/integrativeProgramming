@@ -10,7 +10,8 @@
  * 
  * @author Tang Khai Li
  */
-require_once "User.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/User.php";
+
 class Parents extends User{
     
     private $parentType, $addressID;
@@ -23,8 +24,10 @@ class Parents extends User{
     
     public function __get($name) {
         if (property_exists($this, $name)){
+            
             return $this->$name;
         }else{
+            
             return parent::__get($name);
         }
     }

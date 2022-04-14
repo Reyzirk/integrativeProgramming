@@ -5,6 +5,7 @@ $lang_search_btn = "Search";
 $lang_search_tooltip = "Type in any word that you want to search";
 $lang_refresh_btn = "Refresh";
 $lang_action_btn = "Action";
+//Author: Poh Choo Meng
 ?>
 <html>
     <head>

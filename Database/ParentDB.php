@@ -64,26 +64,27 @@ class ParentDB{
     public function login($email, $password){
         $query = "SELECT * FROM parent WHERE ParentEmail = ? AND Password=?";
         $stmt = $this->instance->con->prepare($query);
+        $parentEmail = $parent->email;
+        $password = $parent->password;
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if($totalrows == 0){
             return false;
         }else{
             return true;
-        }
-                
+        }  
     }
     
     public function insertNewAccount($parent){
         $query = "INSERT INTO parent (parentID, parentName, ParentGender, ParentBirth,ParentEmail, ParentPhoneNo, ParentIcNo, ParentType, Password, AddressID) VALUES (?,?,?,?,?,?,?,?,?,?)";
         $stmt = $this->instance->con->prepare($query);
-        $parents = $parent->parentID;
-        $parentName = $parent->parentName;
-        $parentGender = substr($parent->parentGender,0,1);
-        $parentBirth = $parent->parentBirth;
-        $parentEmail = $parent->parentEmail;
-        $parentPhoneNo = $parent->parentPhoneNo;
-        $parentIcNo = $parent->parentIcNo;
+        $parents = $parent->userID;
+        $parentName = $parent->name;
+        $parentGender = substr($parent->gender,0,1);
+        $parentBirth = $parent->birthDate;
+        $parentEmail = $parent->email;
+        $parentPhoneNo = $parent->contactNumber;
+        $parentIcNo = $parent->icNo;
         $parentType = $parent->parentType;
         $password = $parent->password;
         $addressid = $parent->addressID;
@@ -116,10 +117,9 @@ class ParentDB{
         if($totalrows == 0){
             return false;
         }else{
-            return true;
+            return $totalrows;
         }
     }
         
 }
-
 

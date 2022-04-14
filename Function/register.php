@@ -155,7 +155,7 @@ require_once dirname(__DIR__)."/Database/AddressDB.php";
         $addressdb->insertNewAddress($address);
         $parentdb = new ParentDB();
         $parentdb->insertNewAccount($parent);
-        
+        header("location: login.php");
     }
  }
  ?>
