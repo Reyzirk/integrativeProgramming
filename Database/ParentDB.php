@@ -69,8 +69,6 @@ class ParentDB{
         }
     }
     
-    public function login($email){
-        $query = "SELECT * FROM parent WHERE ParentEmail = ?";
     public function delete($id) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->delete("parent")
@@ -125,8 +123,24 @@ class ParentDB{
             return true;
         }
     }
-    
-    public function details($id) {
+    public function login($email){
+        $query = "SELECT * FROM parent WHERE ParentEmail = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $email, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return NULL;
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $row = $results[0];
+            $result = new Parents($row["ParentID"],$row["ParentName"],$row["ParentGender"],$row["ParentBirth"],$row["ParentEmail"],$row["ParentPhoneNo"],$row["ParentIcNo"],$row["ParentType"],$row["AddressID"],$row["Password"]);
+            $resultList = $result;
+            return $resultList;
+        }
+    }
+    public function details($id){
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("parent"), array("*"))
                 ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
@@ -135,16 +149,59 @@ class ParentDB{
         $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
-        if ($totalrows == 0) {
+        if ($totalrows==0){
             return NULL;
-        } else {
+        }else{
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $results = $stmt->fetchAll();
             $row = $results[0];
-            $result = new Announcement($row["ParentID"], $row["ParentName"], $row["ParentGender"], $row["ParentBirth"],
-                    $row["ParentEmail"], $row["ParentPhoneNo"], $row["ParentIcNo"], $row["ParentType"]);
+            $result = new Parents($row["ParentID"],$row["ParentName"],$row["ParentGender"],$row["ParentBirth"],$row["ParentEmail"],$row["ParentPhoneNo"],$row["ParentIcNo"],$row["ParentType"],$row["AddressID"],$row["Password"]);
             $resultList = $result;
             return $resultList;
+        }
+    }
+    public function insertNewAccount($parent){
+        $query = "INSERT INTO parent (parentID, parentName, ParentGender, ParentBirth,ParentEmail, ParentPhoneNo, ParentIcNo, ParentType, Password, AddressID) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        $stmt = $this->instance->con->prepare($query);
+        $parents = $parent->userID;
+        $parentName = $parent->name;
+        $parentGender = substr($parent->gender,0,1);
+        $parentBirth = $parent->birthDate;
+        $parentEmail = $parent->email;
+        $parentPhoneNo = $parent->contactNumber;
+        $parentIcNo = $parent->icNo;
+        $parentType = $parent->parentType;
+        $password = $parent->password;
+        $addressid = $parent->addressID;
+        $stmt->bindParam(1, $parents, PDO::PARAM_STR);
+        $stmt->bindParam(2, $parentName, PDO::PARAM_STR);
+        $stmt->bindParam(3, $parentGender, PDO::PARAM_STR);
+        $stmt->bindParam(4, $parentBirth, PDO::PARAM_STR);
+        $stmt->bindParam(5, $parentEmail, PDO::PARAM_STR);
+        $stmt->bindParam(6, $parentPhoneNo, PDO::PARAM_STR);
+        $stmt->bindParam(7, $parentIcNo, PDO::PARAM_STR);
+        $stmt->bindParam(8, $parentType, PDO::PARAM_STR);
+        $stmt->bindParam(9, $password, PDO::PARAM_STR);
+        $stmt->bindParam(10, $addressid, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0 ){
+            return 0;
+        }
+        else{
+            return $totalrows;
+        }
+    }
+    public function checkEmail($email){
+        $query = "SELECT ParentEmail FROM parent WHERE ParentEmail = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $parentEmail, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if($totalrows == 0){
+            return false;
+        }else{
+            return $totalrows;
         }
     }
     

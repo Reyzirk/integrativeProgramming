@@ -48,20 +48,20 @@ Registration page
                 <div class="form-group">
                     <br><label>Gender</label><br>
                     <input type="radio" id="male" name="parentGender" value="male">
-                    <label for="male">Male</label><br>
+                    <label for="male" <?php echo empty($gender)?"":($gender=="Male"?"selected":"") ?>>Male</label><br>
                     <input type="radio" id="female" name="parentGender" value="female">
-                    <label for="female">Female</label><br>
+                    <label for="female" <?php echo empty($gender)?"":($gender=="Female"?"selected":"") ?>>Female</label><br>
                     
                 </div>
                 
                 <div class="form-group">
                     <br><label>Parent Type</label><br>   
                     <input type="radio" id="mother" name="parentType" value="mother">
-                    <label for="mother">Mother</label><br>
+                    <label for="mother" <?php echo empty($gender)?"":($gender=="mother"?"selected":"") ?>>Mother</label><br>
                     <input type="radio" id="father" name="parentType" value="father">
-                    <label for="father">Father</label><br>
+                    <label for="father" <?php echo empty($gender)?"":($gender=="father"?"selected":"") ?>>Father</label><br>
                     <input type="radio" id="guardian" name="parentType" value="guardian">
-                    <label for="guardian">Guardian</label>       
+                    <label for="guardian" <?php echo empty($gender)?"":($gender=="guardian"?"selected":"") ?>>Guardian</label>       
                 </div>
                 
                 <div class="form-group">
@@ -74,10 +74,10 @@ Registration page
                 </div>
                 <div class="form-group">
                     <br><label>Address</label>
-                    <input type="text" name="Address" class="form-control <?php echo (!empty($Address_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($Address)?"":$Address; ?>"></input>
+                    <input type="text" name="Address" class="form-control <?php echo (!empty($Address_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($address)?"":$address; ?>"></input>
                     
                     <br><label>City</label>
-                    <select name="City" id="City" class="form-control <?php echo (!empty($City_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($City)?"":$City; ?>">
+                    <select name="City" id="City" class="form-control <?php echo (!empty($City_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($city)?"":$city; ?>">
                         <option value="George Town" <?php echo empty($city)?"":($city=="George Town"?"selected":"") ?>>George Town</option>
                         <option value="Kuala Lumpur" <?php echo empty($city)?"":($city=="Kuala Lumpur"?"selected":"") ?>>Kuala Lumpur</option>
                         <option value="Ipoh" <?php echo empty($city)?"":($city=="Ipoh"?"selected":"") ?>>Ipoh</option>
@@ -118,7 +118,7 @@ Registration page
                     </select>
                     
                     <br><label>Post Code</label>
-                    <input type="text" name="PostCode" class="form-control <?php echo (!empty($PostCode_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($PostCode)?"":$PostCode; ?>"></input>
+                    <input type="text" name="PostCode" class="form-control <?php echo (!empty($PostCode_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($postCode)?"":$postCode; ?>"></input>
                     
                 </div>
                 <div class="form-group">

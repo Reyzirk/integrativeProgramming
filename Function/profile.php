@@ -1,28 +1,13 @@
-
-<!--
-============================================
-Copyright 2022 Omega International Junior School. All Right Reserved.
-Web Application is under GNU General Public License v3.0
-============================================
--->
-
-<!--
-@author Shu Ling
- -->
- 
 <?php
 require_once dirname(__DIR__)."/Objects/Parents.php";
 require_once dirname(__DIR__)."/Objects/Address.php";
 require_once dirname(__DIR__)."/Database/ParentDB.php";
 require_once dirname(__DIR__)."/Database/AddressDB.php";
-//check if user already logged in
-if(isset($_SESSION["parentID"]))
-{
-    header("location: index.php");
-    exit;
-}
  $valid = true;
- 
+if(isset($_SESSION["parentID"])){
+    $parentdb = new ParentDB();
+    $result = $parentdb->details($_SESSION["parentID"]);
+}
  if($_SERVER["REQUEST_METHOD"] == "POST")
  {
      //Check whether this email is existing in the database or not if yes show error message
@@ -36,11 +21,11 @@ if(isset($_SESSION["parentID"]))
      {
          $parentEmail_err = "User email doesn't have the correct format. Please re-enter!";
          $valid = false;
-         }else if($db->checkEmail(trim($_POST["parentEmail"]))){
-             $parentEmail_err = "The email had already been used. Please enter another email!";
-         }else{
-         $parentEmail = trim($_POST["parentEmail"]);
-         }
+    }else if($db->checkEmail(trim($_POST["parentEmail"]))){
+        $parentEmail_err = "The email had already been used. Please enter another email!";
+    }else{
+    $parentEmail = trim($_POST["parentEmail"]);
+    }
      
      //check validation of password
      if(empty($_POST["password"]))
