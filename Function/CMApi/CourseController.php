@@ -58,14 +58,23 @@ class CourseController extends BaseController implements Controller{
                         for ($i = $beginIndex; $i < $endIndex; $i++) {
                             $count++;
                             $key = $courses[$i];
+                            if (!empty($params["search"])) {
+                                if (!(custom_str_contains($key->courseCode, empty($params["search"]) ? "" : $params["search"]) ||
+                                custom_str_contains($key->courseName, empty($params["search"]) ? "" : $params["search"]))){
+                                    $totalCount--;
+                                    continue;
+                                }
+                                
+                            }
+                            
                             $materials = $key->courseMaterials;
                             $material = array();
                             foreach($materials as $key2){
                                 $material[] = array("Material Name"=>(string)$key2->materialName,"Link"=>(string)$key2->materialLink);
                             }
-                            $data[] = array("Course Code" => (string) $key->courseCode, "Course Name" => (string) $key->courseName, "Course Description" => (string) $key->courseDesc, "Course Materials"=>$materials);
+                            $data[] = array("Course Code" => (string) $key->courseCode, "Course Name" => (string) $key->courseName, "Course Description" => htmlspecialchars((string) $key->courseDesc), "Course Materials"=>$materials);
                         }
-                        $output[] = array("Status"=>"Success","Data" => $data, "Total Record Retrieved" => $count);
+                        $output[] = array("Status"=>"Success","Data" => $data, "Total Record Retrieved" => $count, "Total Record in Database" => $totalCount);
                     }
                 }
 

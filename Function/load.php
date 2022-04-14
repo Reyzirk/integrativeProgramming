@@ -5,6 +5,7 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
+//Author: Poh Choo Meng, Oon Kheng Huang, Ng Kar Kai, Fong Shu Ling
 //Check session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

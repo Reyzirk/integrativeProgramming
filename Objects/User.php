@@ -15,7 +15,7 @@
 class User {
     private $userID, $name, $gender, $birthDate, $email, $contactNumber, $icNo, $password, $passwordSalt;
     
-    public function __construct($userID, $name, $gender, $birthDate, $email, $contactNumber, $icNo, $password=null, $passwordSalt=null) {
+    public function __construct($userID, $name, $gender, $birthDate, $email, $contactNumber, $icNo, $password=null) {
         $this->userID = $userID;
         $this->name = $name;
         $this->gender = $gender;
@@ -24,7 +24,6 @@ class User {
         $this->contactNumber = $contactNumber;
         $this->icNo = $icNo;
         $this->password = $password;
-        $this->passwordSalt = $passwordSalt;
     }
 
     public function __get($name) {

@@ -117,7 +117,6 @@ class ReadStatusDB{
                 ->bracketWhere(WhereTypeEnum::AND)
                 ->query();
         $stmt = $this->instance->con->prepare($query);
-        $stmt->bindParam(1, $id, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {

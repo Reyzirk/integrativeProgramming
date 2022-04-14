@@ -1,6 +1,8 @@
 <?php
 include '../Function/load.php';
 include 'Function/searchAttendance.php';
+//$instructorID = $_SESSION["instructorID"];
+//$instructorID = "I0001";
 ?>
 <!DOCTYPE html>
 <!--
@@ -14,11 +16,11 @@ Web Application is under GNU General Public License v3.0
     <head>
         <meta charset="UTF-8">
         <title>Add Attendance</title>
+        <link rel="stylesheet" href="./css/addattendance.css" type="text/css">
+        <script src="js/addattendance.js" type="text/javascript"></script>
         <?php
         include './Components/headmeta.php';
         ?>
-        <link rel="stylesheet" href="./css/addattendance.css" type="text/css">
-        <script src="js/addattendance.js" type="text/javascript"></script>
     </head>
     <body>
         <div id="wrapper">
@@ -112,5 +114,6 @@ Web Application is under GNU General Public License v3.0
                 include 'Components/footer.php'
                 ?>
             </div>
+        </div>
     </body>
 </html>

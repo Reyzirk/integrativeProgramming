@@ -1,5 +1,5 @@
 <?php
-
+//Author: Poh Choo Meng
 /* 
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
@@ -57,6 +57,15 @@ class GradeController extends BaseController implements Controller{
                         for ($i = $beginIndex; $i < $endIndex; $i++) {
                             $count++;
                             $key = $grades[$i];
+                            if (!empty($params["search"])) {
+                                if (!(custom_str_contains($key->grade, empty($params["search"]) ? "" : $params["search"]) ||
+                                custom_str_contains($key->minMark, empty($params["search"]) ? "" : $params["search"])||
+                                custom_str_contains($key->maxMark, empty($params["search"]) ? "" : $params["search"]))){
+                                    $totalCount--;
+                                    continue;
+                                }
+                                
+                            }
                             if (!empty($mark)) {
                                 $minMark = $key->minMark;
                                 $maxMark = $key->maxMark;
@@ -64,9 +73,9 @@ class GradeController extends BaseController implements Controller{
                                     continue;
                                 }
                             }
-                            $data[] = array("Grade" => (string) $key->grade, "Min Mark" => (string)$key->minMark, "Max Mark" => (string)$key->maxMark);
+                            $data[] = array("Grade ID"=> (string) $key->gradeID,"Grade" => (string) $key->grade, "Min Mark" => (string)$key->minMark, "Max Mark" => (string)$key->maxMark);
                         }
-                        $output[] = array("Status"=>"Success","Data" => $data, "Total Record Retrieved" => $count);
+                        $output[] = array("Status"=>"Success","Data" => $data, "Total Record Retrieved" => $count, "Total Record in Database" => $totalCount);
                     }
                 }
 

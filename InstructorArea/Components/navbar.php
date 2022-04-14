@@ -49,8 +49,15 @@
     <!--
     ***The add parent logo need to change***
     -->
-    <li class='nav-item <?php echo $pageName=="parent.php"?"active":""?>'>
-        <a class="nav-link" id="nav-update" href="parent.php"><i class="fa fa-address-card"></i> Parent</a>
+    <li class='nav-item dropdown <?php echo $pageName=="parent.php"?"active":""?>' onclick="dropdown(this)">
+        <!--<a class="nav-link" id="nav-update" href="parent.php"><i class="fa fa-address-card"></i> Parent</a>-->
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="nav-update" href="#" role="button" aria-haspopup="true" aria-expanded="true"><i class="fa-solid fa-scroll"></i> Parent</a>
+        <div class="collapse">
+            <div class="bg-white py-2 collapse-inner rounded mt-1">
+                <a class="collapse-item <?php echo ($pageName=="parent.php"?"active":"")?>" href="parent.php">Parent</a>
+                <a class="collapse-item <?php echo ($pageName=="changepassword.php"?"active":"")?>" href="changepassword.php">Change Password</a>
+            </div>
+        </div>
     </li>
     <div class="middleButton d-none d-md-inline" onclick="toggle(this)">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>

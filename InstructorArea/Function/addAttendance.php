@@ -12,7 +12,6 @@
  * @author Ng Kar Kai
  */
 require_once ( str_replace("AJAX", "", dirname(__DIR__))) . '/Function/AttendanceFacade.php';
-
 $facade = new AttendanceFacade();
 if ($submitBtn == false) {
 

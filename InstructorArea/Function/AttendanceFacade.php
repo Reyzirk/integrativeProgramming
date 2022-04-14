@@ -101,6 +101,8 @@ class AttendanceFacade {
     }
     
     public function deleteAttendanceLog($attendanceID){
+        date_default_timezone_set('Asia/Kuala_Lumpur');
+        $deletedOn = date('l jS \of F Y h:i:s A');
         $results = $this->attendanceDB->getAttendanceRecordID($attendanceID);
         foreach ($results as $row){
             $attendance = new Attendance($row["ChildID"],$row["ChildTemperature"],$row["AttendingDate"]);
@@ -108,12 +110,16 @@ class AttendanceFacade {
         }
         //print_r($attendance);
         if ($this->attendanceDB->deleteAttendanceRecord($attendanceID) == true){
-            return $this->deletionLogDB->recordDeletionLog($attendance,$attendanceID);
+            return $this->deletionLogDB->recordDeletionLog($attendance,$attendanceID,$deletedOn);
         }
         else{
             return false;
         }
         
+    }
+    
+    public function getAttendanceRecordFromParentID($parentID){
+        return $this->attendanceDB->getAttendanceRecordParentID($parentID);
     }
 
 }

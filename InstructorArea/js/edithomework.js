@@ -4,6 +4,7 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
+//Author: Poh Choo Meng
 var invalidHomework = true;
 const date_regex = new RegExp(/^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/);
 function validateDate(){

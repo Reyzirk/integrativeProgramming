@@ -8,7 +8,7 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 
-<?php
+<?php//Author: Poh Choo Meng
 #Page Languages
 $lang_search = "Filter the examinations list";
 $lang_search_btn = "Search";

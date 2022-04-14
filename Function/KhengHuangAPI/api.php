@@ -42,7 +42,7 @@ function response($status, $status_message, $results) {
     $response['status_message'] = $status_message;
     $response['results'] = $results;
 
-    $json_response = json_encode($response);
+    $json_response = json_encode($response, JSON_PRETTY_PRINT);
     echo $json_response;
 }
 

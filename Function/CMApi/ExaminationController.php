@@ -1,5 +1,5 @@
 <?php
-
+//Author: Poh Choo Meng
 /*
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
@@ -104,7 +104,7 @@ class GradeController extends BaseController implements Controller {
                         $output[] = array("Status" => "Failed", "Message" => "Invalid API Key to retrieve the data.");
                     } else {
                         if (empty($params["id"])) {
-                            $output[] = array("Status" => "Failed", "Message" => "Required child ID to retrieve the data.");
+                            $output[] = array("Status" => "Failed", "Message" => "Required examination ID to retrieve the data.");
                         } else {
                             $examID = $params["id"];
                             if (is_numeric($examID)) {

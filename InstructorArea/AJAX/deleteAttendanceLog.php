@@ -1,5 +1,5 @@
 <?php
-
+//Author: Ng Kar Kai
 /* 
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
@@ -14,7 +14,8 @@ if (empty($_POST["attendanceID"])){
     echo "Fail";
 }
 else{
-    $attendanceID = $_POST["attendanceID"];
+    $attendanceID = antiExploit($_POST["attendanceID"]);
+    //$instructorID = antiExploit($_POST["instructorID"]);
     $facade = new AttendanceFacade();
     try{
         if ($facade->deleteAttendanceLog($attendanceID) == true){

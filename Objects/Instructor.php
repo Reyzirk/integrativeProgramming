@@ -12,25 +12,21 @@
  *
  * @author Choo Meng
  */
-class Instructor {
-    private $instructorID, $instructorName, $employeeData, $gender, $birthDate, $email, $contactNumber, $icNo, $password;
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/User.php";
+
+class Instructor extends User {
+    private $employeeData;
     public function __construct($instructorID, $instructorName, $employeeData, $gender, $birthDate, $email, $contactNumber, $icNo, $password = NULL) {
-        $this->instructorID = $instructorID;
-        $this->instructorName = $instructorName;
+        parent::__construct($instructorID, $instructorName, $gender, $birthDate, $email, $contactNumber, $icNo, $password);
         $this->employeeData = $employeeData;
-        $this->gender = $gender;
-        $this->birthDate = $birthDate;
-        $this->email = $email;
-        $this->contactNumber = $contactNumber;
-        $this->icNo = $icNo;
-        $this->password = $password;
+
     }
 
     public function __get($name) {
         if (property_exists($this, $name)){
             return $this->$name;
         }else{
-            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+            return parent::__get($name);
         }
     }
     
@@ -38,7 +34,7 @@ class Instructor {
         if (property_exists($this, $name)){
             $this->$name = $value;
         }else{
-            trigger_error("Property $name doesn't exists", E_USER_ERROR);
+            parent::__set($name, $value);
         }
     }
 }

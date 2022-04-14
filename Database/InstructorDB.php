@@ -10,7 +10,7 @@
 /**
  * Description of InstructorDB
  *
- * @author Choo Meng
+ * @author Fong Shu Ling
  */
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/DBController.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/Database/MySQLQueryBuilder.php';
@@ -71,10 +71,41 @@ class InstructorDB {
             $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $results = $stmt->fetchAll();
             $row = $results[0];
-            $result = new Instructor($row["InstructorID"],$row["InstructorName"],$row["EmployeeDate"],$row["Gender"],$row["BirthDate"],$row["Email"],$row["ContactNumber"],$row["ICNo"]);
+            $result = new Instructor($row["InstructorID"],$row["InstructorName"],$row["EmployeeDate"],$row["Gender"],$row["BirthDate"],$row["Email"],$row["ContactNumber"],$row["ICNo"],$row["Password"]);
             $resultList = $result;
             return $resultList;
         }
     }
+    
+    public function updatePassword($instructorID, $password) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->update("instructor", array("Password" => \CustomSQLEnum::BIND_QUESTIONMARK))
+                ->where("InstructorID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $password, PDO::PARAM_STR);
+        $stmt->bindParam(2, $instructorID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+        public function checkLogin ($email, $password){
+        $query = "SELECT * FROM parent WHERE Email = ? AND Password = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if($totalrows == 0){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
     
 }

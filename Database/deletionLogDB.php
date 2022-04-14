@@ -17,8 +17,8 @@ class deletionLogDB{
         $this->instance = DBController::getInstance();
     }
     
-    function recordDeletionLog(Attendance $attendance, $attendanceID){
-        $query="INSERT INTO deletionlog (ChildID, ChildTemperature, AttendingDate, AttendanceID) VALUES (?,?,?,?)";
+    function recordDeletionLog(Attendance $attendance, $attendanceID,$deletedOn){
+        $query="INSERT INTO deletionlog (ChildID, ChildTemperature, AttendingDate, AttendanceID,DeletedOn) VALUES (?,?,?,?,?)";
         $stmt = $this->instance->con->prepare($query);
         $childID = $attendance->childID;
         $temperature = $attendance->childTemp;
@@ -27,6 +27,7 @@ class deletionLogDB{
         $stmt->bindParam(2,$temperature, PDO::PARAM_STR);
         $stmt->bindParam(3,$attendingDate, PDO::PARAM_STR);
         $stmt->bindParam(4,$attendanceID, PDO::PARAM_STR);
+        $stmt->bindParam(5,$deletedOn,PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         

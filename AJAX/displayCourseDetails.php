@@ -6,9 +6,10 @@
  * Web Application is under GNU General Public License v3.0
  * ============================================
  */
+//Author: Poh Choo Meng
 require_once "AJAXErrorHandler.php";
-require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/ParserFactory.php';
-require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/Course.php";
+require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/XML/ParserFactory.php';
+require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__)))."/Objects/Course.php";
 $factory = new ParserFactory();
 if (empty($_POST["courseCode"])){
     echo "fail";

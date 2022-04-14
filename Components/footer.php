@@ -7,6 +7,8 @@
  * ============================================
  */
 
+//Author: Poh Choo Meng, Oon Kheng Huang, Ng Kar Kai, Fong Shu Ling
+
 ?>
   <!-- ======= Footer ======= -->
   <footer id="footer">
