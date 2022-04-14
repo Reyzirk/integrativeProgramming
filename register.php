@@ -1,4 +1,8 @@
-<?php include 'Function/load.php' ?>
+<?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    include_once 'Function/ini_load.php'; ?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -44,20 +48,20 @@ Registration page
                 <div class="form-group">
                     <br><label>Gender</label><br>
                     <input type="radio" id="male" name="parentGender" value="male">
-                    <label>Male</label><br>
+                    <label for="male">Male</label><br>
                     <input type="radio" id="female" name="parentGender" value="female">
-                    <label>Female</label><br>
+                    <label for="female">Female</label><br>
                     
                 </div>
                 
                 <div class="form-group">
                     <br><label>Parent Type</label><br>   
                     <input type="radio" id="mother" name="parentType" value="mother">
-                    <label>Mother</label><br>
+                    <label for="mother">Mother</label><br>
                     <input type="radio" id="father" name="parentType" value="father">
-                    <label>Father</label><br>
+                    <label for="father">Father</label><br>
                     <input type="radio" id="guardian" name="parentType" value="guardian">
-                    <label>Guardian</label>       
+                    <label for="guardian">Guardian</label>       
                 </div>
                 
                 <div class="form-group">
@@ -74,42 +78,43 @@ Registration page
                     
                     <br><label>City</label>
                     <select name="City" id="City" class="form-control <?php echo (!empty($City_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($City)?"":$City; ?>">
-                        <option value="George Town">George Town</option>
-                        <option value="Kuala Lumpur">Kuala Lumpur</option>
-                        <option value="Ipoh">Ipoh</option>
-                        <option value="Kuching">Kuching</option>
-                        <option value="Johor Bahru">Johor Bahru</option>
-                        <option value="Kota Kinabalu">Kota Kinabalu</option>
-                        <option value="Shah Alam">Shah Alam</option>
-                        <option value="Malacca City">Malacca City</option>
-                        <option value="Alor Setar">Alor Setar</option>
-                        <option value="Miri">Miri</option>
-                        <option value="Petaling Jaya">Petaling Jaya</option>
-                        <option value="Kualan Terengganu">Kuala Terengganu</option>
-                        <option value="Iskandar Puteri">Iskandar Puteri</option>
-                        <option value="Seberang Perai">Seberang Perai</option>
-                        <option value="Seremban">Seremban</option>
-                        <option value="Subang Jaya">Subang Jaya</option>
-                        <option value="Pasir Gudang">Pasir Gudang</option>
-                        <option value="Kuantan">Kuantan</option>
+                        <option value="George Town" <?php echo empty($city)?"":($city=="George Town"?"selected":"") ?>>George Town</option>
+                        <option value="Kuala Lumpur" <?php echo empty($city)?"":($city=="Kuala Lumpur"?"selected":"") ?>>Kuala Lumpur</option>
+                        <option value="Ipoh" <?php echo empty($city)?"":($city=="Ipoh"?"selected":"") ?>>Ipoh</option>
+                        <option value="Kuching" <?php echo empty($city)?"":($city=="Kuching"?"selected":"") ?>>Kuching</option>
+                        <option value="Johor Bahru" <?php echo empty($city)?"":($city=="Johor Bahru"?"selected":"") ?>>Johor Bahru</option>
+                        <option value="Kota Kinabalu" <?php echo empty($city)?"":($city=="Kota Kinabalu"?"selected":"") ?>>Kota Kinabalu</option>
+                        <option value="Shah Alam" <?php echo empty($city)?"":($city=="Shah Alam"?"selected":"") ?>>Shah Alam</option>
+                        <option value="Malacca City" <?php echo empty($city)?"":($city=="Malacca City"?"selected":"") ?>>Malacca City</option>
+                        <option value="Alor Setar" <?php echo empty($city)?"":($city=="Alor Setar"?"selected":"") ?>>Alor Setar</option>
+                        <option value="Miri" <?php echo empty($city)?"":($city=="Miri"?"selected":"") ?>>Miri</option>
+                        <option value="Petaling Jaya" <?php echo empty($city)?"":($city=="Petaling Jaya"?"selected":"") ?>>Petaling Jaya</option>
+                        <option value="Kuala Terengganu" <?php echo empty($city)?"":($city=="Kuala Terengganu"?"selected":"") ?>>Kuala Terengganu</option>
+                        <option value="Iskandar Puteri" <?php echo empty($city)?"":($city=="Iskandar Puteri"?"selected":"") ?>>Iskandar Puteri</option>
+                        <option value="Seberang Perai" <?php echo empty($city)?"":($city=="Seberang Perai"?"selected":"") ?>>Seberang Perai</option>
+                        <option value="Seremban" <?php echo empty($city)?"":($city=="Seremban"?"selected":"") ?>>Seremban</option>
+                        <option value="Subang Jaya" <?php echo empty($city)?"":($city=="Subang Jaya"?"selected":"") ?>>Subang Jaya</option>
+                        <option value="Pasir Gudang" <?php echo empty($city)?"":($city=="Pasir Gudang"?"selected":"") ?>>Pasir Gudang</option>
+                        <option value="Kuantan" <?php echo empty($city)?"":($city=="Kuantan"?"selected":"") ?>>Kuantan</option>
+                        <option value="Bayan Lepas" <?php echo empty($city)?"":($city=="Bayan Lepas"?"selected":"") ?>>Bayan Lepas</option>
                         
                     </select>
                     
                     <br><label>State</label>
                     <select name="State" id="State" class="form-control <?php echo (!empty($State_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($State)?"":$State; ?>">
-                        <option value="Johor">Johor</option>
-                        <option value="Kedah">Kedah</option>
-                        <option value="Kelantan">Kelantan</option>
-                        <option value="Melacca">Melacca</option>
-                        <option value="Negeri Sembilan">Negeri Sembilan</option>
-                        <option value="Pahang">Pahang</option>
-                        <option value="Penang">Penang</option>
-                        <option value="Perak">Perak</option>
-                        <option value="Perlis">Perlis</option>
-                        <option value="Sabah">Sabah</option>
-                        <option value="Sarawak">Sarawak</option>
-                        <option value="Selangor">Selangor</option>
-                        <option value="Terengganu">Terengganu</option>
+                        <option value="Johor" <?php echo empty($state)?"":($state=="Johor"?"selected":"") ?>>Johor</option>
+                        <option value="Kedah" <?php echo empty($state)?"":($state=="Kedah"?"selected":"") ?>>Kedah</option>
+                        <option value="Kelantan" <?php echo empty($state)?"":($state=="Kelantan"?"selected":"") ?>>Kelantan</option>
+                        <option value="Melacca" <?php echo empty($state)?"":($state=="Melacca"?"selected":"") ?>>Melacca</option>
+                        <option value="Negeri Sembilan" <?php echo empty($state)?"":($state=="Negeri Sembilan"?"selected":"") ?>>Negeri Sembilan</option>
+                        <option value="Pahang" <?php echo empty($state)?"":($state=="Pahang"?"selected":"") ?>>Pahang</option>
+                        <option value="Penang" <?php echo empty($state)?"":($state=="Penang"?"selected":"") ?>>Penang</option>
+                        <option value="Perak" <?php echo empty($state)?"":($state=="Perak"?"selected":"") ?>>Perak</option>
+                        <option value="Perlis" <?php echo empty($state)?"":($state=="Perlis"?"selected":"") ?>>Perlis</option>
+                        <option value="Sabah" <?php echo empty($state)?"":($state=="Sabah"?"selected":"") ?>>Sabah</option>
+                        <option value="Sarawak" <?php echo empty($state)?"":($state=="Sarawak"?"selected":"") ?>>Sarawak</option>
+                        <option value="Selangor" <?php echo empty($state)?"":($state=="Selangor"?"selected":"") ?>>Selangor</option>
+                        <option value="Terengganu" <?php echo empty($state)?"":($state=="Terengganu"?"selected":"") ?>>Terengganu</option>
                     </select>
                     
                     <br><label>Post Code</label>
@@ -125,6 +130,7 @@ Registration page
                     <input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($password)?"":$password; ?>">
                 </div>
                 <div class="form-group">
+                    <br/>
                     <label>Confirm Password</label>
                     <input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo !isset($confirm_password)?"":$confirm_password; ?>">
                 </div>

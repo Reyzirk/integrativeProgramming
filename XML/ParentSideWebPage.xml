@@ -100,8 +100,13 @@ Web Application is under GNU General Public License v3.0
         <PageDescription>Temperature level details</PageDescription>
     </Page>
     <Page>
-        <PageLink>index</PageLink>
-        <PageTitle>Template Page</PageTitle>
-        <PageDescription>Home page of the website.</PageDescription>
+        <PageLink>login</PageLink>
+        <PageTitle>Login</PageTitle>
+        <PageDescription>Login the account.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>register</PageLink>
+        <PageTitle>Register</PageTitle>
+        <PageDescription>Register the account.</PageDescription>
     </Page>
 </Pages>

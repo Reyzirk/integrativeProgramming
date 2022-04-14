@@ -11,13 +11,12 @@ Web Application is under GNU General Public License v3.0
  -->
  
 <?php
+require_once dirname(__DIR__)."/Database/ParentDB.php";
 $instructorEmail = "";
 $password = "";
 
-    session_start();
-
     //check if user already logged in
-    if(isset($_SESSION["login"]) && $_SESSION["login"] == true)
+    if(isset($_SESSION["parentID"]))
     {
         header("location: index.php");
         exit;
@@ -47,16 +46,21 @@ $password = "";
         //validate users' credentials
         if(empty($instructorID_err) && (empty($password_err)))
         {
-            //retrieve data form mySQL
             
-            //compare if id and password correct
-                    
-            //store data into session
-            $_SESSION["login"] = 'true';
-            $_SESSION["instructorEmail"] = '$instructorEmail';
-           
-            //direct user to homepage
-            header("location: index.php");
+            $db = new ParentDB();
+            $parent = $db->login(trim($_POST["instructorEmail"]));
+            if ($db!=null){
+                if (password_verify(trim($_POST("password")), $parent->password)){
+                    $_SESSION["parentID"] = $parent->userID;
+                    header("location: announcement.php");
+                }else{
+                    $login_err = "Invalid email or password.";
+                }
+                
+            }else{
+                $login_err = "Invalid email or password.";
+            }
+            
             
         }else
         {

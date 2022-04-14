@@ -44,7 +44,7 @@ Web Application is under GNU General Public License v3.0
                 <li class="dropdown"><a href="#" onclick="toggleMobileNavBarDropdown(this)"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         <li><a href="#">My Account</a></li>
-                        <li><a href="#">Log Out</a></li>
+                        <li><a href="logout.php">Log Out</a></li>
                     </ul>
                 </li>
 

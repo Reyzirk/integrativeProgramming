@@ -61,18 +61,22 @@ class ParentDB{
         }
     }
     
-    public function login($email, $password){
-        $query = "SELECT * FROM parent WHERE ParentEmail = ? AND Password=?";
+    public function login($email){
+        $query = "SELECT * FROM parent WHERE ParentEmail = ?";
         $stmt = $this->instance->con->prepare($query);
-        $parentEmail = $parent->email;
-        $password = $parent->password;
+        $stmt->bindParam(1, $email, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
-        if($totalrows == 0){
-            return false;
+        if ($totalrows==0){
+            return NULL;
         }else{
-            return true;
-        }  
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $row = $results[0];
+            $result = new Parents($row["ParentID"],$row["ParentName"],$row["ParentGender"],$row["ParentBirth"],$row["ParentEmail"],$row["ParentPhoneNo"],$row["ParentIcNo"],$row["ParentType"],$row["AddressID"],$row["Password"]);
+            $resultList = $result;
+            return $resultList;
+        }
     }
     
     public function insertNewAccount($parent){

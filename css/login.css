@@ -17,7 +17,9 @@ body
 }
 .wrapper
 { 
-    padding-right: 40%; 
-    padding-left: 40%; 
-    padding-top: 15%;
+    width:80%;
+    margin:auto;
+}
+.wrapper h2{
+    text-align:center;
 }

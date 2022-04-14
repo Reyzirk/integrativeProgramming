@@ -12,7 +12,7 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Par
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/ParentDB.php";
 
 if(isset($_POST["formDetect"])){
-    $parentID = "P00001"; //$_SESSION["parentID"]; <-------------------------------------------------Reminder
+    $parentID = $_SESSION["parentID"]; //$_SESSION["parentID"]; <-------------------------------------------------Reminder
     
     $storedValue["confirmPass"] = $_POST["confirmPass"];
     $storedValue["newPass"] = $_POST["newPass"];

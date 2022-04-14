@@ -1,3 +1,11 @@
+ <?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+        
+    }
+    include_once 'Function/ini_load.php';
+    include 'Function/login.php';
+ ?>
 <!DOCTYPE html>
 <!--
 ============================================
@@ -10,10 +18,7 @@ Web Application is under GNU General Public License v3.0
 Login page
 @author Shu Ling
  -->
- <?php
-    include 'Function/load.php';
-    include 'Function/login.php';
- ?>
+
  
 <html>
     <head>
@@ -28,24 +33,24 @@ Login page
             
             <h2>Login</h2><br>
             
-            <form action="login.php" method="post">
+            <form action="login.php" method="post" style="text-align: center;">
                 <?php if(isset($_GET['error']))?>
                 
                 <div class="login">
                     <label>Email</label>
-                    <input type="parentEmail" style="margin-left: 10%" name="parentEmail"<?php echo (!empty($parentEmail_err)) ? 'is-invalid' : ''; ?>" 
+                    <input type="parentEmail" name="parentEmail"<?php echo (!empty($parentEmail_err)) ? 'is-invalid' : ''; ?>" 
                            value="<?php echo $instructorEmail; ?>">
                 </div>
                 
                 <div class="login">
                     <br><label>Password</label>
-                    <input type="password" style="margin-left: 2%" name="password" <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+                    <input type="password" name="password" <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
                 </div>
                 
                 <br>
                 
                 <div class="login">
-                    <input type="submit" class="btn btn-primary" value="Login" style="margin-left: 35%;">
+                    <input type="submit" class="btn btn-primary" value="Login">
                 </div>
                 
                 <br><p>Do not have an account? <a href="register.php">Register Now!</a></p>

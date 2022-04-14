@@ -9,7 +9,7 @@
  * @author Oon Kheng Huang
  */
 
-$parentID = "P00001";           //$_SESSION["parentID"]
+$parentID = $_SESSION["parentID"];           //$_SESSION["parentID"]
 
 if (empty($_GET["id"])) {
     $_SESSION["errorLog"] = "noid";
