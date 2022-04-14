@@ -16,7 +16,8 @@ class Parents extends User{
     
     private $parentType, $addressID;
     
-    public function __construct($parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $parentType, $addressID, $password) {
+    public function __construct(
+            $parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $parentType, $addressID, $password) {
         parent::__construct($parentID, $parentName, $parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentIcNo, $password);
         $this->parentType = $parentType;
         $this->addressID = $addressID;

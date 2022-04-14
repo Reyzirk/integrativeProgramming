@@ -10,33 +10,38 @@
  * @author Tang Khai Li
  */
 
-require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ChildDB.php";
-require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ChildClassDB.php";
-require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ParentDB.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/ChildDB.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/ParentDB.php";
 
-$dataArray = array(
-    "childID" =>
-    array(
-        "Title" => "Parent ID",
-        "Width" => "18%"),
-    "parentID" =>
-    array(
-        "Title" => "Parent Name",
-        "Width" => "30%"),
-    "childName" =>
-    array(
-        "Title" => "Parent Email",
-        "Width" => "30%"),
-    "birthDate" =>
-    array(
-        "Title" => "Parent Phone No",
-        "Width" => "40%"),
-    "childIcNo" =>
-    array(
-        "Title" => "Parent Ic No",
-        "Width" => "40%"),
-    "status" =>
-    array(
-        "Title" => "Parent Type",
-        "Width" => "25%"));
+$query = "SELECT * FROM child";
+$childDB = new ChildDB();
+
+$results = $childDB->select($query);
+
+foreach ($results as $row) {
+    $childID = $row["ChildID"];
+    $parentID = $row["ParentID"];
+    $name = $row["ChildName"];
+    $birthdate = $row["ChildBirth"];
+    $ic = $row["ChildIcNo"];
+    $status = $row["Status"];
+    ?>
+    <tr id = "<?php echo $childID?>">
+        <td><?php echo $childID;?></td>
+        <td><?php echo $parentID; ?></td>
+        <td><?php echo $name;?></td>
+        <td><?php echo $parentEmail;?></td>
+        <td><?php echo $birthdate?></td>
+        <td><?php echo $ic?></td>
+        <td><?php echo $status?></td>
+        <td>
+<!--            <button type="button" class="btn btn-primary" onclick = "window.location.href = 'addChild.php?parentID=<?php echo $parentID?>'" >Add Child</button>-->
+            <button type="button" class="btn btn-primary" onclick = "window.location.href = 'viewChildDetails.php?id=<?php echo $parentID?>'" >View Child</button>
+        </td>
+    </tr>
+    <?php
+
+}
+?>
+
 
