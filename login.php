@@ -34,12 +34,11 @@ Login page
             <h2>Login</h2><br>
             
             <form action="login.php" method="post" style="text-align: center;">
-                <?php if(isset($_GET['error']))?>
+                <div class="text-danger"><?php echo empty($login_err)?"":$login_err; ?></div>
                 
                 <div class="login">
                     <label>Email</label>
-                    <input type="parentEmail" name="parentEmail"<?php echo (!empty($parentEmail_err)) ? 'is-invalid' : ''; ?>" 
-                           value="<?php echo $instructorEmail; ?>">
+                    <input type="parentEmail" name="parentEmail"<?php echo (!empty($parentEmail_err)) ? 'is-invalid' : ''; ?>" >
                 </div>
                 
                 <div class="login">

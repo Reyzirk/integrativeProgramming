@@ -26,12 +26,12 @@ $password = "";
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
             //check if user id is empty
-        if(empty(trim($_POST["instructorEmail"])))
+        if(empty(trim($_POST["parentEmail"])))
         {
             $instructorEmail_err = "Please enter user email.";
         } else
         {
-            $instructorEmail = trim($_POST["instructorEmail"]);
+            $instructorEmail = trim($_POST["parentEmail"]);
         }
 
         //check if password is empty
@@ -40,7 +40,7 @@ $password = "";
             $password_err = "Please enter password";
         }else
         {
-            $password = trim($_POST("password"));
+            $password = trim($_POST["password"]);
         }
 
         //validate users' credentials
@@ -48,9 +48,9 @@ $password = "";
         {
             
             $db = new ParentDB();
-            $parent = $db->login(trim($_POST["instructorEmail"]));
+            $parent = $db->login($instructorEmail);
             if ($db!=null){
-                if (password_verify(trim($_POST("password")), $parent->password)){
+                if (password_verify($password, $parent->password)){
                     $_SESSION["parentID"] = $parent->userID;
                     header("location: announcement.php");
                 }else{
