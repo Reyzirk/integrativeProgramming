@@ -174,4 +174,9 @@ Web Application is under GNU General Public License v3.0
         <PageTitle>Change Password</PageTitle>
         <PageDescription>Change your own account password.</PageDescription>
     </Page>
+    <Page>
+        <PageLink>instructorprofile</PageLink>
+        <PageTitle>Instructor Profile</PageTitle>
+        <PageDescription>View your instructor profile.</PageDescription>
+    </Page>
 </Pages>
