@@ -33,7 +33,7 @@ Web Application is under GNU General Public License v3.0
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
                         <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                        <li class="breadcrumb-item active">Parent</li>
+                        <li class="breadcrumb-item active">Change Password (Instructor)</li>
                     </ol>
                     <div class="container">
                         <div class="row">

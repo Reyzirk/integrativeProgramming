@@ -55,6 +55,15 @@
         <div class="collapse">
             <div class="bg-white py-2 collapse-inner rounded mt-1">
                 <a class="collapse-item <?php echo ($pageName=="parent.php"?"active":"")?>" href="parent.php">Parent</a>
+            </div>
+        </div>
+    </li>
+    <li class='nav-item dropdown <?php echo $pageName=="instructorProfile.php"?"active":""?>' onclick="dropdown(this)">
+        <!--<a class="nav-link" id="nav-update" href="parent.php"><i class="fa fa-address-card"></i> Parent</a>-->
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="nav-update" href="#" role="button" aria-haspopup="true" aria-expanded="true"><i class="fa-solid fa-chalkboard-user"></i> Instructor</a>
+        <div class="collapse">
+            <div class="bg-white py-2 collapse-inner rounded mt-1">
+                <a class="collapse-item <?php echo ($pageName=="instructorProfile.php"?"active":"")?>" href="instructorProfile.php">Instructor</a>
                 <a class="collapse-item <?php echo ($pageName=="changepassword.php"?"active":"")?>" href="changepassword.php">Change Password</a>
             </div>
         </div>

@@ -107,5 +107,34 @@ class InstructorDB {
         }
     }
     
+    public function update($instructorID, $updated) {
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->update("instructor", array("InstructorName" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "Gender" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "Email" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "ContactNumber" => \CustomSQLEnum::BIND_QUESTIONMARK))
+                ->where("InstructorID", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $instructID = $instructorID;
+        $name = $updated->name;
+        $gender = $updated->gender;
+        $email = $updated->email;
+        $contact = $updated->contactNumber;
+     
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $name, PDO::PARAM_STR);
+        $stmt->bindParam(2, $gender, PDO::PARAM_STR);
+        $stmt->bindParam(3, $email, PDO::PARAM_STR);
+        $stmt->bindParam(4, $contact, PDO::PARAM_STR);
+        $stmt->bindParam(5, $instructID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
     
 }
