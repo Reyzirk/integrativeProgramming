@@ -29,7 +29,7 @@ $lang_legendTitle = "Holiday Details";
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item"><a href="holidays.php">Holidays</a></li>
                         <li class="breadcrumb-item active">Create Holiday</li>
                     </ol>

@@ -7,11 +7,12 @@
  * ============================================
  */
 
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/User.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Instructor.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/InstructorDB.php";
 
 if(isset($_POST["formDetect"])){
-    $instructorID = "I0001"; //$_SESSION["instructorID"];
+    $instructorID = $_SESSION["instructorID"]; //$_SESSION["instructorID"]; <----------------------------------Reminder: parent ID session
     
     $storedValue["confirmPass"] = $_POST["confirmPass"];
     $storedValue["newPass"] = $_POST["newPass"];
@@ -41,10 +42,9 @@ if(isset($_POST["formDetect"])){
             $error["confirmPass"] = "Password not match";  
         }else{
             $instructorDB = new InstructorDB();
-            $instructor = $instructorDB->details($instructorID);
             
             //Check current password incorrect
-            if($currentPass != $instructor->password){
+            if(!$instructorDB->checkPassword($_SESSION["instructorID"], $currentPass)){
                 $error["currentPass"] = "Wrong password";
             }else{
                 if($instructorDB->updatePassword($instructorID, $newPass)){

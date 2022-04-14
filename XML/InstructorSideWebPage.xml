@@ -159,4 +159,24 @@ Web Application is under GNU General Public License v3.0
         <PageTitle>View Homework</PageTitle>
         <PageDescription>View homework details.</PageDescription>
     </Page>
+    <Page>
+        <PageLink>viewclassattendance</PageLink>
+        <PageTitle>View Class Attendance</PageTitle>
+        <PageDescription>View class attendance list.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>insertchildattendance</PageLink>
+        <PageTitle>Take Attendance</PageTitle>
+        <PageDescription>Take student attendance.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>changepassword</PageLink>
+        <PageTitle>Change Password</PageTitle>
+        <PageDescription>Change your own account password.</PageDescription>
+    </Page>
+    <Page>
+        <PageLink>instructorprofile</PageLink>
+        <PageTitle>Instructor Profile</PageTitle>
+        <PageDescription>View your instructor profile.</PageDescription>
+    </Page>
 </Pages>

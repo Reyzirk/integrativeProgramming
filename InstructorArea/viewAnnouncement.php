@@ -19,7 +19,7 @@ Web Application is under GNU General Public License v3.0
 $lang_title = "View announcement";
 $lang_description = "View an existing announcement.";
 $lang_legendTitle = "Announcement Details";
-$LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change to session user ID
+$LoginID = $_SESSION["instructorID"]; //++++++++++++++++++++++++++++++++++++++++++++To be change to session user ID
 ?>
 <html>
     <head>
@@ -38,7 +38,7 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
                         <li class="breadcrumb-item active">View Announcement</li>
                     </ol>
@@ -170,7 +170,7 @@ $LoginID = "I0001"; //++++++++++++++++++++++++++++++++++++++++++++To be change t
                                                                         <?php
                                                                         $intructorDB = new InstructorDB();
                                                                         $instructor = $intructorDB->details($announceInfo->instructorID);
-                                                                        $instructorName = $instructor->instructorName;
+                                                                        $instructorName = $instructor->name;
                                                                         ?>
                                                                         <input type="hidden" name="userID" id="commentId" placeholder="Name" value="<?php echo $announceInfo->instructorID ?>"/>
                                                                         <input class="input-field" disabled="true" type="text" name="userName" id="name" placeholder="Name" value="<?php echo empty($instructorName) ? "" : $instructorName ?>" />

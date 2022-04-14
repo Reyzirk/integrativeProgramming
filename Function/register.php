@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <!--
 ============================================
 Copyright 2022 Omega International Junior School. All Right Reserved.
@@ -15,7 +15,12 @@ require_once dirname(__DIR__)."/Objects/Parents.php";
 require_once dirname(__DIR__)."/Objects/Address.php";
 require_once dirname(__DIR__)."/Database/ParentDB.php";
 require_once dirname(__DIR__)."/Database/AddressDB.php";
-    
+//check if user already logged in
+if(isset($_SESSION["parentID"]))
+{
+    header("location: index.php");
+    exit;
+}
  $valid = true;
  
  if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -66,18 +71,21 @@ require_once dirname(__DIR__)."/Database/AddressDB.php";
     
     if (empty($_POST["parentType"])){
         $parentType_err = "Please select a parent type";
+        $valid = false;
     }else{
         $parentType = $_POST["parentType"];
     }
     
     if (empty($_POST["parentGender"])){
         $parentGender_err = "Please select a gender";
+        $valid = false;
     }else{
         $parentGender = $_POST["parentGender"];
     }
     
     if (empty($_POST["parentBirth"])){
         $parentBirth_err = "Please type the birthdate";
+        $valid = false;
     }else{
         $parentBirth = $_POST["parentBirth"];
     }
@@ -147,7 +155,7 @@ require_once dirname(__DIR__)."/Database/AddressDB.php";
         $parentName =($_POST["parentName"]);
     }
     if ($valid){
-        $hashed_password = md5($password);
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
         $addressID = uniqid("A",true);
         $address = new Address($addressID, $address, $city, $state, $postCode);
         $parent = new Parents(uniqid("P", true),$parentName,$parentGender, $parentBirth, $parentEmail, $parentPhoneNo, $parentICNo, $parentType, $addressID, $hashed_password);
@@ -155,7 +163,7 @@ require_once dirname(__DIR__)."/Database/AddressDB.php";
         $addressdb->insertNewAddress($address);
         $parentdb = new ParentDB();
         $parentdb->insertNewAccount($parent);
-        
+        header("location: login.php");
     }
  }
  ?>

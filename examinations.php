@@ -26,7 +26,8 @@ $lang_action_btn = "Action";
         <div id="content">
             <div class="breadcrumbs shadow container">
                 <ol class="breadcrumb" id="breadcrumb">
-                    <li class="breadcrumb-item"><a href="dashboard.php">Announcement</a></li>
+                    <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
+                    <li class="breadcrumb-item"><a href="examinationclasses.php">Classes for examination</a></li>
                     <li class="breadcrumb-item active">Examinations</li>
                 </ol>
                 

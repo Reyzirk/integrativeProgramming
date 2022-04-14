@@ -15,17 +15,25 @@
 function validateChild(){
     input = $("#child");
     errorMsg = input.next();
-    if (input.val().length===0){
+    if (input.val()==null){
         errorMsg.html("<b>Child</b> cannot empty.");
         input.addClass("is-invalid");
         input.removeClass("is-valid");
         return false;
-    
-    }else{
-        errorMsg.html("");
-        input.addClass("is-valid");
-        input.removeClass("is-invalid");
-        return true;
+    }
+    else{
+        if (input.val().length==0){
+            errorMsg.html("<b>Child</b> cannot empty.");
+            input.addClass("is-invalid");
+            input.removeClass("is-valid");
+            return false;
+
+        }else{
+            errorMsg.html("");
+            input.addClass("is-valid");
+            input.removeClass("is-invalid");
+            return true;
+        }
     }
 }
 

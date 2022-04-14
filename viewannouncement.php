@@ -16,7 +16,7 @@ Web Application is under GNU General Public License v3.0
 $lang_title = "View announcement";
 $lang_description = "View an existing announcement.";
 $lang_legendTitle = "Announcement Details";
-$LoginID = "P001"; //++++++++++++++++++++++++++++++++++++++++++++To be change to session user ID
+$LoginID = $_SESSION["parentID"]; 
 ?>
 <html>
     <head>
@@ -172,7 +172,7 @@ $LoginID = "P001"; //++++++++++++++++++++++++++++++++++++++++++++To be change to
                                                                         <?php
                                                                         $intructorDB = new InstructorDB();
                                                                         $instructor = $intructorDB->details($announceInfo->instructorID);
-                                                                        $instructorName = $instructor->instructorName;
+                                                                        $instructorName = $instructor->name;
                                                                         ?>
                                                                         <input type="hidden" name="userID" id="commentId" placeholder="Name" value="<?php echo $LoginID ?>"/>
                                                                         <input class="input-field" disabled="true" type="text" name="userName" id="name" placeholder="Name" value="<?php echo empty($instructorName) ? "" : $instructorName //Change to parent Name ?>" />

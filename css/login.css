@@ -13,11 +13,29 @@ body
 { 
     font: 14px;
     font-family: sans-serif;
-    background-image: "../images/loginBackground";
+    background-image: url("../images/login.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 .wrapper
 { 
-    padding-right: 40%; 
-    padding-left: 40%; 
-    padding-top: 15%;
+    background-color: #E5F5F8;
+    width:30%;
+    margin-top: 15%;
+    margin-left: 35%;
+    margin-right: 50%;
+    border: 1px solid grey;
+    border-radius: 25px;
+    box-shadow: 10px 10px lightblue;
+}
+.wrapper h2{
+    text-align:center;
+}
+
+.email{
+    margin-right: 6%;
+}
+
+.password{
+    margin-right: 1%;
 }

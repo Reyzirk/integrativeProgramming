@@ -1,8 +1,9 @@
 <?php
 include '../Function/load.php';
+$pageName = basename(__FILE__);
 include 'Function/searchAttendance.php';
 //$instructorID = $_SESSION["instructorID"];
-//$instructorID = "I0001";
+$instructorID = $_SESSION["instructorID"];
 ?>
 <!DOCTYPE html>
 <!--
@@ -29,7 +30,7 @@ Web Application is under GNU General Public License v3.0
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item active"><a href="addattendance.php">Attendance Log</a></li>
                     </ol>
                     <div class="container">

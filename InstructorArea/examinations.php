@@ -8,7 +8,8 @@ Web Application is under GNU General Public License v3.0
 ============================================
 -->
 
-<?php//Author: Poh Choo Meng
+<?php
+//Author Poh Choo Meng
 #Page Languages
 $lang_search = "Filter the examinations list";
 $lang_search_btn = "Search";
@@ -30,7 +31,7 @@ $lang_action_btn = "Action";
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item active">Examinations</li>
                     </ol>
                     <div class="container-fluid">

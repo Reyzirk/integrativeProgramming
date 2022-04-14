@@ -7,11 +7,12 @@
  * ============================================
  */
 
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/User.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Parents.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/ParentDB.php";
 
 if(isset($_POST["formDetect"])){
-    $parentID = "P00001"; //$_SESSION["parentID"]; <-------------------------------------------------Reminder
+    $parentID = $_SESSION["parentID"]; //$_SESSION["parentID"]; <-------------------------------------------------Reminder
     
     $storedValue["confirmPass"] = $_POST["confirmPass"];
     $storedValue["newPass"] = $_POST["newPass"];
@@ -45,12 +46,12 @@ if(isset($_POST["formDetect"])){
             
             //Check current password incorrect
             if($currentPass != $parent->password){
-                $error["currentPass"] = "Wrong password";
+                $error["currentPass"] = "Wrong Password";
             }else{
                 if($parentDB->updatePassword($parentID, $newPass)){
                     $_SESSION["modifyLog"] = "changepassword";
                     header('HTTP/1.1 307 Temporary Redirect');
-                    header('Location: parent.php');
+                    header('Location: parent.php'); //<-----------------------------------Reminder:change to My Account page
                 }else{
                     $_SESSION["errorLog"] = "sqlerror";
                 }

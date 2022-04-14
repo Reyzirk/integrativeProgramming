@@ -25,7 +25,7 @@ $lang_legendTitle = "Examination Details";
         <div id="content">
             <div class="breadcrumbs shadow container">
                 <ol class="breadcrumb" id="breadcrumb">
-                    <li class="breadcrumb-item"><a href="dashboard.php">Announcement</a></li>
+                    <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
                     <li class="breadcrumb-item"><a href="examinations.php?id=<?php echo $classID; ?>">Examinations</a></li>
                     <li class="breadcrumb-item active">View Examination</li>
                 </ol>
@@ -78,7 +78,7 @@ $lang_legendTitle = "Examination Details";
                                     <div class="row">
                                         <div class="col-md">
                                             <label for="instructor" class="col-form-label">Instructor</label>
-                                            <p class="p-12 font-weight-bold"><b><?php echo $retrievedInstructor->instructorName; ?>(<?php echo $retrievedExam->examiner; ?>)</b></p>
+                                            <p class="p-12 font-weight-bold"><b><?php echo $retrievedInstructor->name; ?>(<?php echo $retrievedExam->examiner; ?>)</b></p>
                                         </div>
                                     </div>
                                 </fieldset>

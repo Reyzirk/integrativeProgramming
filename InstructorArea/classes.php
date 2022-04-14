@@ -7,7 +7,7 @@ Copyright 2022 Omega International Junior School. All Right Reserved.
 Web Application is under GNU General Public License v3.0
 ============================================
 -->
-<--<!-- Author: Poh Choo Meng -->
+<!-- Author: Poh Choo Meng -->
 
 <?php
 #Page Languages
@@ -32,7 +32,7 @@ $lang_action_btn = "Action";
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item active">Classes</li>
                     </ol>
                     <div class="container-fluid">

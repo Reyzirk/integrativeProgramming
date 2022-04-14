@@ -12,11 +12,13 @@
  *
  * @author Choo Meng
  */
+require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Objects/User.php";
+
 class Instructor extends User {
-    private $instructorID, $instructorName, $employeeData, $gender, $birthDate, $email, $contactNumber, $icNo, $password;
-    public function __construct($instructorID, $instructorName, $employeeData, $gender, $birthDate, $email, $contactNumber, $icNo, $password = NULL) {
+    private $employeeDate;
+    public function __construct($instructorID, $instructorName, $employeeDate, $gender, $birthDate, $email, $contactNumber, $icNo, $password = NULL) {
         parent::__construct($instructorID, $instructorName, $gender, $birthDate, $email, $contactNumber, $icNo, $password);
-        $this->employeeData = $employeeData;
+        $this->employeeDate = $employeeDate;
 
     }
 
@@ -24,7 +26,7 @@ class Instructor extends User {
         if (property_exists($this, $name)){
             return $this->$name;
         }else{
-            parent::_get($name);
+            return parent::__get($name);
         }
     }
     

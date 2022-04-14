@@ -11,13 +11,12 @@ Web Application is under GNU General Public License v3.0
  -->
  
 <?php
+require_once dirname(__DIR__)."/Database/ParentDB.php";
 $instructorEmail = "";
 $password = "";
 
-    session_start();
-
     //check if user already logged in
-    if(isset($_SESSION["login"]) && $_SESSION["login"] == true)
+    if(isset($_SESSION["parentID"]))
     {
         header("location: index.php");
         exit;
@@ -27,12 +26,12 @@ $password = "";
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
             //check if user id is empty
-        if(empty(trim($_POST["instructorEmail"])))
+        if(empty(trim($_POST["parentEmail"])))
         {
             $instructorEmail_err = "Please enter user email.";
         } else
         {
-            $instructorEmail = trim($_POST["instructorEmail"]);
+            $instructorEmail = trim($_POST["parentEmail"]);
         }
 
         //check if password is empty
@@ -41,22 +40,28 @@ $password = "";
             $password_err = "Please enter password";
         }else
         {
-            $password = trim($_POST("password"));
+            $password = trim($_POST["password"]);
         }
 
         //validate users' credentials
-        if(empty($instructorID_err) && (empty($password_err)))
+        if(empty($instructorEmail_err) && (empty($password_err)))
         {
-            //retrieve data form mySQL
             
-            //compare if id and password correct
-                    
-            //store data into session
-            $_SESSION["login"] = 'true';
-            $_SESSION["instructorEmail"] = '$instructorEmail';
-           
-            //direct user to homepage
-            header("location: index.php");
+            $db = new ParentDB();
+            $parent = $db->login($instructorEmail);
+            if ($db!=null){
+                if (password_verify($password, $parent->password)){
+                    $_SESSION["parentID"] = $parent->userID;
+                    $_SESSION["parentName"] = $parent->name;
+                    header("location: announcement.php");
+                }else{
+                    $login_err = "Invalid email or password.";
+                }
+                
+            }else{
+                $login_err = "Invalid email or password.";
+            }
+            
             
         }else
         {

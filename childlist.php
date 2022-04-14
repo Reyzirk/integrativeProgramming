@@ -23,7 +23,7 @@ $lang_action_btn = "Action";
         <div id="content">
             <div class="breadcrumbs shadow container">
                 <ol class="breadcrumb" id="breadcrumb">
-                    <li class="breadcrumb-item"><a href="dashboard.php">Announcement</a></li>
+                    <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
                     <li class="breadcrumb-item active">Child List</li>
                 </ol>
                 
@@ -50,6 +50,7 @@ $lang_action_btn = "Action";
                                     <?php 
                                         $db = new ChildDB();
                                         $result = $db->getChildList($_SESSION["parentID"]);
+                                        if ($result!=null){
                                         foreach($result as $row){
                                     ?>
                                     <tr>
@@ -59,7 +60,11 @@ $lang_action_btn = "Action";
                                     <td><?php echo $row["Status"]; ?></td>
                                     <td><button class='btn btn-outline-info' onclick="location.href = 'viewchild.php?id=<?php echo $row["ChildID"]; ?>';"><i class="fa-solid fa-eye"></i> View</button></td>
                                     </tr>
-                                        <?php } ?>
+                                        <?php }}else{
+                                            ?>
+                                <td colspan="5">RESULT NOT FOUND</td>
+                                    <?php
+                                        } ?>
                                 </tbody>
                             </table>
 

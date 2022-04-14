@@ -10,7 +10,7 @@
  * 
  * @author Oon Kheng Huang
  */
-$parentID = "P00001"; //++++++++++++++++++++++++++to be changed to session
+$parentID = $_SESSION["parentID"]; //++++++++++++++++++++++++++to be changed to session
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AnnouncementDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/ReadStatus.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Announcement.php";
@@ -85,5 +85,22 @@ function convertCatToWord($cat) {
         case 'W':
             return "News";
             break;
+    }
+}
+function callLog() {
+    if (!empty($_SESSION["successUpdate"])) {
+
+        
+        ?>
+        <script>
+            setTimeout(function (){
+                Toast.fire({
+                    icon: 'success',
+                    html: '<b>Sucessful</b><br/>Update the user profile.'
+                })
+            },1500);
+        </script>
+        <?php
+        unset($_SESSION["successUpdate"]);
     }
 }
