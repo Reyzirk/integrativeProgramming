@@ -7,6 +7,7 @@
  * ============================================
  */
 
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/User.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Instructor.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/InstructorDB.php";
 
