@@ -1,7 +1,6 @@
 <?php
 include '../Function/load.php';
 $pageName = basename(__FILE__);
-include './Function/parent.php';
 ?>
 <!DOCTYPE html>
 <!--
@@ -30,7 +29,7 @@ $lang_action_btn = "Action";
         ?>
         <script src="js/parent.js" type="text/javascript"></script>
     </head>
-    
+
     <body>
         <div id="wrapper">
             <?php include 'Components/navbar.php' ?>
@@ -41,41 +40,41 @@ $lang_action_btn = "Action";
                         <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
                         <li class="breadcrumb-item active">Parent</li>
                     </ol>
-                    
+
                     <div class="container">
                         <div class="row">
                             <div class="col-md-20">
-                            <div id="displayList">
-                                <div class="jumbotrun" id="container">
-                                    <div class="rightSide">
-                                        <button class="btn btn-info" onclick="location.href = 'addParent.php'"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_add_btn; ?></button> 
-                                    </div>
-                                    <div class="leftSide">
-                                        <button class="btn btn-warning" onclick="displayList()"><?php echo $lang_refresh_btn; ?></button>
-                                    </div>
-                                    <br/>
-                                    <table class="table table-hover" id="tableList">
-                                        <thead>
-                                            <tr class="table-active">
-                                                <?php
-                                                foreach ($dataArray as $key => $value) {
-                                                    ?>
-                                                    <th width="<?php echo $value["Width"]; ?>" class="text-center" onclick="sortCol(this)"><?php echo $value["Title"] ?> <i class="fas fa-sort"></i></th>
-                                                    <?php
-                                                }
+                                <div id="displayList">
+                                    <div class="jumbotrun" id="container">
+                                        <div class="rightSide">
+                                            <button class="btn btn-info" onclick="location.href = 'addParent.php'"><i class="fa-solid fa-square-plus"></i> <?php echo $lang_add_btn; ?></button> 
+                                        </div>
+                                        <div class="leftSide">
+                                            <button class="btn btn-warning" onclick="location.href = 'parent.php'"><?php echo $lang_refresh_btn; ?></button>
+                                        </div>
+                                        <br/>
+                                        <div class="row">
+                                            <table class="table table-hover" id="tableList">
+                                                <thead>
+                                                <th>Parent ID</th>
+                                                <th>Parent Name</th>
+                                                <th>Parent Email</th>
+                                                <th>Parent Phone No</th>
+                                                <th>Parent IC No</th>
+                                                <th>Parent Type</th>
+                                                <th>Action</th>
+                                                </thead>
+                                                <tbody id="tableContent">
+                                                <?php 
+                                                include "Function/parent.php";
                                                 ?>
-                                                <th width="12%" class="text-center" style="cursor:default;">
-                                                    <?php echo $lang_action_btn; ?>
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="tableContent">
-                                        </tbody>
-                                    </table>
-                                    <div id="displayPagination">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div id="displayPagination">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             </div>    
                         </div>
                     </div>
