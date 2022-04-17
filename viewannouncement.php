@@ -170,12 +170,12 @@ $LoginID = $_SESSION["parentID"];
                                                                 <form id="frm-comment" method="POST">
                                                                     <div class="input-row">
                                                                         <?php
-                                                                        $intructorDB = new InstructorDB();
-                                                                        $instructor = $intructorDB->details($announceInfo->instructorID);
-                                                                        $instructorName = $instructor->name;
+                                                                        $parentDB = new ParentDB();
+                                                                        $parents = $parentDB->details($parentID);
+                                                                        $parentName = $parents->name;
                                                                         ?>
                                                                         <input type="hidden" name="userID" id="commentId" placeholder="Name" value="<?php echo $LoginID ?>"/>
-                                                                        <input class="input-field" disabled="true" type="text" name="userName" id="name" placeholder="Name" value="<?php echo empty($instructorName) ? "" : $instructorName //Change to parent Name ?>" />
+                                                                        <input class="input-field" disabled="true" type="text" name="userName" id="name" placeholder="Name" value="<?php echo empty($parentName) ? "" : $parentName ?>" />
                                                                     </div>
                                                                     <div class="input-row">
                                                                         <textarea class="input-field" type="text" name="desc"
@@ -198,7 +198,8 @@ $LoginID = $_SESSION["parentID"];
                                                             $count = $commentDB->getCountByAID($id);
                                                             if ($count != 0) {
                                                                 $commentList = $commentDB->list($id);
-                                                                //ParentDB+++++++++++++++++++++++++++++++++++++++++To be added after parent database created
+                                                                $parentDB = new ParentDB();
+                                                                $instructDB = new InstructorDB();
                                                                 ?>
                                                                 <div class="comment-form-container">
                                                                     <h6>Comments (<?php echo $count ?>)</h6><hr/>
@@ -206,9 +207,11 @@ $LoginID = $_SESSION["parentID"];
                                                                     foreach ($commentList as $row) {
                                                                         $userID = $row->userID;
                                                                         if ($userID[0] == "I") {
-                                                                            $commentName = $instructorName . " (Instructor)";
-                                                                        }else{//else Parent+++++++++++++++++++++++++++++++++++++++++To be added after parent database created
-                                                                            $commentName = "";
+                                                                            $instructor = $instructDB->details($userID);
+                                                                            $commentName = $instructor->name . " (Instructor)";
+                                                                        }else{
+                                                                            $parents = $parentDB->details($userID);
+                                                                            $commentName = $parents->name;
                                                                         }
                                                                         ?>
                                                                         <form id="deleteComment" name="deleteComment" method="POST">

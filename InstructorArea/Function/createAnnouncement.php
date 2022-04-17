@@ -13,7 +13,7 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/An
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Attachment.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AttachmentDB.php";
 
-$instructorID = $_SESSION["instructorID"]; //+++++++++++++++++++++++++++++++++++++++++++Session++++++++++++++++++++++++++++++++
+$instructorID = $_SESSION["instructorID"]; 
 
 if (isset($_POST["formDetect"])) {
     $date = trim($_POST["hiddenDate"]);

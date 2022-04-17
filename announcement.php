@@ -36,7 +36,7 @@ Web Application is under GNU General Public License v3.0
                                 <div class="col-md-5">   
                                     <div class="input-group">
 
-                                        <input type="text" name="inputSearch" id="inputSearch" placeholder="Search by (Title/ID/Date/Description)" title="search" class="form-control bg-white small"/>
+                                        <input type="text" name="inputSearch" id="inputSearch" placeholder="Search by (Title/ID/Date/Description)" value="<?php echo empty($storedValue["search"])?"":$storedValue["search"] ?>" title="search" class="form-control bg-white small"/>
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button" runat="server" id="searchButton" onclick="form.submit()">
                                                 <i class="fas fa-search fa-sm"></i> Search

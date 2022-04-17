@@ -9,7 +9,7 @@
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Instructor.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/InstructorDB.php";
 
-$instructorID = "I0001"; //$_SESSION["instructorID"]; <------------------------------------------Reminder: instructor ID session
+$instructorID = $_SESSION["instructorID"];
 
 $instructorDB = new InstructorDB();
 $getInstructor = $instructorDB->details($instructorID);
