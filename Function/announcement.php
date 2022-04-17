@@ -22,10 +22,12 @@ $searchClick = false;
 
 if (empty($_POST["inputSearch"])) {
     $search = "";
+    $storedValue["search"] = "";
 } else {
     //*******************************************>>>Client Side API Call<<<*********************************************
 
     $search = $_POST["inputSearch"];
+    $storedValue["search"] = $_POST["inputSearch"];
     $url = "http://localhost/integrativeProgramming/Function/KhengHuangAPI/api.php?search=" . urlencode($search);
     $client = curl_init($url);
     curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
