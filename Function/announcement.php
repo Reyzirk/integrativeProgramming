@@ -32,16 +32,20 @@ if (empty($_POST["inputSearch"])) {
     $response = curl_exec($client);
     $result = json_decode($response, true);
     $results = array();
+    $countR = count(array($result));
 
     if (!empty($result) && $result["status_message"] == "Result Found") {
         $temp = array();
-        for($i=0; $i < count(array($result["results"])); $i++) {
+        $i = 0;
+         foreach($result["results"] as $row) {
             foreach($result["results"][$i] as $name => $value){
                 $temp[$name] = $value;
             }
             $results[] = new Announcement($temp["announceID"], $temp["instructorID"], $temp["title"], $temp["desc"], 
                     $temp["cat"], $temp["date"], $temp["pin"], $temp["allowC"]);
+            $i++;
         }
+        
     }
 
     $searchClick = true;
