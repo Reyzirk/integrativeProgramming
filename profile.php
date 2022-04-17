@@ -122,7 +122,7 @@ Web Application is under GNU General Public License v3.0
                                 <br/>
                                 <center>
                                     <input type="submit" class="btn btn-primary" value="Submit">
-                                    <input class="btn btn-secondary ml-2" value="Reset" onclick="location.href = 'profile.php'">
+                                    <input class="btn btn-secondary ml-2" style="width: 6%" value="Reset" onclick="location.href = 'profile.php'">
                                 </center>
                             </form>
                         </div>
