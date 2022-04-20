@@ -11,7 +11,7 @@ require_once str_replace("InstructorArea", "", str_replace("Function", "", dirna
 require_once "BaseController.php";
 require_once "Controller.php";
 
-class GradeController extends BaseController implements Controller {
+class ExaminationController extends BaseController implements Controller {
 
     private static $controller = NULL;
 

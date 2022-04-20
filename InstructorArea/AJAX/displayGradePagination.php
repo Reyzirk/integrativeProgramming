@@ -20,7 +20,6 @@ $grades = $parser->getGrades();
 $entry = empty($_POST["entry"]) ? 20 : (int) $_POST["entry"];
 $search = empty($_POST["search"]) ? null : eliminateExploit($_POST["search"]);
 $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
-$currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
 $count = 0;
 //Convert to indexed array
 while($key = $grades->next()){

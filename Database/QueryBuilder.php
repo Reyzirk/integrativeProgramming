@@ -25,5 +25,7 @@ interface QueryBuilder{
     public function groupby(array $groupby);
     public function order(string $column, OrderTypeEnum $orderType = \OrderTypeEnum::DESC);
     public function limit(int $start, int $offset=0);
+    public function bracketWhere($type = \WhereTypeEnum::AND);
+    public function query();
     
 }
