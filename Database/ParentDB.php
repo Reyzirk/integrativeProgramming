@@ -103,6 +103,22 @@ class ParentDB{
         }
     }
     
+    public function updatePassword($parentID, $password) {
+        $builder = new MySQLQueryBuilder();
+        $query = "UPDATE `parent` SET `Password` = ? WHERE `ParentID` = ?";
+        
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $password, PDO::PARAM_STR);
+        $stmt->bindParam(2, $parentID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
     public function update($oldID, $updated) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->update("parent", array("ParentName" => \CustomSQLEnum::BIND_QUESTIONMARK,

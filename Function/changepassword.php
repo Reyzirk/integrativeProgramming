@@ -45,10 +45,10 @@ if(isset($_POST["formDetect"])){
             $parent = $parentDB->details($parentID);
             
             //Check current password incorrect
-            if($currentPass != $parent->password){
+            if(password_verify($newPass, $parent->password)){
                 $error["currentPass"] = "Wrong Password";
             }else{
-                if($parentDB->updatePassword($parentID, $newPass)){
+                if($parentDB->updatePassword($parentID, password_hash($newPass))){
                     $_SESSION["modifyLog"] = "changepassword";
                     header('HTTP/1.1 307 Temporary Redirect');
                     header('Location: parent.php'); //<-----------------------------------Reminder:change to My Account page

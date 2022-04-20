@@ -7,8 +7,10 @@
  * ============================================
  */
 if (empty($_SESSION["childID"])){
+    
     header('HTTP/1.1 307 Temporary Redirect');
     header('Location: selectchild.php?transferpath=examination');
+    exit();
 }
 function callLog() {
     if (!empty($_SESSION["errorLog"])) {
