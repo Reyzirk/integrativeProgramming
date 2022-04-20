@@ -70,7 +70,7 @@ Registration page
         <div class="wrapper">
             <h2>Registration</h2><br>
             
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" name="parentName" style="width: 50%" class="form-control <?php echo (!empty($parentName_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentName)?"":$parentName; ?>"> 

@@ -84,6 +84,7 @@ Web Application is under GNU General Public License v3.0
                                 ?>
                             </div>
                         </div>
+                </div>
                 </section>
 
             </div>

@@ -26,7 +26,7 @@ Web Application is under GNU General Public License v3.0
                 </li>
                 <li class="dropdown"><a href="childlist.php" onclick="toggleMobileNavBarDropdown(this)"><span>Child</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="#">Display Parent Types</a></li>
+                        <li><a href="displayParentType.php">Display Parent Types</a></li>
                         <li><a href="viewchild.php">View Child Details</a></li>
                     </ul>
                 </li>

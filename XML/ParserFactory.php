@@ -5,7 +5,7 @@
  * Copyright 2022 Omega International Junior School. All Right Reserved.
  * Web Application is under GNU General Public License v3.0
  * ============================================
- * //Author: Poh Choo Meng
+ * //Author: Fong Shu Ling
  */
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/CoursesParser.php';
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . '/XML/HolidaysParser.php';
