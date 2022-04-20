@@ -26,7 +26,7 @@ if (!empty($getInstructor)) {
 }
 
 if (isset($_POST["formDetect"])) {
-
+   
     //***************************Name Validation************************************
     $inputName = "name";
     $inputTitle = "Name";
@@ -44,7 +44,7 @@ if (isset($_POST["formDetect"])) {
     $inputTitle = "Email";
     if (empty($_POST[$inputName])) {
         $error[$inputName] = "<b>$inputTitle</b> cannot empty.";
-    } else if(!filter_var($_POST["parentEmail"], FILTER_VALIDATE_EMAIL)){
+    } else if(!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)){
         $error[$inputName] = "<b>$inputTitle</b> format is not correct. e.g.: abc@gmail.com";
     }else{
         $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
@@ -55,7 +55,7 @@ if (isset($_POST["formDetect"])) {
     $inputTitle = "Contact Number";
     if (empty($_POST[$inputName])) {
         $error[$inputName] = "<b>$inputTitle</b> cannot empty.";
-    } else if(!preg_match( '/[0-9]{3}-[0-9]{7,9}/',$_POST["parentPhoneNo"])){
+    } else if(!preg_match( '/[0-9]{3}-[0-9]{7,9}/',$_POST["contact"])){
         $error[$inputName] = "<b>$inputTitle</b> format is incorrect. e.g.: xxx-xxxxxxx";
     }else{
         $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
@@ -84,7 +84,6 @@ if (isset($_POST["formDetect"])) {
                 $getInstructor->password);
         
         $instructorDB = new InstructorDB();
-
         if ($instructorDB->update($storedValue["instructID"], $instruct)) {
             $_SESSION["modifyLog"] = "editinstructorprofile";
 

@@ -37,7 +37,7 @@ Web Application is under GNU General Public License v3.0
                             <div class="col-md-12">
                             <div id="displayList">
                                 <div class="jumbotrun" id="container">
-                                    <form method="POST" id="formSubmit" name="formSubmit" enctype="multipart/form-data">
+                                    <form method="POST" id="formSubmit" name="formSubmit">
                                     <h1 class="display-4">Instructor Profile</h1>
                                     <p class="lead">Instructor Profile Details</p>
                                     <hr class="my-3">
