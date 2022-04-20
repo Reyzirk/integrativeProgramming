@@ -48,7 +48,7 @@ function loadList(closeBool) {
     $.ajax({
         url: "AJAX/displayExaminationList.php",
         type: "POST",
-        data: {"id":url.searchParams.get("id"),"search": inputSearch.val(), "sorttype": sortType, "sortorder": sortOrder, "currentPage": pageIndex, "entry": entry.val()},
+        data: {"id":url.searchParams.get("id"),"cid":url.searchParams.get("cid"),"search": inputSearch.val(), "sorttype": sortType, "sortorder": sortOrder, "currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {
             tableContent.html(response);
             if (closeBool) {
@@ -74,7 +74,7 @@ function displayList() {
     $.ajax({
         url: "AJAX/displayExaminationPagination.php",
         type: "POST",
-        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id":url.searchParams.get("id"),"cid":url.searchParams.get("cid"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
             Swal.close();
             paginationContent.html(response);
@@ -88,7 +88,7 @@ function displayListWithoutLoading() {
     $.ajax({
         url: "AJAX/displayExaminationPagination.php",
         type: "POST",
-        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id":url.searchParams.get("id"),"cid":url.searchParams.get("cid"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
             paginationContent.html(response);
         }
@@ -141,7 +141,7 @@ function updatePageIndex(index) {
     $.ajax({
         url: "AJAX/displayExaminationPagination.php",
         type: "POST",
-        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
+        data: {"id":url.searchParams.get("id"),"cid":url.searchParams.get("cid"),"currentPage": pageIndex, "entry": entry.val(),"search": inputSearch.val()},
         success: function (response) {
             paginationContent.html(response);
         }
@@ -156,7 +156,7 @@ function updatePageEntry() {
     $.ajax({
         url: "AJAX/displayExaminationPagination.php",
         type: "POST",
-        data: {"id":url.searchParams.get("id"),"currentPage": pageIndex, "entry": entry.val()},
+        data: {"id":url.searchParams.get("id"),"cid":url.searchParams.get("cid"),"currentPage": pageIndex, "entry": entry.val()},
         success: function (response) {
             paginationContent.html(response);
         }

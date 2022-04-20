@@ -84,64 +84,65 @@ function validateFile(element){
     errorMsg = input.next();
     fileNameInput = input.next().next();
     hiddenInput = input.next().next().next();
-    if (hiddenInput.val().length!=0){
-        if (input.val().length===0){
-            fileNameInput.html("File Name: "+hiddenInput.val());
-            return true;
-        }else if(!checkValidFileType(input.val())){
-            input.val("");
-            fileNameInput.html("File Name: "+hiddenInput.val());
-            errorMsg.html("File type of <b>Material File</b> not supported.");
-            input.addClass("is-invalid");
-            input.removeClass("is-valid");
-            return false;
-        }else{
-            fileSize = element.files[0].size;
-            if(fileSize>maxFileSize){
+        if (hiddenInput.val()!=null){
+            if (input.val().length===0){
+                fileNameInput.html("File Name: "+hiddenInput.val());
+                return true;
+            }else if(!checkValidFileType(input.val())){
                 input.val("");
                 fileNameInput.html("File Name: "+hiddenInput.val());
-                errorMsg.html("<b>Material File</b> cannot more than "+convertByteToMB(maxFileSize)+".");
+                errorMsg.html("File type of <b>Material File</b> not supported.");
                 input.addClass("is-invalid");
                 input.removeClass("is-valid");
                 return false;
+            }else{
+                fileSize = element.files[0].size;
+                if(fileSize>maxFileSize){
+                    input.val("");
+                    fileNameInput.html("File Name: "+hiddenInput.val());
+                    errorMsg.html("<b>Material File</b> cannot more than "+convertByteToMB(maxFileSize)+".");
+                    input.addClass("is-invalid");
+                    input.removeClass("is-valid");
+                    return false;
+                }
+                else{
+                    errorMsg.html("");
+                    fileNameInput.html("File Name: "+input.val());
+                    input.addClass("is-valid");
+                    input.removeClass("is-invalid");
+                    return true;
+                }
             }
-            else{
-                errorMsg.html("");
-                fileNameInput.html("File Name: "+input.val());
-                input.addClass("is-valid");
-                input.removeClass("is-invalid");
-                return true;
-            }
-        }
-    }else{
-        if (input.val().length===0){
-            errorMsg.html("<b>Material File</b> cannot empty.");
-            input.addClass("is-invalid");
-            input.removeClass("is-valid");
-            return false;
-        }else if(!checkValidFileType(input.val())){
-            input.val("");
-            errorMsg.html("File type of <b>Material File</b> not supported.");
-            input.addClass("is-invalid");
-            input.removeClass("is-valid");
-            return false;
         }else{
-            fileSize = element.files[0].size;
-            if(fileSize>maxFileSize){
-                input.val("");
-                errorMsg.html("<b>Material File</b> cannot more than "+convertByteToMB(maxFileSize)+".");
+            if (input.val().length===0){
+                errorMsg.html("<b>Material File</b> cannot empty.");
                 input.addClass("is-invalid");
                 input.removeClass("is-valid");
                 return false;
-            }
-            else{
-                errorMsg.html("");
-                input.addClass("is-valid");
-                input.removeClass("is-invalid");
-                return true;
+            }else if(!checkValidFileType(input.val())){
+                input.val("");
+                errorMsg.html("File type of <b>Material File</b> not supported.");
+                input.addClass("is-invalid");
+                input.removeClass("is-valid");
+                return false;
+            }else{
+                fileSize = element.files[0].size;
+                if(fileSize>maxFileSize){
+                    input.val("");
+                    errorMsg.html("<b>Material File</b> cannot more than "+convertByteToMB(maxFileSize)+".");
+                    input.addClass("is-invalid");
+                    input.removeClass("is-valid");
+                    return false;
+                }
+                else{
+                    errorMsg.html("");
+                    input.addClass("is-valid");
+                    input.removeClass("is-invalid");
+                    return true;
+                }
             }
         }
-    }
+    
     
 }
 function convertByteToMB(size){

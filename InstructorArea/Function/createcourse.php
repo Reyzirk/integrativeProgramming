@@ -89,10 +89,9 @@ if (isset($_POST["formDetect"])){
             }
         }
     }
-    
     if (empty($error)){
         $courseMaterials = array();
-        if (isset($_FILES[$inputName])){
+        if (isset($_POST[$inputName])){
             for($i = 0;$i < count($_POST[$inputName]);$i++){
                 $files = $_FILES["materialFile"];
                 $save_as = uniqid("",true).'.'.$ext;

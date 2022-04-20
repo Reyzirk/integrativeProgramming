@@ -56,6 +56,27 @@ class ExaminationDB {
         $totalrows = $stmt->rowCount();
         return $totalrows;
     }
+    public function getCountWithIDAndChild($search,$id,$cid){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("examination"), array("examination.ExaminationID","CourseCode","InstructorName","ExamDuration","ExamStartTime","Marks"))
+        ->join("instructor","examination.InstructorID","instructor.InstructorID")
+        ->join("examresults","examination.ExaminationID","examresults.ExaminationID")
+        ->join("childclass","examresults.ChildID","childclass.ChildID")
+        ->where("examination.ExaminationID", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        ->where("CourseCode", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        ->where("ExamDuration", $search, WhereTypeEnum::OR, OperatorEnum::EQUAL)
+        ->where("ExamStartTime", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        ->where("InstructorName", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        ->where("Marks", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
+        ->bracketWhere(WhereTypeEnum::OR)
+        ->where("childclass.ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->where("examresults.ChildID", $cid, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        return $totalrows;
+    }
     public function select($query){
         
         $stmt = $this->instance->con->prepare($query);

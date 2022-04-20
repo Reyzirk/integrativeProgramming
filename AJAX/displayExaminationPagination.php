@@ -21,13 +21,14 @@ $search = empty($_POST["search"]) ? "" : eliminateExploit($_POST["search"]);
 $entry = empty($_POST["entry"]) ? 20 : (int) $_POST["entry"];
 $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
 $examdb = new ExaminationDB();
-if (!isset($_POST["id"])){
+if (!isset($_POST["id"])||!isset($_POST["cid"])){
     return;
 }else{
     $id = $_POST["id"];
+    $cid = $_POST["cid"];
 }
 try{
-    $totalCount = $examdb->getCountWithID($search,$id);
+    $totalCount = $examdb->getCountWithIDAndChild($search,$id, $cid);
 } catch (PDOException $ex) {
     if ($generalSection["maintenance"]==true){
         echo $ex->getMessage();
