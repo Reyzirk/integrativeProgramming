@@ -7,6 +7,7 @@ if(!isset($_SESSION["instructorID"])){
     $instructordb = new InstructorDB();
     $details = $instructordb->details($_SESSION["instructorID"]);
     if ($details==null){
+        unset($_SESSION["instructorID"]);
         header('HTTP/1.1 307 Temporary Redirect');
         header('Location: login.php');
     }else{

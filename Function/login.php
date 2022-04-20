@@ -18,7 +18,7 @@ $password = "";
     //check if user already logged in
     if(isset($_SESSION["parentID"]))
     {
-        header("location: index.php");
+        header("location: announcement.php");
         exit;
     }
     

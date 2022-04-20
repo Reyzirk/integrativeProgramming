@@ -6,6 +6,7 @@ if(!isset($_SESSION["parentID"])){
     $parentdb = new ParentDB();
     $details = $parentdb->details($_SESSION["parentID"]);
     if ($details==null){
+        unset($_SESSION["parentID"]);
         header('HTTP/1.1 307 Temporary Redirect');
         header('Location: login.php');
     }else{
