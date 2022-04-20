@@ -22,8 +22,8 @@ $lang_legendTitle = "Homework Details";
             <div class="breadcrumbs shadow container">
                 <ol class="breadcrumb" id="breadcrumb">
                     <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
-                    <li class="breadcrumb-item"><a href="homeworks.php?id=<?php echo $retrievedHomework->class; ?>'">Homeworks</a></li>
-                    <li class="breadcrumb-item active">View Homework</li>
+                    <li class="breadcrumb-item"><a href="childlist.php">Child List</a></li>
+                    <li class="breadcrumb-item active">View Child</li>
                 </ol>
                 
             </div>
