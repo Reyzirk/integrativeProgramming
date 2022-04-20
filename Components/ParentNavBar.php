@@ -40,7 +40,6 @@ Web Application is under GNU General Public License v3.0
                         </li>
                     </ul>
                 </li>
-                <li><a href="">About</a></li>
                 <li id="navbarSeperator"><a>|</a></li>
                 <li class="dropdown"><a href="#" onclick="toggleMobileNavBarDropdown(this)"><span><?php echo empty($_SESSION["parentName"])?"Profile":$_SESSION["parentName"] ?></span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
