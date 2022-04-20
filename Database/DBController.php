@@ -10,7 +10,7 @@
 /**
  * Description of DBController (Singleton)
  *
- * @author Tang Khai Li
+ * @author Tang Khai Li & Fong Shu Ling
  * 
  */
 

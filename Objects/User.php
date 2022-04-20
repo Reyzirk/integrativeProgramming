@@ -10,7 +10,7 @@
 /**
  * Description of User
  *
- * @author Choo Meng
+ * @author Shu Ling
  */
 class User {
     private $userID, $name, $gender, $birthDate, $email, $contactNumber, $icNo, $password;
