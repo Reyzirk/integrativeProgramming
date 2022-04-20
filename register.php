@@ -77,7 +77,8 @@ Registration page
                 </div>
                 <div class="form-group">
                     <br><label>IC Number</label>
-                    <input type="text" name="parentICNo" style="width: 50%" class="form-control <?php echo (!empty($parentICNo_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentICNo)?"":$parentICNo; ?>"> 
+                    <input type="text" name="parentICNo" placeholder="010457-07-0987" 
+                           style="width: 50%" class="form-control <?php echo (!empty($parentICNo_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentICNo)?"":$parentICNo; ?>"> 
                 </div>
                 <div class="form-group">
                     <br><label>Gender</label><br>
@@ -104,7 +105,8 @@ Registration page
                 </div>
                 <div class="form-group">
                     <br><label>Phone Number</label>
-                    <input type="text" name="parentPhoneNo" style="width: 50%" class="form-control <?php echo (!empty($parentPhoneNo_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentPhoneNo)?"":$parentPhoneNo; ?>">
+                    <input type="text" name="parentPhoneNo" placeholder="016-1234567"
+                           style="width: 50%" class="form-control <?php echo (!empty($parentPhoneNo_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo !isset($parentPhoneNo)?"":$parentPhoneNo; ?>">
                 </div>
                 <div class="form-group">
                     <br><label>Address</label>
