@@ -48,9 +48,9 @@ if(isset($_POST["formDetect"])){
             if(password_verify($newPass, $parent->password)){
                 $error["currentPass"] = "Wrong Password";
             }else{
-                if($parentDB->updatePassword($parentID, password_hash($newPass))){
+                if($parentDB->updatePassword($parentID, password_hash($newPass, PASSWORD_DEFAULT))){
                     $_SESSION["modifyLog"] = "changepassword";
-                    header('HTTP/1.1 307 Temporary Redirect');
+                   
                     header('Location: profile.php'); //<-----------------------------------Reminder:change to My Account page
                 }else{
                     $_SESSION["errorLog"] = "sqlerror";
