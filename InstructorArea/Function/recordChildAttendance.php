@@ -38,7 +38,7 @@ function printResults($childIDRecord, $todayDate,$facade,$classID) {
             <td><?php echo $childName ?></td>
             <td>
                 <?php echo $classID?>
-            </td>>
+            </td>
             <td>
                 <button type="button" class="btn btn-primary" 
                     <?php echo $facade->checkIfAttendanceExists($childID, $todayDate) ? "disabled":"" ?> onclick="window.location.href = 'updateNewAttendance.php?childID=<?php echo $childID?>'">

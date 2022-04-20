@@ -55,7 +55,7 @@ Web Application is under GNU General Public License v3.0
                                     
                                     <p>Duration: <?php echo $row["ClassStart"]." until ".$row["ClassEnd"]; ?></p>
                                     <h3 class="text-center">
-                                        <a href="examinations.php?id=<?php echo $row["ClassID"]; ?>" class="btn btn-success">View Examination</a>
+                                        <a href="examinations.php?id=<?php echo $row["ClassID"]; ?>&cid=<?php echo $_SESSION["childID"]; ?>" class="btn btn-success">View Examination</a>
                                     </h3>
                                     <div class="formteacher d-flex justify-content-between align-items-center">
                                         <div class="formteacher-profile d-flex align-items-center">

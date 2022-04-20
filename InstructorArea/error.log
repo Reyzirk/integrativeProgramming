@@ -26,3 +26,4 @@
 [2022-04-20 22:50:07] [8]Undefined index: parentPhoneNo | Fatal error on line 58 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\instructorProfile.php 
 [2022-04-20 22:50:27] [8]Undefined index: parentEmail | Fatal error on line 47 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\instructorProfile.php 
 [2022-04-20 22:50:27] [8]Undefined index: parentPhoneNo | Fatal error on line 58 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\instructorProfile.php 
+[2022-04-20 23:28:50] [8]Array to string conversion | Fatal error on line 92 in file C:\xampp\htdocs\IPAssignment\InstructorArea\Function\createcourse.php 

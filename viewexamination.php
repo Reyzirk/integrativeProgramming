@@ -85,7 +85,7 @@ $lang_legendTitle = "Examination Details";
                             </div>
                             <input hidden="true" name="formDetect" value="formDetect">
                             <center>
-                                <button type="button" class="btn btn-danger" onclick="location.href = 'examinations.php?id=<?php echo $classID; ?>'">Cancel</button>
+                                <button type="button" class="btn btn-danger" onclick="location.href = 'examinations.php?id=<?php echo $classID; ?>&cid=<?php echo $_SESSION["childID"]; ?>'">Cancel</button>
                             </center>
                         </div>
                     </div>

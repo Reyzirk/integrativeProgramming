@@ -47,18 +47,16 @@ while($key = $holidays->next()){
     $valueDateEnd = (string) $key->dateEnd;
     $dateStart = new DateTime($valueDateStart);
     $dateEnd = new DateTime($valueDateEnd);
-    if (($classStart>=$dateStart&&$classEnd>=$dateStart&&$classStart<=$dateEnd)){
-        if (empty($search) ||
-            (
-            custom_str_contains($key->name, empty($search) ? "" : $search) ||
-            custom_str_contains($valueDateStart, empty($search) ? "" : $search) ||
-            custom_str_contains($valueDateEnd, empty($search) ? "" : $search)
-            )
-        ) {
-            $count++;
-            $holidayList[] = $key;
-        }   
-    }
+    if (empty($search) ||
+        (
+        custom_str_contains($key->name, empty($search) ? "" : $search) ||
+        custom_str_contains($valueDateStart, empty($search) ? "" : $search) ||
+        custom_str_contains($valueDateEnd, empty($search) ? "" : $search)
+        )
+    ) {
+        $count++;
+        $holidayList[] = $key;
+    }   
     
 }
 $totalCount = $count;

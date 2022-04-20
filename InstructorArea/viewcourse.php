@@ -51,7 +51,7 @@ $lang_legendTitle2 = "Course Materials"
                                     <div class="row">
                                         <div class="col-md">
                                             <label for="courseDescription" class="col-form-label">Course Description </label>
-                                            <div><?php echo $retrievedCourse->courseName; ?></div>
+                                            <div><?php echo $retrievedCourse->courseDesc; ?></div>
                                         </div>
                                     </div>
                                 </fieldset>

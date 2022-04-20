@@ -65,7 +65,7 @@ $lang_legendTitle = "Homework Details";
                                     </div>
                                     <input hidden="true" name="formDetect" value="formDetect">
                                     <center>
-                                         <button type="button" class="btn btn-warning" id="submitBtn" onclick="editcourse.php?id=<?php echo $id; ?>">Modify</button>
+                                         <button type="button" class="btn btn-warning" id="submitBtn" onclick="location.href='edithomework.php?id=<?php echo $id; ?>'">Modify</button>
                                         <button type="button" class="btn btn-danger" onclick="location.href='homeworks.php?id=<?php echo $retrievedHomework->class; ?>'">Back</button>
                                     </center>
                                 </form>
