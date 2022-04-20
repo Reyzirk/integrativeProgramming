@@ -64,4 +64,15 @@ if ($dataType == 'holiday'){
         header("HTTP/1.1 404 Not Found");
         return;
     }
+}else if ($dataType == "examination"){
+    $examController = $factory->getController("Examination");
+    $type = $uri[$defaultApi+2];
+    if ($type=="list"){
+        $examController->list();
+    }else if ($type=="get"){
+        $examController->get();
+    }else{
+        header("HTTP/1.1 404 Not Found");
+        return;
+    }
 }

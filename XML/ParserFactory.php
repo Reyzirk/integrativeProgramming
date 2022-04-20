@@ -26,13 +26,12 @@ class ParserFactory{
     public function saveXML($type){
         $parser = $this->getParser($type);
         if ($type == "Courses"){
-            return $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/courses.xml");
+            $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/courses.xml");
         }else if ($type =="Holidays"){
-            return $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/holidays.xml");
+            $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/holidays.xml");
         }else if ($type =="Grades"){
-            return $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/grades.xml");
-        }else{
-            return NULL;
+            $parser->saveXML(str_replace("InstructorArea", "", dirname(__DIR__)) . "/XML/grades.xml");
         }
+        return true;
     }
 } 
