@@ -41,11 +41,11 @@ if (!empty($_GET["key"])) {
             $parentListData[] = $parentData;
         }
         if (empty($parentListData)) {
-            $parentOutput[] = array("Status" => "Successful", "Parent List" => "Invalid List");
+            $parentOutput[] = array("Status" => "Successful", "ParentList" => "Invalid List");
             $response = json_encode($parentOutput, JSON_PRETTY_PRINT);
             sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
         } else {
-            $parentOutput[] = array("Status" => "Successful", "Parent List" => $parentListData);
+            $parentOutput[] = array("Status" => "Successful", "ParentList" => $parentListData);
             $response = json_encode($parentOutput, JSON_PRETTY_PRINT);
             sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
         }
