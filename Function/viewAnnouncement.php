@@ -9,7 +9,7 @@
  * @author Oon Kheng Huang
  */
 
-$parentID = $_SESSION["parentID"];           //$_SESSION["parentID"]
+$parentID = $_SESSION["parentID"];           
 
 if (empty($_GET["id"])) {
     $_SESSION["errorLog"] = "noid";
@@ -18,6 +18,8 @@ if (empty($_GET["id"])) {
 }
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Announcement.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AnnouncementDB.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Parents.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/ParentDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Attachment.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AttachmentDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/InstructorDB.php";

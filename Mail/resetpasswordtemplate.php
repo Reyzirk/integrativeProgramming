@@ -11,6 +11,6 @@
 <br>
 <p>If you did not request a password reset, please ignore the email. This reset password link will be invalid after 1 hours</p>
 <br>
-<p>By<br>OIJS Authentication Team</p>
+<p>By <br>OIJS Authentication Team</p>
 </body>
 </html>

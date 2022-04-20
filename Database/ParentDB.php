@@ -22,6 +22,23 @@ class ParentDB{
         $this->instance = DBController::getInstance();
     }
     
+    public function getParentDetails ($id){
+        $query = "SELECT * FROM parent WHERE ParentID = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+         $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        
+        if ($totalrows == 0){
+            return NULL;
+        }
+        else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+    }
+    
     public function select($query){
         $stmt = $this->instance->con->prepare($query);
         $stmt->execute();
@@ -242,6 +259,56 @@ class ParentDB{
         }
     }
     
+    public function forgotPassword(){
+        $query = "SELECT * FROM parent WHERE ParentEmail = ?, ParentName = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $parentEmail, PDO::PARAM_STR);
+        $stmt->bindParam(2, $parentName, PDO::PARAM_STR);
+        $stmt->execute();
+        if($totalrows == 0){
+            return false;
+        }else{
+            return $totalrows;
+        }
+    }
     
+    public function resetPassword($email, $password){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->update("parent", array("Password" => \CustomSQLEnum::BIND_QUESTIONMARK))
+                ->where("ParentEmail", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $password, PDO::PARAM_STR);
+        $stmt->bindParam(2, $email, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    public function detailsWithEmail($email){
+        $builder = new MySQLQueryBuilder();
+        $query = $builder->select(array("parent"), array("*"))
+                ->where("ParentEmail", \CustomSQLEnum::BIND_QUESTIONMARK)
+                ->query();
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $email, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows==0){
+            return NULL;
+        }else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $results = $stmt->fetchAll();
+            $row = $results[0];
+            $result = new Parents($row["ParentID"],$row["ParentName"],$row["ParentGender"],$row["ParentBirth"],$row["ParentEmail"],$row["ParentPhoneNo"],$row["ParentIcNo"],$row["ParentType"],$row["AddressID"],$row["Password"]);
+            $resultList = $result;
+            return $resultList;
+        }
+    }
 }
 

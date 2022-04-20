@@ -29,31 +29,41 @@ if (!empty($_GET["key"])) {
             $results = $facade->getAttendanceRecordDate($date);
             $attendanceListData = array();
             $count = 0;
-            foreach($results as $row){
+            foreach ($results as $row) {
                 $attendanceData = array("AttendanceID" => $row["AttendanceID"], "ChildID" => $row["ChildID"], "Child Temperature" => $row["ChildTemperature"], "AttendingDate" => $row["AttendingDate"]);
                 $attendanceListData[] = $attendanceData;
                 $count++;
             }
-            $output[] = array("Status" => "Successful", "Attendance List" => $attendanceListData, "TotalRecords" => $count);
-            $response = json_encode($output, JSON_PRETTY_PRINT);
-            sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
-            
-        }
-        else if (!empty($_GET["childname"])) {
+
+            if (empty($attendanceListData)) {
+                $output[] = array("Status" => "Invalid", "AttendanceList" => "No valid attendance list found", "TotalRecords" => $count);
+                $response = json_encode($output, JSON_PRETTY_PRINT);
+                sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
+            } else {
+                $output[] = array("Status" => "Successful", "AttendanceList" => $attendanceListData, "TotalRecords" => $count);
+                $response = json_encode($output, JSON_PRETTY_PRINT);
+                sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
+            }
+        } else if (!empty($_GET["childname"])) {
             $childName = antiExploit($_GET["childname"]);
             $results = $facade->getAttendanceRecords($childName);
             $attendanceListData = array();
             $count = 0;
-            foreach($results as $row){
+            foreach ($results as $row) {
                 $attendanceData = array("AttendanceID" => $row["AttendanceID"], "ChildID" => $row["ChildID"], "Child Temperature" => $row["ChildTemperature"], "AttendingDate" => $row["AttendingDate"]);
                 $attendanceListData[] = $attendanceData;
                 $count++;
             }
-            $output[] = array("Status" => "Successful", "Attendance List" => $attendanceListData, "TotalRecords" => $count);
-            $response = json_encode($output, JSON_PRETTY_PRINT);
-            sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
-        }
-        else {
+            if (empty($attendanceListData)) {
+                $output[] = array("Status" => "Invalid", "AttendanceList" => "No valid attendance list found", "TotalRecords" => $count);
+                $response = json_encode($output, JSON_PRETTY_PRINT);
+                sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
+            } else {
+                $output[] = array("Status" => "Successful", "AttendanceList" => $attendanceListData, "TotalRecords" => $count);
+                $response = json_encode($output, JSON_PRETTY_PRINT);
+                sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
+            }
+        } else {
             $results = $facade->selectAllAttendanceRecord();
             $count = $facade->getTotalAttendanceRecord();
             $attendanceListData = array();
@@ -61,9 +71,15 @@ if (!empty($_GET["key"])) {
                 $attendanceData = array("AttendanceID" => $row["AttendanceID"], "ChildID" => $row["ChildID"], "Child Temperature" => $row["ChildTemperature"], "AttendingDate" => $row["AttendingDate"]);
                 $attendanceListData[] = $attendanceData;
             }
-            $output[] = array("Status" => "Successful", "Attendance List" => $attendanceListData, "TotalRecords" => $count);
-            $response = json_encode($output, JSON_PRETTY_PRINT);
-            sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
+            if (empty($attendanceListData)) {
+                $output[] = array("Status" => "Invalid", "AttendanceList" => "No valid attendance list found", "TotalRecords" => $count);
+                $response = json_encode($output, JSON_PRETTY_PRINT);
+                sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
+            } else {
+                $output[] = array("Status" => "Successful", "AttendanceList" => $attendanceListData, "TotalRecords" => $count);
+                $response = json_encode($output, JSON_PRETTY_PRINT);
+                sendOutput($response, array('Content-Type: application/json', 'HTTP/1.1 200 OK'));
+            }
         }
     }
 } else {
@@ -77,10 +93,6 @@ function antiExploit($str) {
     $str = stripcslashes($str);
     $str = htmlspecialchars($str);
     return $str;
-}
-
-function printResponses() {
-    
 }
 
 function sendOutput($data, $httpHeaders) {

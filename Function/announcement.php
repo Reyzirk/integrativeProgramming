@@ -10,7 +10,7 @@
  * 
  * @author Oon Kheng Huang
  */
-$parentID = $_SESSION["parentID"]; //++++++++++++++++++++++++++to be changed to session
+$parentID = $_SESSION["parentID"];
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AnnouncementDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/ReadStatus.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Announcement.php";
@@ -22,10 +22,12 @@ $searchClick = false;
 
 if (empty($_POST["inputSearch"])) {
     $search = "";
+    $storedValue["search"] = "";
 } else {
     //*******************************************>>>Client Side API Call<<<*********************************************
-    
+
     $search = $_POST["inputSearch"];
+    $storedValue["search"] = $_POST["inputSearch"];
     $url = "http://localhost/integrativeProgramming/Function/KhengHuangAPI/api.php?search=" . urlencode($search);
     $client = curl_init($url);
     curl_setopt($client, CURLOPT_RETURNTRANSFER, true);
@@ -35,12 +37,14 @@ if (empty($_POST["inputSearch"])) {
 
     if (!empty($result) && $result["status_message"] == "Result Found") {
         $temp = array();
-        for($i=0; $i < count(array($result["results"])); $i++) {
-            foreach($result["results"][$i] as $name => $value){
+        $i = 0;
+        foreach ($result["results"] as $row) {
+            foreach ($result["results"][$i] as $name => $value) {
                 $temp[$name] = $value;
             }
-            $results[] = new Announcement($temp["announceID"], $temp["instructorID"], $temp["title"], $temp["desc"], 
+            $results[] = new Announcement($temp["announceID"], $temp["instructorID"], $temp["title"], $temp["desc"],
                     $temp["cat"], $temp["date"], $temp["pin"], $temp["allowC"]);
+            $i++;
         }
     }
 
@@ -87,20 +91,20 @@ function convertCatToWord($cat) {
             break;
     }
 }
+
 function callLog() {
     if (!empty($_SESSION["successUpdate"])) {
-
-        
         ?>
         <script>
-            setTimeout(function (){
+            setTimeout(function () {
                 Toast.fire({
                     icon: 'success',
                     html: '<b>Sucessful</b><br/>Update the user profile.'
                 })
-            },1500);
+            }, 1500);
         </script>
         <?php
+
         unset($_SESSION["successUpdate"]);
     }
 }

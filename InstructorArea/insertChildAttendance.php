@@ -2,7 +2,7 @@
 include '../Function/load.php';
 $pageName = basename(__FILE__);
 include 'Function/insertChildAttendance.php';
-//Author: Poh Choo Meng
+//Author: Ng Kar Kai
 ?>
 <!DOCTYPE html>
 <!--

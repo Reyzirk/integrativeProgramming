@@ -9,6 +9,8 @@
  * @author Oon Kheng Huang
  */
 
+$instructorID = $_SESSION["instructorID"];
+
 if (empty($_GET["id"])) {
     $_SESSION["errorLog"] = "noid";
     header('HTTP/1.1 307 Temporary Redirect');
@@ -16,6 +18,8 @@ if (empty($_GET["id"])) {
 }
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Announcement.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AnnouncementDB.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Parents.php";
+require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/ParentDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Attachment.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/AttachmentDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/InstructorDB.php";

@@ -40,8 +40,6 @@ class DBController {
         return self::$dbConnection;
     }
     public static function closeConnection(){
-        //self::closeDB();
-        //$this->con = null;
         self::$dbConnection = NULL;
     }
     public function __get($name) {
