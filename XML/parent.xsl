@@ -36,6 +36,9 @@
             <xsl:for-each select="parentType">     
                 <tr>
                     <td>
+                        <xsl:value-of select="position()"/>
+                    </td>
+                    <td>
                         <xsl:value-of select="type"/>
                     </td>
                     <td>
