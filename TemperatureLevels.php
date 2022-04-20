@@ -56,6 +56,18 @@ Web Application is under GNU General Public License v3.0
                                     <br/>
                                 </span>
                             <?php }
+                            else{
+                                ?>
+                                    <span style="font-size: 15pt">
+                                    <b>Code: </b>No matching criteria found.
+                                    <br/>
+                                    <b>Description: </b>No matching criteria found.
+                                    <br/>
+                                    <hr/>
+                                    <br/>
+                                </span>
+                                    <?php
+                            }
                             ?>
                         </div>
                     </div>
