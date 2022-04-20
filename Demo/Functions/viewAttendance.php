@@ -19,7 +19,8 @@ if ($btnClicked == true) {
     printJsonResults($jsonStr);
 } else {
     $apiKey = "d61a42d239989eb9df075a70b5ad0e1435f7b186";
-    $page = file_get_contents("http://localhost/integrativeProgramming/KarKaiAPI/ReadAttendance.php?key=$apiKey");
+    //$page = file_get_contents("http://localhost/integrativeProgramming/KarKaiAPI/ReadAttendance.php?key=$apiKey");
+    $page = file_get_contents("http://localhost/IntegrativeProgramming/integrativeProgramming/KarKaiAPI/ReadAttendance.php?key=$apiKey");
     $jsonStr = json_decode($page)[0];
     
     printJsonResults($jsonStr);
