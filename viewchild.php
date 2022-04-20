@@ -8,9 +8,9 @@ Web Application is under GNU General Public License v3.0
 -->
 <?php
 #Page Languages
-$lang_title = "View existing homework";
-$lang_description = "View an existing homework.";
-$lang_legendTitle = "Homework Details";
+$lang_title = "View Child";
+$lang_description = "View child details";
+$lang_legendTitle = "Child Details";
 ?>
 <html>
     <head>

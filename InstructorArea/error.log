@@ -26,3 +26,6 @@
 [2022-04-20 22:50:07] [8]Undefined index: parentPhoneNo | Fatal error on line 58 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\instructorProfile.php 
 [2022-04-20 22:50:27] [8]Undefined index: parentEmail | Fatal error on line 47 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\instructorProfile.php 
 [2022-04-20 22:50:27] [8]Undefined index: parentPhoneNo | Fatal error on line 58 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\instructorProfile.php 
+[2022-04-20 23:00:39] [8]Undefined variable: id | Fatal error on line 50 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\viewChildDetails.php 
+[2022-04-20 23:00:44] [8]Undefined variable: id | Fatal error on line 50 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\viewChildDetails.php 
+[2022-04-20 23:00:51] [8]Undefined variable: successMsg | Fatal error on line 59 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\grades.php 
