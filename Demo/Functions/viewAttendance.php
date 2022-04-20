@@ -8,6 +8,7 @@
 //Author: Ng Kar Kai
 require_once str_replace("InstructorArea", "", str_replace("Demo", "", dirname(__DIR__))) . "/Objects/Attendance.php";
 
+    $apiKey = "d61a42d239989eb9df075a70b5ad0e1435f7b186";
 //print_r($childName);
 if ($btnClicked == true) {
     $apiKey = "d61a42d239989eb9df075a70b5ad0e1435f7b186";

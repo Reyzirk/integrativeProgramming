@@ -207,7 +207,7 @@ $LoginID = $_SESSION["instructorID"];
                                                                     foreach ($commentList as $row) {
                                                                         $userID = $row->userID;
                                                                         if ($userID[0] == "I") {
-                                                                            $instructor = $instructDB->details($userID);
+                                                                            $instructor = $instructorDB->details($userID);
                                                                             $commentName = $instructor->name . " (Instructor)";
                                                                         }else{//else Parent+++++++++++++++++++++++++++++++++++++++++To be added after parent database created
                                                                             $parents = $parentDB->details($userID);
