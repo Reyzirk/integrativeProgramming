@@ -50,7 +50,7 @@ if(isset($_POST["formDetect"])){
                 if($instructorDB->updatePassword($instructorID, $newPass)){
                     $_SESSION["modifyLog"] = "changepassword";
                     header('HTTP/1.1 307 Temporary Redirect');
-                    header('Location: parent.php');
+                    header('Location: instructorProfile.php');
                 }else{
                     $_SESSION["errorLog"] = "sqlerror";
                 }

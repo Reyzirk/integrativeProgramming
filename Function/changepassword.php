@@ -51,7 +51,7 @@ if(isset($_POST["formDetect"])){
                 if($parentDB->updatePassword($parentID, password_hash($newPass))){
                     $_SESSION["modifyLog"] = "changepassword";
                     header('HTTP/1.1 307 Temporary Redirect');
-                    header('Location: parent.php'); //<-----------------------------------Reminder:change to My Account page
+                    header('Location: profile.php'); //<-----------------------------------Reminder:change to My Account page
                 }else{
                     $_SESSION["errorLog"] = "sqlerror";
                 }
