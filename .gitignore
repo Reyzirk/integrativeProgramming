@@ -2,3 +2,4 @@
 *.log
 test.php
 /vendor/
+error.log
