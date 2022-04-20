@@ -17,7 +17,7 @@
     <xsl:template match="/">
         <html>
             <head>
-                <title>Parent Gender</title>
+                <title>Parent Type</title>
             </head>
             <body>
                 <xsl:apply-templates/>
@@ -28,14 +28,15 @@
     <xsl:template match="parent">
         <table align="center" class="table table-hover">
             <tr>
-                <th>Name</th>
+                <th>No </th>
+                <th>Type</th>
                 <th>Short Form</th>
                 <th>Description</th>
             </tr>
-            <xsl:for-each select="gender">     
+            <xsl:for-each select="parentType">     
                 <tr>
                     <td>
-                        <xsl:value-of select="name"/>
+                        <xsl:value-of select="type"/>
                     </td>
                     <td>
                         <xsl:value-of select="shortForm"/>

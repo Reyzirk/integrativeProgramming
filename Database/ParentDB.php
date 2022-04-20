@@ -22,6 +22,23 @@ class ParentDB{
         $this->instance = DBController::getInstance();
     }
     
+    public function getParentDetails ($id){
+        $query = "SELECT * FROM parent WHERE ParentID = ?";
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $id, PDO::PARAM_STR);
+         $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        
+        if ($totalrows == 0){
+            return NULL;
+        }
+        else{
+            $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
+            return $result;
+        }
+    }
+    
     public function select($query){
         $stmt = $this->instance->con->prepare($query);
         $stmt->execute();

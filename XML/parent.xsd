@@ -14,16 +14,16 @@ Web Application is under GNU General Public License v3.0
     <xs:element name="parent">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="gender" type="genderType" maxOccurs="unbounded" />
+                <xs:element name="parentType" type="parentTypes" maxOccurs="unbounded" />
             </xs:sequence>
         </xs:complexType>
     </xs:element>
-    <xs:complexType name="genderType">
+    <xs:complexType name="parentTypes">
         <xs:sequence>
-            <xs:element name="name" type="xs:string" />
+            <xs:element name="type" type="xs:string" />
             <xs:element name="shortForm" type="xs:string" />
             <xs:element name="description" type="xs:string" />           
         </xs:sequence>
-        <xs:attribute name="genderID" type="xs:string" use="required" />
+        <xs:attribute name="pType" type="xs:string" use="required" />
     </xs:complexType>
 </xs:schema>

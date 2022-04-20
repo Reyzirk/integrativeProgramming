@@ -11,14 +11,14 @@ require_once str_replace("InstructorArea", "", str_replace("Demo", "", dirname(_
 //print_r($childName);
 if ($btnClicked == true) {
     $apiKey = "d61a42d239989eb9df075a70b5ad0e1435f7b186";
-    $page = file_get_contents("http://localhost/IntegrativeProgramming/integrativeProgramming/KarKaiAPI/ReadAttendance.php?key=$apiKey&childname=$childName");
+    $page = file_get_contents("http://localhost/integrativeProgramming/KarKaiAPI/ReadAttendance.php?key=$apiKey&childname=$childName");
     $jsonStr = json_decode($page)[0];
 
     //print_r($jsonStr);
     printJsonResults($jsonStr);
 } else {
     $apiKey = "d61a42d239989eb9df075a70b5ad0e1435f7b186";
-    $page = file_get_contents("http://localhost/IntegrativeProgramming/integrativeProgramming/KarKaiAPI/ReadAttendance.php?key=$apiKey");
+    $page = file_get_contents("http://localhost/integrativeProgramming/KarKaiAPI/ReadAttendance.php?key=$apiKey");
     $jsonStr = json_decode($page)[0];
     
     printJsonResults($jsonStr);

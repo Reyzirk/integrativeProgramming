@@ -11,16 +11,22 @@ Web Application is under GNU General Public License v3.0
 <?xml-stylesheet type="text/xsl" href="parent.xsl"?>
 
 <parent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="parent.xsd">
-    <gender genderID="M">
-        <name>Male</name>
-        <shortForm>M</shortForm>
-        <description>Parent's gender is Male.</description>
-    </gender>
-    
-    <gender genderID="F">
-        <name>Female</name>
+    <parentType pType = "Father">
+        <type>Father</type>
         <shortForm>F</shortForm>
-        <description>Parent's gender is Female.</description>
-    </gender>
+        <description>Children's Father. Male.</description>
+    </parentType>
+    
+    <parentType pType = "Mother">
+        <type>Mother</type>
+        <shortForm>M</shortForm>
+        <description>Children's Mother. Female.</description>
+    </parentType>
+    
+    <parentType pType = "Guardian">
+        <type>Guardian</type>
+        <shortForm>G</shortForm>
+        <description>Children's Guardian. Can be male or female..</description>
+    </parentType>
    
 </parent>
