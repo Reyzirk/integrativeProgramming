@@ -22,5 +22,5 @@ function callErrorLogforError($errNo, $errstr, $errfile, $errline){
     header('HTTP/1.1 307 Temporary Redirect');
     header('Location: index.php');
 }
-//set_exception_handler('callErrorLog');
-//set_error_handler('callErrorLogforError');
+set_exception_handler('callErrorLog');
+set_error_handler('callErrorLogforError');
