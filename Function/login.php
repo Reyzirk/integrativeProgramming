@@ -49,7 +49,7 @@ $password = "";
             
             $db = new ParentDB();
             $parent = $db->login($instructorEmail);
-            if ($db!=null){
+            if ($parent!=null){
                 if (password_verify($password, $parent->password)){
                     $_SESSION["parentID"] = $parent->userID;
                     $_SESSION["parentName"] = $parent->name;
@@ -57,10 +57,11 @@ $password = "";
                 }else{
                     $login_err = "Invalid email or password.";
                 }
-                
+
             }else{
                 $login_err = "Invalid email or password.";
             }
+            
             
             
         }else

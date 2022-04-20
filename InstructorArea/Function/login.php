@@ -49,7 +49,7 @@ $password = "";
             
             $db = new InstructorDB();
             $instructor = $db->checkLogin($instructorEmail, $password);
-            if ($db!=null){
+            if ($instructor!=null){
                 $_SESSION["instructorID"] = $instructor->userID;
                 $_SESSION["instructorName"] = $instructor->name;
                 header("location: announcement.php");

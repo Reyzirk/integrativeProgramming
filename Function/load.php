@@ -10,6 +10,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
 include_once 'ini_load.php';
 require_once str_replace("InstructorArea", "", str_replace("Demo", "", str_replace("Function", "", dirname(__DIR__))))."/Database/ParentDB.php";
 require_once str_replace("InstructorArea", "", str_replace("Demo", "", str_replace("Function", "", dirname(__DIR__))))."/Database/InstructorDB.php";
@@ -22,7 +23,6 @@ try{
 } catch (PDOException $ex) {
     callErrorLog($ex);
 }
-
 //For PHP version that below 8.0
 function custom_str_contains2(string $haystack, string $needle): bool {
     return '' === $needle || false !== strpos($haystack, $needle);

@@ -48,12 +48,12 @@
                                     <!-- Stack Trace Message -->
                                     <div class="card-header" id="headingTwo">
                                         <h5 class="mb-0">
-                                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            <button type="button" class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                             Stack Trace
                                             </button>
                                         </h5>
                                     </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
                                         <div class="card-body">
                                             <?php echo preg_replace("/\n/", '<br>', $ex->getTraceAsString()); ?>
                                         </div>

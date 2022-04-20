@@ -1,4 +1,5 @@
 <?php
+require_once str_replace("InstructorArea", "", str_replace("AJAX", "", dirname(__DIR__))) . '/Database/InstructorDB.php';
 if(!isset($_SESSION["instructorID"])){
     header('HTTP/1.1 307 Temporary Redirect');
     header('Location: login.php');

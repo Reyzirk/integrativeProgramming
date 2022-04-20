@@ -21,5 +21,5 @@ function callErrorLog($errNo, $errstr, $errfile, $errline){
     error_log("[".date("Y-m-d H:i:s")."] [$errNo]$errstr | Fatal error on line $errline in file $errfile \n", 3, "error.log");
     header("HTTP/1.1 500 Internal Server Error");
 }
-//set_exception_handler('callExceptionLog');
-//set_error_handler('callErrorLog');
+set_exception_handler('callExceptionLog');
+set_error_handler('callErrorLog');
