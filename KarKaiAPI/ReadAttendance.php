@@ -95,10 +95,6 @@ function antiExploit($str) {
     return $str;
 }
 
-function printResponses() {
-    
-}
-
 function sendOutput($data, $httpHeaders) {
     header_remove('Set-Cookie');
 
