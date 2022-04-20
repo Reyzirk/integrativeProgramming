@@ -265,22 +265,9 @@ class ParentDB{
     public function checkEmail($email){
         $query = "SELECT ParentEmail FROM parent WHERE ParentEmail = ?";
         $stmt = $this->instance->con->prepare($query);
-        $stmt->bindParam(1, $parentEmail, PDO::PARAM_STR);
+        $stmt->bindParam(1, $email, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
-        if($totalrows == 0){
-            return false;
-        }else{
-            return $totalrows;
-        }
-    }
-    
-    public function forgotPassword(){
-        $query = "SELECT * FROM parent WHERE ParentEmail = ?, ParentName = ?";
-        $stmt = $this->instance->con->prepare($query);
-        $stmt->bindParam(1, $parentEmail, PDO::PARAM_STR);
-        $stmt->bindParam(2, $parentName, PDO::PARAM_STR);
-        $stmt->execute();
         if($totalrows == 0){
             return false;
         }else{

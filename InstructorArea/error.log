@@ -29,3 +29,10 @@
 [2022-04-20 23:00:39] [8]Undefined variable: id | Fatal error on line 50 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\viewChildDetails.php 
 [2022-04-20 23:00:44] [8]Undefined variable: id | Fatal error on line 50 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\viewChildDetails.php 
 [2022-04-20 23:00:51] [8]Undefined variable: successMsg | Fatal error on line 59 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\grades.php 
+[2022-04-20 23:16:28] [8]Undefined variable: successMsg | Fatal error on line 54 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\courses.php 
+[2022-04-20 23:39:17] [8]Undefined variable: successMsg | Fatal error on line 54 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\courses.php 
+[2022-04-21 00:20:04] [8]Undefined index: parentGender | Fatal error on line 21 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\addParent.php 
+[2022-04-21 00:20:46] [8]Undefined index: parentGender | Fatal error on line 21 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\addParent.php 
+[2022-04-21 00:22:03] [8]Undefined index: parentGender | Fatal error on line 21 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\addParent.php 
+[2022-04-21 00:22:38] [8]Undefined index: parentGender | Fatal error on line 21 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\addParent.php 
+[2022-04-21 01:19:16] [8]Undefined variable: db | Fatal error on line 61 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\addParent.php 

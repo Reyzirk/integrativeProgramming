@@ -21,11 +21,8 @@
         </div>
       </div>
       <div class="social-links text-center text-md-right pt-3 pt-md-0">
-        <a href="#" class="twitter"><i class="fa-brands fa-twitter"></i></a>
         <a href="#" class="facebook"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="#" class="instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" class="youtube"><i class="fa-brands fa-youtube"></i></a>
-        <a href="#" class="linkedin"><i class="fa-brands fa-linkedin-in"></i></a>
       </div>
     </div>
   </footer><!-- End Footer -->
