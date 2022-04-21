@@ -166,3 +166,5 @@ function eliminateExploit($str) {
     $str = htmlspecialchars($str);
     return $str;
 }
+
+?>

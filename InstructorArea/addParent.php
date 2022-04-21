@@ -37,6 +37,7 @@ include 'Function/addParent.php';
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
                         <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="parent.php">Parent</a></li>
                         <li class="breadcrumb-item active">Add Parent</li>
                     </ol>
 

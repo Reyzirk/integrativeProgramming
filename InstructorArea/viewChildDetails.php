@@ -1,5 +1,6 @@
 <?php
 include '../Function/load.php';
+include "Function/viewChild.php";
 $pageName = basename(__FILE__);
 //include './Function/viewChild.php';
 ?>
@@ -37,7 +38,7 @@ $lang_refresh_btn = "Refresh";
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
                         <li class="breadcrumb-item"><a href="parent.php">Parent</a></li>
                         <li class="breadcrumb-item active">View Child Details</li>
                     </ol>
@@ -72,7 +73,7 @@ $lang_refresh_btn = "Refresh";
                                     </thead>
                                     <tbody id="tableContent">
                                         <?php
-                                        include "Function/viewChild.php";
+                                        displayList();
                                         ?>
                                     </tbody>
                                 </table>

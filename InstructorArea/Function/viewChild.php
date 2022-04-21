@@ -26,6 +26,8 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Ins
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Parents.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/ChildDB.php";
 
+function displayList(){
+    
 $childDB = new ChildDB();
 $parentDB = new ParentDB();
 $id = eliminateExploit2($_GET["id"]);
@@ -49,15 +51,14 @@ if (empty($getChild)) {
             <td><?php echo $child["BirthDate"]?></td>
             <td><?php echo $child["ChildICNo"]?></td>
             <td><?php echo $child["Status"]?></td>
-            <td><button onclick = "editChildStatus.php?param=1" 
-                        type="button" class="btn btn-primary">Edit Status</button></td>
+            <td><button  type="button" class="btn btn-primary" onclick="window.location.href = 'editChildStatus.php?childID=<?php echo $child["ChildID"]?>'" >Edit Status</button></td>
         </tr>
-
+                 
         <?php
         }
     }
 }
-
+}
 
 function eliminateExploit2($str) {
     $str = trim($str);

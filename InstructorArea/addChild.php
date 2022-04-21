@@ -21,6 +21,12 @@ Web Application is under GNU General Public License v3.0
         <?php
         include './Components/headmeta.php';
         ?>
+        <style>
+            .required{
+                color:red;
+                font-size:12pt;
+            }
+        </style>
     </head>
     <body>
         <div id="wrapper">
@@ -29,7 +35,8 @@ Web Application is under GNU General Public License v3.0
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="parent.php">Parent</a></li>
                         <li class="breadcrumb-item active">Add Child</li>
                     </ol>
 
@@ -38,13 +45,14 @@ Web Application is under GNU General Public License v3.0
                             <div class="col-md">
                                 <form method="POST" id="formSubmit" name="formSubmit" enctype="multipart/form-data">
                                     <h1 class="display-4">Add Child</h1>
-                                    <p class="lead">Add a new child<span class="requiredF">* Required Fields</span></p>
+                                    <p class="lead">Add a new child<span class="required">  * Required Fields</span></p>
                                     <hr class="my-3">
                                     <div class ="row">
                                         <div class="col-md">
                                             <label class="col-form-label">Enter Child's Name:<span class="required">*</span></label>
-                                            <input name = "childName" class="bg-white form-control" 
-                                                   type="text" placeholder="Enter child's name here."/>
+                                            <input name = "childName" class="bg-white form-control <?php echo empty($error["childName"]) ? "" : "is-invalid"; ?>" 
+                                                   type="text" placeholder="Enter child name here." value="<?php echo empty($storedValue["childName"])?"":$storedValue["childName"] ?>"/>
+                                            <span class="invalid-feedback"><?php echo empty($error["childName"]) ? "" : $error["childName"]; ?></span>
                                         </div>
                                     </div>
                                     <br>
@@ -52,8 +60,9 @@ Web Application is under GNU General Public License v3.0
                                         <div class="col-md">
                                             <label class="col-form-label">Enter Child Birthday:
                                                 <span class="required">*</span></label>
-                                            <input name = "childBirthDate" class="bg-white form-control" 
-                                                   type="date" placeholder="Enter Child birthday here."/>
+                                            <input name = "childBirthDate" class="bg-white form-control <?php echo empty($error["childBirthDate"]) ? "" : "is-invalid"; ?>" 
+                                                   type="date" placeholder="Enter child birthday here." value="<?php echo empty($storedValue["childBirthDate"])?"":$storedValue["childBirthDate"] ?>"/>
+                                            <span class="invalid-feedback"><?php echo empty($error["childBirthDate"]) ? "" : $error["childBirthDate"]; ?></span>
                                         </div>
                                     </div>
                                     <br/>
@@ -62,8 +71,9 @@ Web Application is under GNU General Public License v3.0
                                         <div class="col-md">
                                             <label class="col-form-label">Enter Child IC Number:
                                                 <span class="required">*</span></label>
-                                            <input name = "childIC" class="bg-white form-control" 
-                                                   type="text" placeholder="Enter Child IC numbers."/>
+                                            <input name = "childIC" class="bg-white form-control  <?php echo empty($error["childIC"]) ? "" : "is-invalid"; ?>" 
+                                                   type="text" placeholder="Enter child IC numbers." value="<?php echo empty($storedValue["childIC"])?"":$storedValue["childIC"]?>"/>
+                                            <span class="invalid-feedback"><?php echo empty($error["childIC"]) ? "" : $error["childIC"]; ?></span>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -73,9 +83,9 @@ Web Application is under GNU General Public License v3.0
                                                 <br>
                                                 <select class="form-select" name="childStatus" 
                                                         id="childStatus">
-                                                    <option value="Graduated">Graduated</option>
-                                                    <option value="Active">Active</option>
-                                                    <option value="Inactive">Inactive</option>
+                                                    <option value="Graduated" <?php echo empty($storedValue["childStatus"])?"":($storedValue["childStatus"]=="Graduated"?"selected":"")?>>Graduated</option>
+                                                    <option value="Active" <?php echo empty($storedValue["childStatus"])?"":($storedValue["childStatus"]=="Active"?"selected":"")?>>Active</option>
+                                                    <option value="Inactive" <?php echo empty($storedValue["childStatus"])?"":($storedValue["childStatus"]=="Inactive"?"selected":"")?>>Inactive</option>
                                                 </select>
                                             </div>
                                         </div>

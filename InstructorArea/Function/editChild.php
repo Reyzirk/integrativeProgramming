@@ -14,64 +14,27 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Objects/Chi
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/ChildDB.php";
 require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/ChildClassDB.php";
 
-if (empty($_GET["id"])){
+if (empty($_GET["childID"])){
     $_SESSION["errorLog"] = "noid";
     header('HTTP/1.1 307 Temporary Redirect');
-    header('Location: child.php');
+    header('Location: parent.php');
 } else{
-    $id = $_GET["aID"];
+    $id = $_GET["childID"];
     $childDB = new ChildDB();
-
-    if (!empty($getChild)) {
+    $getChild = $childDB->getChildDetails($id);
+    
+    if ($getChild!=null) {
         $storedValue["childID"] = $getChild->childID;
-        $storedValue["parentID"] = $getParent->parentID;
-        $storedValue["childName"] = $getChild->childName;
-        $storedValue["childBirthDate"] = $getChild->childBirthDate;
-        $storedValue["childIcNo"] = $getChild->childIcNo;
-        $storedValue["childStatus"] = $getChild->childStatus;
-
+        $storedValue["parentID"] = $getChild->parentID;
+        $storedValue["childStatus"] = $getChild->status;
     } else {
         $_SESSION["errorLog"] = "noid";
-        header('HTTP/1.1 307 Temporary Redirect');
         header('Location: parent.php');
     }
 }
 
-if (isset($_POST["formDetect"])){
-//    $inputName = "nameC";
-//    $inputTitle = "Child Name";
-//    if (empty($_POST[$inputName])) {
-//        $error[$inputName] = "<b>$inputTitle</b> cannot be empty.";
-//    } else {
-//        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
-//        if (strlen($storedValue[$inputName]) > 100) {
-//            $error[$inputName] = "<b>$inputTitle</b> cannot contain more than 50 characters";
-//        }
-//    }
-//    
-//    $inputName = "birthDateC";
-//    $inputTitle = "Child Birth Date";
-//    if (empty($_POST[$inputName])){
-//        $error[$inputName] = "<b>$inputTitle</b> cannot empty.";
-//    }else{
-//        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
-//        if (DateTime::createFromFormat("Y-m-d", $storedValue[$inputName])==false){
-//            $error[$inputName] = "<b>$inputTitle</b> invalid type.";
-//        }
-//    }
-//    
-//    $inputName = "icC";
-//    $inputTitle = "Child IC No";
-//    if (empty($_POST[$inputName])) {
-//        $error[$inputName] = "<b>$inputTitle</b> cannot be empty.";
-//    } else {
-//        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
-//        if (strlen($storedValue[$inputName]) > 13) {
-//            $error[$inputName] = "<b>$inputTitle</b> cannot contain more than 12 digits";
-//        }
-//    }
-    
-    $inputName = "statusC";
+if (isset($_POST["submitBtn"])){
+    $inputName = "childStatus";
     $inputTitle = "Child Status";
     if (empty($_POST[$inputName])) {
         $error[$inputName] = "<b>$inputTitle</b> is not selected";
@@ -80,19 +43,16 @@ if (isset($_POST["formDetect"])){
     }
     
     if (empty($error)){
-        $newChild = new Child(uniqid("E", true),$storedValue["nameC"],$storedValue["birthDateC"],
-                $storedValue["icC"],$storedValue["statusC"]);
-        
         $childDB = new ChildDB();
-        if ($childDB->insert($newChild)){
-            $_SESSION["modifyLog"] = "addChils";
+        $status = $storedValue[$inputName];
+        if ($childDB->updateStatus($id,$status)){
+            $_SESSION["modifyLog"] = "addChild";
             header('HTTP/1.1 307 Temporary Redirect');
-            header('Location: child.php');
+            header('Location: parent.php');
         }else{
             $_SESSION["errorLog"] = "sqlerror";
         }
     }
-    
 }
 
 function eliminateExploit($str) {
