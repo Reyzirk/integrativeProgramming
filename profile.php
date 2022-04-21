@@ -112,7 +112,7 @@ Web Application is under GNU General Public License v3.0
                                     </select>
 
                                     <br><label>Post Code</label>
-                                    <input type="text" name="PostCode" class="form-control <?php echo (!empty($PostCode_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo!isset($postCode) ? "" : $postCode; ?>"></input>
+                                    <input type="text" name="PostCode" class="form-control <?php echo (!empty($PostCode_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo!isset($postCode) ? "" : $postCode; ?>" maxlength="5"></input>
 
                                 </div>
                                 <div class="form-group">
