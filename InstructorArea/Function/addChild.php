@@ -16,7 +16,7 @@ require_once str_replace("InstructorArea", "", dirname(__DIR__)) . "/Database/Ch
 
 
 if (isset($_POST["submitBtn"])){
-    
+    $submitButton = true;
     //Put empty validations
     $parentID = eliminateExploit($_GET["parentID"]);
     $childID = "C".generateRandomString();
@@ -25,11 +25,41 @@ if (isset($_POST["submitBtn"])){
     $childIC = eliminateExploit($_POST["childIC"]);
     $childStatus = eliminateExploit($_POST["childStatus"]);
     
-    $child = new Child($childID, $parentID, $childName, $childBirthdate, $childIC, $childStatus);
-    $childDB = new ChildDB();
+    if (empty($childName)) {
+        $error["childName"] = "Please enter child name";
+    }else{
+        $storedValue["childName"] = $childName;
+    }
     
-    if ($childDB->insertChildRecords($child) == true){
-        header("location:parent.php");
+     if (empty($childBirthDate)) {
+        $error["childBirthDate"] = "Please select child birthday";
+    }else{
+        $storedValue["childBirthDate"] = $childBirthDate;
+    }
+    
+    if (empty($childIC)) {
+        $error["childIC"] = "Please enter child IC number";
+    }else if(!preg_match('/[0-9]{6}-[0-9]{2}-[0-9]{4}/',$_POST["childIC"] )){
+        $error["childIC"] = "IC number format should be xxxxxx-xx-xxxx";
+        $storedValue["childIC"] = $childIC;
+    }else{
+        $storedValue["childIC"] = $childIC;
+    }
+    
+    if (empty($error)){
+        $child = new Child(
+                $childID,
+                $parentID,
+                $childName,
+                $childBirthDate,
+                $childIC,
+                $childStatus);
+        print_r($child);
+        $childDB = new ChildDB();
+        
+         if ($childDB->insertChildRecords($child) == true){
+            header("location:parent.php");
+        }
     }
 }
 

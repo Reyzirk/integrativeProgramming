@@ -1,8 +1,7 @@
 <?php
-include '../Function/load.php';$pageName = basename(__FILE__); 
-?>
-<?php
-include './Function/editChild.php';
+include '../Function/load.php';
+$pageName = basename(__FILE__); 
+include 'Function/editChild.php';
 ?>
 
 <!DOCTYPE html>
@@ -14,6 +13,7 @@ Web Application is under GNU General Public License v3.0
 
 @author Tang Khai Li
 -->
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -29,16 +29,17 @@ Web Application is under GNU General Public License v3.0
                 <div id="content">
                     <?php include 'Components/header.php' ?>
                     <ol class="breadcrumb shadow" id="breadcrumb">
-                        <li class="breadcrumb-item"><a href="dashboard.php">Home</a></li>
-                        <li class="breadcrumb-item active">Add Child</li>
+                        <li class="breadcrumb-item"><a href="announcement.php">Home</a></li>
+                        <li class="breadcrumb-item"><a href="viewChildDetails.php">View Child Details</a></li>
+                        <li class="breadcrumb-item active">Edit Child Status</li>
                     </ol>
 
                     <div class="container">
                         <div class="row">
                             <div class="col-md">
                                 <form method="POST" id="formSubmit" name="formSubmit" enctype="multipart/form-data">
-                                    <h1 class="display-4">Add Child</h1>
-                                    <p class="lead">Add a new child<span class="requiredF">* Required Fields</span></p>
+                                    <h1 class="display-4">Edit Child Status</h1>
+                                    <p class="lead">Edit Child Status<span class="required">* Required Fields</span></p>
                                     <hr class="my-3">
                                     <div class="row">
                                         <div class="col-md">

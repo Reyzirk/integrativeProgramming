@@ -22,15 +22,8 @@ Web Application is under GNU General Public License v3.0
         <div id="content">
             <div class="breadcrumbs shadow container">
                 <ol class="breadcrumb" id="breadcrumb">
-                    <li class="breadcrumb-item">
-                        <a href="attendance.php">Child</a>
-                    </li>
-                    <li class="breadcrumb-item">
-                        <a href="">Display Parent Types</a>
-                    </li>
-                    <li class="breadcrumb-item active">
-                        Temperature
-                    </li>
+                    <li class="breadcrumb-item"><a href="announcement.php">Announcement</a></li>
+                    <li class="breadcrumb-item active">Parent Types</li>
                 </ol>
             </div>
 
@@ -48,7 +41,6 @@ Web Application is under GNU General Public License v3.0
                                         <?php
                                     }
                                     $parent = new ParentXSLT("XML/parent.xml", "XML/parent.xsl");
-                                    //echo $temperature;
                                     ?>
                                 </div>
                             </div>

@@ -9,7 +9,30 @@
 ?>
 <html>
     <head>
-        <?php include 'Components/headmeta.php' ?>
+        <?php 
+    $author = "Ng Kar Kai, Oon Kheng Huang, Tang Khai Li, Fong Shu Ling, Poh Choo Meng";
+    $keywords = "Kindergarden, Education, Learning";
+    $fileName = pathinfo($_SERVER['PHP_SELF'],PATHINFO_BASENAME);
+
+    echo("
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <meta name='author' content='$author'>
+        <meta name='keywords' content='$keywords'>
+        <link rel='icon' type='image/x-icon' href='../images/favicon.png'>
+        <title>Error Exception | Instructor Section</title>
+        <link href='css/main.css' rel='stylesheet' type='text/css'/>
+        <link href='css/sb-admin-2.css' rel='stylesheet' type='text/css'/>
+        <link href='../css/sweetalert2.min.css' rel='stylesheet' type='text/css'/>
+        <script src='https://kit.fontawesome.com/3f628a0091.js' crossorigin='anonymous'></script>
+        <script src='../js/jquery-3.6.0.js' type='text/javascript'></script>
+        <script src='../js/sweetalert2.all.min.js' type='text/javascript'></script>
+        <script src='../js/ckeditor.js' type='text/javascript'></script>
+        <script src='../js/html2pdf.bundle.min.js' type='text/javascript'></script>
+        <script src='../js/jquery.table2excel.js' type='text/javascript'></script>
+        <script src='js/sb-admin-2.min.js' type='text/javascript'></script>
+            ");
+        ?>
     </head>
     <body>
         <div id="wrapper">

@@ -66,6 +66,22 @@ class ChildDB {
         }
     }
     
+    public function updateStatus($id, $status) {
+        $builder = new MySQLQueryBuilder();
+        $query = "UPDATE `child` SET `Status` = ? WHERE `child`.`ChildID` = ?";
+        
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $status, PDO::PARAM_STR);
+        $stmt->bindParam(2, $id, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
     public function validParent($id,$parentID): bool{
         $builder = new MySQLQueryBuilder();
         $query = $builder->select(array("child"), array("*"))

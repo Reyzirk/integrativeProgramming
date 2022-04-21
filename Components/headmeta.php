@@ -14,6 +14,7 @@ if(!isset($_SESSION["parentID"])){
         $_SESSION["parentName"] = $details->name;
     }
 }
+
 /*
  * ============================================
  * Copyright 2022 Omega International Junior School. All Right Reserved.
