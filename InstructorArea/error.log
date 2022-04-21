@@ -36,3 +36,5 @@
 [2022-04-21 00:22:03] [8]Undefined index: parentGender | Fatal error on line 21 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\addParent.php 
 [2022-04-21 00:22:38] [8]Undefined index: parentGender | Fatal error on line 21 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\addParent.php 
 [2022-04-21 01:19:16] [8]Undefined variable: db | Fatal error on line 61 in file C:\xampp\htdocs\integrativeProgramming\InstructorArea\Function\addParent.php 
+[2022-04-21 09:29:04] [8]Undefined index: instructorName | Fatal error on line 11 in file C:\xampp\htdocs\IPAssignment\InstructorArea\Components\header.php 
+[2022-04-21 10:34:36] [8]Undefined index: instructorName | Fatal error on line 11 in file C:\xampp\htdocs\IPAssignment\InstructorArea\Components\header.php 

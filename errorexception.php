@@ -9,7 +9,38 @@
 ?>
 <html>
     <head>
-        <?php include 'Components/headmeta.php' ?>
+        <?php
+        $author = "Ng Kar Kai, Oon Kheng Huang, Tang Khai Li, Fong Shu Ling, Poh Choo Meng";
+        $keywords = "Kindergarden, Education, Learning";
+        $fileName = pathinfo($_SERVER['PHP_SELF'], PATHINFO_BASENAME);
+        $companyName = $generalSection["companyName"];
+
+        echo("
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='author' content='$author'>
+    <meta name='keywords' content='$keywords'>
+    <title>Exception Occurs | $companyName</title>
+    <link href='css/sweetalert2.min.css' rel='stylesheet' type='text/css'/>
+    <script src='https://kit.fontawesome.com/3f628a0091.js' crossorigin='anonymous'></script>
+    <script src='js/jquery-3.6.0.js' type='text/javascript'></script>
+    <script src='js/sweetalert2.all.min.js' type='text/javascript'></script>
+    <script src='js/ckeditor.js' type='text/javascript'></script>
+    <script src='js/bootstrap.bundle.min.js' type='text/javascript'></script>
+        ");
+        ?>
+
+
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+        <!-- Vendor CSS Files -->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+        <script src="js/html2pdf.bundle.min.js" type='text/javascript'></script>
+        <script src="js/jquery.table2excel.js" type='text/javascript'></script>
     </head>
     <body>
         <div id="wrapper">
@@ -78,7 +109,7 @@
                         </h5>
                        <?php } ?>
                 </div>
-                <?php include "Components/footer.php";unset($_SESSION["exceptionerror"]); ?>
+                <?php unset($_SESSION["exceptionerror"]); ?>
             </div>
         </div>
     </body>
