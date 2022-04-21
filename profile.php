@@ -117,7 +117,7 @@ Web Application is under GNU General Public License v3.0
                                 </div>
                                 <div class="form-group">
                                     <br><label>Email</label>
-                                    <input type="text" name="parentEmail" readonly class="form-control <?php echo (!empty($parentEmail_err)) ? 'is-invalid' : ''; ?>" value = "<?php echo!isset($parentEmail) ? "" : $parentEmail; ?>">
+                                    <input type="text" name="parentEmail" readonly class="form-control" value = "<?php echo!isset($parentEmail) ? "" : $parentEmail; ?>">
                                 </div>   
                                 <br/>
                                 <center>
