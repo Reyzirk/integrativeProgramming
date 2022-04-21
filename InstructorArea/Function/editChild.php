@@ -38,38 +38,38 @@ if (empty($_GET["id"])){
 }
 
 if (isset($_POST["formDetect"])){
-    $inputName = "nameC";
-    $inputTitle = "Child Name";
-    if (empty($_POST[$inputName])) {
-        $error[$inputName] = "<b>$inputTitle</b> cannot be empty.";
-    } else {
-        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
-        if (strlen($storedValue[$inputName]) > 100) {
-            $error[$inputName] = "<b>$inputTitle</b> cannot contain more than 50 characters";
-        }
-    }
-    
-    $inputName = "birthDateC";
-    $inputTitle = "Child Birth Date";
-    if (empty($_POST[$inputName])){
-        $error[$inputName] = "<b>$inputTitle</b> cannot empty.";
-    }else{
-        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
-        if (DateTime::createFromFormat("Y-m-d", $storedValue[$inputName])==false){
-            $error[$inputName] = "<b>$inputTitle</b> invalid type.";
-        }
-    }
-    
-    $inputName = "icC";
-    $inputTitle = "Child IC No";
-    if (empty($_POST[$inputName])) {
-        $error[$inputName] = "<b>$inputTitle</b> cannot be empty.";
-    } else {
-        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
-        if (strlen($storedValue[$inputName]) > 13) {
-            $error[$inputName] = "<b>$inputTitle</b> cannot contain more than 12 digits";
-        }
-    }
+//    $inputName = "nameC";
+//    $inputTitle = "Child Name";
+//    if (empty($_POST[$inputName])) {
+//        $error[$inputName] = "<b>$inputTitle</b> cannot be empty.";
+//    } else {
+//        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
+//        if (strlen($storedValue[$inputName]) > 100) {
+//            $error[$inputName] = "<b>$inputTitle</b> cannot contain more than 50 characters";
+//        }
+//    }
+//    
+//    $inputName = "birthDateC";
+//    $inputTitle = "Child Birth Date";
+//    if (empty($_POST[$inputName])){
+//        $error[$inputName] = "<b>$inputTitle</b> cannot empty.";
+//    }else{
+//        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
+//        if (DateTime::createFromFormat("Y-m-d", $storedValue[$inputName])==false){
+//            $error[$inputName] = "<b>$inputTitle</b> invalid type.";
+//        }
+//    }
+//    
+//    $inputName = "icC";
+//    $inputTitle = "Child IC No";
+//    if (empty($_POST[$inputName])) {
+//        $error[$inputName] = "<b>$inputTitle</b> cannot be empty.";
+//    } else {
+//        $storedValue[$inputName] = eliminateExploit($_POST[$inputName]);
+//        if (strlen($storedValue[$inputName]) > 13) {
+//            $error[$inputName] = "<b>$inputTitle</b> cannot contain more than 12 digits";
+//        }
+//    }
     
     $inputName = "statusC";
     $inputTitle = "Child Status";

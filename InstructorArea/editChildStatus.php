@@ -1,7 +1,8 @@
 <?php
-include '../Function/load.php';
-$pageName = basename(__FILE__);
-include 'Function/addChild.php';
+include '../Function/load.php';$pageName = basename(__FILE__); 
+?>
+<?php
+include './Function/editChild.php';
 ?>
 
 <!DOCTYPE html>
@@ -13,11 +14,10 @@ Web Application is under GNU General Public License v3.0
 
 @author Tang Khai Li
 -->
-
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Child</title>
+        <title>Edit Child Status</title>
         <?php
         include './Components/headmeta.php';
         ?>
@@ -40,36 +40,10 @@ Web Application is under GNU General Public License v3.0
                                     <h1 class="display-4">Add Child</h1>
                                     <p class="lead">Add a new child<span class="requiredF">* Required Fields</span></p>
                                     <hr class="my-3">
-                                    <div class ="row">
-                                        <div class="col-md">
-                                            <label class="col-form-label">Enter Child's Name:<span class="required">*</span></label>
-                                            <input name = "childName" class="bg-white form-control" 
-                                                   type="text" placeholder="Enter child's name here."/>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="row">
-                                        <div class="col-md">
-                                            <label class="col-form-label">Enter Child Birthday:
-                                                <span class="required">*</span></label>
-                                            <input name = "childBirthDate" class="bg-white form-control" 
-                                                   type="date" placeholder="Enter Child birthday here."/>
-                                        </div>
-                                    </div>
-                                    <br/>
-                                    <div class="row">
-
-                                        <div class="col-md">
-                                            <label class="col-form-label">Enter Child IC Number:
-                                                <span class="required">*</span></label>
-                                            <input name = "childIC" class="bg-white form-control" 
-                                                   type="text" placeholder="Enter Child IC numbers."/>
-                                        </div>
-                                    </div>
                                     <div class="row">
                                         <div class="col-md">
                                             <div class="form-group">
-                                                <label for="childStatus" class="form-label mt-4">Select Child's Status:</label>
+                                                <label for="childStatus" class="form-label mt-4">Please Select Child's Status:</label>
                                                 <br>
                                                 <select class="form-select" name="childStatus" 
                                                         id="childStatus">

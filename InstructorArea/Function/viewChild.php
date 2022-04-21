@@ -49,7 +49,7 @@ if (empty($getChild)) {
             <td><?php echo $child["BirthDate"]?></td>
             <td><?php echo $child["ChildICNo"]?></td>
             <td><?php echo $child["Status"]?></td>
-            <td><button onclick = "" 
+            <td><button onclick = "editChildStatus.php?param=1" 
                         type="button" class="btn btn-primary">Edit Status</button></td>
         </tr>
 
