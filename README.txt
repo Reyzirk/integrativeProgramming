@@ -20,6 +20,8 @@ Libraries and APIs: BootStrap, JQuery, HTML2PDF, HTML2Excel, RichText Editor, AJ
 System Requirements:
  - Windows 7 (Minimum Windows 7) 
  - Internet Connection
+ - XAMPP installed
+ - Apache Netbeans 12 or above installed
  
 Browser Requirements: 
  - Any Chromium based browsers
@@ -27,6 +29,21 @@ Browser Requirements:
 Unsupported Browsers: 
  - Internet Explorer
  - Baidu
+ 
+ #####################################################
+ 		Installation Steps
+######################################################
+For those who downloaded the project as a .zip folder
+
+1. Download the .zip folder as a whole. 
+2. Search for the XAMPP folder on your C drive. (Usually on C:/xampp)
+3. Navigate to the htdocs folder in your XAMPP. (Usually C:/xampp/htdocs)
+4. Extract the .zip file and set the location of extraction to the htdocs folder as mentioned in Step (3). 
+5. Start your XAMPP and Apache Netbeans. 
+6. Proceed to Apache Netbeans -> File -> Open Project -> Select the extracted .zip file as mentioned in Step (4). 
+7. Right-click on the login.php file found under /Source Files/login.php and select Run. 
+8. Congratulations! The project is launched successfully!
+
 
 ######################################################
 		Parent-Side Login
@@ -47,6 +64,14 @@ Instructor Accounts
 	[Username]			[Password]
 -oonkh-pm19@student.tarc.edu.my		abc123
 -khailitang413@gmail.com		abcd1234
+
+
+###################################################
+		Clarifications
+###################################################
+
+1. The API demo web services are expected to be functional based on the filepath of your computer. 
+   Do change the respective filepaths within the demo to meet the location of the API file. 
 
 
 =============================================================================
