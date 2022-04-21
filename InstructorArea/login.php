@@ -65,12 +65,12 @@ Login page
                 <div class="text-danger"><?php echo empty($login_err)?"":$login_err; ?></div>
                 
                 <div class="login">
-                    <label>Email</label>
+                    <label class="email">Email</label>
                     <input type="instructorEmail" name="instructorEmail"<?php echo (!empty($instructorEmail_err)) ? 'is-invalid' : ''; ?>" >
                 </div>
                 
                 <div class="login">
-                    <br><label>Password</label>
+                    <br><label class="password">Password</label>
                     <input type="password" name="password" <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
                 </div>
                 
@@ -80,7 +80,7 @@ Login page
                     <input type="submit" class="btn btn-primary" value="Login">
                 </div>
                 
-                <br><p>Forget your password? <a href="#">Change Password!</a></p>  
+                <br><p>Forget your password? <a href="../forgotPassword.php">Click here to reset your password</a></p>  
             </form>
         </div>   
     </body>

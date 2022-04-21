@@ -1,4 +1,5 @@
 <?php
+require_once 'Database/ParentDB.php';
 if(!isset($_SESSION["parentID"])){
     header('HTTP/1.1 307 Temporary Redirect');
     header('Location: login.php');

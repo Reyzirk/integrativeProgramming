@@ -23,7 +23,7 @@ $sortOrder = trim(empty($_POST["sortorder"]) ? "ASC" : eliminateExploit($_POST["
 $search = empty($_POST["search"]) ? "" : eliminateExploit($_POST["search"]);
 $entry = empty($_POST["entry"]) ? 20 : (int) $_POST["entry"];
 $currentPage = empty($_POST["currentPage"]) ? 1 : (int) $_POST["currentPage"];
-if (!isset($_POST["id"])){
+if (!isset($_POST["id"])||!isset($_POST["cid"])){
     
 ?>
     <tr>
@@ -35,6 +35,7 @@ if (!isset($_POST["id"])){
     return;
 }else{
     $id = $_POST["id"];
+    $cid = $_POST["cid"];
 }
 $examdb = new ExaminationDB();
 if ($sortType==="Examination ID"){
@@ -87,6 +88,7 @@ if ($totalCount == 0) {
         ->where("Marks", "%".$search."%", WhereTypeEnum::OR, OperatorEnum::LIKE)
         ->bracketWhere(WhereTypeEnum::OR)
         ->where("childclass.ClassID", $id, WhereTypeEnum::AND, OperatorEnum::EQUAL)
+        ->where("examresults.ChildID",$cid)
         ->order($sortType, $sortOrder)
         ->limit($beginIndex,$endIndex)
         ->query();

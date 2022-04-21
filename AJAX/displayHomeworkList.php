@@ -83,7 +83,7 @@ if ($totalCount == 0) {
 
     }
     foreach($results as $row){
-        $desc = strip_tags(html_entity_decode($row["HomeworkDesc"]));
+        $desc = html_entity_decode($row["HomeworkDesc"]);
         ?>
         <tr id="<?php echo $row["HomeworkID"]; ?>">
             <td class="text-center" style="word-break: break-all;"><?php echo $row["HomeworkID"]; ?></td>

@@ -12,7 +12,7 @@
  * @author Choo Meng
  */
 require_once str_replace("InstructorArea", "", dirname(__DIR__))."/Database/ClassDB.php";
-if (empty($_GET["id"])){
+if (empty($_GET["id"])||empty($_GET["cid"])){
     $_SESSION["errorLog"] = "noid";
     header('HTTP/1.1 307 Temporary Redirect');
     header('Location: examinationclasses.php');

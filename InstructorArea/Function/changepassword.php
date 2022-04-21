@@ -48,9 +48,8 @@ if(isset($_POST["formDetect"])){
                 $error["currentPass"] = "Wrong password";
             }else{
                 if($instructorDB->updatePassword($instructorID, $newPass)){
-                    $_SESSION["modifyLog"] = "changepassword";
-                    header('HTTP/1.1 307 Temporary Redirect');
-                    header('Location: parent.php');
+                    $_SESSION["modifyLog"] = "changepassword";    
+                    header('Location: instructorProfile.php');
                 }else{
                     $_SESSION["errorLog"] = "sqlerror";
                 }

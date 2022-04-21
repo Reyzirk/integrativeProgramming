@@ -40,7 +40,6 @@ if (empty($_GET["id"])){
         header('Location: courses.php');
     }
 }
-
 if (isset($_POST["formDetect"])){
     $inputName = "courseCode";
     $inputTitle = "Course Code";
@@ -75,6 +74,7 @@ if (isset($_POST["formDetect"])){
     $inputName = "materialFile";
     $inputTitle = "Material File";
     $tmpFileStorage = array();
+    
     if (isset($_FILES[$inputName])){
         $files = $_FILES[$inputName];
         for($i = 0; $i < count($files["name"]);$i++){

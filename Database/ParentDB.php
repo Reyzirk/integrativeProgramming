@@ -103,6 +103,22 @@ class ParentDB{
         }
     }
     
+    public function updatePassword($parentID, $password) {
+        $builder = new MySQLQueryBuilder();
+        $query = "UPDATE `parent` SET `Password` = ? WHERE `ParentID` = ?";
+        
+        $stmt = $this->instance->con->prepare($query);
+        $stmt->bindParam(1, $password, PDO::PARAM_STR);
+        $stmt->bindParam(2, $parentID, PDO::PARAM_STR);
+        $stmt->execute();
+        $totalrows = $stmt->rowCount();
+        if ($totalrows == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
     public function update($oldID, $updated) {
         $builder = new MySQLQueryBuilder();
         $query = $builder->update("parent", array("ParentName" => \CustomSQLEnum::BIND_QUESTIONMARK,
@@ -149,7 +165,8 @@ class ParentDB{
                     "ParentBirth" => \CustomSQLEnum::BIND_QUESTIONMARK,
                     "ParentPhoneNo" => \CustomSQLEnum::BIND_QUESTIONMARK,
                     "ParentIcNo" => \CustomSQLEnum::BIND_QUESTIONMARK, 
-                    "ParentType" => \CustomSQLEnum::BIND_QUESTIONMARK))
+                    "ParentType" => \CustomSQLEnum::BIND_QUESTIONMARK,
+                    "AddressID" => \CustomSQLEnum::BIND_QUESTIONMARK))
                 ->where("ParentID", \CustomSQLEnum::BIND_QUESTIONMARK)
                 ->query();
         
@@ -160,6 +177,7 @@ class ParentDB{
         $parentPhoneNo = $updated->contactNumber;
         $parentIcNo = $updated->icNo;
         $parentType = $updated->parentType;
+        $addressID = $updated->addressID;
         
         $stmt = $this->instance->con->prepare($query);
         $stmt->bindParam(1, $parentName, PDO::PARAM_STR);
@@ -168,7 +186,8 @@ class ParentDB{
         $stmt->bindParam(4, $parentPhoneNo, PDO::PARAM_STR);
         $stmt->bindParam(5, $parentIcNo, PDO::PARAM_STR);
         $stmt->bindParam(6, $parentType, PDO::PARAM_STR);
-        $stmt->bindParam(7, $parentID, PDO::PARAM_STR);
+        $stmt->bindParam(7, $addressID, PDO::PARAM_STR);
+        $stmt->bindParam(8, $parentID, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
         if ($totalrows == 0) {
@@ -249,22 +268,9 @@ class ParentDB{
     public function checkEmail($email){
         $query = "SELECT ParentEmail FROM parent WHERE ParentEmail = ?";
         $stmt = $this->instance->con->prepare($query);
-        $stmt->bindParam(1, $parentEmail, PDO::PARAM_STR);
+        $stmt->bindParam(1, $email, PDO::PARAM_STR);
         $stmt->execute();
         $totalrows = $stmt->rowCount();
-        if($totalrows == 0){
-            return false;
-        }else{
-            return $totalrows;
-        }
-    }
-    
-    public function forgotPassword(){
-        $query = "SELECT * FROM parent WHERE ParentEmail = ?, ParentName = ?";
-        $stmt = $this->instance->con->prepare($query);
-        $stmt->bindParam(1, $parentEmail, PDO::PARAM_STR);
-        $stmt->bindParam(2, $parentName, PDO::PARAM_STR);
-        $stmt->execute();
         if($totalrows == 0){
             return false;
         }else{

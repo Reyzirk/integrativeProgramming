@@ -6,7 +6,11 @@ Web Application is under GNU General Public License v3.0
 ============================================
 //Author: Poh Choo Meng
 -->
-
+<?php 
+function custom_str_contains(string $haystack, string $needle): bool {
+    return '' === $needle || false !== strpos($haystack, $needle);
+}
+?>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -37,7 +41,7 @@ Web Application is under GNU General Public License v3.0
                  <h1 style="margin-bottom: 0px;padding-left:20px;"> 404 ERROR</h1>
                  <h3 style="margin-top: 0px;padding-left:20px;"> Page not found.</h3>
             </div>
-            <img src="images/404-error.png" alt="" width="100" height="100" />
+            <img src="<?php echo custom_str_contains(dirname(__DIR__),"InstructorArea")?str_replace("InstructorArea", "/", dirname(__DIR__)):""; ?>images/404-error.png" alt="" width="100" height="100" />
             <br>
             <br>
             <center><button onclick="location.href='index.php'">Home Page</button></center>

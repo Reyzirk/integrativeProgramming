@@ -49,7 +49,6 @@ if(isset($_SESSION["parentID"]))
          $valid = false;
      }else if(!(strlen($_POST["password"]) < 60))
      {
-         die();
          $password_err = "Password can not more than 60 characters.";
          $valid = false;
      }else
