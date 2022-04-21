@@ -6,3 +6,4 @@
 [2022-04-20 21:12:53] Can only throw objects 
 [2022-04-20 21:14:25] Can only throw objects 
 [2022-04-20 21:16:53] Can only throw objects 
+[2022-04-20 22:09:57] SQLSTATE[HY000]: General error: 1366 Incorrect string value: '\xF0\x9F\x98\x8A' for column 'Description' at row 1 
