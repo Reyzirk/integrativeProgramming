@@ -28,19 +28,6 @@ if(isset($_SESSION["parentID"])){
      //Check whether this email is existing in the database or not if yes show error message
      $db = new ParentDB();
      //check validation of user ID
-     if(empty($_POST["parentEmail"]))
-     {
-         $parentEmail_err = "Please enter email.";
-         $valid = false;
-     }else if(!filter_var($_POST["parentEmail"], FILTER_VALIDATE_EMAIL))
-     {
-         $parentEmail_err = "User email doesn't have the correct format. Please re-enter!";
-         $valid = false;
-    }else if($db->checkEmail(trim($_POST["parentEmail"]))){
-        $parentEmail_err = "The email had already been used. Please enter another email!";
-    }else{
-    $parentEmail = trim($_POST["parentEmail"]);
-    }
     
     if (empty($_POST["parentType"])){
         $parentType_err = "Please select a parent type";
@@ -113,7 +100,7 @@ if(isset($_SESSION["parentID"])){
     if(empty($_POST["PostCode"])){
         $postCode_err = "Please enter your postcode";
         $valid = false;
-    }else if(!preg_match( '/[0-9]{5}/',$_POST["PostCode"])){
+    }else if(!preg_match( '/^[0-9]{5}$/',$_POST["PostCode"])){
         $postCode_err = "postcode will only accept five digit number";
         $valid = false;
     }else{

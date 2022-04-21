@@ -91,7 +91,7 @@ author : Fong Shu Ling
                 </div><br/>
 
                 <div class="reset">
-                    <input type="submit" class="btn btn-primary" value="Reset" style="background-color: blue; color: white; border-radius: 25px; width: 100px;">
+                    <input type="submit" class="btn btn-primary" value="Reset" style="background-color: blue; color: white; border-radius: 25px; width: 100px; height: 40px;">
                 </div>
                 <p>Please remember your password after reset!</p>
 

@@ -76,7 +76,7 @@ Login page
                         <br/>
                        <div>
                            
-                           <input type="submit" value="Submit" name="forgotPassword" id="nextBtn" style="background-color: blue; color: white; border-radius: 25px; width: 100px;">
+                           <input type="submit" value="Submit" name="forgotPassword" id="nextBtn" style="background-color: blue; color: white; border-radius: 25px; width: 100px; height: 40px;">
                            
                        </div>
                        <p>Have an account?<a href="login.php"> Login Now!</a></p>
