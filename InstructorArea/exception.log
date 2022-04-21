@@ -6,3 +6,8 @@
 [2022-04-20 21:12:53] Can only throw objects 
 [2022-04-20 21:14:25] Can only throw objects 
 [2022-04-20 21:16:53] Can only throw objects 
+[2022-04-20 23:41:39] SQLSTATE[22001]: String data, right truncated: 1406 Data too long for column 'ParentGender' at row 1 
+[2022-04-20 23:42:02] SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '' for column 'ParentBirth' at row 1 
+[2022-04-20 23:42:13] SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '' for column 'ParentBirth' at row 1 
+[2022-04-20 23:42:52] SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '' for column 'ParentBirth' at row 1 
+[2022-04-21 01:19:16] Call to a member function checkEmail() on null 
