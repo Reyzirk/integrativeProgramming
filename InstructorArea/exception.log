@@ -11,3 +11,5 @@
 [2022-04-20 23:42:13] SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '' for column 'ParentBirth' at row 1 
 [2022-04-20 23:42:52] SQLSTATE[22007]: Invalid datetime format: 1292 Incorrect date value: '' for column 'ParentBirth' at row 1 
 [2022-04-21 01:19:16] Call to a member function checkEmail() on null 
+[2022-04-21 19:11:39] Can only throw objects 
+[2022-04-21 19:11:46] Can only throw objects 
